@@ -1,0 +1,71 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+\usepackage{paralist} %compactenum
+
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{definition}{Definition}
+\usepackage{tipa}
+\usepackage{amsfonts}
+\usepackage[mathscr]{eucal}
+
+% Use the natbib package for the bibliography
+\usepackage[round]{natbib}
+\bibliographystyle{apalike}
+\newcommand{\exampleMacro}[1]{\mu_{#1}}
+
+\title{An annotated bibliography to frequentist topology testing}
+\author{Mark T. Holder}
+
+\usepackage{xspace}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{backref,  pdfpagemode=FullScreen,  linkcolor=blue, citecolor=red, colorlinks=true, hyperindex=true}
+\newcommand{\pvalue}{$P$-value\xspace}
+\newcommand{\pvalues}{$P$-values\xspace}
+\begin{document}
+\maketitle
+
+\citet{Cavender1978}:  Citation for Cavender part of CFN model.  Defines rejection regions based on low probability of observing the data patterns.  Focusses on regions of pattern count space (for four taxa) in which the parsimony score of the best tree is at least $r$ steps better than the next best tree.  Table 2 (page 277) shows the critical value of $r$ needed to assure various $\alpha$ values.  For $\alpha= 0.05$ you have the depressing:
+\begin{center}
+\begin{tabular}{cccccccc}
+$M$ & 3 & 4 & 10 & 15 & 20 & 30 & 40 \\
+$r$ & 2 & 3 & 5 & 7 & 9 & 13 & 15 
+\end{tabular}
+\end{center}
+Notes that $\Pr$ conflicting synapomorphy can be as high as 1/4 (and as high as the probability of the true synapomorphy).  He notes that this test is not ``locally most powerful'' nor is it unbiased. Points out that you can estimate the tree if you don't know the number of constant characters (p278; relevant to the Mkv model of \citep{Lewis2001}).
+        
+
+
+\citet{BerryGC2000}: follows the decision-theoretic framework of \citet{BerryG1996} but uses a quartet-distance as a measure of distance from the true tree. A fully-resolved tree is constructed and then poorly supported branches are collapsed.
+
+\citet{BilleraHV2001}: describe a geometric approach to tree-space that enables a metric distance that can be used to find centroid trees from a collection of trees (e.g. in summarizing bootstrap results).
+
+\citet{Galtier2004}: analytical and simulation study of the effect on extreme violation of the independence assumption (including repeating data patterns and mimicking the effect of pairing across an RNA stem).  Non-independence decrease accuracy of parsimony, but did not decrease BP.  ``Should we, therefore, worry about past and future interpretations of bootstrap scores? Probably not too much because the influence of nonindependence on the bootstrap score appears slight. The overestimation was always $<10\%$ in Figure 1.''  Consecutive-site {\em vs} dispersed bootstrap procedures were compared and suggested as a means of testing for the effect of nonindependence in real analyses.
+
+\citet{Wrobel2008}:
+
+
+\citet{Susko2009}: Examining the star-tree (which should correspond to an lfc), Susko shows that \citep[{\em contra}\xspace][]{EfronHH1996} the BP is not first-order correct.
+Instead, it is conservative. 
+The general approach is to look at the distribution of bootstrap scores from points generated at the star tree, and see how this distribution changes as $M$ increases.
+If BP were first order correct then, for large $M$, the distribution should be uniform (such that $1-BP$ is uniform and gives the correct \pvalue for any $\alpha$). 
+In fact, ``BP as large as $y$ arises less frequently than $y\times 100\%$ of the time.'' (p218).
+Susko attributes this to the relevant lfc being a at a point where three topologies come together. 
+The AU test returns less biased \pvalues, but they still do not satisfy first-order correctness.
+
+
+
+\bibliography{topotesting}
+ \end{document}  
