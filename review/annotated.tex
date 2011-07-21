@@ -29,6 +29,7 @@
 \author{Mark T. Holder}
 
 \usepackage{xspace}
+%\usepackage{ulem}
 \usepackage{url}
 \usepackage{hyperref}
 \hypersetup{backref,  pdfpagemode=FullScreen,  linkcolor=blue, citecolor=red, colorlinks=true, hyperindex=true}
@@ -49,6 +50,7 @@ Notation:
 	\item $N$ leaves, taxa, or sequences;
 	\item $K$ plausible trees to be tested;
 	\item $B$ bootstrap replicates;
+	\item $\delta$ difference in log-likelihood between trees
 	\item $\like(\theta_i,T_i|X)$ is the likelihood of the tree $i$ and the numerical parameters $\theta_i$ given the data (proportional to $\Pr(X|\theta_i,T_i)$
 	\item $\ln L(\theta_i,T_i|X)$ is the log-likelihood of the tree $i$ and the numerical parameters $\theta_i$ given the data (proportional to $\Pr(X|\theta_i,T_i)$
 	\item $\sdLL{i}$ is the standard deviation of the log-likelihoods for $\theta_i,T_i$.
@@ -64,7 +66,48 @@ $r$ & 2 & 3 & 5 & 7 & 9 & 13 & 15
 \end{tabular}
 \end{center}
 Notes that $\Pr$ conflicting synapomorphy can be as high as 1/4 (and as high as the probability of the true synapomorphy).  He notes that this test is not ``locally most powerful'' nor is it unbiased. Points out that you can estimate the tree if you don't know the number of constant characters (p278; relevant to the Mkv model of \citep{Lewis2001}).
+
+\citet{Felsenstein1985}: Introduces the bootstrap to phylogenetics.
+p784 - use of columns as justifiable.\\
+p786 - test of monophyly of a clade.  Reject the alternatives if they occur is <5\% of bootstrap estimates.\\
+p786 - does not correct for inconsistency rather ``a confidence interval within which is contained not the true phylogeny, but the phylogeny that would be estimated on repeated sampling''\\
+p787 - multiple tests problem and need to correct for it.\\
+p787 - difficulties caused by tree space. \\
+p787 - delete 1/2 jackknife \\
+p788 - use of pattern weights to implement bootstrapping. \\
+p790 - perfect Hennigian data, "rule of three" and discussion of connection to clean data and random support around a trifurcation.
+
+\citet{Sanderson1995}: Extensive discussion of objections to bootstapping centered around independence of samples and difficulties with defining a universe of characters to sample from.
         
+pp313-315 provide a nice discussion of objections to Neyman-Pearson hypothesis testing in general.      
+
+\citet{HuelsenbeckHN1996}: Introduce a likelihood-ratio test for monophyly in which monophyly is the null.  The test statistic is $\delta$, the difference in log-likelihoods for the ML subject to the constraint of monophyly and the ML tree found under no constraints. 
+Significance is assessed using the parametric bootstrap.
+They note that the parametric bootstrap is prone to overconfidence when the model used to generate the data is too simple.
+
+\citet{GoldmanAR2000}: Very clear discussion of the selection bias problem in most uses of the KH-test and survey of the tests up to that point. They introduce a cumbersome scheme of mnemonics:
+\begin{compactitem}
+	\item a \underline{pri}ori $|$ \underline{pos}teriori selection of candidates
+	\item \underline{N}on\underline{P}arametric $|$ \underline{P}arametric
+	\item \underline{f}ull $|$ \underline{p}artial $|$ \underline{n}o optimization of parameters on bootstrap reps.
+	\item \underline{c}entered $|$ \underline{u}ncentered
+	\item compare attained $\delta$ to null distribution: \underline{d}irectly $|$ using \underline{n}ormality assumption $|$ \underline{a}dditional normal assumptions ($\hat{\delta}$ estimated from the sitewise $\delta(m)$ values) $|$ \underline{s}tronger assumption that the sitewise $\delta(m)$ are normally distributed.
+\end{compactitem}
+
+Pg 660 clear description of the SH test:
+\begin{enumerate}
+	\item Calculate the test statistic for each tree: $\delta_i = \ln L(\hat\theta,\hat{T}|X) - \ln L(\hat\theta_i, T_i|X)$
+	\item for each bootstrap rep $1 \leq j \leq B$:
+	\begin{enumerate}
+		\item Calculate and store $t_i^{(j)} = \ln L(\hat\theta_i, T_i|\boot{j})$
+	\end{enumerate}
+	\item For each tree calculate the centering offset: $$\bar{t_i} = (1/B)\sum_{j=1}^Bt_i^{(j)}$$
+	\item For each tree $i$ and stored bootstrap result $j$ calculate: ${c_i^{(j)}} = t_i^{(j)} - \bar{t_i}$
+	\item For each bootstrap rep $1 \leq j \leq B$ find the largest likelihood relative to the mean for the tree: $c^{(j)} = \max\left[c_i^{(j)}\right] \mbox{ over all } i$
+	\item \pvalue for $T_i\approx$ the fraction of reps for which $c^{(j)} > \delta_i$
+\end{enumerate}
+
+Point out (pp661) that if an incorrect (a posteriori) KH test is not significant, then the correct SH test won't reject either.
 
 
 \citet{BerryGC2000}: follows the decision-theoretic framework of \citet{BerryG1996} but uses a quartet-distance as a measure of distance from the true tree. A fully-resolved tree is constructed and then poorly supported branches are collapsed.
