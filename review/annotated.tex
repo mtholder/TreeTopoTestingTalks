@@ -32,10 +32,29 @@
 \usepackage{url}
 \usepackage{hyperref}
 \hypersetup{backref,  pdfpagemode=FullScreen,  linkcolor=blue, citecolor=red, colorlinks=true, hyperindex=true}
+
+\newcommand{\boot}[1]{X^{(#1)}}
+\newcommand{\sdLL}[1]{\hat{\sigma_{#1}}}
+\newcommand{\sdLLBoot}[2]{\hat{\sigma_{#1}}^{(#2)}}
+\newcommand{\like}{\ell}
+\newcommand{\expectation}{{\mathbb{E}}}
 \newcommand{\pvalue}{$P$-value\xspace}
 \newcommand{\pvalues}{$P$-values\xspace}
 \begin{document}
 \maketitle
+
+Notation:
+\begin{itemize}
+	\item $M$ characters, sites, or columns;
+	\item $N$ leaves, taxa, or sequences;
+	\item $K$ plausible trees to be tested;
+	\item $B$ bootstrap replicates;
+	\item $\like(\theta_i,T_i|X)$ is the likelihood of the tree $i$ and the numerical parameters $\theta_i$ given the data (proportional to $\Pr(X|\theta_i,T_i)$
+	\item $\ln L(\theta_i,T_i|X)$ is the log-likelihood of the tree $i$ and the numerical parameters $\theta_i$ given the data (proportional to $\Pr(X|\theta_i,T_i)$
+	\item $\sdLL{i}$ is the standard deviation of the log-likelihoods for $\theta_i,T_i$.
+	\item $\sdLLBoot{i}{j}$ is the standard deviation of the log-likelihoods for $\theta_i,T_i$ computed on bootstrap replicate $j$.
+\end{itemize}
+	
 
 \citet{Cavender1978}:  Citation for Cavender part of CFN model.  Defines rejection regions based on low probability of observing the data patterns.  Focusses on regions of pattern count space (for four taxa) in which the parsimony score of the best tree is at least $r$ steps better than the next best tree.  Table 2 (page 277) shows the critical value of $r$ needed to assure various $\alpha$ values.  For $\alpha= 0.05$ you have the depressing:
 \begin{center}
@@ -52,7 +71,32 @@ Notes that $\Pr$ conflicting synapomorphy can be as high as 1/4 (and as high as 
 
 \citet{BilleraHV2001}: describe a geometric approach to tree-space that enables a metric distance that can be used to find centroid trees from a collection of trees (e.g. in summarizing bootstrap results).
 
-\citet{Galtier2004}: analytical and simulation study of the effect on extreme violation of the independence assumption (including repeating data patterns and mimicking the effect of pairing across an RNA stem).  Non-independence decrease accuracy of parsimony, but did not decrease BP.  ``Should we, therefore, worry about past and future interpretations of bootstrap scores? Probably not too much because the influence of nonindependence on the bootstrap score appears slight. The overestimation was always $<10\%$ in Figure 1.''  Consecutive-site {\em vs} dispersed bootstrap procedures were compared and suggested as a means of testing for the effect of nonindependence in real analyses.
+\citet{ArisBrosou2003}: Discuss the fact that the plethora of tests and differing \pvalues often reflect differing nulls.  Discusses a ``natural'' null is that the $k$ trees are equidistance from the unknown, true distribution ($\mu$); thus $\expectation_{\mu}(\like(\theta_1,T_1|X) = \expectation_{\mu}\{\like(\theta_K,T_K|X)\}$ for all trees in the null.  Introduces two means of reducing the composite hypothesis over trees to a simple hypothesis.
+In his frequentist significance test (FST), the mean of the maximized log likelihoods is used as $$h_{0,\tau}(X) = (1/K)\sum_{i=1}^K \like(\hat{\theta_i},T_i|X)$$
+resulting in a test like the SH test.
+
+In the frequentist hypothesis test (FHT) the ML tree is used to calculate $h_{0,\tau}(X)$; he argues that this make it similar to the bootstrap.
+
+Argues that FST is geared toward identifying a set of ``close'' trees; while FHT tries to identify the true tree.
+
+Analysis of real data points to underparameterization of the available models, and leads to a recommendation to adopt conservative tests.
+AU test showed sensitivity to model mis-specification but still found to be ``safer'' than other hypothesis tests.
+\citet{Galtier2004}: analytical and simulation study of the effect on extreme violation of the independence assumption (including repeating data patterns and mimicking the effect of pairing across an RNA stem).  Non-independence decrease accuracy of parsimony, but did not decrease BP.  ``Should we, therefore, worry about past and future interpretations of bootstrap scores? Probably not too much because the influence of nonindependence on the bootstrap score appears slight. The overestimation was always $<10\%$ in Figure 1.''  Consecutive-site {\em vs} dispersed bootstrap procedures were compared and suggested as a means of testing for the effect of non-independence in real analyses.
+In both cases, the algorithm then consists of the following:
+\begin{enumerate}
+	\item For each tree: $\hat{v}_i = \like(\theta_i,T_i|X) - h_{0,\tau}(X)$
+	\item Calculate the test statistic for each tree: $t_i = \hat{v}_i/\sdLL{i}$
+	\item for each bootstrap rep $j$:
+	\begin{enumerate}
+		\item $s_i^{(j)} = \left(\hat{v}_i^{(j)} - \hat{v}_i \right)/\sdLLBoot{i}{j}$
+		\item $\hat{s}^{(j)} = \min\left[{s_i^{(j)}}\right] \mbox{ over all } i\leq K$
+	\end{enumerate}
+	\item \pvalue for $T_i\approx$ the fraction of reps for which $\hat{s}^{(j)} < t_i$
+\end{enumerate}
+
+This is similar to SH, except the test-statistic rather than the resampling is centered.
+
+\citet{ArisBrosou2003b}: A Bayesian version of the methods introduced in \citet{ArisBrosou2003} where the posterior is weight trees in the reduction from complex  to simple hypothesis.
 
 \citet{Wrobel2008}:
 
