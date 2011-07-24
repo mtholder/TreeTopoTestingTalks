@@ -49,6 +49,9 @@ begin paup;
     gett file = guidance.nex mode = 3 ; 
     gett file = noafricanapeclade.tre  mode = 7 ;
     showtree all ;
+end;
+
+begin xpaup;
     savetrees file = staticorder.tre;
 end;
 
@@ -74,7 +77,7 @@ begin xpaup;
 end;
 
 
-begin paup;
+begin xpaup;
     gett file = staticorder.tre from = 1 to = 1 mode = 3;
     gett file = staticorder.tre from = 2 to = 2 mode = 7;
     
@@ -94,3 +97,4 @@ begin paup;
     lscore all / KHTest = normal ;
     [ lscore all / KHTest = full ; ]
     lscore all / KHTest = RELL ;
+end;

@@ -77,6 +77,10 @@ p787 - delete 1/2 jackknife \\
 p788 - use of pattern weights to implement bootstrapping. \\
 p790 - perfect Hennigian data, "rule of three" and discussion of connection to clean data and random support around a trifurcation.
 
+\citet{GautL1995}: Simulation study of ML inference and LRT in the four-taxon case.  ML tree estimation is found to be robust to modeling errors. The authors compare the distribution of the LRT to the $\chi_1^2$ and find that they do not match (they mention the possibility of using a mixture of $\chi^2$, but also cite Thompson via pers comm to \citep{Felsenstein1988} that this may not be a problem in this context because the likelihood is continuous over the trifurcation).
+LRT using $\chi_1^2$ would reject too often if the model is too simple.
+
+
 \citet{Sanderson1995}: Extensive discussion of objections to bootstapping centered around independence of samples and difficulties with defining a universe of characters to sample from.
         
 pp313-315 provide a nice discussion of objections to Neyman-Pearson hypothesis testing in general.      
@@ -124,7 +128,7 @@ Argues that FST is geared toward identifying a set of ``close'' trees; while FHT
 
 Analysis of real data points to underparameterization of the available models, and leads to a recommendation to adopt conservative tests.
 AU test showed sensitivity to model mis-specification but still found to be ``safer'' than other hypothesis tests.
-\citet{Galtier2004}: analytical and simulation study of the effect on extreme violation of the independence assumption (including repeating data patterns and mimicking the effect of pairing across an RNA stem).  Non-independence decrease accuracy of parsimony, but did not decrease BP.  ``Should we, therefore, worry about past and future interpretations of bootstrap scores? Probably not too much because the influence of nonindependence on the bootstrap score appears slight. The overestimation was always $<10\%$ in Figure 1.''  Consecutive-site {\em vs} dispersed bootstrap procedures were compared and suggested as a means of testing for the effect of non-independence in real analyses.
+
 In both cases, the algorithm then consists of the following:
 \begin{enumerate}
 	\item For each tree: $\hat{v}_i = \like(\theta_i,T_i|X) - h_{0,\tau}(X)$
@@ -141,7 +145,37 @@ This is similar to SH, except the test-statistic rather than the resampling is c
 
 \citet{ArisBrosou2003b}: A Bayesian version of the methods introduced in \citet{ArisBrosou2003} where the posterior is weight trees in the reduction from complex  to simple hypothesis.
 
-\citet{Wrobel2008}:
+\citet{ErixonSBO2003}: Simulation study comparing BP to posterior probabilities under the same model.
+Find posteriors to be sensitive to model misspecification (high Type I error).
+
+BP tended to be lower than posterior probabilities, and both were lower than the probability of reconstructing the tree given  more data (but they did not sweep over branch length space).
+
+
+\citet{Galtier2004}: analytical and simulation study of the effect on extreme violation of the independence assumption (including repeating data patterns and mimicking the effect of pairing across an RNA stem).  Non-independence decrease accuracy of parsimony, but did not decrease BP.  ``Should we, therefore, worry about past and future interpretations of bootstrap scores? Probably not too much because the influence of nonindependence on the bootstrap score appears slight. The overestimation was always $<10\%$ in Figure 1.''  Consecutive-site {\em vs} dispersed bootstrap procedures were compared and suggested as a means of testing for the effect of non-independence in real analyses.
+
+\citet{HuelsenbeckR2004}: show that posteriors behave as expected when the true parameters are drawn from the prior.  This paper focusses on Bayesian inference, but is relevant to the interpretation of other studies that examine whether or not BP can be used as $\Pr$ correct reconstruction.
+
+\citet{AnisimovaG2006}: Approximate LRT for branches introduced. For testing a branch, $\delta$ is calculated by looking for best two ML scores among the three trees that resolve the polytomy created by collapsing the branch.
+
+ $2\delta$ shown to follow $\frac{1}{2}\chi_0^2 + \frac{1}{2}\chi_1^2$ when null is known {\em a priori}.  But Bonferroni or ``cubic'' correction was needed to account for selection bias. For lower \pvalues, the Bonferroni correction is to conservative, and the cubic correction is:
+\begin{eqnarray*}
+	P  \approx 1 - (1-\alpha)^3 &\approx& 3\alpha + \mathcal{O}(\alpha^2)\\
+	 &\approx& 1.5 - 1.5F_{\chi_1^2}(2\delta)
+\end{eqnarray*}
+where $F_{\chi_1^2}(2\delta)$ is the cumulative probability function for the $\chi_1^2$ evaluated at the LRT (which is 2$\delta$).
+This implies that if $\delta > 2.25$, then \pvalue will be $<0.05$.
+
+
+\begin{quote}
+	``When the analysis model describes data well, the type I error rate obtained using Bonferroni corrected mixture distribution is close to the significance level $\alpha$, so that the standard LRT remains accurate. Moreover, our results suggest that minor (but detectable) deviations from model assumptions do not significantly affect its accuracy. However, when important factors (e.g., transition/transversion ratio, rate variation among sites) are not accounted for, the test can become very inaccurate.(p545)''
+\end{quote}
+
+They find 1-BP to be excessively liberal for some tree shapes. They attribute the difference to plotting Type-I error rates against $\alpha$ cutoffs conditionally on tree shape rather than $\Pr$ true branch vs cutoff binned by BP (which they find to differ based on simulation tree shape).
+
+\citet{SvennbladdEOB2006}: Detailed discussion of how the Bayesian interpretation of BP given by \citet{EfronHH1996} does not correspond to a Bayesian phylogenetic analysis in which the prior is placed on tree/model parameters (rather than a uniform prior over pattern frequency space).
+They also discuss how the set of {\em separately informative} data patterns is not the same for ML and Bayesian approaches (e.g. an {\tt{AACT}} pattern would support $12|34$ in a Bayesian context, even under JC, because of interactions between longer on which the changes can occur and the branch length priors). 
+
+\citet{Wrobel2008}: Review of topology testing including BP and Bayesian clade posteriors.
 
 
 \citet{Susko2009}: Examining the star-tree (which should correspond to an lfc), Susko shows that \citep[{\em contra}\xspace][]{EfronHH1996} the BP is not first-order correct.
@@ -152,7 +186,7 @@ In fact, ``BP as large as $y$ arises less frequently than $y\times 100\%$ of the
 Susko attributes this to the relevant lfc being a at a point where three topologies come together. 
 The AU test returns less biased \pvalues, but they still do not satisfy first-order correctness.
 
-
+\citet{AnisimovaGDDG2011}: survey of branch support. Simulate under K80+covarion and HKY+$\Gamma_4$ models.
 
 \bibliography{topotesting}
  \end{document}  
