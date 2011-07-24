@@ -4038,3 +4038,652 @@ L             0.286684   2.430e-04    0.286684    0.140373   5.823e-04    0.1403
 ln L         -1.249374   -8.322287   -1.249374   -1.963455   -7.448564   -1.963455   -4.530969   -4.530969
 
 site              2625        2626        2627        2628        2629        2630        2631        2632
+
+P A U P *
+Portable version 4.0b10 for Unix
+Sun Jul 24 07:16:42 2011
+
+      -----------------------------NOTICE-----------------------------
+        This is a beta-test version.  Please report any crashes,
+        apparent calculation errors, or other anomalous results.
+        There are no restrictions on publication of results obtained
+        with this version, but you should check the WWW site
+        frequently for bug announcements and/or updated versions.  
+        See the README file on the distribution media for details.
+      ----------------------------------------------------------------
+Data read in DNA format
+
+Data matrix has 5 taxa, 16203 characters
+Valid character-state symbols: ACGT
+Missing data identified by '?'
+Gaps identified by '-'
+"Equate" macros in effect:
+   R,r ==> {AG}
+   Y,y ==> {CT}
+   M,m ==> {AC}
+   K,k ==> {GT}
+   S,s ==> {CG}
+   W,w ==> {AT}
+   H,h ==> {ACT}
+   B,b ==> {CGT}
+   V,v ==> {ACG}
+   D,d ==> {AGT}
+   N,n ==> {ACGT}
+
+3 trees read from TREES block
+   Time used = <1 sec (CPU time = 0.00 sec)
+
+Character-exclusion status changed:
+  14203 characters excluded
+  Total number of characters now excluded = 14203
+  Number of included characters = 2000
+
+Optimality criterion set to likelihood.
+
+Character-exclusion status changed:
+  1000 characters re-included
+  Total number of characters now excluded = 13203
+  Number of included characters = 3000
+
+*** Skipping "xpaup" block
+
+All trees have been cleared from memory.
+
+Processing TREES block from file "guidance.nex":
+   Keeping: trees from file (replacing trees in memory)
+   3 trees read from file
+   Time used = <1 sec (CPU time = 0.00 sec)
+
+Processing TREES block from file "noafricanapeclade.tre":
+   Keeping: trees in memory plus trees from file
+   3 trees originally in memory
+   12 trees read from file
+   12 trees from file kept
+   Time used = <1 sec (CPU time = 0.00 sec)
+   15 trees now in memory
+
+Tree number 1 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                                                                             /----------------------------------------------- Homo sapiens NC 
+|                                              /----------------------------------------------+
+|                                              |                                              \----------------------------------------------- Pan troglodytes 
++----------------------------------------------+
+|                                              \---------------------------------------------------------------------------------------------- Gorilla gorilla 
+|
+\--------------------------------------------------------------------------------------------------------------------------------------------- Pongo pygmaeus N
+
+Tree number 2 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                              /---------------------------------------------------------------------------------------------- Homo sapiens NC 
+|                                              |
++----------------------------------------------+                                              /----------------------------------------------- Pan troglodytes 
+|                                              \----------------------------------------------+
+|                                                                                             \----------------------------------------------- Gorilla gorilla 
+|
+\--------------------------------------------------------------------------------------------------------------------------------------------- Pongo pygmaeus N
+
+Tree number 3 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                                                                             /----------------------------------------------- Homo sapiens NC 
+|                                              /----------------------------------------------+
+|                                              |                                              \----------------------------------------------- Gorilla gorilla 
++----------------------------------------------+
+|                                              \---------------------------------------------------------------------------------------------- Pan troglodytes 
+|
+\--------------------------------------------------------------------------------------------------------------------------------------------- Pongo pygmaeus N
+
+Tree number 4 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                                                                             /----------------------------------------------- Homo sapiens NC 
+|                                              /----------------------------------------------+
+|                                              |                                              \----------------------------------------------- Pan troglodytes 
++----------------------------------------------+
+|                                              \---------------------------------------------------------------------------------------------- Pongo pygmaeus N
+|
+\--------------------------------------------------------------------------------------------------------------------------------------------- Gorilla gorilla 
+
+Tree number 5 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                                                                             /----------------------------------------------- Homo sapiens NC 
+|                                              /----------------------------------------------+
+|                                              |                                              \----------------------------------------------- Pongo pygmaeus N
++----------------------------------------------+
+|                                              \---------------------------------------------------------------------------------------------- Pan troglodytes 
+|
+\--------------------------------------------------------------------------------------------------------------------------------------------- Gorilla gorilla 
+
+Tree number 6 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                              /---------------------------------------------------------------------------------------------- Homo sapiens NC 
+|                                              |
++----------------------------------------------+                                              /----------------------------------------------- Pan troglodytes 
+|                                              \----------------------------------------------+
+|                                                                                             \----------------------------------------------- Pongo pygmaeus N
+|
+\--------------------------------------------------------------------------------------------------------------------------------------------- Gorilla gorilla 
+
+Tree number 7 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                                                     /----------------------------------------------------------------------- Homo sapiens NC 
++---------------------------------------------------------------------+
+|                                                                     \----------------------------------------------------------------------- Pan troglodytes 
+|
+|                                                                     /----------------------------------------------------------------------- Gorilla gorilla 
+\---------------------------------------------------------------------+
+                                                                      \----------------------------------------------------------------------- Pongo pygmaeus N
+
+Tree number 8 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                                                                             /----------------------------------------------- Homo sapiens NC 
+|                                              /----------------------------------------------+
+|                                              |                                              \----------------------------------------------- Gorilla gorilla 
++----------------------------------------------+
+|                                              \---------------------------------------------------------------------------------------------- Pongo pygmaeus N
+|
+\--------------------------------------------------------------------------------------------------------------------------------------------- Pan troglodytes 
+
+Tree number 9 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                                                                             /----------------------------------------------- Homo sapiens NC 
+|                                              /----------------------------------------------+
+|                                              |                                              \----------------------------------------------- Pongo pygmaeus N
++----------------------------------------------+
+|                                              \---------------------------------------------------------------------------------------------- Gorilla gorilla 
+|
+\--------------------------------------------------------------------------------------------------------------------------------------------- Pan troglodytes 
+
+Tree number 10 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                              /---------------------------------------------------------------------------------------------- Homo sapiens NC 
+|                                              |
++----------------------------------------------+                                              /----------------------------------------------- Gorilla gorilla 
+|                                              \----------------------------------------------+
+|                                                                                             \----------------------------------------------- Pongo pygmaeus N
+|
+\--------------------------------------------------------------------------------------------------------------------------------------------- Pan troglodytes 
+
+Tree number 11 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                                                     /----------------------------------------------------------------------- Homo sapiens NC 
++---------------------------------------------------------------------+
+|                                                                     \----------------------------------------------------------------------- Gorilla gorilla 
+|
+|                                                                     /----------------------------------------------------------------------- Pan troglodytes 
+\---------------------------------------------------------------------+
+                                                                      \----------------------------------------------------------------------- Pongo pygmaeus N
+
+Tree number 12 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
+|                                                                     /----------------------------------------------------------------------- Homo sapiens NC 
++---------------------------------------------------------------------+
+|                                                                     \----------------------------------------------------------------------- Pongo pygmaeus N
+|
+|                                                                     /----------------------------------------------------------------------- Pan troglodytes 
+\---------------------------------------------------------------------+
+                                                                      \----------------------------------------------------------------------- Gorilla gorilla 
+
+Tree number 13 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
++--------------------------------------------------------------------------------------------------------------------------------------------- Homo sapiens NC 
+|
+|                                                                                             /----------------------------------------------- Pan troglodytes 
+|                                              /----------------------------------------------+
+|                                              |                                              \----------------------------------------------- Gorilla gorilla 
+\----------------------------------------------+
+                                               \---------------------------------------------------------------------------------------------- Pongo pygmaeus N
+
+Tree number 14 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
++--------------------------------------------------------------------------------------------------------------------------------------------- Homo sapiens NC 
+|
+|                                                                                             /----------------------------------------------- Pan troglodytes 
+|                                              /----------------------------------------------+
+|                                              |                                              \----------------------------------------------- Pongo pygmaeus N
+\----------------------------------------------+
+                                               \---------------------------------------------------------------------------------------------- Gorilla gorilla 
+
+Tree number 15 (rooted using default outgroup)
+
+/--------------------------------------------------------------------------------------------------------------------------------------------- Hylobates larNC 
+|
++--------------------------------------------------------------------------------------------------------------------------------------------- Homo sapiens NC 
+|
+|                                              /---------------------------------------------------------------------------------------------- Pan troglodytes 
+|                                              |
+\----------------------------------------------+                                              /----------------------------------------------- Gorilla gorilla 
+                                               \----------------------------------------------+
+                                                                                              \----------------------------------------------- Pongo pygmaeus N
+
+*** Skipping "xpaup" block
+
+*** Skipping "xpaup" block
+
+*** Skipping "xpaup" block
+
+Processing of file "~/Documents/storage/talks/teaching/WoodsHole2011/testing/scripts/mtdna/guidance.nex" completed.
+
+paup> hs
+
+
+Heuristic search settings:
+  Optimality criterion = likelihood
+    13203 characters are excluded
+    Likelihood settings:
+      Number of substitution types  = 6
+      Substitution rate-matrix parameters estimated via ML
+      Assumed nucleotide frequencies (empirical frequencies):
+        A=0.33701  C=0.27103  G=0.17279  T=0.21917
+      Among-site rate variation:
+        Assumed proportion of invariable sites  = none
+        Distribution of rates at variable sites = gamma (discrete approximation)
+          Shape parameter (alpha)   = estimated
+          Number of rate categories = 4
+          Representation of average rate for each category = mean
+      These settings correspond to the GTR+G model
+      Number of distinct data patterns under this model = 140
+      Molecular clock not enforced
+      Starting branch lengths obtained using Rogers-Swofford approximation method
+      Trees with approximate likelihoods 5% or further from the target score are rejected without additional iteration
+      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, delta=1e-06
+      -ln L (unconstrained) = unavailable due to missing-data and/or ambiguities
+  Starting tree(s) obtained via stepwise addition
+  Addition sequence: as-is
+  Number of trees held at each step during stepwise addition = 1
+  Branch-swapping algorithm: tree-bisection-reconnection (TBR)
+  Steepest descent option not in effect
+  Initial 'MaxTrees' setting = 100
+  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
+  'MulTrees' option in effect
+  Topological constraints not enforced
+  Trees are unrooted
+
+Heuristic search completed
+   Total number of rearrangements tried = 14
+   Score of best tree(s) found = 7361.70732
+   Number of trees retained = 1
+   Time used = 8 sec (CPU time = 8.45 sec)
+
+paup> lscore
+
+
+Likelihood scores of tree(s) in memory:
+  13203 characters are excluded
+  Likelihood settings:
+    Number of substitution types  = 6
+    Substitution rate-matrix parameters estimated via ML
+    Assumed nucleotide frequencies (empirical frequencies):
+      A=0.33701  C=0.27103  G=0.17279  T=0.21917
+    Among-site rate variation:
+      Assumed proportion of invariable sites  = none
+      Distribution of rates at variable sites = gamma (discrete approximation)
+        Shape parameter (alpha)   = estimated
+        Number of rate categories = 4
+        Representation of average rate for each category = mean
+    These settings correspond to the GTR+G model
+    Number of distinct data patterns under this model = 140
+    Molecular clock not enforced
+    Starting branch lengths obtained using Rogers-Swofford approximation method
+    Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, delta=1e-06
+    -ln L (unconstrained) = unavailable due to missing-data and/or ambiguities
+
+Tree             1
+------------------
+-ln L   7361.70732
+Rate matrix R:
+  AC       6.96403
+  AG      37.46020
+  AT       4.80992
+  CG       0.15538
+  CT      84.60250
+  GT       1.00000
+Shape     0.203445
+
+Time used to compute likelihoods = 1 sec (CPU time = 0.31 sec)
+
+paup> lset rmat = prev shape = est
+
+
+paup> boot /treefile=gtrg.boot.tre
+
+
+Error(#115): Keyword "treefile" is not recognized.
+
+paup> boot /treefile=gtrg.boot.tre ?
+
+
+Error(#115): Keyword "treefile" is not recognized.
+
+paup> boot / ? treefile=gtrg.boot.tre ?
+
+
+Usage: Bootstrap [options...] [/ heuristic-search-options... | branch-and-bound-search-options...] ;
+
+Available options:
+
+Keyword ---- Option type ------------------------ Current default setting --
+Swap         None|NNI|SPR|TBR                     None
+Keep         <real-value>|No                      No
+MulTrees     No|Yes                               No
+Enforce      No|Yes                               No
+Constraints  <constraint-name>                    <none>
+Converse     No|Yes                               No
+ReconLimit   <integer-value>|Infinity             Infinity
+NChuck       <integer-value>                      0
+ChuckScore   <real-value>|No                      No
+Start        Stepwise|NJ|Current|                
+             <tree-number>[-<tree-number>]       *Stepwise
+AddSeq       Simple|Closest|AsIs|Random|Furthest  Simple
+NReps        <integer-value>                      0
+RSeed        <integer-value>                      0
+RStatus      No|Yes                               No
+SaveReps     No|Yes                               No
+RefTax       <integer-value>                      0
+Hold         <integer-value>|No                   No
+NBest        <integer-value>|All                  All
+AllSwap      No|Yes                               No
+UseNonMin    No|Yes                               No
+Steepest     No|Yes                               No
+AbortRep     No|Yes                               No
+Retain       No|Yes                              *No
+Status       No|Yes                               No
+DStatus      <integer-value>|None                 None
+Randomize    AddSeq|Trees                         AddSeq
+TimeLimit    <integer-value>|None                 None
+RearrLimit   <integer-value>|None                 None
+LimitPerRep  No|Yes                               No
+                                                 *Option is nonpersistent
+
+Error(#112): Command "treefile=gtrg" is unrecognized.
+
+paup> boot / ? treefile=gtrg.boot.tre savereps
+
+
+Usage: Bootstrap [options...] [/ heuristic-search-options... | branch-and-bound-search-options...] ;
+
+Available options:
+
+Keyword ---- Option type ------------------------ Current default setting --
+Swap         None|NNI|SPR|TBR                     None
+Keep         <real-value>|No                      No
+MulTrees     No|Yes                               No
+Enforce      No|Yes                               No
+Constraints  <constraint-name>                    <none>
+Converse     No|Yes                               No
+ReconLimit   <integer-value>|Infinity             Infinity
+NChuck       <integer-value>                      0
+ChuckScore   <real-value>|No                      No
+Start        Stepwise|NJ|Current|                
+             <tree-number>[-<tree-number>]       *Stepwise
+AddSeq       Simple|Closest|AsIs|Random|Furthest  Simple
+NReps        <integer-value>                      0
+RSeed        <integer-value>                      0
+RStatus      No|Yes                               No
+SaveReps     No|Yes                               No
+RefTax       <integer-value>                      0
+Hold         <integer-value>|No                   No
+NBest        <integer-value>|All                  All
+AllSwap      No|Yes                               No
+UseNonMin    No|Yes                               No
+Steepest     No|Yes                               No
+AbortRep     No|Yes                               No
+Retain       No|Yes                              *No
+Status       No|Yes                               No
+DStatus      <integer-value>|None                 None
+Randomize    AddSeq|Trees                         AddSeq
+TimeLimit    <integer-value>|None                 None
+RearrLimit   <integer-value>|None                 None
+LimitPerRep  No|Yes                               No
+                                                 *Option is nonpersistent
+
+Error(#112): Command "treefile=gtrg" is unrecognized.
+
+paup> boot /  savereps
+
+
+Bootstrap method with heuristic search:
+  Number of bootstrap replicates = 100
+  Starting seed = 1931882305
+  Optimality criterion = likelihood
+    13203 characters are excluded
+    Likelihood settings:
+      Number of substitution types  = 6
+      User-specified substitution rate matrix =
+                  -   6.964029  37.460195   4.809917
+           6.964029          -   0.155376  84.602497
+          37.460195   0.155376          -   1.000000
+           4.809917  84.602497   1.000000          -
+      Assumed nucleotide frequencies (empirical frequencies):
+        A=0.33701  C=0.27103  G=0.17279  T=0.21917
+      Among-site rate variation:
+        Assumed proportion of invariable sites  = none
+        Distribution of rates at variable sites = gamma (discrete approximation)
+          Shape parameter (alpha)   = estimated
+          Number of rate categories = 4
+          Representation of average rate for each category = mean
+      These settings correspond to the GTR+G model
+      Number of distinct data patterns under this model = 140
+      Molecular clock not enforced
+      Starting branch lengths obtained using Rogers-Swofford approximation method
+      Trees with approximate likelihoods 5% or further from the target score are rejected without additional iteration
+      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, delta=1e-06
+      -ln L (unconstrained) = unavailable due to missing-data and/or ambiguities
+  Starting tree(s) obtained via stepwise addition
+  Addition sequence: as-is
+  Number of trees held at each step during stepwise addition = 1
+  Branch-swapping algorithm: tree-bisection-reconnection (TBR)
+  Steepest descent option not in effect
+  Initial 'MaxTrees' setting = 100
+  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
+  'MulTrees' option in effect
+  Topological constraints not enforced
+  Trees are unrooted
+
+   100 bootstrap replicates completed
+   Time used = 31 sec (CPU time = 31.10 sec)
+
+Bootstrap 50% majority-rule consensus tree
+
+/------------------------------------------------------------------------------------------------------------------------------------------ Hylobates larNC (1)
+|
+|                                                                                           /---------------------------------------------- Homo sapiens NC (2)
+|                                             /---------------------56----------------------+
+|                                             |                                             \---------------------------------------------- Pan troglodytes (3)
++---------------------94----------------------+
+|                                             \-------------------------------------------------------------------------------------------- Gorilla gorilla (4)
+|
+\------------------------------------------------------------------------------------------------------------------------------------------ Pongo pygmaeus N(5)
+
+Bipartitions found in one or more trees and frequency of occurrence (bootstrap support values):
+
+12345      Freq
+---------------
+.***.     94.00
+.**..     56.00
+.*.*.     31.50
+..**.      7.00
+
+5 groups at (relative) frequency less than 5% not shown
+
+paup> boot ?
+
+
+Usage: Bootstrap [options...] [/ heuristic-search-options... | branch-and-bound-search-options...] ;
+
+Available options:
+
+Keyword ---- Option type ------------------------ Current default setting --
+BSeed        <integer-value>                      1731967466
+NChar        Current|<number-of-characters>       Current
+NReps        <integer-value>                      100
+Search       Heuristic|BandB|FastStep|NJ|UPGMA    Heuristic
+ConLevel     <integer-value>                      50
+KeepAll      No|Yes                               No
+Wts          Ignore|Simple|RepeatCnt|Proportional Simple
+GrpFreq      No|Yes                               Yes
+TreeFile     <bootstrap-tree-file-name>           <none>
+Format       Nexus|AltNexus|Freqpars|Phylip|     
+             Hennig                               <none>
+BrLens       No|Yes                               No
+Replace      No|Yes                              *No
+CutoffPct    <integer-value>                      5
+                                                 *Option is nonpersistent
+
+paup> boot treefile=gtrg.boot.tre /nosavereps
+
+
+Bootstrap method with heuristic search:
+  Number of bootstrap replicates = 100
+  Starting seed = 1731967466
+  Optimality criterion = likelihood
+    13203 characters are excluded
+    Likelihood settings:
+      Number of substitution types  = 6
+      User-specified substitution rate matrix =
+                  -   6.964029  37.460195   4.809917
+           6.964029          -   0.155376  84.602497
+          37.460195   0.155376          -   1.000000
+           4.809917  84.602497   1.000000          -
+      Assumed nucleotide frequencies (empirical frequencies):
+        A=0.33701  C=0.27103  G=0.17279  T=0.21917
+      Among-site rate variation:
+        Assumed proportion of invariable sites  = none
+        Distribution of rates at variable sites = gamma (discrete approximation)
+          Shape parameter (alpha)   = estimated
+          Number of rate categories = 4
+          Representation of average rate for each category = mean
+      These settings correspond to the GTR+G model
+      Number of distinct data patterns under this model = 140
+      Molecular clock not enforced
+      Starting branch lengths obtained using Rogers-Swofford approximation method
+      Trees with approximate likelihoods 5% or further from the target score are rejected without additional iteration
+      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, delta=1e-06
+      -ln L (unconstrained) = unavailable due to missing-data and/or ambiguities
+  Starting tree(s) obtained via stepwise addition
+  Addition sequence: as-is
+  Number of trees held at each step during stepwise addition = 1
+  Branch-swapping algorithm: tree-bisection-reconnection (TBR)
+  Steepest descent option not in effect
+  Initial 'MaxTrees' setting = 100
+  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
+  'MulTrees' option in effect
+  Topological constraints not enforced
+  Trees are unrooted
+
+   100 bootstrap replicates completed
+   Time used = 31 sec (CPU time = 30.93 sec)
+
+Trees for each replicate written to treefile: ~/Documents/storage/talks/teaching/WoodsHole2011/testing/scripts/mtdna/gtrg.boot.tre
+
+Bootstrap 50% majority-rule consensus tree
+
+/------------------------------------------------------------------------------------------------------------------------------------------ Hylobates larNC (1)
+|
+|                                                                    /--------------------------------------------------------------------- Homo sapiens NC (2)
+|                                                                    |
++---------------------------------88---------------------------------+--------------------------------------------------------------------- Pan troglodytes (3)
+|                                                                    |
+|                                                                    \--------------------------------------------------------------------- Gorilla gorilla (4)
+|
+\------------------------------------------------------------------------------------------------------------------------------------------ Pongo pygmaeus N(5)
+
+Bipartitions found in one or more trees and frequency of occurrence (bootstrap support values):
+
+12345      Freq
+---------------
+.***.     88.00
+.**..     48.00
+.*.*.     29.50
+..**.     14.00
+..*.*      6.00
+
+4 groups at (relative) frequency less than 5% not shown
+
+paup> set crit = pars
+
+
+Optimality criterion set to parsimony.
+
+paup> boot
+
+
+Bootstrap method with heuristic search:
+  Number of bootstrap replicates = 100
+  Starting seed = 1933144502
+  Optimality criterion = parsimony
+    Character-status summary:
+      13203 characters are excluded
+      Of the remaining 3000 included characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        2397 characters are constant
+        431 variable characters are parsimony-uninformative
+        Number of (included) parsimony-informative characters = 172
+    Gaps are treated as "missing"
+    Multistate taxa interpreted as uncertainty
+  Starting tree(s) obtained via stepwise addition
+  Addition sequence: simple (reference taxon = Hylobates larNC 002082)
+  Number of trees held at each step during stepwise addition = 1
+  Branch-swapping algorithm: tree-bisection-reconnection (TBR)
+  Steepest descent option not in effect
+  Initial 'MaxTrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  Topological constraints not enforced
+  Trees are unrooted
+
+   100 bootstrap replicates completed
+   Time used = 1 sec (CPU time = 0.12 sec)
+
+Bootstrap 50% majority-rule consensus tree
+
+/------------------------------------------------------------------------------------------------------------------------------------------ Hylobates larNC (1)
+|
+|                                                                                           /---------------------------------------------- Homo sapiens NC (2)
+|                                             /---------------------52----------------------+
+|                                             |                                             \---------------------------------------------- Pan troglodytes (3)
++---------------------100---------------------+
+|                                             \-------------------------------------------------------------------------------------------- Gorilla gorilla (4)
+|
+\------------------------------------------------------------------------------------------------------------------------------------------ Pongo pygmaeus N(5)
+
+Bipartitions found in one or more trees and frequency of occurrence (bootstrap support values):
+
+12345      Freq
+---------------
+.***.    100.00
+.**..     51.50
+.*.*.     35.50
+..**.     13.00
+
+paup> 
+paup> 
+paup> 
+paup> 

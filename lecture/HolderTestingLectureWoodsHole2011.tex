@@ -43,9 +43,56 @@ This evening:
 
 \myNewSlide
 \includepdf[pages={1}]{../newimages/JoeFelsBootFig3.pdf} 
+\myNewSlide
+\begin{picture}(0,0)(0,0)
+	  \put(0,-180){\makebox(0,0)[l]{\includegraphics[scale=1.2]{../newimages/hasegawaBootFigTree.pdf}}}
+	  \put(0,-350){\small From Hasegawa's analysis of 232 sites D-loop}
+\end{picture}
+
+\myNewSlide
+\section*{Bootstrapping for branch support}
+\large
+\begin{itemize}
+	\item ``Rogue'' taxa can lower support for many splits -- you do not have to use the majority-rule consensus tree to summarize bootstrap confidence statements.
+	\item Less thorough searching is faster, but will usually artificially lower BP. However, \citet{AnisimovaGDDG2011} report that RAxML's rapid bootstrap algorithm may inflate bootstrap proportions).
+\end{itemize}
 
 
+\myNewSlide
+\large
+\begin{picture}(500,0)(0,0)
+	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT1.pdf}}}
+	  \put(250,-100){1. Should we calculate the LRT as:}
+	  \put(280,-140){$\delta = 2\left[\ln L(t=\hat{t},T) - \ln L(t=0,T)\right]$}
+	  \put(250,-180){? }
+	  \put(250,-250){2. And can we use the $\chi_1^2$ distribution to}
+	  \put(250,-290){get the critical value for $\delta$?}
+\end{picture}
 
+\myNewSlide
+\begin{picture}(500,0)(0,0)
+	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT1.pdf}}}
+	  \put(250,-100){1. Should we calculate the LRT as:}
+	  \put(280,-140){$\delta = 2\left[\ln L(t=\hat{t},T) - \ln L(t=0,T)\right]$}
+	  \put(250,-180){? {\bf \color{red}No. $t=0$ might not yield the best}}
+	  \put(260,-220){\bf\color{red} alternative $\ln L$}
+	  \put(250,-290){2. And can we use the $\chi_1^2$ distribution to}
+	  \put(250,-330){get the critical value for $\delta$ ?}
+	  \put(250,-370){{\bf \color{red}No. Constraining parameters}}
+	  \put(260,-410){{\bf \color{red}at boundaries leads to a mixture}}
+	  \put(260,-450){{\bf \color{red}such as: $\frac{1}{2}\chi_0^2 + \frac{1}{2}\chi_1^2$}}
+	  \put(260,-490){\small See \citet{OtaWHSK2000}.}
+\end{picture}
+
+\myNewSlide
+\begin{picture}(500,0)(0,0)
+	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT2.pdf}}}
+\end{picture}
+
+
+\myNewSlide
+\normalsize
+\bibliography{phylo}
 \end{document}
 
 \myNewSlide
@@ -141,7 +188,6 @@ Parametric bootstrapping is powerful, but can also be sensitive to the model cho
 	\item Use the site-to-site variation in $\delta$ to estimate the variance of a Normal distribution
 	\item In the null the mean is 0
 \end{compactenum}
-\bibliography{phylo}
 
 \myNewSlide
 \includepdf[pages={8}]{images/polTopoTests.pdf} 
