@@ -28,8 +28,17 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 
 This evening:
 \begin{enumerate}
-	\item Bootstrapping;
-	\item Topology tests (KH, SH, AU, aLRT, aBayes, $\ldots$);
+	\item Bootstrapping to assess repeatability;
+	\item Putting $P$-values on trees:
+	\begin{compactitem}
+		\item KH,
+		\item SH,
+		\item aLRT,
+		\item aBayes,
+		\item 1 - BP,
+		\item AU,
+		\item aBP
+	\end{compactitem}
 	\item Discussion of the theory underlying this plethora of testing methods, and the history of the debates around bootstrapping in phylogenetics;
 	\item brief lab on how to use {\tt Seq-Gen} to conduct parametric bootstrapping.
 \end{enumerate}
@@ -57,6 +66,116 @@ This evening:
 	\item Less thorough searching is faster, but will usually artificially lower BP. However, \citet{AnisimovaGDDG2011} report that RAxML's rapid bootstrap algorithm may inflate bootstrap proportions).
 \end{itemize}
 
+
+\myNewSlide
+\section*{Frequentist hypothesis testing: coin flipping example}
+$N=100$ and $h=60$\\
+Can we reject the hypothesis of a fair coin ($p_H = 0.5$)?
+
+The ``recipe'' is:
+\begin{compactenum}
+	\item Formulate a null ($H_0$) and alternative ($H_A$) hypothesis.
+	\item Choose an acceptable Type-I error rate.
+	\item Choose a test statistic, $X.$
+	\item Identify the tail region of the test statistic - the values that conflict with $H_0$ at least a strongly as your observed data.
+	\item Calculate the $P$-value: The probability of a test statistic value more extreme than $X$ arising {\em even if $H_0$  is true}.
+	\item Reject $H_0$ if $P$-value is $\leq$ your Type I error rate.
+\end{compactenum}
+
+\myNewSlide
+{\bf COIN-FLIPPING HYP test figs}
+
+\myNewSlide
+\section*{The simplest phylogenetic test would compare two trees}
+\Large
+Null: If we had no sampling error (infinite data) $T_1$ and $T_2$ would explain the data equally well. 
+
+Test Statistic: $$\delta(T_1,T_2|X) = 2\left[\ln L(T_1|X) - \ln L(T_2|X)\right]$$
+
+Expectation under null: $$\mathbb{E}_{H_0}\left[\delta(T_1,T_2|X)\right] = 0$$
+
+\myNewSlide
+{\bf delta fig}
+
+To get the $P$-value, we need to know the probability density: $$\Pr(\delta(T_1,T_2|X)|H_0)$$
+
+\myNewSlide
+\section*{KH Test}
+\begin{compactenum}
+	\item Examine at the difference in $\ln L$ for each site: $\delta(T_1,T_2|x_i)$ for site $i$.
+	\item Note that the total difference is simply a sum:
+		$$\delta(T_1,T_2|X) = \sum_{i=1}^M\delta(T_1,T_2|x_i)$$
+	\item The variance of $\delta(T_1,T_2|X)$ will be a function of the variance in sitewise $\delta(T_1,T_2|x_i)$ values.
+\end{compactenum}
+
+\myNewSlide
+\section*{KH Test - the variance of $\delta(T_1,T_2|X)$}
+To get a sense of the variance of $\delta(T_1,T_2|X)$ we should expect because of sampling error, we could use:
+\begin{compactenum}
+	\item Assumptions of normality (by appealing to the Central Limit Theorem), or
+	\item Bootstrapping to generate a cloud of pseudo-replicate $\delta(T_1,T_2|X^{\ast})$ values.
+\end{compactenum}
+\myNewSlide
+UNCENTERED FIG
+
+\myNewSlide
+\section*{KH Test - `centering'}
+$H_0$ gives us the expected value: $$\mathbb{E}_{H_0}\left[\delta(T_1,T_2|X)\right] = 0$$
+Bootstrapping gives us a reasonable guess of the variance under $H_0$
+
+By substracting the mean of the bootstrapped $\delta(T_1,T_2|X^{\ast})$ values, we can create a null distribution.
+
+For each of the $j$ bootstrap replicates, we treat $\delta(T_1,T_2|X^{\ast j}) - \bar\delta(T_1,T_2|X^{\ast})$  as draws from the null distribution.
+
+\myNewSlide
+CENTERED FIG
+
+\myNewSlide
+CENTERED FIG with $P$-value
+
+
+\myNewSlide
+\section*{What if start out with only one hypothesized tree, and we want to compare it to the ML tree?}
+The KH Test is {\bf NOT} appropriate in this context \citep[see][for discussion of this point]{GoldmanAR2000}
+
+{\bf Multiple Comparisons}: lots of trees increases the variance of $\delta(\hat{T},T_1|X)$\\
+
+{\bf Selection bias}: Picking the ML tree to serve as one of the hypotheses invalidates the centering procedure of the KH test.
+
+\myNewSlide
+\section*{selection bias introduced by using the ML tree in your test}
+Even when the $H_0$ is true, we do not expect $2\left[\ln L(\hat{T}) - \ln L(T_1)\right]= 0$
+
+Imagine a competition in which a large number of equally skilled people compete, and you compare the score of one competitor against the highest scorer.
+
+\myNewSlide
+\section*{Shimodaira-Hasegawa proposed a test that deals the ``selection bias'' introduced by using the ML tree in your test}
+You have to specify of a set of candidate trees - inclusion in this set {\bf must not} depend on the dataset to be analyzed.
+
+The null hypothesis is that all members of the candidate set have the same expected score.
+
+\myNewSlide
+\section*{SH Test details}
+\normalsize
+\begin{compactitem}
+	\item For each tree $T_i$ in the candidate set calculate $\delta(\hat{T}, T_i|X)$
+	\item For each tree $T_i$, use $\bar{\ln L}(T_i|X^{\ast})$ to center the bootstrapped collection of log-likelihoods:
+		$$c_i^{(j)} = {\ln L}(T_i|X^{\ast})-\bar{\ln L}(T_i|X^{\ast})$$
+	\item For each replicate pick the highest value from the centered distributions (this mimics the selection bias): $$m^{(j)} = \max\left[c_i^{(j)}\right] \mbox{ over all } j$$
+	\item The for each tree and replicate, you get a sample from the null $\delta_i^{(j)} = m^{(j)} - c_i^{(j)}$
+	\item $P$-value for tree $T_i$ can be approximated by seeing where in the distribution of $\delta_i^{(j)}$ values it lies (the $P$-value is the proportion of sampled $\delta_i^{(j)} \geq \delta_i$
+\end{compactitem}
+
+\myNewSlide
+\section*{SH test candidate set selection}
+\large
+\begin{compactitem}
+	\item The candidate set should be all trees that you would have seriously entertained before seeing the data. 
+	\item Using all trees is safe (though weakens the test, and is computationally demanding).
+	\item Unfortunately, only considering a subset of trees for computational convenience can invalidate the test.
+	\item If a tree has low $\ln L$ and low variance of site-log-likelihoods then it can probably be safely removed without affecting the $P$-values of other trees\footnote{Because such a tree would be unlikely to ever be the tree that is the determines the maximum diplacement from the centered value, $m^{(j)}$.}
+\end{compactitem}
+The test makes worst-case assumptions about the range of plausible $\ln L$ values. As a result it is too conservative.
 
 \myNewSlide
 \large
@@ -90,6 +209,8 @@ This evening:
 \end{picture}
 
 
+
+
 \myNewSlide
 \normalsize
 \bibliography{phylo}
@@ -101,7 +222,7 @@ If we have a tree, $T_0$, in mind {\em a priori}, then how can we answer the que
 
 ``Based on this data, should we reject the tree?'' 
 
-Clearly if $\hat{T}\neq T_0$, then there is a possiblity that we should reject $T$.  
+Clearly if $\hat{T}\neq T_0$, then there is a possibility that we should reject $T$.  
 
 But how do we calculate a p-value?
 
@@ -113,6 +234,7 @@ How do we find the null-distribution for the test statistic? {\color{red} Simula
 
 \myNewSlide
 \includepdf[pages={2}]{../lec14Testing/images/polBremer.pdf} 
+
 
 \myNewSlide
 \section*{Testing 2 trees}
