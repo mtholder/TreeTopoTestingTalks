@@ -119,7 +119,7 @@ Test Statistic: $$\delta(T_1,T_2|X) = 2\left[\ln L(T_1|X) - \ln L(T_2|X)\right]$
 Expectation under null: $$\mathbb{E}_{H_0}\left[\delta(T_1,T_2|X)\right] = 0$$
 
 \myNewSlide
-\begin{picture}(500,0)(0,0)
+\begin{picture}(500,0)(-20,-50)
 	  \put(20,-20){\small Using 3000 sites of mtDNA sequence for 5 primates}
 	  \put(20,-60){\normalsize $T_1$ is ((chimp, gorilla), human)}
 	  \put(20,-100){\normalsize $T_2$ is ((chimp, human), gorilla)}
@@ -135,6 +135,15 @@ Expectation under null: $$\mathbb{E}_{H_0}\left[\delta(T_1,T_2|X)\right] = 0$$
 \myNewSlide
 
 To get the $P$-value, we need to know the probability: $$\Pr\left(\big|\delta(T_1,T_2|X)\big| > 3.17 | H_0\mbox{ is true}\right) $$
+\begin{picture}(500,0)(-20,-50)
+	  \put(-10,-235){\small$\delta(T_1,T_2|X)=-3.18$}
+	  \put(460,-235){\small$-\delta(T_1,T_2|X)=3.18$}
+	  \put(10,-270){\huge$\leftarrow$}
+	  \put(570,-270){\huge$\rightarrow$}
+	  \put(300,-235){\small$\mathbb{E}(\delta)$}
+	  \put(50,-0){\makebox(0,-190)[l]{\includegraphics[scale=1.0]{../newimages/delta_axes_reflected.pdf}}}
+	  \put(220,-330){$\delta(T_1,T_2|X) $}
+\end{picture}
 
 \myNewSlide
 \section*{KH Test}
@@ -160,7 +169,7 @@ To get the $P$-value, we need to know the probability: $$\Pr\left(\big|\delta(T_
 \section*{KH Test - the variance of $\delta(T_1,T_2|X)$}
 To get a sense of the variance of $\delta(T_1,T_2|X)$ we should expect because of sampling error, we could use:
 \begin{compactenum}
-	\item Assumptions of normality (by appealing to the Central Limit Theorem), or
+	\item Assumptions of Normality (by appealing to the Central Limit Theorem), or
 	\item Bootstrapping to generate a cloud of pseudo-replicate $\delta(T_1,T_2|X^{\ast})$ values.
 \end{compactenum}
 
@@ -168,11 +177,11 @@ To get a sense of the variance of $\delta(T_1,T_2|X)$ we should expect because o
 \section*{RELL bootstrap}
 If the MLE of the numerical parameters (including branch lengths) do not change much when we bootstrap we can simply resample the site $\ln L$ values and sum them.
 
-This is called the RELL bootstrap \citep[][and Felsenstein]{KishinoMH1990}. It may not be very safe \citep[especially on large trees;][]{StamatakisHR2008}.
+This is called the RELL bootstrap \citep[][and Felsenstein]{KishinoMH1990}. It may not be very safe \citep[especially on large trees;][]{StamatakisHR2008}, but it is very fast.
+
 \myNewSlide
 \begin{picture}(500,0)(0,0)
 	  \put(0,-10){\large $\delta$ for many (RELL) bootstrapped replicates of the data}
-	  \put(280,-35){\large $\vdots$}
 	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/uncentered1-2hist.pdf}}}
 	  \put(250,-490){\normalsize$\delta(T_1,T_2|X^{\ast})$}
 \end{picture}
@@ -187,25 +196,46 @@ By substracting the mean of the bootstrapped $\delta(T_1,T_2|X^{\ast})$ values, 
 For each of the $j$ bootstrap replicates, we treat $\delta(T_1,T_2|X^{\ast j}) - \bar\delta(T_1,T_2|X^{\ast})$  as draws from the null distribution.
 
 \myNewSlide
-CENTERED FIG
+\begin{picture}(500,0)(0,0)
+	  \put(0,10){\large $\delta(T_1,T_2|X^{\ast j})-\bar\delta(T_1,T_2|X^{\ast})$}
+	  \put(0,-25){for many (RELL) bootstrapped replicates of the data}
+	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/centered1-2hist.pdf}}}
+	  \put(250,-490){\normalsize$\delta(T_1,T_2|X^{\ast})$}
+\end{picture}
 
 \myNewSlide
-CENTERED FIG with $P$-value
+\begin{picture}(500,0)(0,0)
+	  \put(0,10){\large $\delta(T_1,T_2|X^{\ast j})-\bar\delta(T_1,T_2|X^{\ast})$}
+	  \put(0,-25){for many (RELL) bootstrapped replicates of the data}
+	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/centered1-2hist-p.pdf}}}
+	  \put(250,-490){\normalsize$\delta(T_1,T_2|X^{\ast})$}
+\end{picture}
 
 
 \myNewSlide
 \section*{What if start out with only one hypothesized tree, and we want to compare it to the ML tree?}
 The KH Test is {\bf NOT} appropriate in this context \citep[see][for discussion of this point]{GoldmanAR2000}
-
+	
 {\bf Multiple Comparisons}: lots of trees increases the variance of $\delta(\hat{T},T_1|X)$\\
 
 {\bf Selection bias}: Picking the ML tree to serve as one of the hypotheses invalidates the centering procedure of the KH test.
 
 \myNewSlide
-\section*{selection bias introduced by using the ML tree in your test}
+\section*{Using the ML tree in your test introduces selection bias}
 Even when the $H_0$ is true, we do not expect $2\left[\ln L(\hat{T}) - \ln L(T_1)\right]= 0$
 
 Imagine a competition in which a large number of equally skilled people compete, and you compare the score of one competitor against the highest scorer.
+
+\myNewSlide
+\begin{picture}(500,0)(0,0)
+	  \put(-10,15){Experiment: 70 people each flip a fair coin 100 times and}
+	  \put(0,-20){count \# heads.  Test statistic:}
+	  \put(100,-55){$h_1 - h_2$}
+	  \put(400,-55){$\max(h) - h_1$}
+	  \put(-30,-250){\makebox(0,0)[l]{\includegraphics[scale=.75]{../scripts/cfc_diff_a_priori.pdf}}}
+	  \put(320,-250){\makebox(0,0)[l]{\includegraphics[scale=.75]{../scripts/cfc_diff_best_v_one.pdf}}}
+\end{picture}
+
 
 \myNewSlide
 \section*{Shimodaira-Hasegawa proposed a test that deals the ``selection bias'' introduced by using the ML tree in your test}
