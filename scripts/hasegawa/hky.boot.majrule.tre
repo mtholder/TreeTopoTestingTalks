@@ -1,0 +1,16 @@
+#NEXUS 
+
+Begin trees;  [Treefile saved Sun Jul 24 05:29:48 2011]
+[!
+>Consensus of 106 trees
+>
+>Source of trees from which consensus(es) calculated...
+>
+>Processing TREES block from file "hky.boot.tre":
+>   Keeping: trees from file (replacing trees in memory)
+>
+>   106 trees read from file
+>   106 trees now in memory
+]
+	tree MajRule = [&U] (Bovine,Mouse,(Gibbon,(Orang,(Gorilla,(Chimp,Human)59)57)57)88);
+end;

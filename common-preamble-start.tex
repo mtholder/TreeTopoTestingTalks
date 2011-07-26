@@ -1,0 +1,76 @@
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+\pdffalse % we are not running PDFLaTeX
+\else
+\pdfoutput=1 % we are running PDFLaTeX
+\pdftrue
+\fi
+
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\else
+\usepackage{graphicx}
+\fi
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif, .png}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+%\usepackage{pslatex}
+\usepackage{tabularx,dcolumn, graphicx, amsfonts,amsmath}  
+\usepackage[sectionbib]{natbib}
+\bibliographystyle{apalike}
+\usepackage{picinpar}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{paralist} %compactenum
+\setlength{\voffset}{-0.5in}
+%\setlength{\hoffset}{-0.5in}
+%\setlength{\textwidth}{10.5in}
+\setlength{\textheight}{7in}
+\setlength{\parindent}{0pt}
+%\pagestyle{empty}
+%\renewcommand{\baselinestretch}{2.0}
+\DeclareMathSymbol{\expect}{\mathalpha}{AMSb}{'105}
+\def\p{\rm p}
+\def\pp{\rm P}
+% this are commands that come with the color package
+\usepackage{color}
+\usepackage{fancyhdr}
+
+
+\pagestyle{empty}
+%define colors
+\definecolor{mediumblue}{rgb}{0.0509,0.35,0.568}
+\definecolor{blue}{rgb}{0.0109,0.15,0.468}
+\definecolor{black}{rgb}{0.04,0.06,0.2}
+\definecolor{darkblue}{rgb}{0.03,0.1,0.2}
+\definecolor{darkgreen}{rgb}{0.03,0.5,0.2}
+\definecolor{lightblue}{rgb}{0.85,0.9333,0.95}
+\definecolor{lightblue2}{rgb}{0.270588, 0.45098, 0.701961}
+\definecolor{white}{rgb}{1.0,1.0,1.0}
+\definecolor{yellow}{rgb}{0.961,0.972,0.047}
+\definecolor{red}{rgb}{0.9,0.1,0.1}
+\definecolor{orange}{rgb}{1.0,0.4,0.0}
+\definecolor{grey}{rgb}{0.5,0.5,0.5}
+\definecolor{violet}{rgb}{0.619608, 0.286275, 0.631373}
+\definecolor{mybackgroundcolor}{rgb}{1.0,1.0,1.0}
+
+%\definecolor{light}{rgb}{.5,0.5,0.0}
+\definecolor{light}{rgb}{.3,0.3,0.3}
+
+% sets backgroundcolor for whole document 
+\pagecolor{mybackgroundcolor}
+% sets text color
+%\color{black}
+% see below for an example how to change just a few words
+% using \textcolor{color}{text}
+
+\font \courier=pcrb scaled 2000
+\newcommand{\notetoself}[1]{{\textsf{\textsc{\color{red} #1}}}\\}
+
+\newcommand{\answer}[1]{{\sf \color{red} #1}}
+
+\usepackage{pdfpages}

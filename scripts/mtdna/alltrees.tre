@@ -1,0 +1,31 @@
+#NEXUS 
+
+Begin trees;  [Treefile saved Wed Jul 20 13:36:07 2011]
+[!
+>Data file = /Users/mholder/Documents/storage/talks/teaching/WoodsHole2011/testing/scripts/mtdna/guidance.nex
+>
+>Generating all unrooted trees for 5 taxa:
+]
+	Translate
+		1 Hylobates_larNC_002082,
+		2 Homo_sapiens_NC_012920,
+		3 Pan_troglodytes_HM068590,
+		4 Gorilla_gorilla_NC_011120,
+		5 Pongo_pygmaeus_NC_001646
+		;
+tree PAUP_1 = [&U] (1,(((2,3),4),5));
+tree PAUP_2 = [&U] (1,(((2,3),5),4));
+tree PAUP_3 = [&U] (1,(((2,5),3),4));
+tree PAUP_4 = [&U] (1,((2,(3,5)),4));
+tree PAUP_5 = [&U] (1,((2,3),(4,5)));
+tree PAUP_6 = [&U] (1,(((2,4),3),5));
+tree PAUP_7 = [&U] (1,(((2,4),5),3));
+tree PAUP_8 = [&U] (1,(((2,5),4),3));
+tree PAUP_9 = [&U] (1,((2,(4,5)),3));
+tree PAUP_10 = [&U] (1,((2,4),(3,5)));
+tree PAUP_11 = [&U] (1,((2,(3,4)),5));
+tree PAUP_12 = [&U] (1,((2,5),(3,4)));
+tree PAUP_13 = [&U] (1,(2,((3,4),5)));
+tree PAUP_14 = [&U] (1,(2,((3,5),4)));
+tree PAUP_15 = [&U] (1,(2,(3,(4,5))));
+End;

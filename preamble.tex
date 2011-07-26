@@ -1,0 +1,32 @@
+\newcommand{\section}{\secdef \newsection\newsection}
+%\renewcommand{\labelitemi}{\includegraphics[width=5mm]{images/bullet.pdf}}
+\newcommand{\newsection}[1]{%
+{
+	\par\flushleft\large\sf\bfseries \vskip -2cm #1\\\rule[0.7\baselineskip]{\textwidth}{0.5mm}\par}}
+
+\newcommand{\subsection}{\secdef \test\test}
+\newcommand{\test}[1]{%
+	{\par\flushleft\normalsize\sf\bfseries #1: }}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\prob}{{\rm Prob~}}
+\def\showy#1{{\normalsize\sf\bfseries #1}}
+\def\donotuse#1{}
+
+\newcommand{\entrylabel}[1]{\mbox{#1}\hfil}
+\newenvironment{entry}
+	{\begin{list}{}%
+		{\renewcommand{\makelabel}{\entrylabel}%
+		\setlength{\labelwidth}{35pt}%
+		\setlength{\leftmargin}{\labelwidth+\labelsep}%
+	}%
+	{\end{list}}}
+
+\newcommand{\poltext}{{\copyright\ 2002--2010 by Paul O. Lewis -- Modified by  Mark Holder with permission from Paul Lewis}}
+
+\newcommand{\pol}{{\footnotesize \poltext}}
+\newcommand{\myBackground}{\begin{picture}(0,0)(0,0)  \put(-40,-70){\makebox(0,0)[l]{\includegraphics[width=33cm]{images/baby_blue.jpg}}} \end{picture}}
+\newcommand{\myFooter}{}
+%\begin{picture}(0,0)(0,0)
+%	\put(0,-185){\pol}
+%\end{picture}}
+\newcommand{\myNewSlide}{\newpage\myFooter} % \myBackground}

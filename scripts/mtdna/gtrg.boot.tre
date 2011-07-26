@@ -1,0 +1,351 @@
+#NEXUS 
+
+Begin trees;  [Treefile saved Sun Jul 24 07:19:59 2011]
+[!>Trees found during each bootstrap replicate using data file '~/Documents/storage/talks/teaching/WoodsHole2011/testing/scripts/mtdna/guidance.nex'...]
+[!
+>Bootstrap method with heuristic search:
+>  Number of bootstrap replicates = 100
+>  Starting seed = 1731967466
+>  Optimality criterion = likelihood
+>    13203 characters are excluded
+>    Likelihood settings:
+>      User-specified substitution rate matrix =
+>                  -   6.964029  37.460195   4.809917
+>           6.964029          -   0.155376  84.602497
+>          37.460195   0.155376          -   1.000000
+>           4.809917  84.602497   1.000000          -
+>      Assumed nucleotide frequencies (empirical frequencies):
+>        A=0.33701  C=0.27103  G=0.17279  T=0.21917
+>      Among-site rate variation:
+>        Assumed proportion of invariable sites  = none
+>        Distribution of rates at variable sites = gamma (discrete approximation)
+>          Shape parameter (alpha)   = estimated
+>          Number of rate categories = 4
+>          Representation of average rate for each category = mean
+>      These settings correspond to the GTR+G model
+>      Number of distinct data patterns under this model = 140
+>      Molecular clock not enforced
+>      Starting branch lengths obtained using Rogers-Swofford approximation method
+>      Trees with approximate likelihoods 5% or further from the target score are rejected without additional iteration
+>      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, delta=1e-06
+>      -ln L (unconstrained) = unavailable due to missing-data and/or ambiguities
+>  Starting tree(s) obtained via stepwise addition
+>  Addition sequence: as-is
+>  Number of trees held at each step during stepwise addition = 1
+>  Branch-swapping algorithm: tree-bisection-reconnection (TBR)
+>  Steepest descent option not in effect
+>  Initial 'MaxTrees' setting = 100
+>  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
+>  'MulTrees' option in effect
+>  Topological constraints not enforced
+>  Trees are unrooted
+]
+	Translate
+		1 Hylobates_larNC_002082,
+		2 Homo_sapiens_NC_012920,
+		3 Pan_troglodytes_HM068590,
+		4 Gorilla_gorilla_NC_011120,
+		5 Pongo_pygmaeus_NC_001646
+		;
+
+[Trees found in bootstrap replicate #1 (seed=1731967466)]
+tree B_1.1 = [&U] [&W 1] (1,(2,((3,5),4)));
+
+[Trees found in bootstrap replicate #2 (seed=1250158281)]
+tree B_2.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #3 (seed=1365360316)]
+tree B_3.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #4 (seed=124612834)]
+tree B_4.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #5 (seed=1813260703)]
+tree B_5.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #6 (seed=650154872)]
+tree B_6.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #7 (seed=1827301382)]
+tree B_7.1 = [&U] [&W 1] (1,(2,((3,5),4)));
+
+[Trees found in bootstrap replicate #8 (seed=1748734841)]
+tree B_8.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #9 (seed=128065722)]
+tree B_9.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #10 (seed=2116113547)]
+tree B_10.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #11 (seed=1836264278)]
+tree B_11.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #12 (seed=1815790341)]
+tree B_12.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #13 (seed=1777143869)]
+tree B_13.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #14 (seed=508803722)]
+tree B_14.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #15 (seed=1105637172)]
+tree B_15.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #16 (seed=751596624)]
+tree B_16.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #17 (seed=451281488)]
+tree B_17.1 = [&U] [&W 1] (1,(((2,4),5),3));
+
+[Trees found in bootstrap replicate #18 (seed=1491391236)]
+tree B_18.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #19 (seed=1508952595)]
+tree B_19.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #20 (seed=539004242)]
+tree B_20.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #21 (seed=804367760)]
+tree B_21.1 = [&U] [&W 1] (1,((2,(3,5)),4));
+
+[Trees found in bootstrap replicate #22 (seed=922006036)]
+tree B_22.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #23 (seed=1236673872)]
+tree B_23.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #24 (seed=2142124275)]
+tree B_24.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #25 (seed=4254478)]
+tree B_25.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #26 (seed=393067316)]
+tree B_26.1 = [&U] [&W 1/2] (1,((2,4,5),3));
+tree B_26.2 = [&U] [&W 1/2] (1,(((2,4),5),3));
+
+[Trees found in bootstrap replicate #27 (seed=628155021)]
+tree B_27.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #28 (seed=1646562610)]
+tree B_28.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #29 (seed=40362822)]
+tree B_29.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #30 (seed=327981364)]
+tree B_30.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #31 (seed=2055920054)]
+tree B_31.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #32 (seed=953888906)]
+tree B_32.1 = [&U] [&W 1] (1,(2,((3,5),4)));
+
+[Trees found in bootstrap replicate #33 (seed=1401808826)]
+tree B_33.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #34 (seed=1745156918)]
+tree B_34.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #35 (seed=2008213380)]
+tree B_35.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #36 (seed=1376950232)]
+tree B_36.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #37 (seed=1546130976)]
+tree B_37.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #38 (seed=620728058)]
+tree B_38.1 = [&U] [&W 1] (1,((2,(4,5)),3));
+
+[Trees found in bootstrap replicate #39 (seed=1362199211)]
+tree B_39.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #40 (seed=1812680120)]
+tree B_40.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #41 (seed=527905547)]
+tree B_41.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #42 (seed=1556882166)]
+tree B_42.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #43 (seed=1435048433)]
+tree B_43.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #44 (seed=357428816)]
+tree B_44.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #45 (seed=526803177)]
+tree B_45.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #46 (seed=883910133)]
+tree B_46.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #47 (seed=540507732)]
+tree B_47.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #48 (seed=1368466172)]
+tree B_48.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #49 (seed=1525716335)]
+tree B_49.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #50 (seed=1238242975)]
+tree B_50.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #51 (seed=1208640536)]
+tree B_51.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #52 (seed=2017663866)]
+tree B_52.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #53 (seed=1135899487)]
+tree B_53.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #54 (seed=1699949953)]
+tree B_54.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #55 (seed=69407694)]
+tree B_55.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #56 (seed=2011256823)]
+tree B_56.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #57 (seed=1768370378)]
+tree B_57.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #58 (seed=2087762431)]
+tree B_58.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #59 (seed=758686059)]
+tree B_59.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #60 (seed=958616951)]
+tree B_60.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #61 (seed=1767529299)]
+tree B_61.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #62 (seed=1650493264)]
+tree B_62.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #63 (seed=1590611294)]
+tree B_63.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #64 (seed=1540071760)]
+tree B_64.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #65 (seed=75631316)]
+tree B_65.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #66 (seed=2044981916)]
+tree B_66.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #67 (seed=250036803)]
+tree B_67.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #68 (seed=1143690942)]
+tree B_68.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #69 (seed=278601979)]
+tree B_69.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #70 (seed=313458313)]
+tree B_70.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #71 (seed=1984715529)]
+tree B_71.1 = [&U] [&W 1] (1,((2,3,5),4));
+
+[Trees found in bootstrap replicate #72 (seed=773192459)]
+tree B_72.1 = [&U] [&W 1] (1,(((2,3),5),4));
+
+[Trees found in bootstrap replicate #73 (seed=454463624)]
+tree B_73.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #74 (seed=1805543892)]
+tree B_74.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #75 (seed=167226226)]
+tree B_75.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #76 (seed=1629480542)]
+tree B_76.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #77 (seed=1700372293)]
+tree B_77.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #78 (seed=2097868052)]
+tree B_78.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #79 (seed=1078655859)]
+tree B_79.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #80 (seed=1485301429)]
+tree B_80.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #81 (seed=2103437225)]
+tree B_81.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #82 (seed=166873574)]
+tree B_82.1 = [&U] [&W 1] (1,((2,(4,5)),3));
+
+[Trees found in bootstrap replicate #83 (seed=1789250672)]
+tree B_83.1 = [&U] [&W 1] (1,((2,4),(3,5)));
+
+[Trees found in bootstrap replicate #84 (seed=12061665)]
+tree B_84.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #85 (seed=2037464338)]
+tree B_85.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #86 (seed=1996601349)]
+tree B_86.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #87 (seed=257468509)]
+tree B_87.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #88 (seed=1546417236)]
+tree B_88.1 = [&U] [&W 1] (1,(2,((3,5),4)));
+
+[Trees found in bootstrap replicate #89 (seed=2003845891)]
+tree B_89.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #90 (seed=1229813789)]
+tree B_90.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #91 (seed=1580546323)]
+tree B_91.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #92 (seed=1783576126)]
+tree B_92.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #93 (seed=1039822761)]
+tree B_93.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #94 (seed=716696702)]
+tree B_94.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #95 (seed=1240624625)]
+tree B_95.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #96 (seed=1233292051)]
+tree B_96.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #97 (seed=559293810)]
+tree B_97.1 = [&U] [&W 1] (1,(((2,4),3),5));
+
+[Trees found in bootstrap replicate #98 (seed=1376888036)]
+tree B_98.1 = [&U] [&W 1] (1,(((2,3),4),5));
+
+[Trees found in bootstrap replicate #99 (seed=612042121)]
+tree B_99.1 = [&U] [&W 1] (1,((2,(3,4)),5));
+
+[Trees found in bootstrap replicate #100 (seed=437668935)]
+tree B_100.1 = [&U] [&W 1] (1,(((2,3),4),5));
+end;
