@@ -330,6 +330,9 @@ Generate the null distribution of $\delta_i$ by:
 	\item Simulating a large number $B$ of data sets, $X^{(1)}, X^{(2)},\ldots,X^{(B)}$ according to the parameters of that model,
 	\item Calculating $\delta^{(j)} = 2\left[\ln L (\hat{T}; X^{(j)}) - \ln L (\hat{T}_{0}; X^{(j)})\right]$ where $\hat{T}_{0}$ is the tree estimated when you enforce a constraint such that all of the trees are compatible with the null.
 \end{compactitem}
+
+\myNewSlide
+\section*{Parametric bootstrapping}
 Intuitive and powerful, but not robust to model violation \citep{Buckley2002}.
 
 In the SOWH test, the null tree is specified {\em a priori}.
@@ -401,10 +404,10 @@ Note: {\em \bf Not} all of these have implied that the measures {\em\bf should} 
 
 
 \myNewSlide
-\section*{\citet{Newton1996} showed that the median BP may not be biased downward}
+\section*{\citet{Newton1996} showed that, when you look at the median, the BP may not be biased downward}
 \begin{picture}(-0,0)(-0,0)
-	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{../newimages/Newton1996Fig3.pdf}}}
-	\put(40,-330){Figure 3 from \citet{Newton1996}}
+	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{../newimages/Newton1996Fig4.pdf}}}
+	\put(40,-330){Figure 4 from \citet{Newton1996}}
 \end{picture}
 
 \myNewSlide
@@ -622,6 +625,26 @@ BP may {\bf not} be conservative when you correct for selection bias.
 \end{picture}
 
 
+\myNewSlide
+\section*{Summary - Part 1}
+
+\begin{itemize}
+	\item $\delta(T_1,T_2|X) = 2\left[\ln L(T_1|X) - \ln L(T_2|X)\right]$ is a powerful statistic for discrimination between trees.
+	\item We can assess confidence by considering the variance in signal between different characters.
+	\item Bootstrapping helps us assess the variance in $\ln L$ that we would expect to result from sampling error.
+\end{itemize}
+
+\myNewSlide
+\section*{Summary - Part 2}
+A (very) wide variety of tests differ by
+\begin{itemize}
+	\item Null hypotheses:
+	\begin{compactitem}
+		\item Expected scores are the same $\rightarrow$ boundary tests. {\bf More robust ?}
+		\item A tree consistent with the null is correct $\rightarrow$ tests that use the full info of the model. {\bf More powerful?}
+	\end{compactitem}
+	\item How t
+\end{itemize}
 
 \myNewSlide
 \normalsize

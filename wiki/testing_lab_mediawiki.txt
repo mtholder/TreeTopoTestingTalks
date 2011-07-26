@@ -12,6 +12,8 @@ It contains 16S rRNA sequences for a cyanobacterium (''Anacystis''), a chromophy
 This data set was used in a 1994 paper by Lockhart et al. to show how common models used in reconstructing phylogenies fail when confronted by convergence in nucleotide composition. The problem is that the common models assume stationarity of the substitution process, which leads to the assumption that base frequencies do not change across the tree. Thus, things can go wrong when the base frequencies do change from lineage to lineage, and things can go really wrong when unrelated groups tend to have similar base compositions. In this case, ''Euglena'' should group with the green plants because its chloroplast (whence the 16S rDNA is obtained) is homologous to green plant chloroplasts. However, as you will see, it has a strong tendency to group with the unrelated chromophyte ''Olithodiscus'' because of similarities in base composition. The complete reference to the Lockhart paper is
 [http://mbe.oxfordjournals.org/content/11/4/605.citation Lockhart, P. J., M. A. Steel, M. D. Hendy, and D. Penny. 1994. "Recovering evolutionary trees under a more realistic model of sequence evolution". ''Molecular Biology and Evolution'' '''11''': 605-612.]
 
+For the purpose of the lab we will use the null hypothesis that there is a branch separating  ''Anacystis'' and ''Olithodiscus'' from the rest of the taxa.
+
 == Parametric Bootstrapping Background  ==
 
 Because we have a limited amount of time in the computer lab, we will be using parsimony as our optimality criterion in this lab.
@@ -38,41 +40,47 @@ command to see all the scores of all the trees.
 :# How many most parsimonious trees are there?
 :# How many steps are required to explain the data?
 
-3. Specify ''Olithodiscus'' as the outgroup (use the <code>Outgroup</code> command). Does the tree display the chlorophyll ''a/b'' clade ?
+3. Use the <code>boot</code> command calculate the bootstrap proportions and display the majority-rule consensus tree from the bootstrapping analyses.
+:# What is the bootstrap support for the split that represents our null hypothesis? If that split is not supported by the data, thenit will not be on the majority-rule tree  but it should be listed in the split frequency table.
+
+
+
+
+4. Specify ''Olithodiscus'' as the outgroup (use the <code>Outgroup</code> command). Does the tree display the chlorophyll ''a/b'' clade ?
 
 You can use <code>ShowTrees all</code> to see all of the trees in memory (note that the <code>AllTrees</code> command scores every tree, but does not retain all of the trees in memory.  It will only retain the best trees according to the criterion).
 
-4. Now we need to find the best scoring tree that is consistent with our null hypothesis.
+5. Now we need to find the best scoring tree that is consistent with our null hypothesis.
 So we want to find the best-scoring tree that has a clade of ''Euglena'', ''Chlorella'', ''Chlamydomonas'', ''Marchantia'', Rice, and Tobacco excluding ''Anacystis nidulans'' and ''Olithodiscus''. We can do this in a number of ways.
 For a small dataset (like this one), we could:
-:# get all of the trees is memory,
+:# get all of the trees in memory,
 :# use PAUP's <code>Filter</code> command to remove trees that do not have the group from memory, and
 :#  use the <code>SortTrees</code> command to find the best score among all of the trees that are left.
 
-We are going to use o more generic approach.
+We are going to use a more generic approach.
 It is an approach that you could use even on a large dataset.
 We will tell PAUP to do a search but also impose a topological constraint. The first step is to tell PAUP to use the constraint. The command to do this is
 <pre>Constraints ab (MONOPHYLY) = newick_description_here</pre>
-In the place of "newick_description_here" you should put the paranthetical notation for a tree that has just the clade that you would like to constrain.
+In the place of "newick_description_here" you should put the parenthetical notation for a tree that has just the clade that you would like to constrain.
 The name of the constraint tree can be any NEXUS word that you like; in this example <code>ab</code> will be the name of the constraint tree.
 
 See if you can compose the command for a constraint tree called 'ab' that represents our null hypothesis: a branch separating ''Anacystis nidulans'' and ''Olithodiscus'' from the rest of the species.
 Use the taxa names (rather than taxa numbers) to define constraint. Note that you will have to use '''Anacystis_nidulans''' rather than '''Anacystis nidulans''' so that PAUP does not get confused by the space in the taxon name.
 
-5. Use the <code>ShowConstr</code> command to see the constraint tree that you have defined and make sure that it looks right?
+6. Use the <code>ShowConstr</code> command to see the constraint tree that you have defined and make sure that it looks right?
 
 Note that you can also load a constraint from a tree file using the <code>LoadConstr</code> command. When you are dealing with large numbers of taxa and complex constraints it is often helpful to construct the constraint tree in [http://mesquiteproject.org/mesquite/mesquite.html Mesquite], save it to a file, and then read it into PAUP using the <code>LoadConstr</code> command.
 
 
-6. Now we will conduct a branch-and-bound search that honors the constraint tree that we have just defined:
+7. Now we will conduct a branch-and-bound search that honors the constraint tree that we have just defined:
 <pre>BAndB enforce constraints=ab </pre>
 The <code>enforce</code> keyword tells paup to only consider trees that meet a constraint, and the <code>constraints=ab</code> keyword tell PAUP which tree to use as a constraint. 
 Note that you can also use constraints with the <code>HSearch</code> command of PAUP (and you will need to do this for bigger datasets). 
 What has the parsimony score of the best tree compatible with the constraint? 
 
-7. Use the <code>ShowTrees</code> command to see the tree. Does it satisfy the constraint? 
+8. Use the <code>ShowTrees</code> command to see the tree. Does it satisfy the constraint? 
 
-8. Use the <code>SaveTrees</code> to save this tree to a file in case you need it later.
+9. Use the <code>SaveTrees</code> to save this tree to a file in case you need it later.
 
 
 == Hypothesis testing ==
@@ -251,6 +259,9 @@ Was the observed difference in this tail of the null distribution? and would you
 = The postscript =
 You will find <code>KHTest</code>, <code>SHTest</code>, and <code>AUTest</code> options in PAUP's <code>LScore</code> command.
 Using <code>LScore</code> command is the easiest way to conduct these tests.
+Let us know if you have any questions about running these tests.
+
+You can run these tests and compare the results from those tests your results from the parametric bootstrapping.
 
 Other software relevant to the testing lecture:
 * [http://www.atgc-montpellier.fr/phyml/ PhyML] aLRT and aBayes statistics, in particular.
