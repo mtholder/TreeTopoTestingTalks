@@ -351,7 +351,7 @@ Generate the null distribution of $\delta_i$ by:
 \begin{compactitem}
 	\item finding the best tree and model pair that are consistent with the $H_0$,
 	\item Simulating a large number $B$ of data sets, $X^{(1)}, X^{(2)},\ldots,X^{(B)}$ according to the parameters of that model,
-	\item Calculating $\delta^{(j)} = 2\left[\ln L (\hat{T}; X^{(j)}) - \ln L (\hat{T}_{0}; X^{(j)})\right]$ where $\hat{T}_{0}$ is the tree estimated when you enforce a constraint such that all of the trees are compatible with the null.
+	\item Calculating $\delta^{(j)} = 2\left[\ln L (\hat{T}| X^{(j)}) - \ln L (\hat{T}_{0}| X^{(j)})\right]$ where $\hat{T}_{0}$ is the tree estimated when you enforce a constraint such that all of the trees are compatible with the null.
 \end{compactitem}
 
 \myNewSlide
