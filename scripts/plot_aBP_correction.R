@@ -6,6 +6,7 @@ plot(d$BP, d$aBPRand,
     main="aBP for each BP (5 model conditions)", 
     type='l')
 points(d$BP, d$aBPRand, pty=1)
+points(d$BP, d$aBPExGam, pty=2)
 lines(d$BP, d$aBPExGam, lty=2)
 points(d$BP, d$aBPExEq, pty=3)
 lines(d$BP, d$aBPExEq, lty=3)
@@ -19,6 +20,7 @@ pdf("Susko2010Table3aBPMLCorrection.pdf")
 plot(d$BP, d$aBPMLRand, xlim=c(0,100), ylim=c(0,100), xlab="BP", ylab="aBP", main="aBP with selection bias correction for each BP (5 model conditions)",
     type='l')
 points(d$BP, d$aBPMLRand, pty=1)
+points(d$BP, d$aBPMLExGam, pty=2)
 lines(d$BP, d$aBPMLExGam, lty=2)
 points(d$BP, d$aBPMLExEq, pty=3)
 lines(d$BP, d$aBPMLExEq, lty=3)

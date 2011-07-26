@@ -44,7 +44,7 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 		\item AU,
 		\item aBP
 	\end{compactitem}
-	\item Cartoon time!
+	\item Cartoon time! ({\small warning: ``cartoon time'' will not actually be fun})
 \end{compactenum}
 
 \myNewSlide
@@ -76,7 +76,7 @@ Eventually those notes and associated code at:\\ {\normalsize \url{https://githu
 \large
 \begin{itemize}
 	\item ``Rogue'' taxa can lower support for many splits -- you do not have to use the majority-rule consensus tree to summarize bootstrap confidence statements.
-	\item Less thorough searching is faster, but will usually artificially lower BP. However, \citet{AnisimovaGDDG2011} report that RAxML's rapid bootstrap algorithm may inflate bootstrap proportions).
+	\item Less thorough searching is faster, but will usually artificially lower bootstrap proportions (BP). However, \citet{AnisimovaGDDG2011} report that RAxML's rapid bootstrap algorithm may inflate BP.
 \end{itemize}
 
 \myNewSlide
@@ -566,7 +566,7 @@ If we bootstrap we get a sense of the variability in our estimate, but we can al
 
 
 \myNewSlide
-\section*{\cite{Susko2010} aBP}
+\section*{\cite{Susko2010} adjusted BP -- aBP}
 Susko reports that the curvature arguments of \citet{EfronHH1996} and \citet{Shimodaira2002}, while not incorrect, ignore the {\bf sharp point} in parameter space around the polytomy.
 
 He uses the curvature of the likelihood function to correct bootstrap proportions so that $1-aBP$ accurately estimates the $P$-value.
@@ -664,8 +664,8 @@ A (very) wide variety of tests differ by:
 \begin{itemize}
 	\item Null hypotheses:
 	\begin{compactitem}
-		\item Expected scores are the same $\rightarrow$ boundary tests. {\bf More robust ?}
-		\item A tree consistent with the null is correct $\rightarrow$ tests that use the full info of the model. {\bf More powerful?}
+		\item Expected scores are the same $\rightarrow$ boundary tests. {\bf Non-parametric tests}
+		\item A tree consistent with the null is correct $\rightarrow$ tests that use the full info of the model. {\bf Parametric tests}
 	\end{compactitem}
 	\item How to use variance information:
 	\begin{compactitem}
@@ -675,6 +675,28 @@ A (very) wide variety of tests differ by:
 	\end{compactitem}
 	\item Whether or not the trees must be specified {\em a priori} -- KH Test requires the trees to be specified {\em a priori}.
 \end{itemize}
+
+\myNewSlide
+\section*{Summary - Part 3}
+\large
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{|c|p{7cm}|p{6cm}|}
+\hline
+& Parametric & Nonparametric \\
+\hline
+$P$-value from $\delta$  & aLRT, aBayes, parametric bootstrapping & KH, SH \\
+\hline
+$P$-value from BP $\delta$  &aBP(semi)  & BP, aBP(semi), AU, EHH\\
+\hline
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}%
+
+When you use a parametric test, you will usually gain power. But non-parametric tests are more robust to model violation.
+
+
 
 \myNewSlide
 \normalsize

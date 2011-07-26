@@ -118,14 +118,15 @@ SaveTrees file = model.tre brlens format=altnexus;
 Make sure that you understand these commands (ask an instructor if you have questions).
 From the standard output of PAUP you should have the model parameter values for the simulation. 
 
-2. Copy the PAUP output with the parameter estimates, and paste the output into a file'''
+
+2. Copy the PAUP output with the parameter estimates, and paste the output into a file
 
 3. Look at the tree file. You should see a newick string representing a tree with branch lengths. 
 Does the tree have taxa names in the newick representation instead of taxon numbers? 
 
 Unfortunately, seq-gen does not understand NEXUS tree files.
 
-4. Save just the newick tree from the file to a new file called '''model.txt'''. 
+4. Save just the newick tree from the file to a new file called '''model.txt''' or you can download this version of [http://phylo.bio.ku.edu/slides/model.txt model.txt].
 If you are a UNIX geek, you do this by quitting paup and issuing the command:
 <pre>cat model.tre | grep PAUP_1 | awk '{print $5}' > model.txt</pre>
 Non-geeks tend to prefer opening '''model.tre''', copying the newick string, and saving it to a '''model.txt''' file.

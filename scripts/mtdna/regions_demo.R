@@ -143,3 +143,24 @@ text(border_x + 1 + 4*plot_buffer, y_max_lim - 2*plot_buffer, paste("=", p_val_f
 dev.off()
 
 print(c("p_ests =" , p_val_from_markov, p_val_from_boot))
+
+obs_diff = est_x - border_x
+radius = 10
+center_x = border_x - radius
+center_y = est_y
+
+for (r in seq(0.5, 2.0, 0.1)) {
+    boot_mean_x = replicate(n_sims, mean(sample(obs_x, size=r*n_points, replace=TRUE)))
+    boot_mean_y = replicate(n_sims, mean(sample(obs_y, size=r*n_points, replace=TRUE)))
+    diff_center_x = boot_mean_x -center_x 
+    diff_center_y = boot_mean_y - center_y
+    diff_center_x_sq = diff_center_x*diff_center_x
+    diff_center_y_sq = diff_center_y*diff_center_y
+    diff_center_sq = diff_center_x_sq + diff_center_y_sq
+    dist_center = diff_center_sq**0.5
+    lin_bound = sum(boot_mean_x < border_x)
+    lin_bound_p = 1 - lin_bound/n_sims
+    circ_bound = sum(dist_center < radius)
+    circ_bound_p = 1 - circ_bound/n_sims
+    print(paste("r", r, lin_bound_p, circ_bound_p))
+}
