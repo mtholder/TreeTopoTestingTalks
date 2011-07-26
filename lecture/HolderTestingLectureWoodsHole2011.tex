@@ -422,18 +422,61 @@ probability of the event $\mu \in \mathscr{R}_1$, if we begin with an ``uninform
 \end{itemize}
 
 
+
+
+
+\myNewSlide
+\large
+Bootstrap proportions have been characterized as providing:
+\begin{compactitem}
+	\item {\color{grey} a measure of repeatability,}
+	\item  {\color{grey} an estimate of the probability that the tree is correct (and criticized as being too conservative in this context),}
+	\item the P-value for a tree or clade
+\end{compactitem}
+
+
+
+
+\myNewSlide
+\section*{coin flipping (yet again)}
+$N=100$ and $H=60$
+
+Can we reject the hypothesis of a fair coin?
+
+We can use simulation to generate the null distribution (we could actually use the binomial distribution to analytically solve this one)...
+
+\myNewSlide
+
+\begin{picture}(0,0)(0,0)
+	\put(-10,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/nullhist.pdf}}}
+	\put(180,-250){\color{red} P-value $\approx$ 0.029 }
+\end{picture}
+
+\myNewSlide
+If we bootstrap we get a sense of the variability in our estimate, but we can also get a tail probability for $\Pr(p^{(boot)} \leq 0.5)$
+
+\myNewSlide
+
+\begin{picture}(0,0)(0,0)
+	\put(-60,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/boothist.pdf}}}
+	\put(60,-250){\color{red}$ \Pr(p^{(boot)} \leq 0.5)\approx$ 0.027 }
+\end{picture}
+
+\myNewSlide
+\begin{picture}(-0,0)(-0,0)
+	\put(60,00){\makebox(30,-150)[l]{\includegraphics[scale=0.5]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/nullhist.pdf}}}
+	\put(60,-260){\makebox(30,-150)[l]{\includegraphics[scale=0.5]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/boothist.pdf}}}
+\end{picture}
+
+
+
+\includepdf[pages={28-45}]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/lec16-Bootstrapping/lec16Bootstrapping.pdf} 
+
 \myNewSlide
 \section*{\citet{EfronHH1996} view of tree space}
 \begin{picture}(-0,0)(-0,0)
 	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=3]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/EfronHH-treespace-fig.pdf}}}
 \end{picture}
-
-
-
-
-
-
-
 
 
 
@@ -471,11 +514,11 @@ probability of the event $\mu \in \mathscr{R}_1$, if we begin with an ``uninform
 \section*{ML scores in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
 	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-pp1v2.pdf}}}
-	\put(10,-20){$\ln L(T_1|X) = -D_{KL}(f_X||f_{T_1})$}
+	\put(-30,-0){$\ln L(T_1|X) = -D_{KL}(f_X||f_{T_1})$}
 \end{picture}
 
 \myNewSlide
-\section*{Posterior Densities in Pattern Frequency Space}
+\section*{aLRT in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
 	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
 \end{picture}
@@ -483,241 +526,16 @@ probability of the event $\mu \in \mathscr{R}_1$, if we begin with an ``uninform
 
 
 \myNewSlide
-\section*{coin flipping (yet again)}
-$N=100$ and $H=60$
+\section*{\cite{Susko2010} aBP}
+Susko reports that the curvature arguments of \citet{EfronHH1996} and \citet{Shimodaira2002}, while not incorrect, ignore the sharp point in parameter space around the polytomy.
 
-Can we reject the hypothesis of a fair coin?
+He uses the curvature of the likelihood function to correct bootstrap proportions so that $1-aBP$ accurately estimates the $P$-value.
 
-We can use simulation to generate the null distribution (we could actually use the binomial distribution to analytically solve this one)...
+For an {\em a priori} tree: aBP is usually $>$ BP.
 
-\myNewSlide
+When you account for selection bias, it is less predictable. 
 
-\begin{picture}(0,0)(0,0)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/nullhist.pdf}}}
-	\put(180,-60){\color{red} P-value $\approx$ 0.029 }
-\end{picture}
-
-\myNewSlide
-If we bootstrap we get a sense of the variability in our estimate, but we can also get a tail probability for $\Pr(p^{(boot)} \leq 0.5)$
-
-\myNewSlide
-
-\begin{picture}(0,0)(0,0)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/boothist.pdf}}}
-	\put(40,-60){\color{red}$ \Pr(p^{(boot)} \leq 0.5)\approx$ 0.027 }
-\end{picture}
-
-\myNewSlide
-\begin{picture}(-0,0)(-0,0)
-	\put(60,40){\makebox(30,-150)[l]{\includegraphics[scale=0.5]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/nullhist.pdf}}}
-	\put(60,-60){\makebox(30,-150)[l]{\includegraphics[scale=0.5]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/boothist.pdf}}}
-\end{picture}
-
-
-\myNewSlide
-\large
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/regions.pdf}}}
-	\put(30,32){$R_0$}
-	\put(80,32){$R_1$}
-	\put(83,60){$\hat{\mu}$}
-	\put(165,32){$R_0$}
-	\put(215,32){$R_1$}
-	\put(218,60){$\hat{\mu}$}
-	\put(40,00){$\hat{\mu}$ is the best point calculated from the data}
-\end{picture}
-
-\myNewSlide
-
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/regionsLFC.pdf}}}
-	\put(30,32){$R_0$}
-	\put(80,32){$R_1$}
-	\put(83,60){$\hat{\mu}$}
-	\put(63,60){${\mu_{\dag}}$}
-	\put(165,32){$R_0$}
-	\put(215,32){$R_1$}
-	\put(218,60){$\hat{\mu}$}
-	\put(198,60){${\mu_{\dag}}$}
-	\put(40,00){$\hat{\mu}$ is the best point calculated from the data}
-	\put(40,-10){${\mu_{\dag}}$ is least-favorable condition (LFC) point in $R_0$}
-\end{picture}
-
-
-\myNewSlide
-
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/regionsTailRegions.pdf}}}
-	\put(30,32){$R_0$}
-	\put(80,32){$R_1$}
-	\put(83,60){$\hat{\mu}$}
-	\put(63,60){${\mu_{\dag}}$}
-	\put(165,32){$R_0$}
-	\put(215,32){$R_1$}
-	\put(218,60){$\hat{\mu}$}
-	\put(198,60){${\mu_{\dag}}$}
-	\put(0,00){$\hat{\mu}$ is the best point calculated from the data}
-	\put(0,-10){${\mu_{\dag}}$ is least-favorable condition (LFC) point in $R_0$}
-	\put(0,-20){green areas are the tails - they correspond to values of the test}
-	\put(5,-30){statistic more extreme than $\hat{\mu}$ (relative to that $\mu\in R_0$}
-\end{picture}
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/regionsPValue.pdf}}}
-	\put(30,32){$R_0$}
-	\put(80,32){$R_1$}
-	%\put(63,60){${\mu_{\dag}}$}
-	\put(165,32){$R_0$}
-	\put(215,32){$R_1$}
-	%\put(198,60){${\mu_{\dag}}$}
-	\put(40,00){$\hat{\mu}$ is the best point calculated from the data}
-	\put(40,-10){${\mu_{\dag}}$ is least-favorable condition (LFC) point in $R_0$}
-	\put(40,-20){Case 1 P-value $<$ the P-value in Case 2}
-\end{picture}
-
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/regionsBootProp.pdf}}}
-	\put(30,32){$R_0$}
-	\put(80,32){$R_1$}
-	%\put(63,60){${\mu_{\dag}}$}
-	\put(165,32){$R_0$}
-	\put(215,32){$R_1$}
-	%\put(198,60){${\mu_{\dag}}$}
-	%\put(40,00){$\hat{\mu}$ is the best point calculated from the data}
-	%\put(40,-10){${\mu_{\dag}}$ is least-favorable condition (LFC) point in $R_0$}
-	\put(-20,-20){In case 1 - the bootstrap proportion  is a good estimate of the P-value}
-	\put(-20,-30){In case 2 - the bootstrap proportion underestimates the P-value}
-\end{picture}
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/regions3.pdf}}}
-	\put(30,32){$R_0$}
-	\put(80,32){$R_1$}
-	\put(63,60){${\mu_{\dag}}$}
-	\put(43,60){$\hat{\mu}$}
-	\put(165,32){$R_0$}
-	\put(215,32){$R_1$}
-	\put(198,60){${\mu_{\dag}}$}
-	\put(178,60){$\hat{\mu}$}
-	\put(40,00){$\hat{\mu}$ is the best point calculated from the data}
-	\put(40,-10){${\mu_{\dag}}$ is least-favorable condition (LFC) point in $R_1$}
-\end{picture}
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/regions3TailRegions.pdf}}}
-	\put(30,32){$R_0$}
-	\put(80,32){$R_1$}
-	\put(63,60){${\mu_{\dag}}$}
-	\put(43,60){$\hat{\mu}$}
-	\put(165,32){$R_0$}
-	\put(215,32){$R_1$}
-	\put(198,60){${\mu_{\dag}}$}
-	\put(178,60){$\hat{\mu}$}
-	\put(0,00){$\hat{\mu}$ is the best point calculated from the data}
-	\put(0,-10){${\mu_{\dag}}$ is least-favorable condition (LFC) point in $R_0$}
-	\put(0,-20){green areas are the tails - they correspond to values of the test}
-	\put(5,-30){statistic more extreme than $\hat{\mu}$ (relative to that $\mu\in R_1$)}
-\end{picture}
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/regions3PValue.pdf}}}
-	\put(30,32){$R_0$}
-	\put(80,32){$R_1$}
-	%\put(63,60){${\mu_{\dag}}$}
-	\put(165,32){$R_0$}
-	\put(215,32){$R_1$}
-	%\put(198,60){${\mu_{\dag}}$}
-	\put(40,-20){Case 3 P-value $>$ the P-value in Case 4}
-\end{picture}
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/regions3BootProp.pdf}}}
-	\put(30,32){$R_0$}
-	\put(80,32){$R_1$}
-	%\put(63,60){${\mu_{\dag}}$}
-	\put(165,32){$R_0$}
-	\put(215,32){$R_1$}
-	%\put(198,60){${\mu_{\dag}}$}
-	%\put(40,00){$\hat{\mu}$ is the best point calculated from the data}
-	%\put(40,-10){${\mu_{\dag}}$ is least-favorable condition (LFC) point in $R_0$}
-	\put(-20,-20){In case 3 - the bootstrap proportion  is a good estimate of the P-value}
-	\put(-20,-30){In case 4 - the bootstrap proportion overestimates the P-value}
-\end{picture}
-
-\myNewSlide
-\citet{EfronHH1996} pointed out these issues of curvature of the boundaries between tree hypotheses. 
-
-We cannot see the boundaries in tree space, so it is hard to know how to correct for the biases so that we can use bootstrapping procedures as a means of getting a P-value for a clade  -- the probability that we would see this much support (or stronger support) for a clade if it were {\em not} present in the true tree.
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/efronBootCorrection.pdf}}}
-	\put(53,60){$\hat{\mu}$}
-	\put(178,60){$\hat{\mu}$}
-\end{picture}
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/efronBootCorrection2.pdf}}}
-	\put(53,60){$\hat{\mu}$}
-	\put(178,60){$\hat{\mu}$}
-\end{picture}
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/efronBootCorrection3.pdf}}}
-\end{picture}
-
-\myNewSlide
-The corrected bootstrap procedure of \citet{EfronHH1996} requires a very large number of bootstrap replicates because you need very accurate estimates of the curvature in order to apply the correction. \citet{Shimodaira2002} expanded on this work:
-\begin{compactitem}
-	\item $d$ is the distance from the point that corresponds to the data and the closest point on the boundary between another tree
-	\item $\Phi(\cdot)$ denotes the cumulative density function of the standard Normal(0,1) distribution.
-	\item $c$ denotes the curvature of the boundary
-	\item the P-value for the KH test is given by $KH=\Phi(d)$
-\end{compactitem}
-
-\myNewSlide
-\begin{compactitem}
-	\item Shimodaira argues (from an early Efron paper) that the appropriate P-value for tree selection is: \[AU = 1-\Phi(d-c)\]
-	\item In ``standard'' non parametric bootstrapping proportions are: \[BP = 1 - \Phi(d+c)\] Note the incorrect sign with respect to the curvature term causes BP (and recall how on the curved boundary examples, the curvature caused the P-value to change in one direction and the BP to go in the other).
-\end{compactitem}
-How can we find $c$ so that we can correct for it?
-
-\myNewSlide
-\begin{compactitem}
-	\item $N$ is the number of characters in the real data set
-	\item $N^{\prime}$ is the number of characters in each bootstrap data set
-	\item $r=\frac{N^{\prime}}{N}$
-	\item If you do a bootstrap in which $r \neq 1 $, Shimodaira determined the expected effect on the bootstrap proportion as a function of $d$ and $c$:
-	\[BP(r) = 1 - \Phi\left(d\sqrt{r} + \frac{c}{\sqrt{r}}\right)\]
-\end{compactitem}
-
-\myNewSlide
-\begin{picture}(0,0)(0,100)
-	\put(-10,-60){\makebox(0,0)[l]{\includegraphics[scale=1.2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/auMultiscale.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{AU Test}
-		\begin{compactenum}
-			\item conduct a sweep of bootstraps with $r$ varying (for instance $r = 0.5,  r=0.6, r=0.7, \ldots r=1.4$, to get a set of $BP(r)$ for a tree. 
-			\item Use weighted least squares to estimate $c$ and $d$ form the set of $BP(r)$
-			\item Calculate \[AU = 1-\Phi(d-c)\]
-		\end{compactenum}
-This lets you calculate a P-value for any tree of interest, and then you can construct a confidence set of trees.
-
-
-
-
-
+BP may not be excessively conservative.
 
 
 
