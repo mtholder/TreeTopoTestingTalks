@@ -26,7 +26,7 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 
 (or it could be some combination of these).
 
-{Focus of this evening: How confident can we be in the trees/splits inferred by ML?}
+{Focus of this evening: {\bf How confident can we be in the trees/splits inferred by ML?}}
 
 \myNewSlide
 \begin{compactenum}
@@ -41,12 +41,17 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 		\item AU,
 		\item aBP
 	\end{compactitem}
-	\item brief lab on how to use {\tt Seq-Gen} to conduct parametric bootstrapping.
+	\item Cartoon time!
+	\item brief lab on parametric bootstrapping.
 \end{compactenum}
 
 \myNewSlide
 \section*{Some resources related to this talk}
 A \href{http://www.mendeley.com/groups/1275263/confidence-on-phylogenetic-trees/}{Mendeley Group} of papers related to topology testing on trees.
+
+A \url{http://phylo.bio.ku.edu/woodshole/} has the beginnings of an annotated bibliography on this literature. Really this is just a few cryptic notes now. It will get better.
+
+Eventually those notes will be at \url{https://github.com/mtholder/TreeTopoTestingTalks}
 
 
 \myNewSlide
@@ -385,7 +390,7 @@ Bootstrap proportions have been characterized as providing:
 \section*{Bootstrap Proportion $\neq$ Posterior Probability}
 Several studies have compared the non-parametric bootstrap proportion of clade from an ML analysis of a data set to the posterior probabilities when the same data is analyzed under the same model \citep{SuzukiGN2002,WilcoxZHH2002,AlfaroZL2003,CummingsHMRRW2003,DouadyDBDD2003}.\par
 
-{\em \bf Not} all of these have implied that the measures {\em\bf should} be the same, but some authors have, usually citing \citet{EfronHH1996}.
+Note: {\em \bf Not} all of these have implied that the measures {\em\bf should} be the same, but some authors have, usually citing \citet{EfronHH1996}.
 
 \myNewSlide
 \section*{Bootstrap Proportion $\neq$ Posterior Probability in general}
@@ -394,6 +399,9 @@ Several studies have compared the non-parametric bootstrap proportion of clade f
 	\put(40,-330){from \citet{WilcoxZHH2002}}
 \end{picture}
 
+
+\myNewSlide
+\section*{\citet{Newton1996} showed that the median BP may not be biased downward}
 
 \myNewSlide
 \section*{What did \citet{EfronHH1996} say?}
@@ -531,6 +539,17 @@ BP may {\bf not} be excessively conservative.
 
 
 \myNewSlide
+\section*{aBP in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(-50,-0){Null distribution for BP}
+	\put(-40,-30){is calculated using}
+	\put(-40,-60){Normal approximations from}
+	\put(-40,-90){polytomy}
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-abp.pdf}}}
+\end{picture}
+
+
+\myNewSlide
 \section*{ML scores in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
 	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-pp1v2.pdf}}}
@@ -571,6 +590,17 @@ BP may {\bf not} be excessively conservative.
 	\put(-50,-0){Uses the $\delta$ test statistic}
 	\put(-40,-30){and a null distribution}
 	\put(-40,-60){{\em centered} on the boundary}
+\end{picture}
+
+\myNewSlide
+\section*{Parametric bootstrapping in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-parametricBP.pdf}}}
+	\put(-50,-0){Uses the $\delta$ test statistic}
+	\put(-40,-30){and a null distribution}
+	\put(-40,-60){{\em centered} on point that}
+	\put(-40,-90){arises from the best}
+	\put(-40,-120){tree in $H_0$}
 \end{picture}
 
 
