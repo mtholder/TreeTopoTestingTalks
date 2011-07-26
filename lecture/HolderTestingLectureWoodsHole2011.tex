@@ -26,7 +26,7 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 
 (or it could be some combination of these).
 
-{Focus of this evenging: How confident can we be in the trees/splits inferred by ML?}
+{Focus of this evening: How confident can we be in the trees/splits inferred by ML?}
 
 \myNewSlide
 \begin{compactenum}
@@ -34,8 +34,8 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 	\item Putting $P$-values on trees:
 	\begin{compactitem}
 		\item KH Test, SH Test
-		\item aLRT, aBayes,
 		\item parametric bootstrapping,
+		\item aLRT, aBayes,
 		\item 1 - BP,
 		\item Discussion of the theory underlying this plethora of testing methods, and the history of the debates around bootstrapping in phylogenetics,
 		\item AU,
@@ -43,6 +43,10 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 	\end{compactitem}
 	\item brief lab on how to use {\tt Seq-Gen} to conduct parametric bootstrapping.
 \end{compactenum}
+
+\myNewSlide
+\section*{Some resources related to this talk}
+A \href{http://www.mendeley.com/groups/1275263/confidence-on-phylogenetic-trees/}{Mendeley Group} of papers related to topology testing on trees.
 
 
 \myNewSlide
@@ -345,7 +349,8 @@ In the SOWH test, the null tree is specified {\em a priori}.
 \myNewSlide
 \begin{picture}(500,0)(0,0)
 	  \put(-130,-450){\makebox(0,0)[l]{\includegraphics[scale=1.5]{../newimages/AnisimovaG2006Fig1.pdf}}}
-	  \put(300,-200){aLRT = $2\left[\ln L(T_1|X) - \ln L(T_2|X)\right]$}
+	  \put(330,-200){aLRT = $2\left[\ln L(T_1|X) - \ln L(T_2|X)\right]$}
+	  \put(400,-400){\small Image from \citet{AnisimovaG2006}}
 \end{picture}
 
 \myNewSlide
@@ -510,6 +515,21 @@ If we bootstrap we get a sense of the variability in our estimate, but we can al
 	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/simple-treespace-boot.pdf}}}
 \end{picture}
 
+
+
+\myNewSlide
+\section*{\cite{Susko2010} aBP}
+Susko reports that the curvature arguments of \citet{EfronHH1996} and \citet{Shimodaira2002}, while not incorrect, ignore the {\bf sharp point} in parameter space around the polytomy.
+
+He uses the curvature of the likelihood function to correct bootstrap proportions so that $1-aBP$ accurately estimates the $P$-value.
+
+For an {\em a priori} tree: aBP is usually $>$ BP.
+
+When you account for selection bias, it is less predictable. 
+
+BP may {\bf not} be excessively conservative.
+
+
 \myNewSlide
 \section*{ML scores in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
@@ -518,24 +538,40 @@ If we bootstrap we get a sense of the variability in our estimate, but we can al
 \end{picture}
 
 \myNewSlide
-\section*{aLRT in Pattern Frequency Space}
+\section*{Bootstrapping in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
-	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/simple-treespace-boot.pdf}}}
 \end{picture}
 
-
+\myNewSlide
+\section*{Bootstrapping in Pattern Frequency Space (if you had more data)}
+\begin{picture}(-0,0)(-0,0)
+	\put(-50,-0){AU Test uses multiple sequence}
+	\put(-40,-30){lengths to correct BP for}
+	\put(-40,-60){any curvature in the boundary }
+	\put(-40,-90){between trees}
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-boot-more.pdf}}}
+\end{picture}
 
 \myNewSlide
-\section*{\cite{Susko2010} aBP}
-Susko reports that the curvature arguments of \citet{EfronHH1996} and \citet{Shimodaira2002}, while not incorrect, ignore the sharp point in parameter space around the polytomy.
+\section*{aLRT and aBayes in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
+	\put(-50,-0){In aLRT, we use mixtures of $\chi^2$}
+	\put(-40,-30){and selection bias corrections}
+	\put(-40,-60){to calculate the $P$-value.}
+	\put(370,-0){In aBayes, we normalize}
+	\put(380,-30){the ML scores to (0,1)}
+\end{picture}
 
-He uses the curvature of the likelihood function to correct bootstrap proportions so that $1-aBP$ accurately estimates the $P$-value.
-
-For an {\em a priori} tree: aBP is usually $>$ BP.
-
-When you account for selection bias, it is less predictable. 
-
-BP may not be excessively conservative.
+\myNewSlide
+\section*{KH Test in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-kh.pdf}}}
+	\put(-50,-0){Uses the $\delta$ test statistic}
+	\put(-40,-30){and a null distribution}
+	\put(-40,-60){{\em centered} on the boundary}
+\end{picture}
 
 
 
