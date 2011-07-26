@@ -20,7 +20,7 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 \Large
 \begin{compactenum}
 	\item Our data might be wrong (``garbage in garbage out'')
-	\item {\em Systematic error} -- our inference method might not be sophisticated enough
+	\item {\em Systematic error} -- Our inference method might not be sophisticated enough
 	\item \underline{{\em Random error}} -- We might not have enough data, so we are misled by sampling error.
 \end{compactenum}
 
@@ -35,14 +35,16 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 	\begin{compactitem}
 		\item KH Test, SH Test
 		\item parametric bootstrapping,
+	\end{compactitem}
+	\item Brief lab on parametric bootstrapping.
+	\item Continue the onslaught of testing methods
+	\begin{compactitem}
 		\item aLRT, aBayes,
 		\item 1 - BP,
-		\item Discussion of the theory underlying this plethora of testing methods, and the history of the debates around bootstrapping in phylogenetics,
 		\item AU,
 		\item aBP
 	\end{compactitem}
 	\item Cartoon time!
-	\item brief lab on parametric bootstrapping.
 \end{compactenum}
 
 \myNewSlide
@@ -98,7 +100,7 @@ Can we reject the hypothesis of a fair coin ($p_H = 0.5$)?
 
 The ``recipe'' is:
 \begin{compactenum}
-	\item Formulate a null ($H_0$) and alternative ($H_A$) hypothesis.
+	\item Formulate null ($H_0$) and alternative ($H_A$) hypotheses.
 	\item Choose an acceptable Type-I error rate.
 	\item Choose a test statistic: $f_H$= fraction of heads in sample. $f_H=0.6$
 	\item Identify the tail region of the test statistic - the values that conflict with $H_0$ at least a strongly as your observed data.
@@ -132,7 +134,7 @@ Making similar plots for tree inference is hard.
 
 Our parameter space is trees and branch lengths. Our data is a matrix of characters. It is hard to put these objects on the same plot.
 
-We will see later, that we can visualize them both in a parameter space that describes how frequent different patterns of data are.
+We will see later (during ``cartoon time''), that we {\em can} visualize them both in a parameter space that describes how frequent different patterns of data are.
 
 
 \myNewSlide
@@ -144,11 +146,26 @@ Test Statistic: $$\delta(T_1,T_2|X) = 2\left[\ln L(T_1|X) - \ln L(T_2|X)\right]$
 
 Expectation under null: $$\mathbb{E}_{H_0}\left[\delta(T_1,T_2|X)\right] = 0$$
 
+
 \myNewSlide
 \begin{picture}(500,0)(-20,-50)
 	  \put(20,-20){\small Using 3000 sites of mtDNA sequence for 5 primates}
 	  \put(20,-60){\normalsize $T_1$ is ((chimp, gorilla), human)}
-	  \put(20,-100){\normalsize $T_2$ is ((chimp, human), gorilla)}
+	  \put(50,-200){\makebox(0,-190)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/chimpGorilla3000sites.pdf}}}
+\end{picture}
+
+\myNewSlide
+\begin{picture}(500,0)(-20,-50)
+	  \put(20,-20){\small Using 3000 sites of mtDNA sequence for 5 primates}
+	  \put(20,-60){\normalsize $T_2$ is ((chimp, human), gorilla)}
+	  \put(50,-200){\makebox(0,-190)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/humanChimp3000SitesTree.pdf}}}
+\end{picture}
+
+\myNewSlide
+\begin{picture}(500,0)(-20,-50)
+	  \put(20,-20){\small Using 3000 sites of mtDNA sequence for 5 primates}
+	  \put(20,-60){\normalsize $T_1$ is ((chimp, gorilla), human)   \hskip2cm $\ln L(T_1|X) = -7363.296$}
+	  \put(20,-100){\normalsize $T_2$ is ((chimp, human), gorilla)  \hskip2cm $\ln L(T_2|X) = -7361.707$}
 	  \put(-10,-385){\small$\delta(T_1,T_2|X)=-3.18$}
 	  \put(300,-385){\small$\mathbb{E}(\delta)$}
 	  \put(50,-150){\makebox(0,-190)[l]{\includegraphics[scale=1.0]{../newimages/delta_axes.pdf}}}
@@ -160,7 +177,7 @@ Expectation under null: $$\mathbb{E}_{H_0}\left[\delta(T_1,T_2|X)\right] = 0$$
 
 \myNewSlide
 
-To get the $P$-value, we need to know the probability: $$\Pr\left(\big|\delta(T_1,T_2|X)\big| > 3.17 | H_0\mbox{ is true}\right) $$
+To get the $P$-value, we need to know the probability: $$\Pr\left(\big|\delta(T_1,T_2|X)\big| \geq 3.18 | H_0\mbox{ is true}\right) $$
 \begin{picture}(500,0)(-20,-50)
 	  \put(-10,-235){\small$\delta(T_1,T_2|X)=-3.18$}
 	  \put(460,-235){\small$-\delta(T_1,T_2|X)=3.18$}
@@ -184,7 +201,7 @@ To get the $P$-value, we need to know the probability: $$\Pr\left(\big|\delta(T_
 
 \myNewSlide
 \begin{picture}(500,0)(0,0)
-	  \put(0,-10){\large 2*difference in $\ln L$ for each site}
+	  \put(0,10){\large $\delta(T_1,T_2|X_i)$ for each site, $i$.}
 	  \put(280,-35){\large $\vdots$}
 	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/d1-2hist.pdf}}}
 	  \put(250,-490){\normalsize$\delta(T_1,T_2|x_i)$}
@@ -201,9 +218,14 @@ To get a sense of the variance of $\delta(T_1,T_2|X)$ we should expect because o
 
 \myNewSlide
 \section*{RELL bootstrap}
+\large
 If the MLE of the numerical parameters (including branch lengths) do not change much when we bootstrap we can simply resample the site $\ln L$ values and sum them.
 
-This is called the RELL bootstrap \citep[][and Felsenstein]{KishinoMH1990}. It may not be very safe \citep[especially on large trees;][]{StamatakisHR2008}, but it is very fast.
+This is called the RELL bootstrap \citep[][and Felsenstein]{KishinoMH1990}. It is not a ``safe'' replacement for normal bootstrapping \citep[especially on large trees;][]{StamatakisHR2008} when you want to estimate clade support.
+
+But it should be good enough for helping us learn about the standard error of the $\ln L$.
+
+And it is really fast.
 
 \myNewSlide
 \begin{picture}(500,0)(0,0)
@@ -219,22 +241,22 @@ Bootstrapping gives us a reasonable guess of the variance under $H_0$
 
 By substracting the mean of the bootstrapped $\delta(T_1,T_2|X^{\ast})$ values, we can create a null distribution.
 
-For each of the $j$ bootstrap replicates, we treat $\delta(T_1,T_2|X^{\ast j}) - \bar\delta(T_1,T_2|X^{\ast})$  as draws from the null distribution.
+For each of the $j$ bootstrap replicates, we treat $$\delta(T_1,T_2|X^{\ast j}) - \bar\delta(T_1,T_2|X^{\ast})$$  as draws from the null distribution.
 
 \myNewSlide
 \begin{picture}(500,0)(0,0)
-	  \put(0,10){\large $\delta(T_1,T_2|X^{\ast j})-\bar\delta(T_1,T_2|X^{\ast})$}
+	  \put(0,10){\large $\delta(T_1,T_2|X^{(j)})-\bar\delta(T_1,T_2|X^{\ast})$}
 	  \put(0,-25){for many (RELL) bootstrapped replicates of the data}
 	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/centered1-2hist.pdf}}}
-	  \put(250,-490){\normalsize$\delta(T_1,T_2|X^{\ast})$}
+	  \put(150,-490){\normalsize$\delta(T_1,T_2|X^{(j)})-\bar\delta(T_1,T_2|X^{\ast})$}
 \end{picture}
 
 \myNewSlide
 \begin{picture}(500,0)(0,0)
-	  \put(0,10){\large $\delta(T_1,T_2|X^{\ast j})-\bar\delta(T_1,T_2|X^{\ast})$}
+	  \put(0,10){\large $\delta(T_1,T_2|X^{(j)})-\bar\delta(T_1,T_2|X^{\ast})$}
 	  \put(0,-25){for many (RELL) bootstrapped replicates of the data}
 	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/centered1-2hist-p.pdf}}}
-	  \put(250,-490){\normalsize$\delta(T_1,T_2|X^{\ast})$}
+	  \put(250,-490){\normalsize$\delta(T_1,T_2|X^{\ast})-\bar\delta(T_1,T_2|X^{\ast})$}
 \end{picture}
 
 
@@ -264,16 +286,17 @@ Imagine a competition in which a large number of equally skilled people compete,
 
 
 \myNewSlide 
-\section*{Shimodaira-Hasegawa proposed a test that deals the ``selection bias'' introduced by using the ML tree in your test}
+\section*{Shimodaira and Hasegawa proposed the SH test which deals the ``selection bias'' introduced by using the ML tree in your test}
 You have to specify of a set of candidate trees - inclusion in this set {\bf must not} depend on the dataset to be analyzed.
 
 The null hypothesis is that all members of the candidate set have the same expected score.
 
 \myNewSlide
-\section*{SH Test details}
+{\bf SH Test details}
 \normalsize
 \begin{compactitem}
 	\item For each tree $T_i$ in the candidate set calculate $\delta(\hat{T}, T_i|X)$
+	\item Bootstrap to generate ${\ln L}(T_i|X^{(j)})$
 	\item For each tree $T_i$, use $\bar{\ln L}(T_i|X^{\ast})$ to center the bootstrapped collection of log-likelihoods:
 		$$c_i^{(j)} = {\ln L}(T_i|X^{(j)})-\bar{\ln L}(T_i|X^{\ast})$$
 	\item For each replicate pick the highest value from the centered distributions (this mimics the selection bias): $$m^{(j)} = \max\left[c_i^{(j)}\right] \mbox{ over all } j$$
@@ -636,14 +659,21 @@ BP may {\bf not} be conservative when you correct for selection bias.
 
 \myNewSlide
 \section*{Summary - Part 2}
-A (very) wide variety of tests differ by
+\normalsize
+A (very) wide variety of tests differ by:
 \begin{itemize}
 	\item Null hypotheses:
 	\begin{compactitem}
 		\item Expected scores are the same $\rightarrow$ boundary tests. {\bf More robust ?}
 		\item A tree consistent with the null is correct $\rightarrow$ tests that use the full info of the model. {\bf More powerful?}
 	\end{compactitem}
-	\item How t
+	\item How to use variance information:
+	\begin{compactitem}
+		\item Rely on ``raw'' bootstrap variability,
+		\item Invoke assumptions of normality of scores,
+		\item Use $\chi^2$ variants.
+	\end{compactitem}
+	\item Whether or not the trees must be specified {\em a priori} -- KH Test requires the trees to be specified {\em a priori}.
 \end{itemize}
 
 \myNewSlide

@@ -37,11 +37,11 @@ parsimony scores, ''etc''.
 2. Find the score of the most parsimonious tree using PAUP.  
 Because this is a small dataset, you can use the <code>AllTrees fd=bar</code> 
 command to see all the scores of all the trees.
-:# How many most parsimonious trees are there?
-:# How many steps are required to explain the data?
+:* How many most parsimonious trees are there?
+:* How many steps are required to explain the data?
 
 3. Use the <code>boot</code> command calculate the bootstrap proportions and display the majority-rule consensus tree from the bootstrapping analyses.
-:# What is the bootstrap support for the split that represents our null hypothesis? If that split is not supported by the data, thenit will not be on the majority-rule tree  but it should be listed in the split frequency table.
+:* What is the bootstrap support for the split that represents our null hypothesis? If that split is not supported by the data, then it will not be on the majority-rule tree  but it should be listed in the split frequency table.
 
 
 

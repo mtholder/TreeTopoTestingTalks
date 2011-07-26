@@ -12,11 +12,11 @@ Begin trees;  [Treefile saved Wed Jul 20 14:05:00 2011]
 >   15 trees now in memory
 ]
 	Translate
-		1 Hylobates_larNC_002082,
-		2 Homo_sapiens_NC_012920,
-		3 Pan_troglodytes_HM068590,
-		4 Gorilla_gorilla_NC_011120,
-		5 Pongo_pygmaeus_NC_001646
+		1 gibbon,
+		2 human,
+		3 chimp,
+		4 gorilla,
+		5 orang
 		;
 tree PAUP_1 = [&U] (1:0.138940,((2:0.031783,3:0.030754):0.003375,4:0.043542):0.024384,5:0.110100);
 tree PAUP_2 = [&U] (1:0.140330,(2:0.031920,(3:0.031037,4:0.046247):0.000561):0.026067,5:0.111047);
