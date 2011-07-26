@@ -545,11 +545,15 @@ Susko reports that the curvature arguments of \citet{EfronHH1996} and \citet{Shi
 
 He uses the curvature of the likelihood function to correct bootstrap proportions so that $1-aBP$ accurately estimates the $P$-value.
 
-For an {\em a priori} tree: aBP is usually $>$ BP.
+You need to perform a different correction when you know the candidate tree {\em a priori} versus when you are putting BP on the ML tree.
 
-When you account for selection bias, it is less predictable. 
+BP may {\bf not} be conservative when you correct for selection bias.
 
-BP may {\bf not} be excessively conservative.
+\myNewSlide
+\begin{picture}(-0,0)(-0,0)
+	\put(-60,-150){\makebox(30,-150)[l]{\includegraphics[scale=0.75]{../scripts/Susko2010Table3aBP.pdf}}}
+	\put(300,-150){\makebox(30,-150)[l]{\includegraphics[scale=0.75]{../scripts/Susko2010Table3aBPMLCorrection.pdf}}}
+\end{picture}
 
 
 \myNewSlide
@@ -623,141 +627,4 @@ BP may {\bf not} be excessively conservative.
 \normalsize
 \bibliography{phylo}
 \end{document}
-
-
-
-
-
-
-
-\myNewSlide
-\section*{Frequentist phylogenetic hypothesis testing?}
-If we have a tree, $T_0$, in mind {\em a priori}, then how can we answer the question:
-
-``Based on this data, should we reject the tree?'' 
-
-Clearly if $\hat{T}\neq T_0$, then there is a possibility that we should reject $T$.  
-
-But how do we calculate a p-value?
-
-\myNewSlide
-\section*{Frequentist phylogenetic hypothesis testing? (cont)}
-What is our test-statistic? {\color{red} Difference in support between the null tree and the preferred tree.}
-
-How do we find the null-distribution for the test statistic? {\color{red} Simulation}
-
-\myNewSlide
-\includepdf[pages={2}]{../lec14Testing/images/polBremer.pdf} 
-
-
-\myNewSlide
-\section*{Testing 2 trees}
-\Large
-Test statistic: The difference in score, $\delta$, between two trees chosen {\em a priori}.
-
-Null hypothesis: Both trees are equally good explanations of the truth.
-
-\[E(\delta) = 0\]
-
-Is $\delta$ so large that we reject the null?\\ What if $\delta=-9$, should we reject the null?
-
-\myNewSlide
-\includepdf[pages={1}]{images/hivarsitediff.pdf} 
-
-\myNewSlide
-\includepdf[pages={1}]{images/lowvarsitediff.pdf} 
-
-\myNewSlide
-\section*{Tests that treat the number of variable length characters as fixed}
-\large
-\begin{compactenum}
-	\item Winning sites test (test the null that there is an equal probability of a site favoring tree 1 over tree 2)
-	\item Templeton's test a version of Wilcoxon's rank sum test
-\end{compactenum}
-Robust, but not very powerful
-
-\myNewSlide
-\includepdf[pages={1}]{images/hivardist.pdf} 
-
-\myNewSlide
-\includepdf[pages={1}]{images/lowvardist.pdf} 
-
-\myNewSlide
-I could generate the last 4 slides because I made up (and hence knew) a variance.
-
-How can we assess the strength of support if we do not know the variance of the generating process?
-
-
-
-\myNewSlide
-\section*{Parametric bootstrapping}
-\begin{compactenum}
-	\item Simulate a large number of data sets on $T_0$. On each dataset, $i$:
-	\begin{compactenum}
-		\item Search for the preferred tree, $\hat{T}^{(i)}$
-		\item Search for the best tree that is consistent with the null hypothesis, $T_0^{(i)}$
-		\item Let $z_0^{(i)}$ be the difference in score  between these trees for data set $i$
-	\end{compactenum}
-	\item See if the observed test statistic $z$ is in the $\alpha$\% tail of the distribution $\mathbf{z}_0$
-\end{compactenum}
-
-\myNewSlide
-\includepdf[pages={1-2}]{images/gtr_i_g_sim_hist_data.pdf} 
-
-\myNewSlide
-Parametric bootstrapping is powerful, but can also be sensitive to the model chosen to generate the data.
-
-\myNewSlide
-\includepdf[pages={1-2}]{images/jc_sim_hist_data.pdf} 
-
-
-\myNewSlide
-\section*{Kishino Hasegawa Test}
-\begin{compactenum}
-	\item Several variants:
-	\begin{compactenum}
-		\item parametric - using a normal approximation
-		\item non-parametric - using a bootstrapping
-	\end{compactenum}
-	\item Appropriate for testing the null hypothesis that two trees explain the data equally well.
-	\item {\bf Both} trees for the test must be specified from prior knowledge.
-	\item Use the site-to-site variation in $\delta$ to estimate the variance of a Normal distribution
-	\item In the null the mean is 0
-\end{compactenum}
-
-\myNewSlide
-\includepdf[pages={8}]{images/polTopoTests.pdf} 
-
-\myNewSlide
-\section*{Kishino Hasegawa Test (bootstrapping)}
-Rather than assume a Normal distribution and estimate a variance, it is common to bootstrap the
-data to generate a null distribution of the total difference in score between 2 trees.
-
-Bootstrapping is resampling your data to mimic the variability in the process that generated the data.
-
-
-\myNewSlide
-\includepdf[pages={33-34}]{images/joeTesting.pdf} 
-
-\myNewSlide
-\section*{Kishino Hasegawa Test (bootstrapping - continued)}
-Bootstrapping can give us a sense of the variability, but if the original data favored tree 1 isn't it very likely that the bootstrapped replicates will be more likely to support tree 1 than tree 2?
-
-This does not sound like we are following our null that both trees are equally good.
-
-Solution: we must center the bootstrapped differences in score.
-\myNewSlide
-\includepdf[pages={2}]{images/polTopoTests.pdf} 
-
-\myNewSlide
-\includepdf[pages={4-5}]{images/polTopoTests.pdf} 
-
-\myNewSlide
-\includepdf[pages={10}]{images/polTopoTests.pdf} 
-
-\myNewSlide
-\includepdf[pages={4-7}]{images/polBoot.pdf} 
-\end{document}     
-
-\end{document}     
 

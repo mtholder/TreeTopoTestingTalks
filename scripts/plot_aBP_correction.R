@@ -1,0 +1,30 @@
+d = read.table('Susko2010Table3.csv', sep='\t', header=TRUE)
+pdf("Susko2010Table3aBP.pdf")
+plot(d$BP, d$aBPRand, 
+    xlim=c(0,100), ylim=c(0,100),
+    xlab="BP", ylab="aBP",
+    main="aBP for each BP (5 model conditions)", 
+    type='l')
+points(d$BP, d$aBPRand, pty=1)
+lines(d$BP, d$aBPExGam, lty=2)
+points(d$BP, d$aBPExEq, pty=3)
+lines(d$BP, d$aBPExEq, lty=3)
+points(d$BP, d$aBPExGamAA, pty=4)
+lines(d$BP, d$aBPExGamAA, lty=4)
+points(d$BP, d$aBPExEqAA, pty=5)
+lines(d$BP, d$aBPExEqAA, lty=5)
+lines(c(0,100), c(0,100), col="red")
+dev.off()
+pdf("Susko2010Table3aBPMLCorrection.pdf")
+plot(d$BP, d$aBPMLRand, xlim=c(0,100), ylim=c(0,100), xlab="BP", ylab="aBP", main="aBP with selection bias correction for each BP (5 model conditions)",
+    type='l')
+points(d$BP, d$aBPMLRand, pty=1)
+lines(d$BP, d$aBPMLExGam, lty=2)
+points(d$BP, d$aBPMLExEq, pty=3)
+lines(d$BP, d$aBPMLExEq, lty=3)
+points(d$BP, d$aBPMLExGamAA, pty=4)
+lines(d$BP, d$aBPMLExGamAA, lty=4)
+points(d$BP, d$aBPMLExEqAA, pty=5)
+lines(d$BP, d$aBPMLExEqAA, lty=5)
+lines(c(0,100), c(0,100), col="red")
+dev.off()
