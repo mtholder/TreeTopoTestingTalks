@@ -1,8 +1,11 @@
 #NEXUS
 
 log file=guidanceParsimony.log start replace;
+ execute guidance.nex ;
 
-execute guidance.nex ;
+charset to_trim = 3001 - .;
+charset differing_pscore = 17 268 384 525 781 811 949 1172 1209 1222 1225 1286 1433 1481 1645 1759 2114 2146 2161 2190 2191 2287 2514 2750 2819 2993 ;
+
 
 pscore all ; 
 
@@ -11,39 +14,51 @@ pscore 1 2 / single = var ;
 
 set crit = likelihood ; 
 
+exclude to_trim /  only ;
+
 savetrees file = 3000sitesAllTreesMLBranches.tre brl replace ; 
-
-lscore / nosite;
-
+lscore 1 2 / nositel;
+[!### -ln L   first 3000 sites - estimating ]
+lscore 1 2 / scorefile=all_site_estimating_params replace siteli;
 set storebr ; 
-
 gettrees file = 3000sitesAllTreesMLBranches.tre mode=3 ;
-
 lset / user ; 
-
-charset to_trim = 3001 - .;
-charset differing_pscore = 17 268 384 525 781 811 949 1172 1209 1222 1225 1286 1433 1481 1645 1759 2114 2146 2161 2190 2191 2287 2514 2750 2819 2993 ;
-
-include differing_pscore / only ;
-
-LScore 1 / rmat = (6.96403 37.46020 4.80992 0.15538 84.60250) shape = 0.203445 nositeli ; 
-LScore 2 / rmat = (7.08980 37.56539 4.88639 0.11678 85.62007) shape = 0.199229 nositeli ; 
-
-exclude differing_pscore to_trim / only ;
-
-LScore 1 / rmat = (6.96403 37.46020 4.80992 0.15538 84.60250) shape = 0.203445 nositeli ; 
-LScore 2 / rmat = (7.08980 37.56539 4.88639 0.11678 85.62007) shape = 0.199229 nositeli ; 
-
-
+[!### -ln L    first 3000 sites - specified params]
+LScore 1  / scorefile=all_site_user_params replace  rmat = (6.96403 37.46020 4.80992 0.15538 84.60250) shape = 0.203445 siteli ; 
+LScore 2  / scorefile=all_site_user_params append rmat = (7.08980 37.56539 4.88639 0.11678 85.62007) shape = 0.199229 siteli ; 
 
 include differing_pscore / only ;
+exclude to_trim ;
+cstat ; 
+showmat ; 
 
+LScore 1 / rmat = (6.96403 37.46020 4.80992 0.15538 84.60250) shape = 0.203445 nositeli ; 
+[!### -ln L   tree1 first 26 pars. inf. sites - specified params]
 LScore 1  / scorefile=inf_site_lnL replace  rmat = (6.96403 37.46020 4.80992 0.15538 84.60250) shape = 0.203445 siteli ; 
+
+exclude differing_pscore / only;
+exclude to_trim ;
+cstat ; 
+
+LScore 1 / rmat = (6.96403 37.46020 4.80992 0.15538 84.60250) shape = 0.203445 nositeli ; 
+[!### -ln L  tree2 without first 26 pars. inf. sites - specified params]
+LScore 1 / scorefile=noninf_site_lnL replace  rmat = (6.96403 37.46020 4.80992 0.15538 84.60250) shape = 0.203445 siteli ; 
+
+
+
+
+include differing_pscore / only ;
+exclude to_trim ;
+cstat ; 
+
+LScore 2 / rmat = (7.08980 37.56539 4.88639 0.11678 85.62007) shape = 0.199229 nositeli ; 
+[!### -ln L  first 26 pars. inf. sites - specified params]
 LScore 2  / scorefile=inf_site_lnL append rmat = (7.08980 37.56539 4.88639 0.11678 85.62007) shape = 0.199229 siteli ; 
 
+exclude differing_pscore / only;
+exclude to_trim ;
+cstat ; 
 
-
-exclude differing_pscore to_trim / only ;
-
-LScore 1 / scorefile=noninf_site_lnL replace  rmat = (6.96403 37.46020 4.80992 0.15538 84.60250) shape = 0.203445 siteli ; 
+LScore 2 / rmat = (7.08980 37.56539 4.88639 0.11678 85.62007) shape = 0.199229 nositeli ; 
+[!### -ln L  tree2 without first 26 pars. inf. sites - specified params]
 LScore 2  / scorefile=noninf_site_lnL append  rmat = (7.08980 37.56539 4.88639 0.11678 85.62007) shape = 0.199229 siteli ; 

@@ -1,4 +1,5 @@
 t = read.table('sitelnL3000.csv', sep='\t', header=TRUE)
+t2 = read.table('pdiff.csv', sep='\t', header=TRUE)
 
 d1.2 = 2*(t$tree1 - t$tree2)
 d1.3 = 2*(t$tree1 - t$tree3)
@@ -56,6 +57,7 @@ pdf('d1-2hist.pdf')
 hist(d1.2, breaks=breaks, axes=TRUE, ylim=c(0,50), main=c(""), xlab="")
 #lines(x, 5*dnorm(x, mean=0, sd=sd(d1.2)))
 dev.off()
+
 
 u1.2 = replicate(nrellreps, sum(sample(d1.2, replace=TRUE)))
 mu1.2 = mean(u1.2)

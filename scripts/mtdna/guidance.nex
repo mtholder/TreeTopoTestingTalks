@@ -1,7 +1,4 @@
 #NEXUS
-begin paup ; 
-    log file=guidanceKH.log start append;
-end;
 
 BEGIN DATA;
     DIMENSIONS NTax=5 NChar=16203;
@@ -15,86 +12,33 @@ Pongo_pygmaeus_NC_001646    GTTTATGTAGCTTAATCCAAAGCAATACACTGAAAATGTCTCGATA-CGCCC
 ;
 END;
 
-
-begin trees;
-    translate 
-        1 Hylobates_larNC_002082 ,
-        2 Homo_sapiens_NC_012920 ,
-        3 Pan_troglodytes_HM068590 ,
-        4 Gorilla_gorilla_NC_011120 ,
-        5 Pongo_pygmaeus_NC_001646 ;
-
-    tree hc = [&U] (1,((2,3),4),5);
-    tree cg = [&U] (1,(2,(3,4)),5);
-    tree hg = [&U] (1,((2,4),3),5);
-end;
+Begin trees; 
+	Translate
+		1 Hylobates_larNC_002082,
+		2 Homo_sapiens_NC_012920,
+		3 Pan_troglodytes_HM068590,
+		4 Gorilla_gorilla_NC_011120,
+		5 Pongo_pygmaeus_NC_001646
+		;
+tree PAUP_1 = [&U] (1,(((2,3),4),5));
+tree PAUP_2 = [&U] (1,((2,(3,4)),5));
+tree PAUP_3 = [&U] (1,(((2,4),3),5));
+tree PAUP_4 = [&U] (1,(((2,3),5),4));
+tree PAUP_5 = [&U] (1,(((2,5),3),4));
+tree PAUP_6 = [&U] (1,((2,(3,5)),4));
+tree PAUP_7 = [&U] (1,((2,3),(4,5)));
+tree PAUP_8 = [&U] (1,(((2,4),5),3));
+tree PAUP_9 = [&U] (1,(((2,5),4),3));
+tree PAUP_10 = [&U] (1,((2,(4,5)),3));
+tree PAUP_11 = [&U] (1,((2,4),(3,5)));
+tree PAUP_12 = [&U] (1,((2,5),(3,4)));
+tree PAUP_13 = [&U] (1,(2,((3,4),5)));
+tree PAUP_14 = [&U] (1,(2,((3,5),4)));
+tree PAUP_15 = [&U] (1,(2,(3,(4,5))));
+End;
 
 begin paup ;
-    include 1 - 2000 / only;
     set crit = like ; 
     lset nst = 6 basefreq = emp rates = gamma shape = est pinv = 0.0 rmat = est;
     include 1-3000 / only ;
-    
-end;
-
-begin xpaup ; 
-    lset nst = 6 basefreq = emp rates = gamma shape = est pinv = est rmat = est;
-    lscore all ;
-end;
-
-
-
-begin paup;
-    cleartrees; 
-    gett file = guidance.nex mode = 3 ; 
-    gett file = noafricanapeclade.tre  mode = 7 ;
-    showtree all ;
-end;
-
-begin xpaup;
-    savetrees file = staticorder.tre;
-end;
-
-begin xpaup;
-    lset nst = 6 basefreq = emp rates = gamma shape = est pinv = 0.0 rmat = est;
-    lscore / nositelike ;
-    savetree file = wbrlens2000.tre replace brle ;
-    lscore  / sitelike scoref=sitelnL2000.txt replace ;
-    include 1-4000 / only ;
-    lscore / nositelike ;
-    savetree file = wbrlens4000.tre replace brle ;
-    lscore  / sitelike scoref=sitelnL4000.txt  replace ;
-    include 2000-4000 / only ;
-    lscore / nositelike ;
-    savetree file = wbrlens2000-4000.tre replace brle ;
-    lscore  / sitelike scoref=sitelnL2000-4000.txt  replace ;
-
-    include 1-3000 / only ;
-    lscore / nositelike ;
-    savetree file = wbrlens3000.tre replace brle ;
-    lscore  / sitelike scoref=sitelnL3000.txt  replace ;
-
-end;
-
-
-begin xpaup;
-    gett file = staticorder.tre from = 1 to = 1 mode = 3;
-    gett file = staticorder.tre from = 2 to = 2 mode = 7;
-    
-    lscore all / KHTest = normal ;
-   [ lscore all / KHTest = full ; ]
-    lscore all / KHTest = RELL ;
-
-    gett file = staticorder.tre from = 1 to = 1 mode = 3;
-    gett file = staticorder.tre from = 3 to = 3 mode = 7;
-
-    lscore all / KHTest = normal ;
-    [ lscore all / KHTest = full ; ]
-    lscore all / KHTest = RELL ;
-
-    gett file = staticorder.tre from = 1 to = 1 mode = 3;
-    gett file = staticorder.tre from = 12 to = 12 mode = 7;
-    lscore all / KHTest = normal ;
-    [ lscore all / KHTest = full ; ]
-    lscore all / KHTest = RELL ;
 end;
