@@ -79,10 +79,17 @@ hist(c1.2, breaks=sbreaks-mu1.2, axes=TRUE, main=c(""), xlab="")
 dev.off()
 pdf('centered1-2hist-p.pdf')
 c1.2 = u1.2 - mu1.2
-hist(c1.2, breaks=sbreaks-mu1.2, axes=TRUE, main=c(""), xlab="")
+hist(c1.2, breaks=sbreaks-mu1.2, axes=TRUE, main=c(""), xlab="", ylim=c(0,.08*nrellreps))
 abline(v=-abs(obs1.2))
-text(20, 200, paste('P-value =', as.character(r1.2/nrellreps), sep=' '))
+text(20, 200, paste('P-value =', as.character(round(r1.2/nrellreps, 2)), sep=' '))
 abline(v=abs(sum(d1.2)))
+dev.off()
+pdf('centered1-2hist-tails.pdf')
+in_tails1.2 = abs(c1.2) >= abs(obs1.2)
+print(in_tails1.2)
+inv = c1.2[in_tails1.2]
+print(inv)
+hist(inv, breaks=sbreaks-mu1.2, axes=FALSE, main=c(""), xlab="", ylab="", col="red", , ylim=c(0,.08*nrellreps))
 dev.off()
 
 

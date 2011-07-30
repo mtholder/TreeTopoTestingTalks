@@ -32,22 +32,17 @@
 \newcommand{\exampleMacro}[1]{\mu_{#1}}
 
 
-\renewcommand{\section}[1]{%
+\renewcommand{\section}[2]{%
 \bigskip
 \begin{center}
 \begin{Large}
-\normalfont\scshape #1
+\normalfont\scshape #2
 \medskip
 \end{Large}
 \end{center}}
 
 \renewcommand{\subsection}[1]{%
-\begin{center}
-\begin{normalsize}
-\normalfont\bf #1
-\end{normalsize}
-\end{center}
-}
+\noindent{\large\scshape \underline{#1}}:}
 
 \renewcommand{\subsubsection}[1]{%
 \noindent\textbf{#1}:}
@@ -69,7 +64,7 @@
 \newcommand{\pvalue}{$P$-value\xspace}
 \newcommand{\pvalues}{$P$-values\xspace}
 \begin{document}
-\section{Notes on frequentist topology testing (Woods Hole Workshop on Molecular Evolution, 2011)}
+\section*{Notes on frequentist topology testing (Woods Hole Workshop on Molecular Evolution, 2011)}
 Thanks to Joe Felsenstein for the use of images in the slides.
 
 The basic problem that these methods address is this: 
@@ -86,9 +81,13 @@ We will denote the log-likelihood on tree 1 as $\lnL(T_1|X)$ where $X$ represent
 We will denote 2 times the difference in $\lnL$ as a delta test statistic: $$\delta(T_1,T_2|X) = 2\left[\ln L(T_1|X) - \ln L(T_2|X)\right]$$
 
 \subsection{Notation}
-$X$ will denote the data. $x_i$ denotes column $i$ in the matrix.\\
-$T_i$ denotes tree i. $\hat{T}$ is the MLE of the tree. \\
-$^{(j)}$ superscripts in parentheses denote bootstrap replicates. $X^{(j)}$ would be the $j$-th bootstrap replicate dataset; $\hat{T}^{(j)} would be the MLE of the tree for that dataset.\\
+\begin{compactitem}
+	\item $X$ will denote the data. $x_i$ denotes column $i$ in the matrix.\\
+	\item $T_i$ denotes tree i. $\hat{T}$ is the MLE of the tree. \\
+	\item $^{(j)}$ superscripts in parentheses denote bootstrap replicates. $X^{(j)}$ would be the $j$-th bootstrap replicate dataset; $\hat{T}^{(j)}$ would be the MLE of the tree for that dataset.\\
+	\item $\expect{Y}$ denotes the expected value of some statistic, $Y$.  You can think of the expected value as the mean that you would calculate if you could perform a large number of simulations.
+	\item $\bar y$ denotes the mean value of some observed statistics.
+\end{compactitem}
 \subsection{Null hypotheses and the null distribution}
 If the null hypothesis was true, what is the probability that we would see a difference in log-likelihood that is at least as large as the observed?
 This probability is the \pvalue.
@@ -113,7 +112,7 @@ There are a large number of topology tests because:
 	\end{compactitem}
 \end{compactitem}
 \newpage
-\section{Visualizing pattern frequency space}
+\section*{Visualizing pattern frequency space}
 We can rigorously describe phylogenetic inference by placing it in a geometrical framework in which we have a multidimensional space in which the coordinate in each dimension represents the proportion of sites that have (or would we be expected to have) a particular data pattern.  
 \citet{Kim2000} presents a very nice description of this view of tree space.
 
@@ -169,13 +168,13 @@ Note that the closest point for the A+C {\em vs} B+D tree is actually the star t
 
 
 \newpage
-\section{Dataset background}
+\section*{Dataset background}
 I took 3000 sites from an alignment of 5 primates.
 
 $T_1$ = (((chimp, gorilla), human),orang,gibbon), and $\ln L(T_1|X) = -7363.296$\par
 $T_2$ = (((chimp, human), gorilla),orang,gibbon), and $\ln L(T_2|X) = -7361.707$\par
 
-Below is a depiction of the $\delta$ test statistic and the expected value of the test statistic if the null were true. the expectation is 0.\par
+Below is a depiction of the $\delta$ test statistic and the expected value of the test statistic if we believe that the trees are equally good.\par
 \begin{picture}(0,50)(0,-50)
 	  \put(110,0){\small$\delta(T_1,T_2|X)=-3.18$}
 	  \put(270,0){\small$\mathbb{E}(\delta) = 0$}
@@ -194,15 +193,43 @@ The per-site $\delta$ statistic for the 26 sites which have different parsimony 
 Also note that the notation uses $x_i$ indicating that we are calculating the likelihood for a site (a subscript on $x$ will indicate a site index).
 
 \newpage
-\section{KH Test \citep{KishinoH1989} }
+\section*{KH Test \citep{KishinoH1989} }
 Two trees, $T_1$ and $T_2$, must be chosen {\bf before} looking at the data at hand.
 
 \subsubsection{Test statistic} $\delta(T_1,T_2|X)$
 
 \subsubsection{Null hypothesis} Two trees will explain the data equally well. 
-
 In notation $\expect{\lnL(T_1|X)} = \expect{\lnL(T_1|X)}$ (where $\expectation$ denotes the expected value).  Thus:
 $$\expect{\delta(T_1,T_2|X)} = 0$$
+
+\subsubsection{Null distribution} We use the null hypothesis to let us set the expected value of the null distribution to 0.
+To finish specifying the null distribution we can either
+\begin{compactenum}
+	\item Assume the the $\lnL$ values will follow a Normal distribution, and estimated the variance. Or
+	\item Use bootstrapping to generate the a distribution, and then ``center'' this distribution so that it fits our null assumption that the mean of the distribution will be 0.
+\end{compactenum}
+
+A distribution of $\delta(T_1,T_2|X^{(\ast)})$ values is created by bootstrapping the data and recalculating the likelihood score on each tree (often this is done through the RELL procedure).
+An example for the primate dataset is shown below (before centering on the left and centered on the right).
+Note that the mean of this distribution, $\bar{\delta}(T_1,T_2|X^{(\ast)})$, taken over bootstrap replicates is very close to the observed value of the test statistic (around -3.2).\\
+\begin{picture}(500,280)(0,-280)
+	  \put(-30,-120){\makebox(0,0)[l]{\includegraphics[scale=0.5]{../scripts/mtdna/uncentered1-2hist.pdf}}}
+	  \put(70,-260){\normalsize${\delta}(T_1,T_2|X^{(\ast)})$}
+	  \put(230,-120){\makebox(0,0)[l]{\includegraphics[scale=0.5]{../scripts/mtdna/centered1-2hist.pdf}}}
+	  \put(280,-260){\normalsize${\delta}(T_1,T_2|X^{(\ast)}) - \bar{\delta}(T_1,T_2|X^{(\ast)})$}
+\end{picture}
+
+Subtracting the mean of the bootstraps is a very simple procedure, but it is justified by the fact that expected value should be 0 under the null and the fact that the mean of a large sample should be close to the expected value.
+We then treat the centered distribution as a simulation of draws from the null distribution.
+We can calculate a \pvalue by counting the proportion of replicates from this simulated null yield values that deviate from the null at least as strongly as the observed test statistic (\pvalue$\approx$ 0.47 in this example).
+In the figure below the tail region are shown in red.
+Artifacts caused by binning values in the histogram make it appear that some of the values are less extreme than the observed value, but this is not the case.\\
+\begin{picture}(500,280)(0,-280)
+	  \put(100,-120){\makebox(0,0)[l]{\includegraphics[scale=0.5]{../scripts/mtdna/centered1-2hist-p.pdf}}}
+	  \put(100,-120){\makebox(0,0)[l]{\includegraphics[scale=0.5]{../scripts/mtdna/centered1-2hist-tails.pdf}}}
+	  \put(180,-260){\normalsize${\delta}(T_1,T_2|X^{(\ast)}) - \bar{\delta}(T_1,T_2|X^{(\ast)})$}
+\end{picture}
+You would have to do an enormous number of simulations if you wanted to estimate the \pvalue with great precision, but 10,000 RELL bootstraps do not take much computational effort.
 
 
 \newpage
@@ -240,7 +267,7 @@ We will see later (during ``cartoon time''), that we {\em can} visualize them bo
 
 
 \myNewSlide
-\section{The simplest phylogenetic test would compare two trees}
+\section*{The simplest phylogenetic test would compare two trees}
 \Large
 Null: If we had no sampling error (infinite data) $T_1$ and $T_2$ would explain the data equally well. 
 
@@ -291,7 +318,7 @@ To get the $P$-value, we need to know the probability: $$\Pr\left(\big|\delta(T_
 \end{picture}
 
 \myNewSlide
-\section{KH Test}
+\section*{KH Test}
 \begin{compactenum}
 	\item Examine at the difference in $\ln L$ for each site: $\delta(T_1,T_2|X_i)$ for site $i$.
 	\item Note that the total difference is simply a sum:
@@ -699,7 +726,7 @@ BP may {\bf not} be conservative when you correct for selection bias.
 \section*{ML scores in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
 	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-pp1v2.pdf}}}
-	\put(-30,-0){$\ln L(T_1|X) = -D_{KL}(f_X||f_{T_1})$}
+	\put(-30,-0){$\ln L(T_1|X) = -D_{KL}(f_X|f_{T_1})$}
 \end{picture}
 
 \myNewSlide
