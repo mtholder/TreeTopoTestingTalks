@@ -67,10 +67,9 @@
 \section*{Notes on frequentist topology testing (Woods Hole Workshop on Molecular Evolution, 2011)}
 Thanks to Joe Felsenstein for the use of images in the slides.
 
-The basic problem that these methods address is this: 
 \begin{quote}
 	We have two  trees that differ in their score. 
-	Let's say that tree 1's log-likelihood is 5.3 higher than the log-likelihood of tree 0 (the likelihoods have to be calculated on the same data set).
+	Let's say that tree 2's log-likelihood is 1.59 higher than the log-likelihood of tree 1 (the likelihoods have to be calculated on the same data set).
 	
 	{\bf Is a difference in log-likelihoods too large to be explained by sampling error?}
 	
@@ -85,20 +84,20 @@ We will denote 2 times the difference in $\lnL$ as a delta test statistic: $$\de
 	\item $X$ will denote the data. $x_i$ denotes column $i$ in the matrix.\\
 	\item $T_i$ denotes tree i. $\hat{T}$ is the MLE of the tree. \\
 	\item $^{(j)}$ superscripts in parentheses denote bootstrap replicates. $X^{(j)}$ would be the $j$-th bootstrap replicate dataset; $\hat{T}^{(j)}$ would be the MLE of the tree for that dataset.\\
-	\item $\expect{Y}$ denotes the expected value of some statistic, $Y$.  You can think of the expected value as the mean that you would calculate if you could perform a large number of simulations.
-	\item $\bar y$ denotes the mean value of some observed statistics.
+	\item $\expect{Y}$ denotes the expected value of some statistic, $Y$.  You can think of the expected value as the mean that you would calculate if you could perform an infinitely large number of simulations.
+	\item $\bar y$ denotes the mean value of some observed statistic, $y$.
 \end{compactitem}
 \subsection{Null hypotheses and the null distribution}
-If the null hypothesis was true, what is the probability that we would see a difference in log-likelihood that is at least as large as the observed?
+If the null hypothesis was true, what is the probability that we would see a difference in log-likelihood that is at least as large as the observed value?
 This probability is the \pvalue.
-If we have a low \pvalue we can feel comfortable rejecting the null hypothesis; a low \pvalue implies that we will only make mistakes and falsely reject the null hypothesis rarely.
-
+If we have a low \pvalue we can feel comfortable rejecting the null hypothesis.
+A low \pvalue implies that we will falsely reject the null hypothesis rarely.
 We can calculate the \pvalue by figuring out the null distribution - the probability distribution that shows how frequent different values of the $\delta$ test statistic would be even if the null hypothesis were true.
 
-There are a large number of topology tests because there are a number of ways of calculating the null distribution
 
 \subsection{The plethora of topology tests}
-There are a large number of topology tests because:
+There are a large number of topology tests because there are a number of ways of calculating the null distribution
+Specifically:
 \begin{compactitem}
 	\item We can estimate the \pvalue from bootstrapping and associated corrections (see sections on BP, aBP, AU, EHH), or
 	\item We can estimate the \pvalue by looking at the $\delta$ test statistic. If we do this:
@@ -115,21 +114,21 @@ There are a large number of topology tests because:
 \section*{Visualizing pattern frequency space}
 We can rigorously describe phylogenetic inference by placing it in a geometrical framework in which we have a multidimensional space in which the coordinate in each dimension represents the proportion of sites that have (or would we be expected to have) a particular data pattern.  
 \citet{Kim2000} presents a very nice description of this view of tree space.
-
 Unfortunately the rigorous view of pattern frequency space involves a huge number of dimensions.  
 For nucleotides there are $4^N$ possible patterns for $N$ sequences!
 
-I like to draw graphs for species (A, B, C, D) inference that squash the rigorous pattern frequency world down to a simplified space.
+I like to draw graphs for tree inference for 4 sequences (A, B, C, and D).
+In these graphs, I squash the rigorous pattern frequency world down to a simplified space.
 I display the relative proportion of each parsimony-informative pattern among the class of parsimony-informative patterns.
 {\bf Warning: This squashing down to relative frequencies for 3 patterns makes the graphs rough tools, and not perfect depictions of the phylogeny inference problem}\footnote{In fact if we {\em only had information about the relative frequency of parsimony-informative pattern}, we cannot accurately estimate a four-species tree because every possible tree can generate every possible spectrum of pattern frequencies\citep{AllmanHR2010}}. 
-The strong connections between the pattern frequency space and tree inference apply to the full space of the frequencies over all patterns.
+The strong connections between the pattern frequency space and tree inference apply to the full space of the frequencies over all patterns, but not to the easy-to-draw pictures.
 
 Even in this simple case, there are too many patterns to visualize so I make two further simplifications:
 \begin{compactitem}
 	\item consider a two-state (0 and 1) version of the simplest model (it is often called the Cavender-Farris-Neyman model, and it is like a two-state version of Jukes-Cantor)
 	\item define the state that shows up in species A to be state 1
 \end{compactitem}
-This means that the parsimony-informative patterns (in the order ABCD) are: 1100 (which prefers the tree that groups A and B), 1010 (which prefers the tree that groups A and C), and 1001 (which prefers the tree that groups A and D).
+This means that the parsimony-informative patterns (denoted in the order ABCD) are: 1100 (which prefers the tree that groups A and B), 1010 (which prefers the tree that groups A and C), and 1001 (which prefers the tree that groups A and D).
 
 \begin{wrapfigure}{r}{0.5\textwidth}
   \begin{center}
@@ -148,7 +147,7 @@ So the point shown by the black dot would represent approximately:
 	P(1010) & \approx & 0.1\\
 	P(1001) & \approx & 0.4
 \end{eqnarray*}
-(remember these are the frequencies of the patterns given that it is parsimony-informative pattern, so these have to sum to one).
+(remember these are the relative frequencies of the patterns given that it is parsimony-informative pattern, so these have to sum to one).
 
 \begin{wrapfigure}{r}{0.5\textwidth}
   \begin{center}
@@ -156,15 +155,16 @@ So the point shown by the black dot would represent approximately:
     \includegraphics[width=0.48\textwidth]{../newimages/simple-treespace-trees.pdf}
    \vspace{-10pt}
     \includegraphics[width=0.48\textwidth]{../newimages/simple-treespace-trees2.pdf}
-    \vspace{-200pt}
+    \vspace{-120pt}
   \end{center}
 \end{wrapfigure}
 We use this view of tree space because we can plot data points in this space, and we can also represent the prediction of different trees into the same space.
 The figures to the right show how some trees project into this space.  
 The idea is that if we were to use our simple model of 0$\leftrightarrow$1 evolution on those trees, then they would predict pattern frequencies that exactly match the point that the arrows point to.
-In the lower panel, we see the points in the three trees (one for each topology) that are as close as possible\footnote{``As close as possible'' only applies if we constrain branch lengths to have certain maximum lengths - the topology tests do {\bf not} make these constraints, I just impose them when making these figures.} to the sampled data (the black dot).
-If we think of the distance as the Kullback-Leibler distance, then those distances can be thought of -1 times the $\lnL$ for any tree (smaller distance directly translates to higher $\lnL$ in the actual pattern frequency space\footnote{This connection is lost when we look at the relative pattern frequencies -- but we'll ignore that, since we are using these pictures as rough guides only.}).
+In the lower panel, we see the points in the three trees (one for each topology) that are as close as possible\footnote{``As close as possible'' only applies if we constrain branch lengths in certain non-obvious ways. The topology tests and the real approaches to ML tree inference do {\bf not} make these constraints. I just impose them when making these figures to make the cartoons clearer.} to the sampled data (the black dot).
+If we think of the distance as the Kullback-Leibler distance, then those distances can be thought of -1 times the $\lnL$ for any tree (smaller distance directly translates to higher $\lnL$ in the actual pattern frequency space\footnote{This connection is lost when we look at the relative pattern frequencies -- but we'll ignore that, since we are using these pictures as rough guides only. The KL-distance is better thought of as a log likelihood ratio between the ``multinomial likelihood'' \citep[{\em aka} th ``unconstrained likelihood''][]{Goldman1993} that represents the highest possible likelihood for any {\em i.i.d.} model and the likelihood under a tree model.}.
 Note that the closest point for the A+C {\em vs} B+D tree is actually the star tree.
+Under a star tree with all of the terminal branch lengths constrained to have same length, all three parsimony-informative data patterns will be equally frequent; thus we get a point in the center of the triangle (distance = 1/3 from each side).
 
 
 \newpage
@@ -190,7 +190,19 @@ To get a sense of the variablity in the signal, we can look like the $\delta$ st
 \end{picture}
 Note that the central bars of this histogram are cropped -- almost all of the sites do not discriminate between these trees so that $\delta(T_1,T_2|x_i)\approx0$ for these sites.
 The per-site $\delta$ statistic for the 26 sites which have different parsimony scores on the two trees are shown in red.
-Also note that the notation uses $x_i$ indicating that we are calculating the likelihood for a site (a subscript on $x$ will indicate a site index).
+Also note that the notation uses $x_i$ indicating that we are calculating the likelihood for a site (a subscript on $x$ will indicate a site index).  
+
+\subsubsection{A side note on the Templeton test} In case you are curious, $\delta(T_1,T_2|x_i)\approx0$ instead of $\delta(T_1,T_2|x_i)=0$ even if a site $i$ represents a constant pattern.
+You may wonder how a constant pattern prefers one tree over another tree.
+The short answer is that a constant pattern by itself will not prefer one topology over another, but in the process of maximizing the likelihood jointly over all parameters the two trees will predict different probabilities of even the constant patterns.
+Typically (if we ignore the numerical parameters of the model of sequence evolution), we will find that the smaller tree (the tree with the smaller sum of branch lengths) will predict more constant patterns.
+This makes sense, because there is less opportunity for change on small trees.
+Thus, even constant patterns will discriminate {\em very} slightly between trees.
+The Wilcoxon signed-rank test (that goes by the name of ``Templeton test'' in the realm of phylogenetics \citep{Templeton1983}) ignores the precise degree of preference for a tree, and simply ranks the sites by their preference between trees.
+The test was proposed as a means of assessing statistical support when using parsimony, but has been applied to likelihood differences as well.
+Because the subtle interactions between data and parameters lead to unexpected effects (such as constant patterns all favoring one tree, but very slightly), this sort of ranking of sites may not be a wise approach when using ML phylogenetic techniques.
+The ``Paired-sites tests'' chapter (Chapter 21) of \citep{Felsenstein2004} discusses these issues more thoroughly.
+
 
 \newpage
 \section*{KH Test \citep{KishinoH1989} }
@@ -209,6 +221,7 @@ To finish specifying the null distribution we can either
 	\item Use bootstrapping to generate the a distribution, and then ``center'' this distribution so that it fits our null assumption that the mean of the distribution will be 0.
 \end{compactenum}
 
+\subsubsection{Details of the bootstrapping approach}
 A distribution of $\delta(T_1,T_2|X^{(\ast)})$ values is created by bootstrapping the data and recalculating the likelihood score on each tree (often this is done through the RELL procedure).
 An example for the primate dataset is shown below (before centering on the left and centered on the right).
 Note that the mean of this distribution, $\bar{\delta}(T_1,T_2|X^{(\ast)})$, taken over bootstrap replicates is very close to the observed value of the test statistic (around -3.2).\\
@@ -230,6 +243,45 @@ Artifacts caused by binning values in the histogram make it appear that some of 
 	  \put(180,-260){\normalsize${\delta}(T_1,T_2|X^{(\ast)}) - \bar{\delta}(T_1,T_2|X^{(\ast)})$}
 \end{picture}
 You would have to do an enormous number of simulations if you wanted to estimate the \pvalue with great precision, but 10,000 RELL bootstraps do not take much computational effort.
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+   \vspace{0pt}
+    \includegraphics[width=0.48\textwidth]{../newimages/simple-treespace-kh.pdf}
+    \vspace{-50pt}
+    \put(-160,70){KH Test Cartoon shown in lecture}
+  \end{center}
+\end{wrapfigure}
+We can depict the KH Test in a cartoon of pattern frequency space as shown to the right.
+The intent of the cartoon is to display the test statistic with lines connecting the
+ML estimates of branch lengths in the tree to the point that corresponds to the pattern frequencies in the observed data (shown as a black dot). 
+The length of the lines is negatively related to the $\lnL$, and the black portion is intended to convey the difference in the $\lnL$ between the trees; this is our $\delta$ test statistic.
+In this cartoon, we can view the patterns as being ordered `chimp', `human', `orang+gibbon', and `gorilla'
+Thus the tree with the highest likelihood, $T_2$, is colored in green and depicted with the 1100 pattern (chimp+human), and the other {\em a priori} tree, $T_1$, unites chimp and gorilla (pattern 1001).
+
+The contour lines centered around the boundary between hypotheses are intended to convey the fact that we generate the null distribution by bootstrapping to create a population points in pattern frequency space (the contours can be thought of as a contours of the probability distribution, with the highest probability region being the central circle).
+Recall that in the KH test, we calculate the $\delta$ test statistic for each bootstrapped replicate and then we center these values on 0; this centering is the reason that the contours in the KH test cartoon are centered on the boundary between $T_1$ and $T_2$.
+In the actual test the $\delta$ test-statistics are ``centered'' to have a mean of 0, so perhaps the cartoon should look like the one below (note it is really the $\delta$ test statistics that are being centered, not the bootstrapped points in pattern frequency space).
+\begin{picture}(500,280)(0,-280)
+	  \put(-70,-120){\makebox(0,0)[l]{\includegraphics[scale=0.4]{../scripts/mtdna/kh_points_before.pdf}}}
+	  \put(130,-120){\makebox(0,0)[l]{\includegraphics[scale=0.4]{../scripts/mtdna/kh_points_arrows.pdf}}}
+	  \put(330,-120){\makebox(0,0)[l]{\includegraphics[scale=0.4]{../scripts/mtdna/kh_points_after.pdf}}}
+	  \put(-40,-210){\normalsize Observed data ($+$ sign), and }
+	  \put(-40,-222){\normalsize bootstrap pseudoreplicates (black) }
+	  \put(160,-210){\normalsize Center each the $\delta$ from each  }
+	  \put(160,-222){\normalsize  bootstrap, such that the mean is 0 }
+	  \put(360,-210){\normalsize After centering. The observed $\delta$ }
+	  \put(360,-222){\normalsize (corresponding to the data point }
+	  \put(360,-234){\normalsize denoted by $+$ sign) is {\em not}}
+	  \put(360,-246){\normalsize ``centered.'' Instead we use the}
+	  \put(360,-258){\normalsize centered bootstrap reps of $\delta$ to}
+	  \put(360,-270){\normalsize calculate a \pvalue: what is the }
+	  \put(360,-282){\normalsize probability that a value as extreme }
+	  \put(360,-294){\normalsize as $+$ would arise under the null. }
+\end{picture}
+
+Note that in these figures, only 2 trees are considered (the ``red'' tree is not shown); this is because the KH test requires that two tree be specified {\em a priori}.  
+It is {\em not} appropriate to use this test to reject one {\em a priori} tree by comparing it to the ML tree.
 
 
 \newpage
