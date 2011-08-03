@@ -296,12 +296,12 @@ The null hypothesis is that all members of the candidate set have the same expec
 \normalsize
 \begin{compactitem}
 	\item For each tree $T_i$ in the candidate set calculate $\delta(\hat{T}, T_i|X)$
-	\item Bootstrap to generate ${\ln L}(T_i|X^{(j)})$
-	\item For each tree $T_i$, use $\bar{\ln L}(T_i|X^{\ast})$ to center the bootstrapped collection of log-likelihoods:
+	\item Bootstrap to generate ${\ln L}(T_i|X^{(j)})$ for each bootstrap replicate $j$.
+	\item For each tree $T_i$, use the mean, $\bar{\ln L}(T_i|X^{\ast})$, over all bootstrap replicates to center the bootstrapped collection of log-likelihoods:
 		$$c_i^{(j)} = {\ln L}(T_i|X^{(j)})-\bar{\ln L}(T_i|X^{\ast})$$
-	\item For each replicate pick the highest value from the centered distributions (this mimics the selection bias): $$m^{(j)} = \max\left[c_i^{(j)}\right] \mbox{ over all } j$$
-	\item The for each tree and replicate, you get a sample from the null $\delta_i^{(j)} = m^{(j)} - c_i^{(j)}$
-	\item $P$-value for tree $T_i$ can be approximated by seeing where in the distribution of $\delta_i^{(j)}$ values it lies (the $P$-value is the proportion of sampled $\delta_i^{(j)} \geq \delta_i$
+	\item For each bootstrap replicate, $j$, pick the highest value from the centered distributions (this mimics the selection bias): $$m^{(j)} = \max\left[c_i^{(j)}\right] \mbox{ over all } i$$
+	\item Then for each tree and replicate, you get a sample from the null $\delta_i^{(j)} = m^{(j)} - c_i^{(j)}$
+	\item $P$-value for tree $T_i$ can be approximated by seeing where in the distribution of $\delta_i^{(j)}$ values it lies. The $P$-value is the proportion of bootstrap replicates for which $$\delta_i^{(j)} \geq \delta(\hat{T}, T_i|X)$$
 \end{compactitem}
 
 \myNewSlide

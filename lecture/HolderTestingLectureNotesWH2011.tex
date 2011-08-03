@@ -52,6 +52,8 @@
 %\usepackage{ulem}
 \usepackage{url}
 \usepackage{hyperref}
+
+
 \hypersetup{backref,  pdfpagemode=FullScreen,  linkcolor=blue, citecolor=red, colorlinks=true, hyperindex=true}
 
 \newcommand{\boot}[1]{X^{(#1)}}
@@ -63,6 +65,9 @@
 \newcommand{\expect}[1]{\expectation\left[#1\right]}
 \newcommand{\pvalue}{$P$-value\xspace}
 \newcommand{\pvalues}{$P$-values\xspace}
+\newcommand{\myFigLabel}[1]{\stepcounter{myFigCounter} \newcounter{#1} \setcounter{#1}{\value{myFigCounter}} Fig \arabic{#1}}
+
+\newcounter{myFigCounter}
 \begin{document}
 \section*{Notes on frequentist topology testing (Woods Hole Workshop on Molecular Evolution, 2011)}
 Thanks to Joe Felsenstein for the use of images in the slides.
@@ -71,7 +76,7 @@ Thanks to Joe Felsenstein for the use of images in the slides.
 	We have two  trees that differ in their score. 
 	Let's say that tree 2's log-likelihood is 1.59 higher than the log-likelihood of tree 1 (the likelihoods have to be calculated on the same data set).
 	
-	{\bf Is a difference in log-likelihoods too large to be explained by sampling error?}
+	{\bf Is the apparent support for one tree over another too large to be explained by sampling error?}
 	
 \end{quote}
 
@@ -94,7 +99,7 @@ If the null hypothesis was true, what is the probability that we would see a dif
 This probability is the \pvalue.
 If we have a low \pvalue we can feel comfortable rejecting the null hypothesis.
 A low \pvalue implies that we will falsely reject the null hypothesis rarely.
-We can calculate the \pvalue by figuring out the null distribution - the probability distribution that shows how frequent different values of the $\delta$ test statistic would be even if the null hypothesis were true.
+We can calculate the \pvalue by figuring out the null distribution -- the probability distribution that shows how frequent different values of the $\delta$ test statistic would be even if the null hypothesis were true.
 
 
 \subsection{The plethora of topology tests}
@@ -136,11 +141,12 @@ This means that the parsimony-informative patterns (denoted in the order ABCD) a
   \begin{center}
    \vspace{-40pt}
     \includegraphics[width=0.48\textwidth]{../newimages/simple-treespace-sample.pdf}
+    \put(-180,10){\myFigLabel{figSimpleDataCounter}: pattern frequency space}
    \vspace{-0pt}
    \vspace{-40pt}
   \end{center}
 \end{wrapfigure}
-I plot the relative frequencies of these patterns in \href{http://en.wikipedia.org/wiki/Barycentric_coordinate_system_(mathematics)}{Barycentric coordinate space}, as shown on the right.
+I plot (Fig. \arabic{figSimpleDataCounter}) the relative frequencies of these patterns in \href{http://en.wikipedia.org/wiki/Barycentric_coordinate_system_(mathematics)}{Barycentric coordinate space}, as shown on the right.
 The frequency of a pattern can be read by looking at the distance between the point and the sides of the equilateral triangle.
 Somewhat confusingly the pattern frequency is the distance from the side that is opposite the labelled point.
 So the point shown by the black dot would represent approximately:
@@ -155,16 +161,23 @@ So the point shown by the black dot would represent approximately:
   \begin{center}
    \vspace{-40pt}
     \includegraphics[width=0.48\textwidth]{../newimages/simple-treespace-trees.pdf}
+    \put(-160,20){\myFigLabel{figSimpleTreeCounter}: simple trees}
    \vspace{-10pt}
     \includegraphics[width=0.48\textwidth]{../newimages/simple-treespace-trees2.pdf}
-    \vspace{-120pt}
+    \put(-160,20){\myFigLabel{figClosestTreeCounter}: closest trees}
+    \vspace{-50pt}
   \end{center}
 \end{wrapfigure}
-We use this view of tree space because we can plot data points in this space, and we can also represent the prediction of different trees into the same space.
+We use this view of tree space because we can plot points that represent data matrices in this space, and we can also represent the {\em prediction} of different trees into the same space.
 The figures to the right show how some trees project into this space.  
 The idea is that if we were to use our simple model of 0$\leftrightarrow$1 evolution on those trees, then they would predict pattern frequencies that exactly match the point that the arrows point to.
-In the lower panel, we see the points in the three trees (one for each topology) that are as close as possible\footnote{``As close as possible'' only applies if we constrain branch lengths in certain non-obvious ways. The topology tests and the real approaches to ML tree inference do {\bf not} make these constraints. I just impose them when making these figures to make the cartoons clearer.} to the sampled data (the black dot).
-If we think of the distance as the Kullback-Leibler distance, then those distances can be thought of -1 times the $\lnL$ for any tree (smaller distance directly translates to higher $\lnL$ in the actual pattern frequency space\footnote{This connection is lost when we look at the relative pattern frequencies -- but we'll ignore that, since we are using these pictures as rough guides only. The KL-distance is better thought of as a log likelihood ratio between the ``multinomial likelihood'' \citep[{\em aka} th ``unconstrained likelihood''][]{Goldman1993} that represents the highest possible likelihood for any {\em i.i.d.} model and the likelihood under a tree model.}.
+So in Figure \arabic{figSimpleTreeCounter} all of the terminal branches have the same length. 
+Thus, each tree predicts the data pattern that would support that tree (under parismony).  
+If the internal branch is long, then close to 100\% of the parsimony-informative sites will be the ``expected'' type.
+When the internal branch is short, the relative frequency of the pattern that supports the tree is closer to 1/3 (because sites that experience multiple substitutions on the terminal branches generate each type of pattern in equal frequencies).
+
+In the lower panel (Fig \arabic{figClosestTreeCounter}), we see the points in the three trees (one for each topology) that are as close as possible\footnote{``As close as possible'' only applies if we constrain branch lengths in certain non-obvious ways. The topology tests and the real approaches to ML tree inference do {\bf not} make these constraints. I just impose them when making these figures to make the cartoons clearer.} to the sampled data (the black dot).
+If we think of the distance as the Kullback-Leibler distance, then those distances can be thought of -1 times the $\lnL$ for any tree (smaller distance directly translates to higher $\lnL$ in the actual pattern frequency space\footnote{This connection is lost when we look at the relative pattern frequencies -- but we'll ignore that, since we are using these pictures as rough guides only. The KL-distance is better thought of as a log likelihood ratio between the ``multinomial likelihood'' \citep[{\em aka} the ``unconstrained likelihood'' of][]{Goldman1993} that represents the highest possible likelihood for any {\em i.i.d.} model and the likelihood under a tree model.}).
 Note that the closest point for the A+C {\em vs} B+D tree is actually the star tree.
 Under a star tree with all of the terminal branch lengths constrained to have same length, all three parsimony-informative data patterns will be equally frequent; thus we get a point in the center of the triangle (distance = 1/3 from each side).
 
@@ -184,7 +197,7 @@ Below is a depiction of the $\delta$ test statistic and the expected value of th
 	  \put(250,-60){$\delta(T_1,T_2|X) $}
 \end{picture}
 
-To get a sense of the variablity in the signal, we can look like the $\delta$ statistic calculated on each site:\\
+To get a sense of the variability in the signal, we can look like the $\delta$ statistic calculated on each site:\\
 \begin{picture}(500,280)(0,-280)
 	  \put(40,-120){\makebox(0,0)[l]{\includegraphics[scale=0.6]{../scripts/mtdna/d1-2hist.pdf}}}
 	  \put(170,-260){\normalsize$\delta(T_1,T_2|x_i)$}
@@ -323,6 +336,68 @@ As discussed in \citet{GoldmanAR2000}, PAUP makes the stringent assumption that 
 The $\delta$ test-statistic is very powerful, but the test is non-parametric because it uses only mild assumptions to determine the null distribution of the test statistic. 
 Specifically, we use the fact that the null states that the expected value of $\delta$ is 0, and we use the nonparametric approaches to estimate the variance of the null distribution.
 Thus the KH Test should be fairly robust to model violation ({\em e.g.}~using an oversimplified model to score trees).
+
+\newpage
+\section*{SH Test \citep{ShimodairaH1999}}
+As discussed by \citet{GoldmanAR2000} the KH Test should not be used when you have one tree specified {\em a priori} and you would like to test the ML tree against this tree.
+Because you are searching through tree space to find the ML tree, using a KH Test will suffer from ``selection bias'' in which the selection of the optimal tree biases the test statistic to large values.
+In other words, even under a null hypothesis that $T_1$ will explain the data as well as another tree, you would expect large values of $\delta(\hat{T}, T_1|X)$ to arise simply because $\hat{T}$ is selected on the basis of having a high ML score.
+
+The SH test corrects for selection bias, by requiring the investigator to designate a set of candidate trees. 
+This set could be the set of all possible trees.
+
+\subsubsection{Test statistic} $\delta(\hat{T},T_i|X)$ for any tree, $T_i$, in your candidate set.
+
+\subsubsection{Null hypothesis} For each tree, $T_i$, in your candidate set you expect to explain the data as well as any other tree in the candidate set (if you have no sampling error).
+
+\subsubsection{Null distribution} Unlike in the KH Test, we {\em cannot} assume that $\delta(\hat{T},T_i|X)$ is centered around 0.
+In fact $\delta(\hat{T},T_i|X)$ will be positive for every tree that is not the MLE tree (if $T_i$ is tied for being the ML tree, then  $\delta(\hat{T},T_i|X) = 0$).
+If a statistic is always positive or zero, then its expectation cannot be 0.
+We must account for the fact that we are testing a large number of trees against the tree that appears to be the best explanation of  the data.
+
+To account for the selection bias and the large number of tests, the null distribution relies on the fact that our expectation is that all of the trees in candidate set will explain the data equally well.
+In notation, $A = \expect{\lnL(T_i|X)}$, where $A$ is the (unknown) expected likelihood of each tree in the candidate set.
+We do not need to know what value $A$ has.
+Because our test statistic is the difference in $\lnL$ values, it is only important to note that the expected $\lnL$ is the {\em same} for all trees in the candidate set.
+
+In the SH test, we bootstrap to get a sense of the variability of $\lnL$ scores as a result of sampling error.
+But rather than ``centering'' $\delta\left(T_1,T_2|X^{\ast}\right)$ around 0,  we center each tree's distribution of $\lnL$ scores $\lnL\left(T_i|X^{\ast}\right)$ around 0 (we could choose any number to center the distributions around, but 0 is convenient).
+
+To calculate the null distribution of the test statistic, we then look at the magnitude of the differences between a bootstrap replicate's ``centered'' $\lnL$ and the largest ``centered'' $\lnL$ over all trees.
+Using this difference from the largest value mimics the ``selection bias'' that is introduced by choosing to compare all of the trees to the best tree on the dataset at hand.
+
+Thus, after bootstrapping and centering we obtain, for each tree, a distribution of centered $\delta$ values. 
+This distribution describes how large we would expect $\delta$ to be even if all of the trees had the same expected score -- all of the centered $\delta$ values arise from sampling error (due to the fact that we have a finite sample of sites) and the selection bias of comparing trees to the best tree.
+
+\subsubsection{Details of the bootstrapping approach}
+A more algorithmic description of the bootstrapping procedure would be:
+\begin{enumerate}
+	\item For each tree $T_i$ in the candidate set calculate $\delta(\hat{T}, T_i|X)$. This is the observed value of the test statistic for each tree.
+	\item Bootstrap to generate ${\ln L}(T_i|X^{(j)})$ for each bootstrap replicate $j$.
+	\item For each tree $T_i$, use the mean, $\bar{\ln L}(T_i|X^{\ast})$, over all bootstrap replicates to center the bootstrapped collection of log-likelihoods:
+		$$c_i^{(j)} = {\ln L}(T_i|X^{(j)})-\bar{\ln L}(T_i|X^{\ast})$$
+	\item For each bootstrap replicate, $j$, pick the highest value from the centered distributions (this mimics the selection bias): $$m^{(j)} = \max\left[c_i^{(j)}\right] \mbox{ over all } i$$
+	\item Then for each tree and replicate, you get a sample from the null $\delta_i^{(j)} = m^{(j)} - c_i^{(j)}$
+	\item $P$-value for tree $T_i$ can be approximated by seeing where in the distribution of $\delta_i^{(j)}$ values it lies. The $P$-value is the proportion of bootstrap replicates for which $$\delta_i^{(j)} \geq \delta(\hat{T}, T_i|X)$$
+	\item Trees in the candidate set with low \pvalues can be rejected; the remaining trees represent your confidence set of trees.
+\end{enumerate}
+
+\subsubsection{SH Test on the primate dataset}
+Suppose that we were interested in the relationships among human, chimp, and gorilla; but we were unwilling to entertain the possibility that these three were not a monophyletic group.
+In this case we would have 3 candidate trees:\\
+$T_1$ = (((chimp, gorilla), human),orang,gibbon), and $\ln L(T_1|X) = -7363.296$\\
+$T_2$ = (((chimp, human), gorilla),orang,gibbon), and $\ln L(T_2|X) = -7361.707$\\
+$T_3$ = (((gorilla, human), chimp),orang,gibbon), and $\ln L(T_3|X) = -7362.609$\\
+So $T_2$ is the ML tree, and the set of $\delta$ test statistics would be\par
+\begin{picture}(0,50)(0,-50)
+	  \put(160,0){\tiny$\delta(\hat{T},T_2|X)=0$}
+	  \put(240,0){\tiny$\delta(\hat{T},T_3|X)\approx1.8$}
+	  \put(320,0){\tiny$\delta(\hat{T},T_1|X)\approx3.18$}
+	  \put(30,180){\makebox(0,-190)[l]{\includegraphics[scale=.6]{../newimages/delta_axes_pos.pdf}}}
+	  \put(150,-60){$\delta(\hat{T},T_i|X) $}
+\end{picture}
+
+
 
 
 \newpage
