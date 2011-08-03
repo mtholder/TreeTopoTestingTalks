@@ -86,6 +86,8 @@ We will denote 2 times the difference in $\lnL$ as a delta test statistic: $$\de
 	\item $^{(j)}$ superscripts in parentheses denote bootstrap replicates. $X^{(j)}$ would be the $j$-th bootstrap replicate dataset; $\hat{T}^{(j)}$ would be the MLE of the tree for that dataset.\\
 	\item $\expect{Y}$ denotes the expected value of some statistic, $Y$.  You can think of the expected value as the mean that you would calculate if you could perform an infinitely large number of simulations.
 	\item $\bar y$ denotes the mean value of some observed statistic, $y$.
+	\item $M$ will denote the number of sites (the number of columns).
+	\item $N$ is the number of sequences (leaves) in the tree.
 \end{compactitem}
 \subsection{Null hypotheses and the null distribution}
 If the null hypothesis was true, what is the probability that we would see a difference in log-likelihood that is at least as large as the observed value?
@@ -248,7 +250,7 @@ You would have to do an enormous number of simulations if you wanted to estimate
   \begin{center}
    \vspace{0pt}
     \includegraphics[width=0.48\textwidth]{../newimages/simple-treespace-kh.pdf}
-    \vspace{-50pt}
+    \vspace{-120pt}
     \put(-160,70){KH Test Cartoon shown in lecture}
   \end{center}
 \end{wrapfigure}
@@ -262,7 +264,7 @@ Thus the tree with the highest likelihood, $T_2$, is colored in green and depict
 The contour lines centered around the boundary between hypotheses are intended to convey the fact that we generate the null distribution by bootstrapping to create a population points in pattern frequency space (the contours can be thought of as a contours of the probability distribution, with the highest probability region being the central circle).
 Recall that in the KH test, we calculate the $\delta$ test statistic for each bootstrapped replicate and then we center these values on 0; this centering is the reason that the contours in the KH test cartoon are centered on the boundary between $T_1$ and $T_2$.
 In the actual test the $\delta$ test-statistics are ``centered'' to have a mean of 0, so perhaps the cartoon should look like the one below (note it is really the $\delta$ test statistics that are being centered, not the bootstrapped points in pattern frequency space).
-\begin{picture}(500,280)(0,-280)
+\begin{picture}(500,300)(0,-300)
 	  \put(-70,-120){\makebox(0,0)[l]{\includegraphics[scale=0.4]{../scripts/mtdna/kh_points_before.pdf}}}
 	  \put(130,-120){\makebox(0,0)[l]{\includegraphics[scale=0.4]{../scripts/mtdna/kh_points_arrows.pdf}}}
 	  \put(330,-120){\makebox(0,0)[l]{\includegraphics[scale=0.4]{../scripts/mtdna/kh_points_after.pdf}}}
@@ -278,10 +280,49 @@ In the actual test the $\delta$ test-statistics are ``centered'' to have a mean 
 	  \put(360,-270){\normalsize calculate a \pvalue: what is the }
 	  \put(360,-282){\normalsize probability that a value as extreme }
 	  \put(360,-294){\normalsize as $+$ would arise under the null. }
+    \vspace{10pt}
 \end{picture}
 
 Note that in these figures, only 2 trees are considered (the ``red'' tree is not shown); this is because the KH test requires that two tree be specified {\em a priori}.  
 It is {\em not} appropriate to use this test to reject one {\em a priori} tree by comparing it to the ML tree.
+
+\subsection{Performing the KH test in PAUP}
+Assuming that you have chosen an appropriate model of sequence evolution (and configured PAUP to use that model using the {\tt LSet} command, then the KH test can be run by the commands:
+\begin{verbatim}
+GetTrees file = tree1.tre mode = 3 ;
+GetTrees file = tree2.tre mode = 7 ;
+LScore / KHTest=RELL ;
+\end{verbatim}
+Note that you can use the command {\tt LScore / KHTest=FullOpt } to maximize the likelihood on each bootstrap replicate, $j$, when calculating $\delta\left(T_1,T_2|X^{(j)}\right)$, but that is rarely computationally feasible.
+
+\subsection{Normal approximation versions of the KH test} 
+Because the total $\delta$ is a sum over all sites: $$\delta\left(T_1,T_2|X\right) = \sum_{i=1}^M\delta\left(T_1,T_2|x_i\right),$$
+the Central Limit Theorem implies that we should be able to use the Normal distribution as our null distribution.
+This is a large sample property, and it may not hold for even fairly big datasets.  
+For instance in the case of the primate dataset that we are considering, the per-site $\delta$ test statistics are skewed to the left; and the bootstrapping approach reveals that this skew shows up in the distribution of $\delta\left(T_1,T_2|X^{\ast}\right)$ for the bootstrap replicates.
+The Central Limit Theorem, guarantees that this skew will eventually go away as we move to larger datasets; and the Normal distribution will be a good surrogate for the null distribution in these cases.
+
+The number of sites that we are summing across is large (3000), but the vast majority show $\delta$ values of very close to 0.  
+Only 40 strongly discriminate between trees.  
+The very ``fat-tailed'' distribution of per-site $\delta$ values means that convergence of the sum to a normal will require a very large sample of sites.
+
+If we do feel comfortable making the assumption that the null distribution is a Normal we can use the mean$=0$ and variance $M$ times the variance of $\delta$ across all sites.
+The mean of 0 comes from the assumption of our null.
+The variance comes from the fact that the variance of a sum is the sum of the variances:
+$$ \sigma_{\delta\left(T_1,T_2|X\right)}^2 = \sum_i^M\sigma_{\left(T_1,T_2|x_i\right)}^2 = M\sigma_{\left(T_1,T_2|x\right)}^2$$
+(where the last equality comes from assuming that the sites are {\em i.i.d.} so the have their $\delta$ statistics are drawn from a distribution with the same variance for each site; so we can drop the $i$ subscript for each site).
+
+\subsubsection{Using the normal approximation in PAUP} Substituting the command {\tt LScore / KHTest=Normal }	 will tell PAUP to use the normal approximation.
+In the example of this data set, the results are quite different.
+The RELL approach gives a $P \approx 0.49$, while assuming a Normal strongly rejects the chimp+gorilla tree $P < 0.001$.
+I would trust the RELL approach in this case.
+
+As discussed in \citet{GoldmanAR2000}, PAUP makes the stringent assumption that the per-site $\delta$ values (not just the $\delta\left(T_1,T_2|X\right)$ statistic) follows a Normal.
+
+\subsection{Summary of the KH Test} This test is appropriate when you have two trees specified {\em a priori} that you want to test with a new dataset. 
+The $\delta$ test-statistic is very powerful, but the test is non-parametric because it uses only mild assumptions to determine the null distribution of the test statistic. 
+Specifically, we use the fact that the null states that the expected value of $\delta$ is 0, and we use the nonparametric approaches to estimate the variance of the null distribution.
+Thus the KH Test should be fairly robust to model violation ({\em e.g.}~using an oversimplified model to score trees).
 
 
 \newpage
