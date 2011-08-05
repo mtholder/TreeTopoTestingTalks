@@ -202,9 +202,10 @@ To get a sense of the variability in the signal, we can look like the $\delta$ s
 	  \put(40,-120){\makebox(0,0)[l]{\includegraphics[scale=0.6]{../scripts/mtdna/d1-2hist.pdf}}}
 	  \put(170,-260){\normalsize$\delta(T_1,T_2|x_i)$}
 	  \put(40,-120){\makebox(0,0)[l]{\includegraphics[scale=0.6]{../scripts/mtdna/diff1-2hist.pdf}}}
+	  \put(300, -50){\myFigLabel{figSiteDeltaCounter}: histogram of per site $\delta$ statistics}
 \end{picture}
-Note that the central bars of this histogram are cropped -- almost all of the sites do not discriminate between these trees so that $\delta(T_1,T_2|x_i)\approx0$ for these sites.
-The per-site $\delta$ statistic for the 26 sites which have different parsimony scores on the two trees are shown in red.
+Note that the central bars of this histogram are cropped -- almost all of the sites do not discriminate strongly between these trees so that $\delta(T_1,T_2|x_i)\approx0$ for these sites.
+The per site $\delta$ statistic for the 26 sites which have different parsimony scores on the two trees are shown in red.
 Also note that the notation uses $x_i$ indicating that we are calculating the likelihood for a site (a subscript on $x$ will indicate a site index).  
 
 \subsubsection{A side note on the Templeton test} In case you are curious, $\delta(T_1,T_2|x_i)\approx0$ instead of $\delta(T_1,T_2|x_i)=0$ even if a site $i$ represents a constant pattern.
@@ -249,7 +250,7 @@ Note that the mean of this distribution, $\bar{\delta}(T_1,T_2|X^{(\ast)})$, tak
 
 Subtracting the mean of the bootstraps is a very simple procedure, but it is justified by the fact that expected value should be 0 under the null and the fact that the mean of a large sample should be close to the expected value.
 We then treat the centered distribution as a simulation of draws from the null distribution.
-We can calculate a \pvalue by counting the proportion of replicates from this simulated null yield values that deviate from the null at least as strongly as the observed test statistic (\pvalue$\approx$ 0.47 in this example).
+We can calculate a \pvalue by counting the proportion of replicates from this simulated null yield values that deviate from the null at least as strongly as the observed test statistic (\pvalue$\approx$ 0.48 in this example).
 In the figure below the tail region are shown in red.
 Artifacts caused by binning values in the histogram make it appear that some of the values are less extreme than the observed value, but this is not the case.\\
 \begin{picture}(500,280)(0,-280)
@@ -276,7 +277,7 @@ Thus the tree with the highest likelihood, $T_2$, is colored in green and depict
 
 The contour lines centered around the boundary between hypotheses are intended to convey the fact that we generate the null distribution by bootstrapping to create a population points in pattern frequency space (the contours can be thought of as a contours of the probability distribution, with the highest probability region being the central circle).
 Recall that in the KH test, we calculate the $\delta$ test statistic for each bootstrapped replicate and then we center these values on 0; this centering is the reason that the contours in the KH test cartoon are centered on the boundary between $T_1$ and $T_2$.
-In the actual test the $\delta$ test-statistics are ``centered'' to have a mean of 0, so perhaps the cartoon should look like the one below (note it is really the $\delta$ test statistics that are being centered, not the bootstrapped points in pattern frequency space).
+In the actual test the $\delta$ test-statistics are ``centered'' to have a mean of 0, so perhaps the cartoon should look like the one below (note it is really the $\delta$ test statistics that are being centered, not the bootstrapped points in pattern frequency space; but I still find these figures helpful).
 \begin{picture}(500,300)(0,-300)
 	  \put(-70,-120){\makebox(0,0)[l]{\includegraphics[scale=0.4]{../scripts/mtdna/kh_points_before.pdf}}}
 	  \put(130,-120){\makebox(0,0)[l]{\includegraphics[scale=0.4]{../scripts/mtdna/kh_points_arrows.pdf}}}
@@ -296,7 +297,9 @@ In the actual test the $\delta$ test-statistics are ``centered'' to have a mean 
     \vspace{10pt}
 \end{picture}
 
-Note that in these figures, only 2 trees are considered (the ``red'' tree is not shown); this is because the KH test requires that two tree be specified {\em a priori}.  
+In these figures only 2 trees are considered. 
+The ``red'' tree depicted in other views of pattern frequency space is not shown.
+This is done because the KH test requires that two trees be specified {\em a priori}.  
 It is {\em not} appropriate to use this test to reject one {\em a priori} tree by comparing it to the ML tree.
 
 \subsection{Performing the KH test in PAUP}
@@ -312,12 +315,12 @@ Note that you can use the command {\tt LScore / KHTest=FullOpt } to maximize the
 Because the total $\delta$ is a sum over all sites: $$\delta\left(T_1,T_2|X\right) = \sum_{i=1}^M\delta\left(T_1,T_2|x_i\right),$$
 the Central Limit Theorem implies that we should be able to use the Normal distribution as our null distribution.
 This is a large sample property, and it may not hold for even fairly big datasets.  
-For instance in the case of the primate dataset that we are considering, the per-site $\delta$ test statistics are skewed to the left; and the bootstrapping approach reveals that this skew shows up in the distribution of $\delta\left(T_1,T_2|X^{\ast}\right)$ for the bootstrap replicates.
+For instance in the case of the primate dataset that we are considering, the per site $\delta$ test statistics are skewed to the left; and the bootstrapping approach reveals that this skew shows up in the distribution of $\delta\left(T_1,T_2|X^{\ast}\right)$ for the bootstrap replicates.
 The Central Limit Theorem, guarantees that this skew will eventually go away as we move to larger datasets; and the Normal distribution will be a good surrogate for the null distribution in these cases.
 
 The number of sites that we are summing across is large (3000), but the vast majority show $\delta$ values of very close to 0.  
 Only 40 strongly discriminate between trees.  
-The very ``fat-tailed'' distribution of per-site $\delta$ values means that convergence of the sum to a normal will require a very large sample of sites.
+The very ``fat-tailed'' distribution of per site $\delta$ values means that convergence of the sum to a normal will require a very large sample of sites.
 
 If we do feel comfortable making the assumption that the null distribution is a Normal we can use the mean$=0$ and variance $M$ times the variance of $\delta$ across all sites.
 The mean of 0 comes from the assumption of our null.
@@ -327,10 +330,10 @@ $$ \sigma_{\delta\left(T_1,T_2|X\right)}^2 = \sum_i^M\sigma_{\left(T_1,T_2|x_i\r
 
 \subsubsection{Using the normal approximation in PAUP} Substituting the command {\tt LScore / KHTest=Normal }	 will tell PAUP to use the normal approximation.
 In the example of this data set, the results are quite different.
-The RELL approach gives a $P \approx 0.49$, while assuming a Normal strongly rejects the chimp+gorilla tree $P < 0.001$.
+The RELL approach gives a $P \approx 0.48$, while assuming a Normal strongly rejects the chimp+gorilla tree $P < 0.001$.
 I would trust the RELL approach in this case.
 
-As discussed in \citet{GoldmanAR2000}, PAUP makes the stringent assumption that the per-site $\delta$ values (not just the $\delta\left(T_1,T_2|X\right)$ statistic) follows a Normal.
+As discussed in \citet{GoldmanAR2000}, PAUP makes the stringent assumption that the per site $\delta$ values (not just the $\delta\left(T_1,T_2|X\right)$ statistic) follows a Normal.
 
 \subsection{Summary of the KH Test} This test is appropriate when you have two trees specified {\em a priori} that you want to test with a new dataset. 
 The $\delta$ test-statistic is very powerful, but the test is non-parametric because it uses only mild assumptions to determine the null distribution of the test statistic. 
@@ -355,13 +358,14 @@ In fact $\delta(\hat{T},T_i|X)$ will be positive for every tree that is not the 
 If a statistic is always positive or zero, then its expectation cannot be 0.
 We must account for the fact that we are testing a large number of trees against the tree that appears to be the best explanation of  the data.
 
-To account for the selection bias and the large number of tests, the null distribution relies on the fact that our expectation is that all of the trees in candidate set will explain the data equally well.
+Our approximation of the null distribution will rely on the fact that our expectation is that all of the trees in candidate set will explain the data equally well.
 In notation, $A = \expect{\lnL(T_i|X)}$, where $A$ is the (unknown) expected likelihood of each tree in the candidate set.
 We do not need to know what value $A$ has.
 Because our test statistic is the difference in $\lnL$ values, it is only important to note that the expected $\lnL$ is the {\em same} for all trees in the candidate set.
 
 In the SH test, we bootstrap to get a sense of the variability of $\lnL$ scores as a result of sampling error.
-But rather than ``centering'' $\delta\left(T_1,T_2|X^{\ast}\right)$ around 0,  we center each tree's distribution of $\lnL$ scores $\lnL\left(T_i|X^{\ast}\right)$ around 0 (we could choose any number to center the distributions around, but 0 is convenient).
+But rather than ``centering'' $\delta\left(\hat T,T_i|X^{\ast}\right)$ around 0,  we center each tree's distribution of $\lnL$ scores around 0 (we could choose any number to center the distributions around, but 0 is convenient).
+So for each tree we center the distribution of $\lnL\left(T_i|X^{\ast}\right)$ by subtracting the mean, $\bar{\lnL}\left(T_i|X^{\ast}\right)$, for that tree over all bootstraps replicates.
 
 To calculate the null distribution of the test statistic, we then look at the magnitude of the differences between a bootstrap replicate's ``centered'' $\lnL$ and the largest ``centered'' $\lnL$ over all trees.
 Using this difference from the largest value mimics the ``selection bias'' that is introduced by choosing to compare all of the trees to the best tree on the dataset at hand.
@@ -385,9 +389,9 @@ A more algorithmic description of the bootstrapping procedure would be:
 \subsubsection{SH Test on the primate dataset}
 Suppose that we were interested in the relationships among human, chimp, and gorilla; but we were unwilling to entertain the possibility that these three were not a monophyletic group.
 In this case we would have 3 candidate trees:\\
-$T_1$ = (((chimp, gorilla), human),orang,gibbon), and $\ln L(T_1|X) = -7363.296$\\
-$T_2$ = (((chimp, human), gorilla),orang,gibbon), and $\ln L(T_2|X) = -7361.707$\\
-$T_3$ = (((gorilla, human), chimp),orang,gibbon), and $\ln L(T_3|X) = -7362.609$\\
+{\color{blue} $T_1$} = (((chimp, gorilla), human),orang,gibbon), and $\ln L(T_1|X) = -7363.296$\\
+{\color{green} $T_2$} = (((chimp, human), gorilla),orang,gibbon), and $\ln L(T_2|X) = -7361.707$\\
+{\color{red} $T_3$} = (((gorilla, human), chimp),orang,gibbon), and $\ln L(T_3|X) = -7362.609$\\
 So $T_2$ is the ML tree, and the set of $\delta$ test statistics would be\par
 \begin{picture}(0,50)(0,-50)
 	  \put(160,0){\tiny$\delta(\hat{T},T_2|X)=0$}

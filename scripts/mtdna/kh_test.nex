@@ -5,8 +5,10 @@ Execute data.nex ;
 GetTrees file = tree1.tre mode = 3 ;
 GetTrees file = tree2.tre mode = 7 ;
 
+LScore / KHTest=RELL ; [ use RELL bootstrap to approximate the variance of delta]
+
+
 [LScore / KHTest=FullOpt ; [use full optimization parameters in each bootstrap]]
 
-LScore / KHTest=RELL ; [ use RELL bootstrap to approximate the variance of delta]
 
 LScore / KHTest=Normal ; [ use the assumption of normality and variance of site lnL to get the null distribution]
