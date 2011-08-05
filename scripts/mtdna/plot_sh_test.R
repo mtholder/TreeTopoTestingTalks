@@ -135,7 +135,7 @@ plot(x=c(uoffset, uoffset + uwidth), y=c(1/denom, 1/denom), type='l', lty=2,
      xlim=c(0, uwidth + 2*uoffset), 
      ylim=c(0, 1.1), axes=FALSE, ylab="", xlab="", main="")
 for (i in seq(num.to.plot)) {
-    text(0.02, 1 - i/denom, paste('boot', as.character(i), sep=' ') , col=colors[i])
+    text(0.02, 1 - i/denom, paste('boot', as.character(i), sep=' '))
     lines(c(uoffset, uoffset + uwidth), c(i/denom, i/denom), lty=2)
 }
 text(uoffset, 0, as.character(round(min.v, 1)))
