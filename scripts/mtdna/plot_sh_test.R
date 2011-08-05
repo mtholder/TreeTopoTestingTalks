@@ -46,7 +46,7 @@ bootstrap = function(lnLList, nreps) {
 }
 
 d = list(t$tree1, t$tree2, t$tree3
-        , t$tree4, t$tree5, t$tree6, t$tree7, t$tree8, t$tree9, t$tree10 , t$tree11 , t$tree12 , t$tree13 , t$tree14 , t$tree15
+    #    , t$tree4, t$tree5, t$tree6, t$tree7, t$tree8, t$tree9, t$tree10 , t$tree11 , t$tree12 , t$tree13 , t$tree14 , t$tree15
        )
 
 ntrees = length(d);
