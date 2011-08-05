@@ -405,6 +405,44 @@ So $T_2$ is the ML tree, and the set of $\delta$ test statistics would be\par
 \begin{wrapfigure}{r}{0.5\textwidth}
   \begin{center}
    \vspace{-40pt}
+    \includegraphics[width=0.48\textwidth]{../newimages/sh_test_uncentered_plots3.pdf}
+    \put(-200,10){\myFigLabel{figUncenteredSH3Counter}: SH Test uncentered $\lnL$ }
+    \includegraphics[width=0.48\textwidth]{../newimages/sh_test_centered_plots3.pdf}
+    \put(-180,10){\myFigLabel{figCenteredSH3Counter}: SH Test after centering}
+   \vspace{-0pt}
+   \vspace{-40pt}
+  \end{center}
+\end{wrapfigure}
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+   \vspace{-40pt}
+    \includegraphics[width=0.48\textwidth]{../newimages/sh_test_stat_plots3.pdf}
+    \put(-180,10){\myFigLabel{figSHTestStat3Counter}: SH Test draws from the null }
+   \vspace{-0pt}
+   \vspace{-20pt}
+  \end{center}
+\end{wrapfigure}
+The SH Test is difficult to represent in figures. 
+Figure \arabic{figUncenteredSH3Counter} shows the $\lnL$ values obtained 
+for {\color{blue} $T_1$},  {\color{green} $T_2$}, and  {\color{red} $T_3$} from the first 20 replicates of a RELL bootstrap; the vertical lines correspond to the
+mean $\lnL$ 
+If you look very closely (which would require zooming in on the pdf), you can see that
+{\color{green} $T_2$} has the highest $\lnL$ in most of the bootstrap replicates.
+This is not surprising, as it is also the tree with the highest $\lnL$ on unperturbed data.
+
+After centering the $\lnL$ values for each tree (Figure \arabic{figCenteredSH3Counter}) by 
+subtracting each tree's mean $\lnL$ over all bootstrap reps from each bootstrap value, we obtain a bootstrap estimate of the 
+distribution of $\lnL$ values under the null.
+
+Recall that our test statistic on the real data involved comparing the $\lnL$ of the ML tree to the $\lnL$ score for each tree in the candidate set.
+The SH Test mimics this by calculating the difference (for each bootstrap replicate) between the maximum centered $\lnL$ and the centered $\lnL$ for each tree.
+Each bootstrap replicate in the SH test provides an value of the test statistic for each tree that can be viewed as a draw from the null distribution of the $\delta$ test statistic for  that tree.
+By counting the proportion of draws from the null distribution that have a magnitude $\geq$ the magnitude of $\delta(\hat{T},T_i|X)$ we can approximate a \pvalue for each tree $i$ (in the figure the values as extreme as the observed $\delta$ are show with $\times$ symbols, and the draws from the null that are less extreme are shown as $+$).
+Note that the ML tree has a $\delta$ statistic of 0. Thus, all of the draws from the null are at least this extreme, and its \pvalue is always 1.0 (and we never reject the ML tree, of course).
+The \pvalue for $T_1 \approx 0.3$ and the \pvalue for $T_3 \approx 0.45$ according to the SH Test, so neither tree would be rejected.
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \begin{center}
+   \vspace{-40pt}
     \includegraphics[width=0.48\textwidth]{../newimages/sh_test_uncentered_plots.pdf}
     \put(-200,10){\myFigLabel{figUncenteredSHAllCounter}: SH Test uncentered $\lnL$ }
     \includegraphics[width=0.48\textwidth]{../newimages/sh_test_centered_plots.pdf}
@@ -422,7 +460,16 @@ So $T_2$ is the ML tree, and the set of $\delta$ test statistics would be\par
    \vspace{-20pt}
   \end{center}
 \end{wrapfigure}
-The SH Test is difficult to represent diagramatically.
+If our candidate set includes all 15 possible trees (rather than just the trees that have human, chimp, and gorilla as a clade), then we find the SH Test has lower power.
+The approximated \pvalues for $T_1$ and $T_3$ are then $0.69$ and  $0.78$ respectively.
+Figures \arabic{figUncenteredSHAllCounter} - \arabic{figSHTestStatAllCounter} show the SH procedure on the first twenty bootstrap replicates for all 15 trees.
+Even though the other 12 trees that are now in are candidate set do not have high likelihoods (compared to $T_1, T_2$, and $T_3$), including more trees in the candidate set weakens the test.
+
+The SH Test's centering of all of the bootstrapped $\lnL$ values around the same quantity (0) is conservative.
+After centering, even a tree with poor fit to the data can achieve the highest centered $\lnL$ score on a bootstrap replicate.
+Thus, adding more trees increases the values of the $\delta$ statistic that you would expect under the null. 
+This makes the test weaker (because the observed value has to be very extreme to fall in the tails of the broader null distribution).
+
 
 
 \newpage
