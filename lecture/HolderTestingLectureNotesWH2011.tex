@@ -33,6 +33,7 @@
 
 
 \renewcommand{\section}[2]{%
+\addcontentsline{toc}{section}{#2}
 \bigskip
 \begin{center}
 \begin{Large}
@@ -42,9 +43,11 @@
 \end{center}}
 
 \renewcommand{\subsection}[1]{%
+\addcontentsline{toc}{subsection}{#1}
 \noindent{\large\scshape \underline{#1}}:}
 
 \renewcommand{\subsubsection}[1]{%
+\addcontentsline{toc}{subsubsection}{#1}
 \noindent\textbf{#1}:}
 
 
@@ -70,8 +73,14 @@
 \newcounter{myFigCounter}
 \begin{document}
 \section*{Notes on frequentist topology testing (Woods Hole Workshop on Molecular Evolution, 2011)}
-Thanks to Joe Felsenstein for the use of images in the slides.
+{
+\parskip = -0.5mm
 
+\tableofcontents
+\parskip = 0.2in
+}
+\newpage
+Thanks to Joe Felsenstein for the use of images in the slides.
 \begin{quote}
 	We have two  trees that differ in their score. 
 	Let's say that tree 2's log-likelihood is 1.59 higher than the log-likelihood of tree 1 (the likelihoods have to be calculated on the same data set).
@@ -83,6 +92,8 @@ Thanks to Joe Felsenstein for the use of images in the slides.
 We will denote the log-likelihood on tree 1 as $\lnL(T_1|X)$ where $X$ represents the data.
 
 We will denote 2 times the difference in $\lnL$ as a delta test statistic: $$\delta(T_1,T_2|X) = 2\left[\ln L(T_1|X) - \ln L(T_2|X)\right]$$
+Many test rely on the $\delta$ test statistic, because (according to the \href{http://en.wikipedia.org/wiki/Neyman-Pearson_lemma}{Neyman-Pearson Lemma}) the a test using the likelihood ratio will result on the most powerful test.
+Having high statistical power means that you are able to reject the null hypothesis when it is false.
 
 \subsection{Notation}
 \begin{compactitem}
@@ -406,7 +417,7 @@ So $T_2$ is the ML tree, and the set of $\delta$ test statistics would be\par
   \begin{center}
    \vspace{-40pt}
     \includegraphics[width=0.48\textwidth]{../newimages/sh_test_uncentered_plots3.pdf}
-    \put(-200,10){\myFigLabel{figUncenteredSH3Counter}: SH Test uncentered $\lnL$ }
+    \put(-240,10){\myFigLabel{figUncenteredSH3Counter}: SH Test uncentered $\lnL$ for {\color{blue} $T_1$},  {\color{green} $T_2$}, {\color{red} $T_3$}}
     \includegraphics[width=0.48\textwidth]{../newimages/sh_test_centered_plots3.pdf}
     \put(-180,10){\myFigLabel{figCenteredSH3Counter}: SH Test after centering}
    \vspace{-0pt}
@@ -417,7 +428,7 @@ So $T_2$ is the ML tree, and the set of $\delta$ test statistics would be\par
   \begin{center}
    \vspace{-40pt}
     \includegraphics[width=0.48\textwidth]{../newimages/sh_test_stat_plots3.pdf}
-    \put(-180,10){\myFigLabel{figSHTestStat3Counter}: SH Test draws from the null }
+    \put(-200,10){\myFigLabel{figSHTestStat3Counter}: SH Test draws from the null }
    \vspace{-0pt}
    \vspace{-20pt}
   \end{center}
@@ -433,6 +444,7 @@ This is not surprising, as it is also the tree with the highest $\lnL$ on unpert
 After centering the $\lnL$ values for each tree (Figure \arabic{figCenteredSH3Counter}) by 
 subtracting each tree's mean $\lnL$ over all bootstrap reps from each bootstrap value, we obtain a bootstrap estimate of the 
 distribution of $\lnL$ values under the null.
+Bootstrap replicate is a case in which $T_2$ had the highest $\lnL$, but does not have the highest value after centering.
 
 Recall that our test statistic on the real data involved comparing the $\lnL$ of the ML tree to the $\lnL$ score for each tree in the candidate set.
 The SH Test mimics this by calculating the difference (for each bootstrap replicate) between the maximum centered $\lnL$ and the centered $\lnL$ for each tree.
@@ -440,6 +452,11 @@ Each bootstrap replicate in the SH test provides an value of the test statistic 
 By counting the proportion of draws from the null distribution that have a magnitude $\geq$ the magnitude of $\delta(\hat{T},T_i|X)$ we can approximate a \pvalue for each tree $i$ (in the figure the values as extreme as the observed $\delta$ are show with $\times$ symbols, and the draws from the null that are less extreme are shown as $+$).
 Note that the ML tree has a $\delta$ statistic of 0. Thus, all of the draws from the null are at least this extreme, and its \pvalue is always 1.0 (and we never reject the ML tree, of course).
 The \pvalue for $T_1 \approx 0.3$ and the \pvalue for $T_3 \approx 0.45$ according to the SH Test, so neither tree would be rejected.
+
+\subsubsection{Effect of using a larger candidate set of trees}
+In order to correct for the selection bias introduced by using the ML tree to calculate the $\delta$ test statistic, the SH Test must be given the set of trees that were considered during the search.
+Using all possible trees is a valid way to perform the test, but this leads to computational hurdles and a loss of statistical power.
+
 \begin{wrapfigure}{r}{0.5\textwidth}
   \begin{center}
    \vspace{-40pt}
@@ -460,16 +477,38 @@ The \pvalue for $T_1 \approx 0.3$ and the \pvalue for $T_3 \approx 0.45$ accordi
    \vspace{-20pt}
   \end{center}
 \end{wrapfigure}
-If our candidate set includes all 15 possible trees (rather than just the trees that have human, chimp, and gorilla as a clade), then we find the SH Test has lower power.
+Returning to the example of the primate mtDNA dataset, if our candidate set includes all 15 possible trees (rather than just the trees that have human, chimp, and gorilla as a clade), then we find the SH Test has lower power.
 The approximated \pvalues for $T_1$ and $T_3$ are then $0.69$ and  $0.78$ respectively.
 Figures \arabic{figUncenteredSHAllCounter} - \arabic{figSHTestStatAllCounter} show the SH procedure on the first twenty bootstrap replicates for all 15 trees.
 Even though the other 12 trees that are now in are candidate set do not have high likelihoods (compared to $T_1, T_2$, and $T_3$), including more trees in the candidate set weakens the test.
 
+
 The SH Test's centering of all of the bootstrapped $\lnL$ values around the same quantity (0) is conservative.
 After centering, even a tree with poor fit to the data can achieve the highest centered $\lnL$ score on a bootstrap replicate.
+By including more trees, the maximum value after centering tends to be larger (the largest of 15 random draws is probably going to be larger than the largest of 3 random draws).
 Thus, adding more trees increases the values of the $\delta$ statistic that you would expect under the null. 
 This makes the test weaker (because the observed value has to be very extreme to fall in the tails of the broader null distribution).
 
+You might think that it is safe to exclude a tree, $T_x$, from the candidate set if you are confident that it will be rejected by the test (for example, if it has a $\lnL$ score that is 100 units worse than the ML tree).
+While you may be correct that a tree with a huge $\lnL$ difference {\em will} be rejected by the SH test, it is still not ``safe'' to cull such trees from your candidate set.
+By excluding such a tree, you may artificially lower the value of the $\delta\left(\hat{T}, T_i|X^{(j)}\right)$ for any bootstrap replicate in which the centered $\lnL$ for $T_x$ is the maximimum value. 
+Even if $T_x$ has a horrible $\lnL$ on the unperturbed dataset, it could have the maximum {\em centered} value.
+
+In principle, if you have a large candidate set of trees you should be able to exclude trees that have:
+\begin{compactenum}
+	\item very low $\lnL$ values (because they will be rejected), {\em and}
+	\item unusually low variance in per site $\lnL$ (even after centering, a distribution of scores with small variance is unlikely to contribute the maximum value of centered $\lnL$ in any bootstrap).
+\end{compactenum}
+It is not clear if such trees can be identified, so this idea has not been pursued.
+
+\subsection{Performing the SH test in PAUP}
+\begin{verbatim}
+GetTrees file = candidate.tre mode = 3 ;
+LScore / SHTest=RELL ;
+\end{verbatim}
+
+\subsection{Summary of the SH Test}
+The SH Test is a version of the KH Test that is appropriate to use when you have more than two candidate trees that you would like to test.
 
 
 \newpage
