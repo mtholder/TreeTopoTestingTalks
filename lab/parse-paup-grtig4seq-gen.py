@@ -38,5 +38,5 @@ if line.startswith('Shape'):
     line = log_file.next()
 else:
     shape = 'inf'
-param_list = [shape, pinv] + rmat + base_freqs
-print 'seq-gen -mGTR -a%s -i%s -r %s %s %s %s %s %s -f %s %s %s %s' % tuple(param_list)
+param_list = [shape, pinv] + rmat + base_freqs + [' '.join(sys.argv[2:])]
+print 'seq-gen -mGTR -a%s -i%s -r %s %s %s %s %s %s -f %s %s %s %s %s' % tuple(param_list)
