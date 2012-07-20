@@ -7,11 +7,17 @@ simulation to construct a null distribution for a phylogenetic hypothesis.
 == Background on the Dataset  ==
 
 In this lab, we will use a dataset [http://phylo.bio.ku.edu/slides/data/algae.nex algae.nex].
-It contains 16S rRNA sequences for a cyanobacterium (''Anacystis''), a chromophyte alga (''Olithodiscus''), a euglenoid protist (''Euglena''), and six green plants, including two green algae (''Chlorella'' and ''Chlamydomonas''), a liverwort (''Marchantia''), a monocotyledonous angiosperm (''Oryza'', rice) and a dicotyledonous angiosperm (''Nicotiana'', tobacco). 
+It contains 16S rRNA sequences for a cyanobacterium (''[http://eol.org/pages/916452/overview Anacystis]''), a chromophyte alga (''[http://eol.org/pages/901701/overview Olithodiscus]''), a euglenoid protist (''[http://eol.org/pages/11704/overview Euglena]''), and six green plants, including two green algae (''Chlorella'' and ''[http://eol.org/pages/11591/overview Chlamydomonas]''), a liverwort (''[http://eol.org/pages/73295/overview Marchantia]''), a monocotyledonous angiosperm ([http://eol.org/pages/108188/overview rice]) and a dicotyledonous angiosperm ([http://eol.org/pages/581050/overview tobacco]). 
 
-This data set was used in a 1994 paper by Lockhart et al. to show how common models used in reconstructing phylogenies fail when confronted by convergence in nucleotide composition. The problem is that the common models assume stationarity of the substitution process, which leads to the assumption that base frequencies do not change across the tree. Thus, things can go wrong when the base frequencies do change from lineage to lineage, and things can go really wrong when unrelated groups tend to have similar base compositions. In this case, ''Euglena'' should group with the green plants because its chloroplast (whence the 16S rDNA is obtained) is homologous to green plant chloroplasts. However, as you will see, it has a strong tendency to group with the unrelated chromophyte ''Olithodiscus'' because of similarities in base composition. The complete reference to the Lockhart paper is
+This data set was used in a 1994 paper by Lockhart et al. to show how common models used in reconstructing phylogenies fail when confronted by convergence in nucleotide composition. The problem is that the common models assume stationarity of the substitution process, which leads to the assumption that base frequencies do not change across the tree. Thus, things can go wrong when the base frequencies do change from lineage to lineage, and things can go really wrong when unrelated groups tend to have similar base compositions.
+
+In this case, all of the species except ''Olithodiscus'' and ''Anacystis'' have chlorophyll ''a/b'' and are strongly suspected to be a monophyletic group.  However, as you will see, ''Euglena'' has a strong tendency to group with the unrelated chromophyte ''Olithodiscus'' because of similarities in base composition. 
+
+The complete reference to the Lockhart paper is
 [http://mbe.oxfordjournals.org/content/11/4/605.citation Lockhart, P. J., M. A. Steel, M. D. Hendy, and D. Penny. 1994. "Recovering evolutionary trees under a more realistic model of sequence evolution". ''Molecular Biology and Evolution'' '''11''': 605-612.]
 
+
+== Null hypothesis  ==
 For the purpose of the lab we will use the null hypothesis that there is a branch separating  ''Anacystis'' and ''Olithodiscus'' from the rest of the taxa.
 
 == Parametric Bootstrapping Background  ==
@@ -35,67 +41,63 @@ parsimony scores, ''etc''.
 1. Download [http://phylo.bio.ku.edu/slides/data/algae.nex algae.nex]
 
 2. Find the score of the most parsimonious tree using PAUP.  
-Because this is a small dataset, you can use the <code>AllTrees fd=bar</code> 
+Because this is a small dataset, you can use the <pre>AllTrees fd=bar</pre> 
 command to see all the scores of all the trees.
-:* How many most parsimonious trees are there?
-:* How many steps are required to explain the data?
+:* How many most parsimonious trees are there? {{title|2|answer}}
+:* What is the parsimony score of the most parsimonious tree(s)? {{title|411 steps|answer}}
 
-3. Use the <code>boot</code> command calculate the bootstrap proportions and display the majority-rule consensus tree from the bootstrapping analyses.
-:* What is the bootstrap support for the split that represents our null hypothesis? If that split is not supported by the data, then it will not be on the majority-rule tree  but it should be listed in the split frequency table.
-
+3. Use the <pre>boot</pre> command to calculate the bootstrap proportions and display the majority-rule consensus tree from the bootstrapping analyses.
 
 
 
-4. Specify ''Olithodiscus'' as the outgroup (use the <code>Outgroup</code> command). Does the tree display the chlorophyll ''a/b'' clade ?
+4. Does the bootstrap  tree display the chlorophyll ''a/b'' clade (a clade of all of the species except ''Anacystis'' and ''Olithodiscus'')? {{title|No|answer}}
 
-You can use <code>ShowTrees all</code> to see all of the trees in memory (note that the <code>AllTrees</code> command scores every tree, but does not retain all of the trees in memory.  It will only retain the best trees according to the criterion).
+What is the bootstrap support for the split that represents our null hypothesis? If that split is not supported by the data, then it will not be on the majority-rule tree  but it should be listed in the split frequency table. {{title|Typically the bootstrap support is around 25 percent|answer}}
 
-5. Now we need to find the best scoring tree that is consistent with our null hypothesis.
-So we want to find the best-scoring tree that has a clade of ''Euglena'', ''Chlorella'', ''Chlamydomonas'', ''Marchantia'', Rice, and Tobacco excluding ''Anacystis nidulans'' and ''Olithodiscus''. We can do this in a number of ways.
-For a small dataset (like this one), we could:
-:# get all of the trees in memory,
-:# use PAUP's <code>Filter</code> command to remove trees that do not have the group from memory, and
-:#  use the <code>SortTrees</code> command to find the best score among all of the trees that are left.
+You can use <pre>ShowTrees all</pre> to see all of the trees in memory (note that the <code>AllTrees</code> command scores every tree, but does not retain all of the trees in memory.  It will only retain the best trees according to the criterion).
 
-We are going to use a more generic approach.
-It is an approach that you could use even on a large dataset.
-We will tell PAUP to do a search but also impose a topological constraint. The first step is to tell PAUP to use the constraint. The command to do this is
-<pre>Constraints ab (MONOPHYLY) = newick_description_here</pre>
-In the place of "newick_description_here" you should put the parenthetical notation for a tree that has just the clade that you would like to constrain.
+5. Now we need to find the best scoring tree that is consistent with our null hypothesis.  In other words, we want to find the best-scoring tree that has a clade of ''Euglena'', ''Chlorella'', ''Chlamydomonas'', ''Marchantia'', Rice, and Tobacco excluding ''Anacystis nidulans'' and ''Olithodiscus''. We can do this in a number of ways. 
+
+We will tell PAUP to do a search for the best tree that satisfies a topological constraint. 
+:* The first step is to write a file with a NEXUS trees block and a tree the contains only one branch. In a text editor, create a new file with the following contents:
+<pre>
+#NEXUS
+begin trees ;
+    Tree ab = [&U](Anacystis_nidulans,Olithodiscus,(Euglena, Chlorella, Chlamydomonas, Marchantia, Rice, Tobacco));
+end;
+</pre>
 The name of the constraint tree can be any NEXUS word that you like; in this example <code>ab</code> will be the name of the constraint tree.
+When you are dealing with large numbers of taxa and complex constraints it is often helpful to construct the constraint tree in [http://mesquiteproject.org/mesquite/mesquite.html Mesquite], save it to a file, and then read it into PAUP using the <code>LoadConstr</code> command.
 
-See if you can compose the command for a constraint tree called 'ab' that represents our null hypothesis: a branch separating ''Anacystis nidulans'' and ''Olithodiscus'' from the rest of the species.
-Use the taxa names (rather than taxa numbers) to define constraint. Note that you will have to use '''Anacystis_nidulans''' rather than '''Anacystis nidulans''' so that PAUP does not get confused by the space in the taxon name.
+:* Save the file as <code>abconstraint.tre</code> in the same directory as the <code>algae.nex</code> directory.
+:*  To get PAUP to read the constraint into memory, use the <pre>LoadConstr file=abconstraint.tre</pre>  command.
 
-6. Use the <code>ShowConstr</code> command to see the constraint tree that you have defined and make sure that it looks right?
-
-Note that you can also load a constraint from a tree file using the <code>LoadConstr</code> command. When you are dealing with large numbers of taxa and complex constraints it is often helpful to construct the constraint tree in [http://mesquiteproject.org/mesquite/mesquite.html Mesquite], save it to a file, and then read it into PAUP using the <code>LoadConstr</code> command.
+6. Use the <code>ShowConstr</code> command to see the constraint tree that you have defined and make sure that it is the constraint that you intended.
 
 
 7. Now we will conduct a branch-and-bound search that honors the constraint tree that we have just defined:
 <pre>BAndB enforce constraints=ab </pre>
 The <code>enforce</code> keyword tells paup to only consider trees that meet a constraint, and the <code>constraints=ab</code> keyword tell PAUP which tree to use as a constraint. 
 Note that you can also use constraints with the <code>HSearch</code> command of PAUP (and you will need to do this for bigger datasets). 
-What has the parsimony score of the best tree compatible with the constraint? 
+What has the parsimony score of the best tree compatible with the constraint? {{title|4|answer}}
 
-8. Use the <code>ShowTrees</code> command to see the tree. Does it satisfy the constraint? 
+8. Use the <code>ShowTrees</code> command to see the tree. Does it satisfy the constraint? (it should).
 
-9. Use the <code>SaveTrees</code> to save this tree to a file in case you need it later.
-
+9. Use the <code>SaveTrees file=bestconstrained.tre</code> to save this tree to a file in case you need it later.
 
 == Hypothesis testing ==
 
 As our test statistic, we will use the difference in parsimony score between the best (unconstrained) tree and the best tree that satisfies our null hypothesis. 
 
-1. '''What is the value of the test statistic for our data?'''  Write this answer down somewhere. You'll need it later.
+1. '''What is the value of the test statistic for our data?'''  {{title|4|answer}}
 
 
-To interpret the value of the test statistic we need to have some ideas what range of values would be produced if the null hypothesis were true. 
+To interpret the value of the test statistic we need to have some idea the range of values would be produced ''if the null hypothesis were true''. 
 This is can be tricky.
 For one thing, there are lots of trees that are compatible with the null hypothesis.
 It seems logical to take the tree from the constrained search as the tree to repersent the null hypothesis.
-After all, among all of the trees compatible with the data it is the one that best explains the data (according to parsimony).
-(technically speaking this procedure of choosing a tree to represent the null does not guarantee that we are testing from the "least favorable conditions" as we should in hypothesis testing - but using this tree seems good enough, and it is practical).
+After all, among all of the trees compatible with the constraint, it is the one that best explains the data (according to parsimony).
+Technically speaking this procedure of choosing a tree to represent the null does not guarantee that we are testing from the "least favorable conditions" as we should in hypothesis testing - but using this tree seems good enough, and it is practical.
 
 Even if we are satisfied about the choice of a tree that represents the best the null can do, we still have to have a way to find out what the distribution of the test statistic would be if this null were true.
 We will use Monte Carlo simulations for this.
@@ -108,7 +110,7 @@ We can compare our real data to that.
 To simulate data, Seq-Gen needs a fully-specified model and a tree with branch lengths.
 We can use the tree that we found in the constrained search and the GTR+I+G model to get the necessary input.
 
-1. Assuming that you have not quit PAUP and the tree found in the constrained search is still in memory:
+1. Assuming that you have not quit PAUP and the tree found in the constrained search is still in memory, then we can save it with branch lengths that maximize the likelihood under the GTR+I+G model:
 <pre>
 Set crit = like;
 LSet nst=6 rmat=est basefreq=est rates = gamma shape = est pinv=est;
@@ -116,8 +118,7 @@ LScore;
 SaveTrees file = model.tre brlens format=altnexus;
 </pre>
 Make sure that you understand these commands (ask an instructor if you have questions).
-From the standard output of PAUP you should have the model parameter values for the simulation. 
-
+From the output of PAUP you should have the model parameter values for the simulation.
 
 2. Copy the PAUP output with the parameter estimates, and paste the output into a file
 
@@ -126,7 +127,7 @@ Does the tree have taxa names in the newick representation instead of taxon numb
 
 Unfortunately, seq-gen does not understand NEXUS tree files.
 
-4. Save just the newick tree from the file to a new file called '''model.txt''' or you can download this version of [http://phylo.bio.ku.edu/slides/model.txt model.txt].
+4. Cut just the newick tree (the parenthetical description of the tree) from the file to a new file called '''model.txt''' or you can download this version of [http://phylo.bio.ku.edu/slides/model.txt model.txt].
 If you are a UNIX geek, you do this by quitting paup and issuing the command:
 <pre>cat model.tre | grep PAUP_1 | awk '{print $5}' > model.txt</pre>
 Non-geeks tend to prefer opening '''model.tre''', copying the newick string, and saving it to a '''model.txt''' file.
@@ -164,6 +165,8 @@ end;
 <pre>seq-gen -mGTR -a0.6 -i0.32 -r 0.6 2.1 0.3 0.2 5 1 -f 0.27 0.20 0.30 0.23 -l920 -n1000 -on -xdefpaup.nex model.txt > simdata.nex
 </pre>
 Use the parameter values that you got from PAUP's <code>LScore</code> to construct a similar command and run it.
+<br>
+Note: In the Windows executable version of the program, the syntax of the command line is somewhat different. The rate matrix will be specified as <code>-r0.6,2.1,0.3,0.2,5,1 </code> and the base frequencies as <code>-f0.27,0.20,0.30,0.23</code>. You will also need to direct the treefile to seq-gen by inserting a '''<''' before the filename. In the case above, the end part of the command will read <code>-xdefpaup.nex < model.txt > simdata.nex</code> <br>
 
 5. Open '''simdata.nex''' in a text editor. Do you see the content of the '''defpaup.nex''' file?
 
