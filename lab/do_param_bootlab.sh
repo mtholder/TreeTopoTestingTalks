@@ -108,3 +108,27 @@ then
     echo "Executing the master.nex command file in PAUP*..."
     paup -n master.nex
 fi
+
+if ! test -f summarizePaupLengthDiffs.py
+then
+    echo "Grab a python script to parse the output..."
+    wget http://phylo.bio.ku.edu/slides/lab6-Simulation/summarizePaupLengthDiffs.py
+fi
+
+if ! test -f diffs.txt
+then
+    echo "Parse the output from running the simulations..."
+    python summarizePaupLengthDiffs.py sim.log > diffs.txt
+fi
+
+if ! test -f plot_diffs.R
+then
+    echo "Grab an R script to create a histogram of the ..."
+    wget http://phylo.bio.ku.edu/slides/lab6-Simulation/plot_diffs.R
+fi
+
+if ! test -f null_distribution_pscore_diffs.pdf
+then
+    echo "Use R to create a histogram..."
+    R --file=plot_diffs.R --args 4
+fi
