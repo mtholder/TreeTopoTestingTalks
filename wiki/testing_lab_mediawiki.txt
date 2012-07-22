@@ -1,8 +1,32 @@
-This lab was adopted from one written by [[Paul Lewis]]. Thanks, Paul!
+= Pointers to other topology testing techniques =
+The lecture mentions several tests that we are not going to run through in detail in the lab.
 
+You will find <code>KHTest</code>, <code>SHTest</code>, and <code>AUTest</code> options in PAUP's <code>LScore</code> command.
+Using <code>LScore</code> command is the easiest way to conduct these tests.
+Let us know if you have any questions about running these tests.
+
+You can run these tests and compare the results from those tests your results from the parametric bootstrapping.
+
+Other software relevant to the testing lecture:
+* [http://www.atgc-montpellier.fr/phyml/ PhyML] aLRT and aBayes statistics, in particular.
+* [http://wwwkramer.in.tum.de/exelixis/software.html RAxML] Rapid bootstrapping
+* [http://www.is.titech.ac.jp/~shimo/prog/consel/ Consel] AU Test, SH Test, Weighted SH Test, KH Test, Bootstrap
+* [http://www.mathstat.dal.ca/tsusko/software.cgi  Ed Susko's software page] (software from Susko, E. (2010) and Susko, E. (2006) papers is of particular relevance to the tree testing lecture).
+ 
+
+= Parametric Bootstrapping Lab =
 The goal of this lab exercise is to show you how to conduct use Monte Carlo 
-simulation to construct a null distribution for a phylogenetic hypothesis.
+simulation to construct a null distribution for a phylogenetic hypothesis. 
+This type of parametric bootstrapping is not a trivial analysis, so there are several steps (and we've included a script in case you want a more automated way of completing the analysis.
 
+The easiest way to run all of the steps in the lab (via a script) is to download [http://phylo.bio.ku.edu/slides/param_boot_lab.zip param_boot_lab.zip], uncompress it, <code>cd</code> into the unzipped directory, and run the <code>do_param_bootlab</code> script. From a UNIX prompt (preferably on the workshop's cluster), you can do all of this by typing: 
+<pre>wget http://phylo.bio.ku.edu/slides/param_boot_lab.zip
+unzip param_boot_lab.zip
+cd param_boot_lab
+sh do_param_bootlab.sh
+</pre>
+
+However, just running the script is probably not going to help you understand the steps. I recommend that you work through the lab until at least step 16 before you resort to running the script.
 
 == Background on the Dataset  ==
 
@@ -241,22 +265,8 @@ histogram and the approximate ''p'' value.
 = The end =
 Was the observed difference in this tail of the null distribution? and would you reject the null hypothesis?
 
-= The postscript =
-You will find <code>KHTest</code>, <code>SHTest</code>, and <code>AUTest</code> options in PAUP's <code>LScore</code> command.
-Using <code>LScore</code> command is the easiest way to conduct these tests.
-Let us know if you have any questions about running these tests.
 
-You can run these tests and compare the results from those tests your results from the parametric bootstrapping.
-
-Other software relevant to the testing lecture:
-* [http://www.atgc-montpellier.fr/phyml/ PhyML] aLRT and aBayes statistics, in particular.
-* [http://wwwkramer.in.tum.de/exelixis/software.html RAxML] Rapid bootstrapping
-* [http://www.is.titech.ac.jp/~shimo/prog/consel/ Consel] AU Test, SH Test, Weighted SH Test, KH Test, Bootstrap
-* [http://www.mathstat.dal.ca/tsusko/software.cgi  Ed Susko's software page] (software from Susko, E. (2010) and Susko, E. (2006) papers in particular).
- 
-
-
-==== Alternative (geeky way) of running step 20 ====
+= postscript: An alternative (geeky) way of running step 20 =
 If you find it unsatisfying to run a pre-packaged script in step 20 to parse the output of the simulated data, you can try to write a quick parser.
 
 This is a step by step instruction of how to construct a simple workflow using UNIX "pipes". We are going to connect the output of one process (process = running program) to the input of another process. This is done with a "pipe" between the processes. From our shell, this is done with the <code>|</code> symbol.

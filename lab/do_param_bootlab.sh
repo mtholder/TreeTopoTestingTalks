@@ -1,14 +1,5 @@
 #!/bin/bash
 ################################################################################
-# Set up the environment to know where paup, seg-gen, etc are.  (MBL computers only
-##########
-if ! which paup > /dev/null
-then
-    echo "Adding bioware tools to path..."
-    module load bioware || exit 1
-fi
-
-################################################################################
 # Get the dataset
 ##########
 if ! test -f algae.nex
