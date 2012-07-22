@@ -9,23 +9,23 @@ then
     echo "Downloading algae.nex..."
     wget http://phylo.bio.ku.edu/slides/data/algae.nex || exit 1
 fi
-if ! test -f abconstraint.tre
+if ! test -f step5.abconstraint.tre
 then
-    echo "Writing the constraint tree in abconstraint.tre file..."
+    echo "Writing the constraint tree in step5a.abconstraint.tre file..."
     echo "#NEXUS
 begin trees ;
     Tree ab = [&U](Anacystis_nidulans,Olithodiscus,(Euglena, Chlorella, Chlamydomonas, Marchantia, Rice, Tobacco));
 end;
-" > abconstraint.tre
+" > step5.abconstraint.tre
 fi
 
-if ! test -f runrealdata.nex
+if ! test -f step7-11.realdatacmds.nex
 then
-    echo "Composing the runrealdata.nex command file..."
+    echo "Composing the step7-11.realdatacmds.nex command file..."
     echo "#NEXUS
-Log start file=reallog.txt ; 
+Log start file = 'steps7-11.realdatalog.txt' ; 
 Execute algae.nex ; 
-LoadConstr file=abconstraint.tre;
+LoadConstr file=step5.abconstraint.tre;
 BAndB noenforce ; 
 PScore;
 BAndB enforce constraints=ab ; 
@@ -33,21 +33,21 @@ PScore ;
 Set crit = like;
 LSet nst=6 rmat=est basefreq=est rates = gamma shape = est pinv=est;
 LScore / ScoreFile=modelparams.txt ;
-SaveTrees file = model.tre brlens format=altnexus;
-" > runrealdata.nex
+SaveTrees file = step11.model.tre brlens format=altnexus;
+" > steps7-11.realdatacmds.nex
 fi
 
-if ! test -f reallog.txt
+if ! test -f steps7-11.realdatalog.nex
 then
-    echo "Executing the runrealdata.nex command file in PAUP*..."
-    paup -n runrealdata.nex
+    echo "Executing the steps7-11.runrealdata.nex command file in PAUP*..."
+    paup -n steps7-11.realdatacmds.nex
 fi
 
 
-if ! test -f model.txt
+if ! test -f step13.model.txt
 then
     echo "Grabbing the newick string for the tree out of the NEXUS file..."
-    cat model.tre | grep PAUP_1 | awk '{print $5}' > model.txt
+    cat step11.model.tre | grep PAUP_1 | awk '{print $5}' > step13.model.txt
 fi
 
 if ! test -f defpaup.nex
@@ -55,7 +55,7 @@ then
     echo "Creating the defpaup.nex to be executed by every simulated data set ..."
     echo "
 begin paup;
-	execute run.nex;
+	execute step18.run.nex;
 end;
 " > defpaup.nex
 fi
@@ -69,7 +69,7 @@ fi
 if ! test -f seqgen-command.sh
 then
     echo "Composing a seqgen command for these data"
-    python parse-paup-grtig4seq-gen.py reallog.txt -l920 -n1000 -on -xdefpaup.nex model.txt '>simdata.nex'> seqgen-command.sh || exit 1
+    python parse-paup-grtig4seq-gen.py steps7-11.realdatalog.txt -l920 -n1000 -on -xdefpaup.nex step13.model.txt '>simdata.nex'> seqgen-command.sh || exit 1
 fi
 
 if ! test -f simdata.nex
@@ -78,48 +78,37 @@ then
 fi
 
 
-if ! test -f run.nex
+if ! test -f step18.run.nex
 then
-    echo "Composing the run.nex file to be executed by each simulation replicate"
+    echo "Composing the step18.run.nex file to be executed by each simulation replicate"
     echo "#NEXUS
 BAndB;
 [!****This is the best tree's score****]
 PScore;
-GetTrees file = model.tre;
+GetTrees file = step11.model.tre;
 [!####This is the true tree's score####]
-PScore;" > run.nex
+PScore;" > step18.run.nex
 
 fi
 
 
-if ! test -f master.nex
+if ! test -f step19.master.nex
 then
-    echo "Composing the master.nex file to be launch the analyses of the simulated data"
+    echo "Composing the step19.master.nex file to be launch the analyses of the simulated data"
     echo "#NEXUS
-Log start replace file=sim.log;
+Log start replace file=step19.sim.log;
 Set noQueryBeep noerrorBeep  noWarnReset noWarnTree noWarnTSave;
 Execute simdata.nex;
 Log stop;
-"> master.nex
+"> step19.master.nex
 fi
 
-if ! test -f sim.log
+if ! test -f step19.sim.log
 then
-    echo "Executing the master.nex command file in PAUP*..."
-    paup -n master.nex
+    echo "Executing the step19.master.nex command file in PAUP*..."
+    paup -n step19.master.nex
 fi
 
-if ! test -f summarizePaupLengthDiffs.py
-then
-    echo "Grab a python script to parse the output..."
-    wget http://phylo.bio.ku.edu/slides/lab6-Simulation/summarizePaupLengthDiffs.py
-fi
-
-if ! test -f diffs.txt
-then
-    echo "Parse the output from running the simulations..."
-    python summarizePaupLengthDiffs.py sim.log > diffs.txt
-fi
 
 if ! test -f plot_diffs.R
 then
@@ -131,4 +120,17 @@ if ! test -f null_distribution_pscore_diffs.pdf
 then
     echo "Use R to create a histogram..."
     R --file=plot_diffs.R --args 4
+    echo "The file null_distribution_pscore_diffs.pdf should contain a histogram of the null distribution"
+fi
+
+if ! test -f summarizePaupLengthDiffs.py
+then
+    echo "Grab a python script to parse the output..."
+    wget http://phylo.bio.ku.edu/slides/lab6-Simulation/summarizePaupLengthDiffs.py
+fi
+
+if ! test -f step20.diffs.txt
+then
+    echo "Parse the output from running the simulations..."
+    python summarizePaupLengthDiffs.py step19.sim.log > step20.diffs.txt
 fi

@@ -76,7 +76,9 @@ When you are dealing with large numbers of taxa and complex constraints it is of
 
 
 7. Now we will conduct a branch-and-bound search that honors the constraint tree that we have just defined:
-<pre>BAndB enforce constraints=ab </pre>
+<pre>Log start file = 'steps7-11.realdatalog.txt' ; 
+BAndB enforce constraints=ab
+</pre>
 The <code>enforce</code> keyword tells paup to only consider trees that meet a constraint, and the <code>constraints=ab</code> keyword tell PAUP which tree to use as a constraint. 
 Note that you can also use constraints with the <code>HSearch</code> command of PAUP (and you will need to do this for bigger datasets). 
 What has the parsimony score of the best tree compatible with the constraint? {{title|4|answer}}
@@ -89,7 +91,7 @@ What has the parsimony score of the best tree compatible with the constraint? {{
 
 As our test statistic, we will use the difference in parsimony score between the best (unconstrained) tree and the best tree that satisfies our null hypothesis. 
 
-1. '''What is the value of the test statistic for our data?'''  {{title|4|answer}}
+10. '''What is the value of the test statistic for our data?'''  {{title|4|answer}}
 
 
 To interpret the value of the test statistic we need to have some idea the range of values would be produced ''if the null hypothesis were true''. 
@@ -110,7 +112,7 @@ We can compare our real data to that.
 To simulate data, Seq-Gen needs a fully-specified model and a tree with branch lengths.
 We can use the tree that we found in the constrained search and the GTR+I+G model to get the necessary input.
 
-1. Assuming that you have not quit PAUP and the tree found in the constrained search is still in memory, then we can save it with branch lengths that maximize the likelihood under the GTR+I+G model:
+11. Assuming that you have not quit PAUP and the tree found in the constrained search is still in memory, then we can save it with branch lengths that maximize the likelihood under the GTR+I+G model:
 <pre>
 Set crit = like;
 LSet nst=6 rmat=est basefreq=est rates = gamma shape = est pinv=est;
@@ -120,25 +122,22 @@ SaveTrees file = model.tre brlens format=altnexus;
 Make sure that you understand these commands (ask an instructor if you have questions).
 From the output of PAUP you should have the model parameter values for the simulation.
 
-2. Copy the PAUP output with the parameter estimates, and paste the output into a file
+12. Look at the tree file. You should see a newick string representing a tree with branch lengths. You can use a text editor to see the newick representation. Or you can use FigTree to see a graphical representation of the tree.
 
-3. Look at the tree file. You should see a newick string representing a tree with branch lengths. 
-Does the tree have taxa names in the newick representation instead of taxon numbers? 
 
-Unfortunately, seq-gen does not understand NEXUS tree files.
 
-4. Cut just the newick tree (the parenthetical description of the tree) from the file to a new file called '''model.txt''' or you can download this version of [http://phylo.bio.ku.edu/slides/model.txt model.txt].
+13. Unfortunately, seq-gen does not understand NEXUS tree files. Cut just the newick tree (the parenthetical description of the tree) from the file to a new file called '''model.txt''' or you can download this version of [http://phylo.bio.ku.edu/slides/model.txt model.txt].
 If you are a UNIX geek, you do this by quitting paup and issuing the command:
 <pre>cat model.tre | grep PAUP_1 | awk '{print $5}' > model.txt</pre>
-Non-geeks tend to prefer opening '''model.tre''', copying the newick string, and saving it to a '''model.txt''' file.
+Non-geeks tend to prefer opening '''model.tre''', copying the newick string, and saving it to a '''step13.model.txt''' file.
 
 === Invoking seq-gen ===
 
-1. Download [http://tree.bio.ed.ac.uk/software/seqgen/ Seq-Gen]
+Seq-Gen is installed on the workshop's cluster. If you are running the exercise on a machine that does not have seq-gen, you'll need to download [http://tree.bio.ed.ac.uk/software/seqgen/ Seq-Gen] and install it.
 
-2. Drag the seq-gen executable to the directory that you are using for this lab (or add it to your <code>PATH</code> environmental variable that tells your shell where to find executables [[Computer_lab_introduction#Adding_a_directory_to_the_path| notes here]])
+To install, you'll need to drag the seq-gen executable to the directory that you are using for this lab (or add it to your <code>PATH</code> environmental variable that tells your shell where to find executables [[Computer_lab_introduction#Adding_a_directory_to_the_path| notes here]])
 
-3. To see the options for seq-gen use the command
+14. To see the options for seq-gen use the command
 <pre>seq-gen -h</pre>
 To make sure everything is working do a simple test run using the HKY model:
 <pre>seq-gen -mHKY model.txt</pre>
@@ -153,31 +152,35 @@ The simulation used it default parameter values for the HKY model. We'd like to 
 : <code>-n1000</code> to generate 1000 datasets
 : <code>-on</code> to request output in the NEXUS format
 : <code>-xdefpaup.nex</code> to tell it the name of a file with text input to be inserted between each dataset.
-Finally we'll want to redirect the output to file using the : '''>''' redirection operator (Remember that this will overwrite whatever filename you put after the '''>''' character!). We have to do one more thing before running seq-gen.
-Save the following lines to a file called '''defpaup.nex''':
+Finally we'll want to redirect the output to file using the : '''>''' redirection operator (Remember that this will overwrite whatever filename you put after the '''>''' character!). 
+
+15. Take a look at the '''defpaup.nex''' that is included in the lab. It should contain the following lines.
 <pre>
 begin paup;
 	execute run.nex;
 end;
 </pre>
+the <code>-xdefpaup.nex</code> option to seq-gen will insert the contents of defpaup.nex in between each data set.
 
-4. Run seq-gen.  The invocation should be something like the command below (but with the parameter estimates for this dataset filled in the appropriate spots):
+By putting the correct commands in a file called step18.run.nex
+
+16. Run seq-gen.  The invocation should be something like the command below (but with the parameter estimates for this dataset filled in the appropriate spots):
 <pre>seq-gen -mGTR -a0.6 -i0.32 -r 0.6 2.1 0.3 0.2 5 1 -f 0.27 0.20 0.30 0.23 -l920 -n1000 -on -xdefpaup.nex model.txt > simdata.nex
 </pre>
 Use the parameter values that you got from PAUP's <code>LScore</code> to construct a similar command and run it.
 <br>
 Note: In the Windows executable version of the program, the syntax of the command line is somewhat different. The rate matrix will be specified as <code>-r0.6,2.1,0.3,0.2,5,1 </code> and the base frequencies as <code>-f0.27,0.20,0.30,0.23</code>. You will also need to direct the treefile to seq-gen by inserting a '''<''' before the filename. In the case above, the end part of the command will read <code>-xdefpaup.nex < model.txt > simdata.nex</code> <br>
 
-5. Open '''simdata.nex''' in a text editor. Do you see the content of the '''defpaup.nex''' file?
+17. Open '''simdata.nex''' in a text editor. Do you see the content of the '''defpaup.nex''' file?
 
 === Running PAUP on the simulated data===
 
-Now we have 1000 datasets. How are we going to analyze them all? Fortunately we have the PAUP command <code>execute run.nex</code> intercalated between each data set. 
-If we put the commands that we want PAUP to execute in the '''run.nex''' file then those commands will be executed for each dataset.
+Now we have 1000 datasets. How are we going to analyze them all? Fortunately we have the PAUP command <code>execute step18.run.nex</code> intercalated between each data set. 
+If we put the commands that we want PAUP to execute in the '''step18.run.nex''' file then those commands will be executed for each dataset.
 
-What do we want to do for each dataset? Well we want to see the difference in score that we get between the true tree and the preferred (most-parsimonious) tree. This will give us a distribution on the amount of spurious support we could get for a tree because of sampling error (or even systematic error.
+What do we want to do for each dataset? We want to see the difference in score that we get between the true tree and the preferred (most-parsimonious) tree. This will give us a distribution on the amount of spurious support we could get for a tree because of sampling error (or even systematic error.
 
-Save the following commands to the '''run.nex''' file:
+18. Take a look at the '''step18.run.nex''' file. It should contain:
 <pre>
 #NEXUS
 BAndB;
@@ -198,9 +201,9 @@ In effect we are changing the null from:
 : "the tree has the chlorophyll ''a/b'' group"
 to a more specific null: "the true tree is the tree stored in '''model.tre'''"
 
-Finally to run all of the analyses it is helpful to have a simple "master" paup file:
+19. Finally to run all of the analyses it is helpful to have a simple "master" paup file. See the step19.master.nex file:
 <pre>
-Log start replace file=sim.log;
+Log start replace file=step19.sim.log;
 Set noQueryBeep noerrorBeep  noWarnReset noWarnTree noWarnTSave;
 Execute simdata.nex;
 Log stop;
@@ -218,43 +221,21 @@ Summarize the output using the "easy way" below.
 If you want to see how you can do a lot of the calculation using pipes from the command line (and if you are working on a non-Windows machine), check out "the geeky way."
 
 ==== The easy way ====
-1. Download [http://phylo.bio.ku.edu/slides/lab6-Simulation/summarizePaupLengthDiffs.py summarizePaupLengthDiffs.py] and move it to the directory with all of the paup output.
+I wrote a simple summarization script [http://phylo.bio.ku.edu/slides/lab6-Simulation/summarizePaupLengthDiffs.py summarizePaupLengthDiffs.py]. Make sure that it is in your current working directory.
 
-2. Install [http://www.python.org/ Python] (any version that starts with '''2''' should work) if you don't have it.
+If you are running Windows, you may need to install [http://www.python.org/ Python] (any version that starts with '''2''' should work) if you don't have it.
 
-3. As long as you do not mind overwriting a file in this directory named '''diffs.txt''' you can run the command :
-<pre> python summarizePaupLengthDiffs.py sim.log > diffs.txt</pre>
+20. As long as you do not mind overwriting a file in this directory named '''step20.diffs.txt''' you can run the command :
+<pre> python summarizePaupLengthDiffs.py step19.sim.log > step20.diffs.txt</pre>
 
 This should report critical values for the test statistic at a few significance levels.
-You should be able to open the file '''diffs.txt''' in Excel if you want to see differences for any replicate.
+You should be able to open the file '''step20.diffs.txt''' in Excel if you want to see differences for any replicate.
 
-4. (optional) if you have the [http://www.r-project.org/ R] programming language installed then you should be able to download [http://phylo.bio.ku.edu/slides/lab6-Simulation/plot_diffs.R plot_diffs.R] and 
+21. (optional) if you have the [http://www.r-project.org/ R] programming language installed then you should be able to download [http://phylo.bio.ku.edu/slides/lab6-Simulation/plot_diffs.R plot_diffs.R] and 
 run it with a command line argument to produce a pdf that summarizes the parametric bootstrapping.  Pass in the observed value of the test statistic to the R script.  So, if the observed length difference (on the real data) was 2 then you would use the command:
 <pre>R --file=plot_diffs.R --args 2</pre>
 to produce a file called '''null_distribution_pscore_diffs.pdf''' with a 
 histogram and the approximate ''p'' value.
-
-
-==== The geeky way (or "Behold the power of UNIX!") ====
-We are going to connect the standard output of one process to the standard input of another. This is done with a "pipe" between the processes. From our shell, this is done with the <code>|</code> symbol.
-The command:
-<pre>cat sim.log</pre>
-spits out all 83,000 lines of the log file to the screen. Ugh!
-The command:
-<pre>cat sim.log | grep "Length "</pre>
-filters all of those lines so that only those with the word Length followed by a space are printed. This selects just the output from the PScore command that we did.
-Want to get just the scores of the first tree each time (without the word Length)? Try:
-<pre>cat sim.log | grep "Length " | awk '{print $2}'</pre>
-We are close. We now need to subtract the number in the second line from the first line; the number in the fourth line from the third line... This would give us the difference in score for each rep. I wrote a simple python script to do this. Save the script as [http://phylo.bio.ku.edu/slides/lab6-Simulation/consecutiveDiffs.py consecutiveDiffs.py] in the same directory that you have been working in.
-Now
-<pre>cat sim.log | grep "Length " | awk '{print $2}' | python consecutiveDiffs.py</pre>
-Should display the length differences.
-At this point (or really a couple of steps ago) you could take the data into Excel and find the critical value for the '''p=0.05''' level by looking for the 50th largest difference. We can finish the UNIX way by
-<pre>cat sim.log | grep "Length " | awk '{print $2}' | python consecutiveDiffs.py | sort -g</pre>
-to sort the values numerically.
-And finally:
-<pre>cat sim.log | grep "Length " | awk '{print $2}' | python consecutiveDiffs.py | sort -g | tail -n50</pre>
-to show the 50 most extreme length differences.
 
 
 = The end =
@@ -273,3 +254,27 @@ Other software relevant to the testing lecture:
 * [http://www.is.titech.ac.jp/~shimo/prog/consel/ Consel] AU Test, SH Test, Weighted SH Test, KH Test, Bootstrap
 * [http://www.mathstat.dal.ca/tsusko/software.cgi  Ed Susko's software page] (software from Susko, E. (2010) and Susko, E. (2006) papers in particular).
  
+
+
+==== Alternative (geeky way) of running step 20 ====
+If you find it unsatisfying to run a pre-packaged script in step 20 to parse the output of the simulated data, you can try to write a quick parser.
+
+This is a step by step instruction of how to construct a simple workflow using UNIX "pipes". We are going to connect the output of one process (process = running program) to the input of another process. This is done with a "pipe" between the processes. From our shell, this is done with the <code>|</code> symbol.
+The command:
+<pre>cat step19.sim.log</pre>
+spits out all 83,000 lines of the log file to the screen. Ugh!
+The command:
+<pre>cat step19.sim.log | grep "Length "</pre>
+filters all of those lines so that only those with the word Length followed by a space are printed. This selects just the output from the PScore command that we did.
+Want to get just the scores of the first tree each time (without the word Length)? Try:
+<pre>cat step19.sim.log | grep "Length " | awk '{print $2}'</pre>
+We are close. We now need to subtract the number in the second line from the first line; the number in the fourth line from the third line... This would give us the difference in score for each rep. I wrote a simple python script to do this. Save the script as [http://phylo.bio.ku.edu/slides/lab6-Simulation/consecutiveDiffs.py consecutiveDiffs.py] in the same directory that you have been working in.
+Now
+<pre>cat step19.sim.log | grep "Length " | awk '{print $2}' | python consecutiveDiffs.py</pre>
+Should display the length differences.
+At this point (or really a couple of steps ago) you could take the data into Excel and find the critical value for the '''p=0.05''' level by looking for the 50th largest difference. We can finish the UNIX way by
+<pre>cat step19.sim.log | grep "Length " | awk '{print $2}' | python consecutiveDiffs.py | sort -g</pre>
+to sort the values numerically.
+And finally:
+<pre>cat step19.sim.log | grep "Length " | awk '{print $2}' | python consecutiveDiffs.py | sort -g | tail -n50</pre>
+to show the 50 most extreme length differences.
