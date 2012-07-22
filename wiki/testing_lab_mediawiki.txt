@@ -233,7 +233,7 @@ You should be able to open the file '''step20.diffs.txt''' in Excel if you want 
 
 21. (optional) if you have the [http://www.r-project.org/ R] programming language installed then you should be able to download [http://phylo.bio.ku.edu/slides/lab6-Simulation/plot_diffs.R plot_diffs.R] and 
 run it with a command line argument to produce a pdf that summarizes the parametric bootstrapping.  Pass in the observed value of the test statistic to the R script.  So, if the observed length difference (on the real data) was 2 then you would use the command:
-<pre>R --file=plot_diffs.R --args 2</pre>
+<pre>R --file=plot_diffs.R --args 4</pre>
 to produce a file called '''null_distribution_pscore_diffs.pdf''' with a 
 histogram and the approximate ''p'' value.
 
