@@ -14,7 +14,7 @@ fi
 if ! test -f algae.nex
 then
     echo "Downloading algae.nex..."
-    wget https://raw.github.com/mtholder/TreeTopoTestingTalks/master/lab/algae.nex || exit 1
+    wget --no-check-certificate https://raw.github.com/mtholder/TreeTopoTestingTalks/master/lab/algae.nex || exit 1
     if ! test -f algae.nex ; then echo "Failed to download the data set!" ; exit 1 ; fi
 fi
 
@@ -96,7 +96,7 @@ fi
 if ! test -f parse-paup-grtig4seq-gen.py
 then
     echo "Downloading parse-paup-grtig4seq-gen.py script"
-    wget https://raw.github.com/mtholder/TreeTopoTestingTalks/master/lab/parse-paup-grtig4seq-gen.py || exit 1
+    wget --no-check-certificate https://raw.github.com/mtholder/TreeTopoTestingTalks/master/lab/parse-paup-grtig4seq-gen.py || exit 1
 fi
 
 ################################################################################
@@ -177,7 +177,7 @@ fi
 if ! test -f summarizePaupLengthDiffs.py
 then
     echo "Grab a python script to parse the output..."
-    wget https://raw.github.com/mtholder/TreeTopoTestingTalks/master/lab/summarizePaupLengthDiffs.py || exit 1
+    wget --no-check-certificate https://raw.github.com/mtholder/TreeTopoTestingTalks/master/lab/summarizePaupLengthDiffs.py || exit 1
 fi
 
 if ! test -f step20.diffs.txt
@@ -193,7 +193,7 @@ fi
 if ! test -f plot_diffs.R
 then
     echo "Grab an R script to create a histogram of the ..."
-    wget https://raw.github.com/mtholder/TreeTopoTestingTalks/master/lab/plot_diffs.R || exit 1
+    wget --no-check-certificate https://raw.github.com/mtholder/TreeTopoTestingTalks/master/lab/plot_diffs.R || exit 1
 fi
 
 if ! test -f null_distribution_pscore_diffs.pdf
