@@ -1,0 +1,6 @@
+#NEXUS
+Log start replace file=step19.sim.log;
+Set noQueryBeep noerrorBeep  noWarnReset noWarnTree noWarnTSave;
+Execute simdata.nex;
+Log stop;
+

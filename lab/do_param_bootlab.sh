@@ -50,14 +50,14 @@ then
     cat step11.model.tre | grep PAUP_1 | awk '{print $5}' > step13.model.txt
 fi
 
-if ! test -f defpaup.nex
+if ! test -f eachreppaup.nex
 then
-    echo "Creating the defpaup.nex to be executed by every simulated data set ..."
+    echo "Creating the eachreppaup.nex to be executed by every simulated data set ..."
     echo "
 begin paup;
 	execute step18.run.nex;
 end;
-" > defpaup.nex
+" > eachreppaup.nex
 fi
 
 if ! test -f parse-paup-grtig4seq-gen.py
@@ -69,7 +69,7 @@ fi
 if ! test -f seqgen-command.sh
 then
     echo "Composing a seqgen command for these data"
-    python parse-paup-grtig4seq-gen.py steps7-11.realdatalog.txt -l920 -n1000 -on -xdefpaup.nex step13.model.txt '>simdata.nex'> seqgen-command.sh || exit 1
+    python parse-paup-grtig4seq-gen.py steps7-11.realdatalog.txt -l920 -n1000 -on -xeachreppaup.nex step13.model.txt '>simdata.nex'> seqgen-command.sh || exit 1
 fi
 
 if ! test -f simdata.nex

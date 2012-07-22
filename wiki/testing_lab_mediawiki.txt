@@ -151,27 +151,27 @@ The simulation used it default parameter values for the HKY model. We'd like to 
 : <code>-l920</code> to simulate 920 sites (the same length as our real dataset).
 : <code>-n1000</code> to generate 1000 datasets
 : <code>-on</code> to request output in the NEXUS format
-: <code>-xdefpaup.nex</code> to tell it the name of a file with text input to be inserted between each dataset.
+: <code>-xeachreppaup.nex</code> to tell it the name of a file with text input to be inserted between each dataset.
 Finally we'll want to redirect the output to file using the : '''>''' redirection operator (Remember that this will overwrite whatever filename you put after the '''>''' character!). 
 
-15. Take a look at the '''defpaup.nex''' that is included in the lab. It should contain the following lines.
+15. Take a look at the '''eachreppaup.nex''' that is included in the lab. It should contain the following lines.
 <pre>
 begin paup;
 	execute run.nex;
 end;
 </pre>
-the <code>-xdefpaup.nex</code> option to seq-gen will insert the contents of defpaup.nex in between each data set.
+the <code>-xeachreppaup.nex</code> option to seq-gen will insert the contents of eachreppaup.nex in between each data set.
 
 By putting the correct commands in a file called step18.run.nex
 
 16. Run seq-gen.  The invocation should be something like the command below (but with the parameter estimates for this dataset filled in the appropriate spots):
-<pre>seq-gen -mGTR -a0.6 -i0.32 -r 0.6 2.1 0.3 0.2 5 1 -f 0.27 0.20 0.30 0.23 -l920 -n1000 -on -xdefpaup.nex model.txt > simdata.nex
+<pre>seq-gen -mGTR -a0.6 -i0.32 -r 0.6 2.1 0.3 0.2 5 1 -f 0.27 0.20 0.30 0.23 -l920 -n1000 -on -xeachreppaup.nex model.txt > simdata.nex
 </pre>
 Use the parameter values that you got from PAUP's <code>LScore</code> to construct a similar command and run it.
 <br>
-Note: In the Windows executable version of the program, the syntax of the command line is somewhat different. The rate matrix will be specified as <code>-r0.6,2.1,0.3,0.2,5,1 </code> and the base frequencies as <code>-f0.27,0.20,0.30,0.23</code>. You will also need to direct the treefile to seq-gen by inserting a '''<''' before the filename. In the case above, the end part of the command will read <code>-xdefpaup.nex < model.txt > simdata.nex</code> <br>
+Note: In the Windows executable version of the program, the syntax of the command line is somewhat different. The rate matrix will be specified as <code>-r0.6,2.1,0.3,0.2,5,1 </code> and the base frequencies as <code>-f0.27,0.20,0.30,0.23</code>. You will also need to direct the treefile to seq-gen by inserting a '''<''' before the filename. In the case above, the end part of the command will read <code>-xeachreppaup.nex < model.txt > simdata.nex</code> <br>
 
-17. Open '''simdata.nex''' in a text editor. Do you see the content of the '''defpaup.nex''' file?
+17. Open '''simdata.nex''' in a text editor. Do you see the content of the '''eachreppaup.nex''' file?
 
 === Running PAUP on the simulated data===
 
