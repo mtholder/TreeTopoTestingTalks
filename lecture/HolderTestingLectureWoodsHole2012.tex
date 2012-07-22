@@ -41,7 +41,7 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 	\begin{compactitem}
 		\item aLRT, aBayes,
 		\item 1 - BP,
-		\item AU,
+		\item AU and \citet{EfronHH1996} correction
 		\item aBP
 	\end{compactitem}
 	\item Cartoon time! ({\small warning: ``cartoon time'' will not actually be fun})
@@ -304,7 +304,7 @@ The test makes worst-case assumptions, so the SH test {\bf is conservative}.
 		$$c_i^{(j)} = {\ln L}(T_i \mid X^{(j)})-\bar{\ln L}(T_i \mid X^{\ast})$$
 	\item For each bootstrap replicate, $j$, pick the highest value from the centered distributions (this mimics the selection bias): $$m^{(j)} = \max\left[c_i^{(j)}\right] \mbox{ over all } i$$
 	\item Then for each tree and replicate, you get a sample from the null $\delta_i^{(j)} = m^{(j)} - c_i^{(j)}$
-	\item $P$-value for tree $T_i$ can be approximated by seeing where in the distribution of $\delta_i^{(j)}$ values it lies. The $P$-value is the proportion of bootstrap replicates for which $$\delta_i^{(j)} \geq \delta(\hat{T}, T_i \mid X)$$
+	\item $P$-value for tree $T_i$ is approximated by the proportions of bootstrap reps for which: $$\delta_i^{(j)} \leq \delta(\hat{T}, T_i \mid X)$$
 \end{compactitem}
 
 \myNewSlide
@@ -457,6 +457,8 @@ probability of the event $\mu \in \mathscr{R}_1$, if we begin with an ``uninform
 	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=3]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/EfronHH-treespace-fig.pdf}}}
 \end{picture}
 
+
+
 \myNewSlide
 \section*{What did \citet{EfronHH1996} say (and mean)?}
 \begin{itemize}
@@ -534,7 +536,20 @@ If we bootstrap we get a sense of the variability in our estimate, but we can al
 
 
 
+\myNewSlide
+\begin{itemize}
+	\item \citet{EfronHH1996} pointed out these issues of curvature of the boundaries between tree hypotheses.
+	\item When the boundary of the hypothesis space is curved, 1 - BP can be a poor approximation of the $P$-value.
+\end{itemize}
 
+
+\myNewSlide
+\begin{itemize}
+	\item \citet{EfronHH1996} pointed out these issues of curvature of the boundaries between tree hypotheses.
+	\item When the boundary of the hypothesis space is curved, 1 - BP can be a poor approximation of the $P$-value.
+	\item \citet{EfronHH1996}  proposed a computationally expensive multi-level bootstrap (which has not been widely used).
+	\item \citet{Shimodaira2002} used the same theoretical framework to devise a (more feasible) Approximately Unbiased (AU) test of topologies. Multiple scales of bootstrap resampling are used to detect and correct for curvature of the boundary.
+\end{itemize}
 
 
 
