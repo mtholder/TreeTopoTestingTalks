@@ -98,33 +98,20 @@ The source for all the documents for my talk is at:\\ {\normalsize \url{https://
 	\item ``Rogue'' taxa can lower support for many splits -- you do not have to use the majority-rule consensus tree to summarize bootstrap confidence statements.
 \end{itemize}
 
-\myNewSlide
-\section*{Bootstrapping as a noisy measure of repeatability}
-\begin{picture}(0,0)(0,0)
-	  \put(40,-280){\makebox(0,0)[l]{\includegraphics[scale=1.2]{../newimages/HillisB1993Fig3.pdf}}}
-	  \put(150,-330){\small \% recovering tree}
-	  \put(0,-20){\small bootstrap}
-	  \put(0,-50){\small values from}
-	  \put(0,-80){\small many simulations}
-	  \put(0,-220){\small repeated}
-	  \put(0,-250){\small simulation}
-	  \put(390,-170){Simulation study of }
-	  \put(390,-200){\citet{HillisB1993} }
-\end{picture}
 
 
 \myNewSlide
 \section*{Frequentist hypothesis testing: coin flipping example}
 $N=100$ and $h=60$\\
-Can we reject the hypothesis of a fair coin ($p_H = 0.5$)?
+Can we reject the fair coin hypothesis? $H_0:\Pr(\mbox{heads}) = 0.5$
 
 The ``recipe'' is:
 \begin{compactenum}
 	\item Formulate null ($H_0$) and alternative ($H_A$) hypotheses.
 	\item Choose an acceptable Type-I error rate (significance level)
 	\item Choose a test statistic: $f_H$= fraction of heads in sample. $f_H=0.6$
-	\item Identify the tail region of the test statistic - the values that conflict with $H_0$ at least a strongly as your observed data.
-	\item Calculate the $P$-value: The probability of a test statistic value more extreme than $0.6$ arising {\em even if $H_0$  is true}.
+	\item Characterize the null distribution of the test statistic 
+	\item Calculate the $P$-value: The probability of a test statistic value more extreme than $f_H$ arising {\em even if $H_0$  is true}.
 	\item Reject $H_0$ if $P$-value is $\leq$ your Type I error rate.
 \end{compactenum}
 
@@ -292,7 +279,7 @@ For each of the $j$ bootstrap replicates, we treat $$\delta(T_1,T_2 \mid X^{\ast
 	  \put(0,10){Approximate null distribution with}
 	  \put(0,-30){tails (absolute value $\geq 3.18$) shown}
 	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/centered1-2hist-p.pdf}}}
-	  \put(250,-490){\normalsize$\delta(T_1,T_2 \mid X^{\ast})-\bar\delta(T_1,T_2 \mid X^{\ast})$}
+	  \put(175,-490){\normalsize$\delta(T_1,T_2 \mid X^{\ast})-\bar\delta(T_1,T_2 \mid X^{\ast})$}
 \end{picture}
 
 
@@ -305,6 +292,15 @@ For each of the $j$ bootstrap replicates, we treat $$\delta(T_1,T_2 \mid X^{\ast
 	\item Bootstrapping helps us assess the variance in $\ln L$ that we would expect to result from sampling error.
 \end{itemize}
 
+\myNewSlide
+\section*{Scenario}
+\begin{enumerate}
+	\item A (presumably evil) competing lab scoops you by publishing a tree, $T_1$, for your favorite group of organisms.
+	\item You have just collected a new dataset for the group, and your ML estimate of the best tree, $T_2$, differ's from $T_1$.
+	\item A KH Test shows that your data {\bf significantly} prefer $T_2$ over $T_1$.
+	\item You write a (presumably scathing) response article.
+\end{enumerate}
+Should a {\em Systematic Biology} publish your response?
 
 \myNewSlide
 \section*{What if start out with only one hypothesized tree, and we want to compare it to the ML tree?}
@@ -443,9 +439,9 @@ Intuitive and powerful, but not robust to model violation \citep{Buckley2002}.
 \myNewSlide
 \section*{aLRT of \citet{AnisimovaG2006}}
 \begin{compactitem}
-	\item For a {\bf branch} $j$, calculate $\delta_{j}^{\dag}$ as twice the difference in $\ln L$ between the optimal tree (which has the branch) and the best NNI neighbor that lacks the branch.
-	\item This is very fast, and can be done in PhyML.
-	\item The argue that the null distribution for each LRT around the polytomy follows a $\frac{1}{2}\chi_0^2 + \frac{1}{2}\chi_1^2$ distribution
+	\item For a {\bf branch} $j$, calculate $\delta_{j}^{\dag}$ as twice the difference in $\ln L$ between the optimal tree (which has the branch) and the best NNI neighbor.
+	\item This is very fast.
+	\item They argue that the null distribution for each LRT around the polytomy follows a $\frac{1}{2}\chi_0^2 + \frac{1}{2}\chi_1^2$ distribution
 	\item The introduce Bonferroni-correction appropriate for correcting for the selection of the best of the three resolutions.
 	\item They find aLRT to be accurate and powerful in simulations, but \citet{AnisimovaGDDG2011} report that it rejects too often and is sensitive to model violation.
 \end{compactitem}
@@ -614,9 +610,59 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 	\put(300,-150){\makebox(30,-150)[l]{\includegraphics[scale=0.75]{../scripts/Susko2010Table3aBPMLCorrection.pdf}}}
 \end{picture}
 
+\myNewSlide
+\section*{Summary - Part 1}
+
+\begin{itemize}
+	\item $\delta(T_1,T_2 \mid X) = 2\left[\ln L(T_1 \mid X) - \ln L(T_2 \mid X)\right]$ is a powerful statistic for discrimination between trees.
+	\item We can assess confidence by considering the variance in signal between different characters.
+	\item Bootstrapping helps us assess the variance in $\ln L$ that we would expect to result from sampling error.
+\end{itemize}
 
 \myNewSlide
-\section*{\citet{Kim2000} view of tree space}
+\section*{Summary - Part 2}
+\normalsize
+A (very) wide variety of tests differ by:
+\begin{itemize}
+	\item Null hypotheses:
+	\begin{compactitem}
+		\item Expected scores are the same $\rightarrow$ boundary tests. {\bf Non-parametric tests}
+		\item A tree consistent with the null is correct $\rightarrow$ tests that use the full info of the model. {\bf Parametric tests}
+	\end{compactitem}
+	\item How to use variance information:
+	\begin{compactitem}
+		\item Rely on ``raw'' bootstrap variability,
+		\item Invoke assumptions of normality of scores,
+		\item Use $\chi^2$ variants.
+	\end{compactitem}
+	\item Whether or not the trees must be specified {\em a priori} -- KH Test requires the trees to be specified {\em a priori}.
+\end{itemize}
+
+\myNewSlide
+\section*{Summary - Part 3}
+\large
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{|c|p{7cm}|p{6cm}|}
+\hline
+& Parametric & Nonparametric \\
+\hline
+$P$-value from $\delta$  & aLRT, aBayes, parametric bootstrapping & KH, SH \\
+\hline
+$P$-value from BP  &aBP(semi)  & BP, aBP(semi), AU, EHH\\
+\hline
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}%
+
+When you use a parametric test, you will usually gain power. But non-parametric tests are more robust to model violation.
+
+
+
+
+\myNewSlide
+\section*{Cartoon time courtesy of the \citet{Kim2000} view of tree space}
 \begin{picture}(-0,0)(-0,0)
 	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=2.5]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/Kim-treespace.pdf}}}
 \end{picture}
@@ -730,15 +776,6 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 \end{picture}
 
 \myNewSlide
-\section*{Summary - Part 1}
-
-\begin{itemize}
-	\item $\delta(T_1,T_2 \mid X) = 2\left[\ln L(T_1 \mid X) - \ln L(T_2 \mid X)\right]$ is a powerful statistic for discrimination between trees.
-	\item We can assess confidence by considering the variance in signal between different characters.
-	\item Bootstrapping helps us assess the variance in $\ln L$ that we would expect to result from sampling error.
-\end{itemize}
-
-\myNewSlide
 \section*{Summary - Part 2}
 \normalsize
 A (very) wide variety of tests differ by:
@@ -768,7 +805,7 @@ A (very) wide variety of tests differ by:
 \hline
 $P$-value from $\delta$  & aLRT, aBayes, parametric bootstrapping & KH, SH \\
 \hline
-$P$-value from BP $\delta$  &aBP(semi)  & BP, aBP(semi), AU, EHH\\
+$P$-value from BP  &aBP(semi)  & BP, aBP(semi), AU, EHH\\
 \hline
 \end{tabular}
 \end{center}
@@ -785,6 +822,21 @@ When you use a parametric test, you will usually gain power. But non-parametric 
 \myNewSlide
 \normalsize
 \bibliography{phylo}
+
+\myNewSlide
+\section*{Bootstrapping as a noisy measure of repeatability}
+\begin{picture}(0,0)(0,0)
+	  \put(40,-280){\makebox(0,0)[l]{\includegraphics[scale=1.2]{../newimages/HillisB1993Fig3.pdf}}}
+	  \put(150,-330){\small \% recovering tree}
+	  \put(0,-20){\small bootstrap}
+	  \put(0,-50){\small values from}
+	  \put(0,-80){\small many simulations}
+	  \put(0,-220){\small repeated}
+	  \put(0,-250){\small simulation}
+	  \put(390,-170){Simulation study of }
+	  \put(390,-200){\citet{HillisB1993} }
+\end{picture}
+
 
 \myNewSlide
 \section*{Bootstrap Proportion $\neq$ Posterior Probability}

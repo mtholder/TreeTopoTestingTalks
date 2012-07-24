@@ -151,7 +151,8 @@ SaveTrees file = model.tre brlens format=altnexus;
 Make sure that you understand these commands (ask an instructor if you have questions).
 From the output of PAUP you should have the model parameter values for the simulation.
 
-'''12.''' Look at the tree file. You should see a newick string representing a tree with branch lengths. You can use a text editor to see the newick representation. Or you can use FigTree to see a graphical representation of the tree.
+'''12.''' Look at the tree file. You should see a newick string representing a tree with branch lengths. You can use a text editor to see the newick representation. 
+You can use FigTree to see a graphical representation of the tree, but that will require using <code>scp</code> to get the tree onto your laptop (from the cluster).
 
 
 
@@ -181,7 +182,6 @@ The simulation used it default parameter values for the HKY model. We'd like to 
 : <code>-n1000</code> to generate 1000 datasets
 : <code>-on</code> to request output in the NEXUS format
 : <code>-xeachreppaup.nex</code> to tell it the name of a file with text input to be inserted between each dataset.
-Finally we'll want to redirect the output to file using the : '''>''' redirection operator (Remember that this will overwrite whatever filename you put after the '''>''' character!). 
 
 '''15.''' Take a look at the '''eachreppaup.nex''' that is included in the lab. It should contain the following lines.
 <pre>
@@ -193,7 +193,11 @@ the <code>-xeachreppaup.nex</code> option to seq-gen will insert the contents of
 
 By putting the correct commands in a file called step18.run.nex
 
-'''16.''' Run seq-gen.  The invocation should be something like the command below (but with the parameter estimates for this dataset filled in the appropriate spots):
+'''16.''' Now we will run seq-gen.  
+
+One additional trick: We want to redirect the output to file using the : '''>''' redirection operator so that we can store the simulated data to a file (rather than printing it out). Warning: this will overwrite whatever filename you put after the '''>''' character!.  We will redirect to a file called <code>simdata.nex</code> with the syntax <code>  > simdata.nex </code> at the end of our invocation of seq-gen.
+
+The invocation should be something like the command below (but with the parameter estimates for this dataset filled in the appropriate spots).
 <pre>seq-gen -mGTR -a0.6 -i0.32 -r 0.6 2.1 0.3 0.2 5 1 -f 0.27 0.20 0.30 0.23 -l920 -n1000 -on -xeachreppaup.nex model.txt > simdata.nex
 </pre>
 Use the parameter values that you got from PAUP's <code>LScore</code> to construct a similar command and run it.
@@ -246,13 +250,11 @@ After a few seconds, you should have completed the analysis of all 1000 datasets
 = Summarizing the output =
 You really don't want to browse through 1000 analyses and perform subtraction (and certainly not when you could be at the Kidd after a long day).
 
-Summarize the output using the "easy way" below.
-If you want to see how you can do a lot of the calculation using pipes from the command line (and if you are working on a non-Windows machine), check out "the geeky way."
+If you want to see how you can do a lot of the calculation using pipes from the command line (and if you are working on a non-Windows machine), check out "the geeky way." Here we will use the easy way
 
-==== The easy way ====
-I wrote a simple summarization script [http://phylo.bio.ku.edu/slides/lab6-Simulation/summarizePaupLengthDiffs.py summarizePaupLengthDiffs.py]. Make sure that it is in your current working directory.
+I wrote a simple summarization script <code>summarizePaupLengthDiffs.py</code> that is in the bundle that you downloaded.
 
-If you are running Windows, you may need to install [http://www.python.org/ Python] (any version that starts with '''2''' should work) if you don't have it.
+If you are running Windows (and not working on the cluster), you may need to install [http://www.python.org/ Python] (any version that starts with '''2''' should work) if you don't have it.
 
 '''20.''' As long as you do not mind overwriting a file in this directory named '''step20.diffs.txt''' you can run the command :
 <pre> python summarizePaupLengthDiffs.py step19.sim.log > step20.diffs.txt</pre>
@@ -260,7 +262,9 @@ If you are running Windows, you may need to install [http://www.python.org/ Pyth
 This should report critical values for the test statistic at a few significance levels.
 You should be able to open the file '''step20.diffs.txt''' in Excel if you want to see differences for any replicate.
 
-'''21.''' (optional) if you have the [http://www.r-project.org/ R] programming language installed then you should be able to download [http://phylo.bio.ku.edu/slides/lab6-Simulation/plot_diffs.R plot_diffs.R] and 
+
+
+'''21.''' (optional) If you have the [http://www.r-project.org/ R] programming language installed then you should be able to run <code>plot_diffs.R</code> and 
 run it with a command line argument to produce a pdf that summarizes the parametric bootstrapping.  Pass in the observed value of the test statistic to the R script.  So, if the observed length difference (on the real data) was 2 then you would use the command:
 <pre>R --file=plot_diffs.R --args 4</pre>
 to produce a file called '''null_distribution_pscore_diffs.pdf''' with a 
@@ -268,6 +272,7 @@ histogram and the approximate ''p'' value.
 
 
 = The end =
+
 Was the observed difference in this tail of the null distribution? and would you reject the null hypothesis?
 
 
