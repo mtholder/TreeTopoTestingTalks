@@ -1,5 +1,5 @@
 = Overview =
-This lab is written as a tutorial as a [[#Parametric Bootstrapping Lab]].
+This lab is written as a [[#Parametric Bootstrapping Lab]].
 If you prefer you can skip to [[#Topology tests in PAUP]] if you'd prefer to see the how to run <code>KHTest</code>, <code>SHTest</code>, and <code>AUTest</code> options in PAUP's <code>LScore</code> command.
  
 
@@ -37,12 +37,8 @@ For the purpose of the lab we will use the null hypothesis that there is a branc
 
 == Parametric Bootstrapping Background  ==
 
-Because we have a limited amount of time in the computer lab, we will be using parsimony as our optimality criterion in this lab.
-The general principles of using Monte Carlo simulation to construct a null distribution apply to any optimality criterion, so you can adapt the lab to hypothesis testing using ML or distance-based approaches.
-
-Often, you will use parametric bootstrapping when the optimal tree disagrees 
-with your null hypothesis. 
-You would like to decide whether or not you should reject the null hypothesis.
+To save time, we will be use parsimony.
+The same principles of parametric bootstrapping apply to ML and distance-based methods.
 
 Parametric bootstrapping is useful for answering the question: 
 "I have observed a particular difference between the score of the optimal tree 
@@ -55,11 +51,21 @@ parsimony scores, ''etc''.
 Parametric bootstrapping has a lot of steps. You may want to look at [http://phylo.bio.ku.edu/woodshole/pboot_flow_chart.pdf this flowchart].
 
 == Lab Activity ==
-1. Download [http://phylo.bio.ku.edu/slides/data/algae.nex algae.nex]
-
 *NOTE: remember to type in '''module load bioware''' so that paup becomes available if using the cluster version
 
-2. Find the score of the most parsimonious tree using PAUP.  Launch the command line version of PAUP. Because this is a small dataset, you can use the commands:
+'''1.''' Download the data for the lab by running:
+<pre>wget http://phylo.bio.ku.edu/slides/param_boot_lab.zip
+unzip param_boot_lab.zip
+cd param_boot_lab
+</pre>
+You can see the contents of the data file by running
+<pre>
+cat algae.nex
+</pre>
+
+
+
+'''2.''' Find the score of the most parsimonious tree using PAUP.  Launch the command line version of PAUP by typing <code>paup</code>. Because this is a small dataset, you can use the commands:
 <pre>
 Execute algae.nex ; 
 AllTrees fd=bar;
@@ -68,17 +74,18 @@ command to see all the scores of all the trees.
 :* How many most parsimonious trees are there? {{title|2|answer}}
 :* What is the parsimony score of the most parsimonious tree(s)? {{title|411 steps|answer}}
 
-3. Use the <pre>boot</pre> command to calculate the bootstrap proportions and display the majority-rule consensus tree from the bootstrapping analyses.
+You can use <pre>ShowTrees all</pre> to see all of the trees in memory (note that the <code>AllTrees</code> command scores every tree, but does not retain all of the trees in memory.  It will only retain the best trees according to the criterion).
+
+'''3.''' Use the <pre>boot</pre> command to calculate the bootstrap proportions and display the majority-rule consensus tree from the bootstrapping analyses.
 
 
 
-4. Does the bootstrap  tree display the chlorophyll ''a/b'' clade (a clade of all of the species except ''Anacystis'' and ''Olithodiscus'')? {{title|No|answer}}
+'''4.''' Does the bootstrap  tree display the chlorophyll ''a/b'' clade (a clade of all of the species except ''Anacystis'' and ''Olithodiscus'')? {{title|No|answer}}
 
 What is the bootstrap support for the split that represents our null hypothesis? If that split is not supported by the data, then it will not be on the majority-rule tree  but it should be listed in the split frequency table (''Anacystis'' is taxon number 7 and ''Olithodiscus'' is taxon number 8, so look for a row in the table with a split pattern that groups taxa 7 and 8 in one group and all the other taxa in the other group: e.g., "......**"). {{title|Typically the bootstrap support is around 25 percent|answer}}
 
-You can use <pre>ShowTrees all</pre> to see all of the trees in memory (note that the <code>AllTrees</code> command scores every tree, but does not retain all of the trees in memory.  It will only retain the best trees according to the criterion).
 
-5. Now we need to find the best scoring tree that is consistent with our null hypothesis.  In other words, we want to find the best-scoring tree that has a clade of ''Euglena'', ''Chlorella'', ''Chlamydomonas'', ''Marchantia'', Rice, and Tobacco excluding ''Anacystis nidulans'' and ''Olithodiscus''. We can do this in a number of ways. 
+'''5.''' Now we need to find the best scoring tree that is consistent with our null hypothesis.  In other words, we want to find the best-scoring tree that has a clade of ''Euglena'', ''Chlorella'', ''Chlamydomonas'', ''Marchantia'', Rice, and Tobacco excluding ''Anacystis nidulans'' and ''Olithodiscus''. We can do this in a number of ways. 
 
 We will tell PAUP to do a search for the best tree that satisfies a topological constraint. 
 :* The first step is to write a file with a NEXUS trees block and a tree the contains only one branch. In a text editor, create a new file with the following contents:
@@ -91,13 +98,13 @@ end;
 The name of the constraint tree can be any NEXUS word that you like; in this example <code>ab</code> will be the name of the constraint tree.
 When you are dealing with large numbers of taxa and complex constraints it is often helpful to construct the constraint tree in [http://mesquiteproject.org/mesquite/mesquite.html Mesquite], save it to a file, and then read it into PAUP using the <code>LoadConstr</code> command.
 
-:* Save the file as <code>abconstraint.tre</code> in the same directory as the <code>algae.nex</code> directory.
-:*  To get PAUP to read the constraint into memory, use the <pre>LoadConstr file=abconstraint.tre</pre>  command.
+:* Save the file as <code>step5.abconstraint.tre</code> in the same directory as the <code>algae.nex</code> directory (you can use <code>nano step5.abconstraint.tre</code> to open your text editor on the cluster).
+:*  To get PAUP to read the constraint into memory, use the <pre>LoadConstr file=step5.abconstraint.tre</pre>  command.
 
-6. Use the <code>ShowConstr</code> command to see the constraint tree that you have defined and make sure that it is the constraint that you intended.
+'''6.''' Use the <code>ShowConstr</code> command to see the constraint tree that you have defined and make sure that it is the constraint that you intended.
 
 
-7. Now we will conduct a branch-and-bound search that honors the constraint tree that we have just defined:
+'''7.''' Now we will conduct a branch-and-bound search that honors the constraint tree that we have just defined:
 <pre>Log start file = 'steps7-11.realdatalog.txt' ; 
 BAndB enforce constraints=ab
 </pre>
@@ -105,36 +112,36 @@ The <code>enforce</code> keyword tells paup to only consider trees that meet a c
 Note that you can also use constraints with the <code>HSearch</code> command of PAUP (and you will need to do this for bigger datasets). 
 What has the parsimony score of the best tree compatible with the constraint? {{title|4|answer}}
 
-8. Use the <code>ShowTrees</code> command to see the tree. Does it satisfy the constraint? (it should).
+'''8.''' Use the <code>ShowTrees</code> command to see the tree. Does it satisfy the constraint? (it should).
 
-9. Use the <code>SaveTrees file=bestconstrained.tre</code> to save this tree to a file in case you need it later.
+'''9.''' Use the <code>SaveTrees file=bestconstrained.tre</code> to save this tree to a file in case you need it later.
 
 == Hypothesis testing ==
 
 As our test statistic, we will use the difference in parsimony score between the best (unconstrained) tree and the best tree that satisfies our null hypothesis. 
 
-10. '''What is the value of the test statistic for our data?'''  {{title|4|answer}}
+'''10.''' '''What is the value of the test statistic for our data?'''  {{title|4|answer}}
 
 
 To interpret the value of the test statistic we need to have some idea the range of values would be produced ''if the null hypothesis were true''. 
 This is can be tricky.
 For one thing, there are lots of trees that are compatible with the null hypothesis.
-It seems logical to take the tree from the constrained search as the tree to repersent the null hypothesis.
-After all, among all of the trees compatible with the constraint, it is the one that best explains the data (according to parsimony).
+It seems logical to take the tree from the constrained search as the tree to repersent the null hypothesis; it is the tree that best explains the data (according to parsimony).
 Technically speaking this procedure of choosing a tree to represent the null does not guarantee that we are testing from the "least favorable conditions" as we should in hypothesis testing - but using this tree seems good enough, and it is practical.
 
-Even if we are satisfied about the choice of a tree that represents the best the null can do, we still have to have a way to find out what the distribution of the test statistic would be if this null were true.
+Even if we are satisfied about the choice of a tree that represents null, we still have to have a way to find out what the distribution of the test statistic would be if this null were true.
 We will use Monte Carlo simulations for this.
+
 In particular we will use [http://tree.bio.ed.ac.uk/software/seqgen/ Seq-Gen] to generate a bunch of datasets that are compatible with the kind of data that we would see if the null were true. 
 Then we will calculate the test statistic on each of them. This will give us a null distribution of the test statistic. 
-We can compare our real data to that.
+We can compare our real data to this distribution to determine significance.
 
 === Finding model parameters ===
 
 To simulate data, Seq-Gen needs a fully-specified model and a tree with branch lengths.
 We can use the tree that we found in the constrained search and the GTR+I+G model to get the necessary input.
 
-11. Assuming that you have not quit PAUP and the tree found in the constrained search is still in memory, then we can save it with branch lengths that maximize the likelihood under the GTR+I+G model:
+'''11.''' Assuming that you have not quit PAUP and the tree found in the constrained search is still in memory, then we can save it with branch lengths that maximize the likelihood under the GTR+I+G model:
 <pre>
 Set crit = like;
 LSet nst=6 rmat=est basefreq=est rates = gamma shape = est pinv=est;
@@ -144,11 +151,11 @@ SaveTrees file = model.tre brlens format=altnexus;
 Make sure that you understand these commands (ask an instructor if you have questions).
 From the output of PAUP you should have the model parameter values for the simulation.
 
-12. Look at the tree file. You should see a newick string representing a tree with branch lengths. You can use a text editor to see the newick representation. Or you can use FigTree to see a graphical representation of the tree.
+'''12.''' Look at the tree file. You should see a newick string representing a tree with branch lengths. You can use a text editor to see the newick representation. Or you can use FigTree to see a graphical representation of the tree.
 
 
 
-13. Unfortunately, seq-gen does not understand NEXUS tree files. Cut just the newick tree (the parenthetical description of the tree) from the file to a new file called '''model.txt''' or you can download this version of [http://phylo.bio.ku.edu/slides/model.txt model.txt].
+'''13.''' Unfortunately, seq-gen does not understand NEXUS tree files. Cut just the newick tree (the parenthetical description of the tree) from the file to a new file called '''model.txt''' or you can download this version of [http://phylo.bio.ku.edu/slides/model.txt model.txt].
 If you are a UNIX geek, you do this by quitting paup and issuing the command:
 <pre>cat model.tre | grep PAUP_1 | awk '{print $5}' > model.txt</pre>
 Non-geeks tend to prefer opening '''model.tre''', copying the newick string, and saving it to a '''step13.model.txt''' file.
@@ -159,7 +166,7 @@ Seq-Gen is installed on the workshop's cluster. If you are running the exercise 
 
 To install, you'll need to drag the seq-gen executable to the directory that you are using for this lab (or add it to your <code>PATH</code> environmental variable that tells your shell where to find executables [[Computer_lab_introduction#Adding_a_directory_to_the_path| notes here]])
 
-14. To see the options for seq-gen use the command
+'''14.''' To see the options for seq-gen use the command
 <pre>seq-gen -h</pre>
 To make sure everything is working do a simple test run using the HKY model:
 <pre>seq-gen -mHKY model.txt</pre>
@@ -176,7 +183,7 @@ The simulation used it default parameter values for the HKY model. We'd like to 
 : <code>-xeachreppaup.nex</code> to tell it the name of a file with text input to be inserted between each dataset.
 Finally we'll want to redirect the output to file using the : '''>''' redirection operator (Remember that this will overwrite whatever filename you put after the '''>''' character!). 
 
-15. Take a look at the '''eachreppaup.nex''' that is included in the lab. It should contain the following lines.
+'''15.''' Take a look at the '''eachreppaup.nex''' that is included in the lab. It should contain the following lines.
 <pre>
 begin paup;
 	execute run.nex;
@@ -186,14 +193,14 @@ the <code>-xeachreppaup.nex</code> option to seq-gen will insert the contents of
 
 By putting the correct commands in a file called step18.run.nex
 
-16. Run seq-gen.  The invocation should be something like the command below (but with the parameter estimates for this dataset filled in the appropriate spots):
+'''16.''' Run seq-gen.  The invocation should be something like the command below (but with the parameter estimates for this dataset filled in the appropriate spots):
 <pre>seq-gen -mGTR -a0.6 -i0.32 -r 0.6 2.1 0.3 0.2 5 1 -f 0.27 0.20 0.30 0.23 -l920 -n1000 -on -xeachreppaup.nex model.txt > simdata.nex
 </pre>
 Use the parameter values that you got from PAUP's <code>LScore</code> to construct a similar command and run it.
 <br>
 Note: In the Windows executable version of the program, the syntax of the command line is somewhat different. The rate matrix will be specified as <code>-r0.6,2.1,0.3,0.2,5,1 </code> and the base frequencies as <code>-f0.27,0.20,0.30,0.23</code>. You will also need to direct the treefile to seq-gen by inserting a '''<''' before the filename. In the case above, the end part of the command will read <code>-xeachreppaup.nex < model.txt > simdata.nex</code> <br>
 
-17. Open '''simdata.nex''' in a text editor. Do you see the content of the '''eachreppaup.nex''' file?
+'''17.''' Open '''simdata.nex''' in a text editor. Do you see the content of the '''eachreppaup.nex''' file?
 
 === Running PAUP on the simulated data===
 
@@ -202,7 +209,7 @@ If we put the commands that we want PAUP to execute in the '''step18.run.nex''' 
 
 What do we want to do for each dataset? We want to see the difference in score that we get between the true tree and the preferred (most-parsimonious) tree. This will give us a distribution on the amount of spurious support we could get for a tree because of sampling error (or even systematic error.
 
-18. Take a look at the '''step18.run.nex''' file. It should contain:
+'''18.''' Take a look at the '''step18.run.nex''' file. It should contain:
 <pre>
 #NEXUS
 BAndB;
@@ -223,7 +230,7 @@ In effect we are changing the null from:
 : "the tree has the chlorophyll ''a/b'' group"
 to a more specific null: "the true tree is the tree stored in '''model.tre'''"
 
-19. Finally to run all of the analyses it is helpful to have a simple "master" paup file. See the step19.master.nex file:
+'''19.''' Finally to run all of the analyses it is helpful to have a simple "master" paup file. See the step19.master.nex file:
 <pre>
 Log start replace file=step19.sim.log;
 Set noQueryBeep noerrorBeep  noWarnReset noWarnTree noWarnTSave;
@@ -247,13 +254,13 @@ I wrote a simple summarization script [http://phylo.bio.ku.edu/slides/lab6-Simul
 
 If you are running Windows, you may need to install [http://www.python.org/ Python] (any version that starts with '''2''' should work) if you don't have it.
 
-20. As long as you do not mind overwriting a file in this directory named '''step20.diffs.txt''' you can run the command :
+'''20.''' As long as you do not mind overwriting a file in this directory named '''step20.diffs.txt''' you can run the command :
 <pre> python summarizePaupLengthDiffs.py step19.sim.log > step20.diffs.txt</pre>
 
 This should report critical values for the test statistic at a few significance levels.
 You should be able to open the file '''step20.diffs.txt''' in Excel if you want to see differences for any replicate.
 
-21. (optional) if you have the [http://www.r-project.org/ R] programming language installed then you should be able to download [http://phylo.bio.ku.edu/slides/lab6-Simulation/plot_diffs.R plot_diffs.R] and 
+'''21.''' (optional) if you have the [http://www.r-project.org/ R] programming language installed then you should be able to download [http://phylo.bio.ku.edu/slides/lab6-Simulation/plot_diffs.R plot_diffs.R] and 
 run it with a command line argument to produce a pdf that summarizes the parametric bootstrapping.  Pass in the observed value of the test statistic to the R script.  So, if the observed length difference (on the real data) was 2 then you would use the command:
 <pre>R --file=plot_diffs.R --args 4</pre>
 to produce a file called '''null_distribution_pscore_diffs.pdf''' with a 
@@ -348,7 +355,7 @@ Tell PAUP to run the AUTest and then SHTest with:
 LScore all / NoKHTest AUTest NoSHTest ;
 LScore all / NoKHTest NoAUTest SHTest  ;
 </pre>
-Do the ''P''-values agree? Which test is more powerful? {{tite|AU test - it should show lower P-values|answer}}
+Do the ''P''-values agree? Which test is more powerful? {{title|AU test. It should show lower P-values|answer}}
 
 If you have time, you can see the effect of candidate set size on the power of the SH Test.  Suppose that we knew that ''Chlamydomonas'' was sister to the land plants. Try out these commands:
 <pre>
