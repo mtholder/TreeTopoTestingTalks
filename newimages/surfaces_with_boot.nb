@@ -1,0 +1,668 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     23241,        659]
+NotebookOptionsPosition[     22949,        645]
+NotebookOutlinePosition[     23292,        660]
+CellTagsIndexPosition[     23249,        657]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{3.5520735986496277`*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"radius", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsilon", " ", "=", " ", "0.001"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsilon2", " ", "=", " ", "0.0001"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"yview", "=", 
+   RowBox[{"-", "6"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"zview", "=", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"straightpoint", " ", "=", " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"\[Pi]", "/", "4"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"logLike", "[", 
+    RowBox[{"v_", ",", "k_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"PDF", "[", 
+       RowBox[{
+        RowBox[{"NormalDistribution", "[", 
+         RowBox[{"0", ",", " ", "1"}], "]"}], ",", "v"}], "]"}], "*", 
+      RowBox[{"PDF", "[", 
+       RowBox[{
+        RowBox[{"NormalDistribution", "[", 
+         RowBox[{"0", ",", " ", "1"}], "]"}], ",", "k"}], "]"}]}]}], "]"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"logTail", "[", 
+    RowBox[{"v_", ",", "k_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"v", " ", ">", " ", "1"}], ",", " ", "0", ",", 
+       RowBox[{"-", "epsilon"}]}], "]"}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"logOtherTail", "[", 
+   RowBox[{"v_", ",", "k_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"v", " ", "\[LessEqual]", "1"}], ",", " ", "epsilon2", ",", " ", 
+      RowBox[{"-", "epsilon"}]}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"logPValue", "[", 
+   RowBox[{"v_", ",", "k_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", 
+    RowBox[{"If", " ", "[", 
+     RowBox[{
+      RowBox[{"b", " ", "\[Equal]", " ", "0"}], ",", 
+      RowBox[{
+       RowBox[{"logLike", "[", 
+        RowBox[{"v", ",", "k"}], "]"}], "+", 
+       RowBox[{"logTail", "[", 
+        RowBox[{"v", ",", "k"}], "]"}]}], ",", " ", 
+      RowBox[{
+       RowBox[{"logLike", "[", 
+        RowBox[{"v", ",", "k"}], "]"}], "+", 
+       RowBox[{"logOtherTail", "[", 
+        RowBox[{"v", ",", "k"}], "]"}]}]}], "]"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p", "[", 
+   RowBox[{"v_", ",", "k_", ",", "i_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "b", "}"}], ",", 
+    RowBox[{
+     RowBox[{"b", "=", "i"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Exp", "[", 
+      RowBox[{"logPValue", "[", 
+       RowBox[{"v", ",", "k", ",", "b"}], "]"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Plot3D", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"p", "[", 
+       RowBox[{"v", ",", "k", ",", "0"}], "]"}], ",", "\n", 
+      "                  ", 
+      RowBox[{"p", "[", 
+       RowBox[{"v", ",", "k", ",", "1"}], "]"}]}], "}"}], ",", " ", 
+    "\[IndentingNewLine]", "           ", 
+    RowBox[{"{", 
+     RowBox[{"v", ",", " ", 
+      RowBox[{"-", "3"}], ",", " ", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+    "           ", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", " ", 
+      RowBox[{"-", "3"}], ",", " ", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+    "            ", 
+    RowBox[{"PlotStyle", " ", "->", " ", 
+     RowBox[{"{", 
+      RowBox[{"Blue", ",", "Red"}], "}"}]}], ",", "\[IndentingNewLine]", 
+    "            ", 
+    RowBox[{"AxesStyle", " ", "->", " ", 
+     RowBox[{"Directive", "[", 
+      RowBox[{"14", ",", 
+       RowBox[{"Thickness", "[", ".002", "]"}]}], "]"}]}], ",", " ", 
+    "\[IndentingNewLine]", "            ", 
+    RowBox[{"PlotRange", " ", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{".99", ",", "2"}], "}"}]}], ",", " ", "\[IndentingNewLine]", 
+    "            ", 
+    RowBox[{"BoxRatios", " ", "->", " ", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", " ", "1", ",", " ", "1.5"}], "}"}]}], ",", " ", 
+    "\[IndentingNewLine]", "            ", 
+    RowBox[{"Boxed", " ", "->", " ", "False"}], ",", " ", 
+    "\[IndentingNewLine]", "           ", 
+    RowBox[{"AxesEdge", " ", "->", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", " ", 
+         RowBox[{"-", "1"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", " ", 
+         RowBox[{"-", "1"}]}], "}"}], ",", " ", "None"}], "}"}]}], ",", 
+    "\[IndentingNewLine]", "           ", 
+    RowBox[{"AxesLabel", "->", 
+     RowBox[{"{", 
+      RowBox[{"None", ",", "None", ",", "None"}], "}"}]}], ",", 
+    "\[IndentingNewLine]", "           ", 
+    RowBox[{"ViewPoint", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "yview", ",", "zview"}], "}"}]}]}], "]"}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"logBootTail", "[", 
+    RowBox[{"v_", ",", "k_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"v", " ", "<", " ", "0"}], ",", " ", "epsilon2", ",", 
+       RowBox[{"-", "epsilon"}]}], "]"}]}], "]"}]}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"logBootOtherTail", "[", 
+   RowBox[{"v_", ",", "k_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"v", " ", ">=", "0"}], ",", " ", "epsilon2", ",", " ", 
+      RowBox[{"-", "epsilon"}]}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"logBootPValue", "[", 
+   RowBox[{"v_", ",", "k_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", 
+    RowBox[{"If", " ", "[", 
+     RowBox[{
+      RowBox[{"b", " ", "\[Equal]", " ", "0"}], ",", 
+      RowBox[{
+       RowBox[{"logLike", "[", 
+        RowBox[{
+         RowBox[{"v", "-", "1"}], ",", "k"}], "]"}], "+", 
+       RowBox[{"logBootTail", "[", 
+        RowBox[{"v", ",", "k"}], "]"}]}], ",", " ", 
+      RowBox[{
+       RowBox[{"logLike", "[", 
+        RowBox[{
+         RowBox[{"v", "-", "1"}], ",", "k"}], "]"}], "+", 
+       RowBox[{"logBootOtherTail", "[", 
+        RowBox[{"v", ",", "k"}], "]"}]}]}], "]"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"bootp", "[", 
+   RowBox[{"v_", ",", "k_", ",", "i_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "b", "}"}], ",", 
+    RowBox[{
+     RowBox[{"b", "=", "i"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Exp", "[", 
+      RowBox[{"logBootPValue", "[", 
+       RowBox[{"v", ",", "k", ",", "b"}], "]"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Plot3D", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"bootp", "[", 
+      RowBox[{"v", ",", "k", ",", "1"}], "]"}], ",", "\n", 
+     "                  ", 
+     RowBox[{"bootp", "[", 
+      RowBox[{"v", ",", "k", ",", "0"}], "]"}]}], "}"}], ",", " ", 
+   "\[IndentingNewLine]", "           ", 
+   RowBox[{"{", 
+    RowBox[{"v", ",", " ", 
+     RowBox[{"-", "3"}], ",", " ", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+   "           ", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", " ", 
+     RowBox[{"-", "3"}], ",", " ", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+   "            ", 
+   RowBox[{"PlotStyle", " ", "->", " ", 
+    RowBox[{"{", 
+     RowBox[{"Red", ",", "Blue"}], "}"}]}], ",", "\[IndentingNewLine]", 
+   "            ", 
+   RowBox[{"AxesStyle", " ", "->", " ", 
+    RowBox[{"Directive", "[", 
+     RowBox[{"14", ",", 
+      RowBox[{"Thickness", "[", ".002", "]"}]}], "]"}]}], ",", " ", 
+   "\[IndentingNewLine]", "            ", 
+   RowBox[{"PlotRange", " ", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{".99", ",", "2"}], "}"}]}], ",", " ", "\[IndentingNewLine]", 
+   "            ", 
+   RowBox[{"BoxRatios", " ", "->", " ", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", " ", "1", ",", " ", "1.5"}], "}"}]}], ",", " ", 
+   "\[IndentingNewLine]", "            ", 
+   RowBox[{"Boxed", " ", "->", " ", "False"}], ",", " ", 
+   "\[IndentingNewLine]", "           ", 
+   RowBox[{"AxesEdge", " ", "->", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", " ", 
+        RowBox[{"-", "1"}]}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", " ", 
+        RowBox[{"-", "1"}]}], "}"}], ",", " ", "None"}], "}"}]}], ",", 
+   "\[IndentingNewLine]", "           ", 
+   RowBox[{"AxesLabel", "->", 
+    RowBox[{"{", 
+     RowBox[{"None", ",", "None", ",", "None"}], "}"}]}], ",", 
+   "\[IndentingNewLine]", "          ", 
+   RowBox[{"ViewPoint", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "yview", ",", "zview"}], "}"}]}]}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsilon", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"logCTail", "[", 
+    RowBox[{"v_", ",", "k_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"v", "^", "2"}], " ", "+", " ", 
+          RowBox[{"k", "^", "2"}]}], " ", ">", " ", "1"}], "  ", "&&", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"v", ">", "straightpoint"}], " ", "&&", 
+            RowBox[{"k", "<", "straightpoint"}], " ", "&&", " ", 
+            RowBox[{"k", " ", "\[GreaterEqual]", 
+             RowBox[{"-", "straightpoint"}]}]}], ")"}], " ", "||", 
+          RowBox[{"(", " ", 
+           RowBox[{
+            RowBox[{"k", ">", "straightpoint"}], " ", "&&", " ", 
+            RowBox[{"k", " ", ">", "  ", 
+             RowBox[{
+              RowBox[{"2", "*", "straightpoint"}], "-", "v"}]}]}], ")"}], " ",
+           "||", " ", 
+          RowBox[{"(", " ", 
+           RowBox[{
+            RowBox[{"k", "<", 
+             RowBox[{"-", "straightpoint"}]}], " ", "&&", " ", 
+            RowBox[{"k", " ", "<=", " ", 
+             RowBox[{"v", " ", "-", 
+              RowBox[{"2", "*", "straightpoint"}]}]}]}], ")"}]}], ")"}]}], 
+       ",", " ", "0", ",", 
+       RowBox[{"-", "epsilon"}]}], "]"}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"logCOtherTail", "[", 
+    RowBox[{"v_", ",", "k_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"v", "^", "2"}], " ", "+", " ", 
+          RowBox[{"k", "^", "2"}]}], " ", "\[LessEqual]", "1"}], " ", "||", 
+        " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"v", "<", "straightpoint"}], "&&", 
+          RowBox[{"(", 
+           RowBox[{"k", "\[LessEqual]", 
+            RowBox[{
+             RowBox[{"2", "*", "straightpoint"}], "-", "v"}]}], ")"}], "&&", 
+          RowBox[{"k", "\[GreaterEqual]", 
+           RowBox[{"v", "-", 
+            RowBox[{"2", "*", "straightpoint"}]}]}]}], ")"}]}], " ", ",", " ",
+        "0", ",", " ", 
+       RowBox[{"-", "epsilon"}]}], "]"}]}], "]"}]}], "\n", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"logcq", "[", 
+   RowBox[{"v_", ",", "k_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", 
+    RowBox[{"If", " ", "[", 
+     RowBox[{
+      RowBox[{"b", " ", "\[Equal]", " ", "0"}], ",", 
+      RowBox[{
+       RowBox[{"logLike", "[", 
+        RowBox[{"v", ",", "k"}], "]"}], "+", 
+       RowBox[{"logCTail", "[", 
+        RowBox[{"v", ",", "k"}], "]"}]}], ",", "  ", 
+      RowBox[{
+       RowBox[{"logLike", "[", 
+        RowBox[{"v", ",", "k"}], "]"}], "+", 
+       RowBox[{"logCOtherTail", "[", 
+        RowBox[{"v", ",", "k"}], "]"}]}]}], "]"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cp", "[", 
+    RowBox[{"v_", ",", "k_", ",", "i_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "b", "}"}], ",", 
+     RowBox[{
+      RowBox[{"b", "=", "i"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Exp", "[", 
+       RowBox[{"logcq", "[", 
+        RowBox[{"v", ",", "k", ",", "b"}], "]"}], "]"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Plot3D", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"cp", "[", 
+       RowBox[{"v", ",", "k", ",", "0"}], "]"}], ",", "\n", 
+      "                  ", 
+      RowBox[{"cp", "[", 
+       RowBox[{"v", ",", "k", ",", "1"}], "]"}]}], "}"}], ",", " ", 
+    "\[IndentingNewLine]", "           ", 
+    RowBox[{"{", 
+     RowBox[{"v", ",", " ", 
+      RowBox[{"-", "3"}], ",", " ", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+    "           ", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", " ", 
+      RowBox[{"-", "3"}], ",", " ", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+    "            ", 
+    RowBox[{"PlotStyle", " ", "->", " ", 
+     RowBox[{"{", 
+      RowBox[{"Blue", ",", "Red"}], "}"}]}], ",", "\[IndentingNewLine]", 
+    "            ", 
+    RowBox[{"PlotRange", " ", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{".99", ",", "2"}], "}"}]}], ",", " ", "\[IndentingNewLine]", 
+    "           ", 
+    RowBox[{"AxesStyle", " ", "->", " ", 
+     RowBox[{"Directive", "[", 
+      RowBox[{"14", ",", 
+       RowBox[{"Thickness", "[", ".002", "]"}]}], "]"}]}], ",", " ", 
+    "\[IndentingNewLine]", "            ", 
+    RowBox[{"BoxRatios", " ", "->", " ", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", " ", "1", ",", " ", "2"}], "}"}]}], ",", "  ", 
+    "\[IndentingNewLine]", "            ", 
+    RowBox[{"Boxed", " ", "->", " ", "False"}], ",", " ", 
+    "\[IndentingNewLine]", "           ", 
+    RowBox[{"AxesEdge", " ", "->", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", " ", 
+         RowBox[{"-", "1"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", " ", 
+         RowBox[{"-", "1"}]}], "}"}], ",", " ", "None"}], "}"}]}], ",", 
+    "\[IndentingNewLine]", "           ", 
+    RowBox[{"AxesLabel", "->", 
+     RowBox[{"{", 
+      RowBox[{"None", ",", "None", ",", "None"}], "}"}]}], ",", 
+    "\[IndentingNewLine]", "          ", 
+    RowBox[{"PlotPoints", "\[Rule]", "100"}], ",", 
+    RowBox[{"ViewPoint", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "yview", ",", "zview"}], "}"}]}]}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"straightpoint", " ", "=", " ", 
+    RowBox[{"Sin", "[", 
+     RowBox[{"\[Pi]", "/", "4"}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"radius", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsilon", " ", "=", " ", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsilon2", " ", "=", " ", "0.0001"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"logSBCTail", "[", 
+    RowBox[{"w_", ",", "k_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "v", "}"}], ",", " ", 
+     RowBox[{
+      RowBox[{"v", "=", 
+       RowBox[{"w", "+", "2"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"v", "-", "1"}], ")"}], "^", "2"}], " ", "+", " ", 
+             RowBox[{"k", "^", "2"}]}], "<", "radius"}], " ", ")"}], " ", "||",
+           " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"w", "<", 
+             RowBox[{"straightpoint", "-", "1"}]}], " ", "&&", " ", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"k", " ", "<=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{
+                    SqrtBox["2"], "-", "1"}], ")"}], " ", "straightpoint"}], 
+                 "-", "w"}]}], ")"}], "&&", 
+              RowBox[{"(", 
+               RowBox[{"k", " ", ">=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"-", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    SqrtBox["2"], "-", "1"}], ")"}]}], "straightpoint"}], "+",
+                  "w"}]}], ")"}]}], ")"}]}], ")"}]}], ")"}], "  ", ",", " ", 
+        "0", ",", 
+        RowBox[{"-", "epsilon"}]}], "]"}]}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"logSBCOtherTail", "[", 
+    RowBox[{"w_", ",", "k_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "v", "}"}], ",", " ", 
+     RowBox[{
+      RowBox[{"v", "=", 
+       RowBox[{"w", "+", "2"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"v", "-", "1"}], ")"}], "^", "2"}], " ", "+", " ", 
+           RowBox[{"k", "^", "2"}]}], ">=", "radius"}], "  ", "&&", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"w", ">", 
+            RowBox[{"straightpoint", "-", "1"}]}], " ", "||", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"k", " ", ">", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   SqrtBox["2"], "-", "1"}], ")"}], " ", "straightpoint"}], 
+                "-", "w"}]}], ")"}], "||", 
+             RowBox[{"(", 
+              RowBox[{"k", " ", "<", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"-", 
+                  RowBox[{"(", 
+                   RowBox[{
+                    SqrtBox["2"], "-", "1"}], ")"}]}], "straightpoint"}], "+",
+                 "w"}]}], ")"}]}], ")"}]}], ")"}]}], " ", ",", " ", "0", ",", 
+        
+        RowBox[{"-", "epsilon"}]}], "]"}]}]}], "]"}]}], "\n", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"logsbcq", "[", 
+   RowBox[{"v_", ",", "k_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", 
+    RowBox[{"If", " ", "[", 
+     RowBox[{
+      RowBox[{"b", " ", "\[Equal]", " ", "1"}], ",", 
+      RowBox[{
+       RowBox[{"logLike", "[", 
+        RowBox[{
+         RowBox[{"v", "-", "1"}], ",", "k"}], "]"}], "+", 
+       RowBox[{"logSBCTail", "[", 
+        RowBox[{"v", ",", "k"}], "]"}]}], ",", "  ", 
+      RowBox[{
+       RowBox[{"logLike", "[", 
+        RowBox[{
+         RowBox[{"v", "-", "1"}], ",", "k"}], "]"}], "+", 
+       RowBox[{"logSBCOtherTail", "[", 
+        RowBox[{"v", ",", "k"}], "]"}]}]}], "]"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sbcp", "[", 
+   RowBox[{"v_", ",", "k_", ",", "i_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "b", "}"}], ",", 
+    RowBox[{
+     RowBox[{"b", "=", "i"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Exp", "[", 
+      RowBox[{"logsbcq", "[", 
+       RowBox[{"v", ",", "k", ",", "b"}], "]"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Plot3D", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"sbcp", "[", 
+       RowBox[{"v", ",", "k", ",", "0"}], "]"}], ",", 
+      RowBox[{"sbcp", "[", 
+       RowBox[{"v", ",", "k", ",", "1"}], "]"}]}], "}"}], ",", " ", 
+    "\[IndentingNewLine]", "           ", 
+    RowBox[{"{", 
+     RowBox[{"v", ",", " ", 
+      RowBox[{"-", "3"}], ",", " ", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+    "           ", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", " ", 
+      RowBox[{"-", "3"}], ",", " ", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+    "            ", 
+    RowBox[{"PlotStyle", " ", "->", " ", 
+     RowBox[{"{", 
+      RowBox[{"Red", ",", "Blue"}], "}"}]}], ",", "\[IndentingNewLine]", 
+    "             ", 
+    RowBox[{"PlotRange", " ", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{".99", ",", "2"}], "}"}]}], ",", " ", "\[IndentingNewLine]", 
+    "            ", 
+    RowBox[{"AxesStyle", " ", "->", " ", 
+     RowBox[{"Directive", "[", 
+      RowBox[{"14", ",", 
+       RowBox[{"Thickness", "[", ".002", "]"}]}], "]"}]}], ",", " ", 
+    "\[IndentingNewLine]", "            ", 
+    RowBox[{"BoxRatios", " ", "->", " ", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", " ", "1", ",", " ", "2"}], "}"}]}], ",", "  ", 
+    "\[IndentingNewLine]", "            ", 
+    RowBox[{"Boxed", " ", "->", " ", "False"}], ",", " ", 
+    "\[IndentingNewLine]", "           ", 
+    RowBox[{"AxesEdge", " ", "->", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", " ", 
+         RowBox[{"-", "1"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", " ", 
+         RowBox[{"-", "1"}]}], "}"}], ",", " ", "None"}], "}"}]}], ",", 
+    "\[IndentingNewLine]", "          ", " ", 
+    RowBox[{"AxesLabel", "->", 
+     RowBox[{"{", 
+      RowBox[{"None", ",", "None", ",", "None"}], "}"}]}], ",", 
+    "\[IndentingNewLine]", "          ", 
+    RowBox[{"PlotPoints", "\[Rule]", "100"}], ",", 
+    RowBox[{"ViewPoint", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "yview", ",", "zview"}], "}"}]}]}], "]"}], "\n", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.552073592306342*^9, 3.5520736014000397`*^9}, {
+   3.5520744090451927`*^9, 3.552074411695952*^9}, {3.552076745316703*^9, 
+   3.552076750097139*^9}, 3.55207680223512*^9, {3.552077966842272*^9, 
+   3.552078035543112*^9}, {3.55207807568274*^9, 3.5520780794539948`*^9}, {
+   3.5520781098346786`*^9, 3.552078110315284*^9}, {3.552080429568864*^9, 
+   3.552080586655171*^9}, {3.552080751283283*^9, 3.552080888962641*^9}, {
+   3.552081848623467*^9, 3.55208189058119*^9}, {3.552082388939787*^9, 
+   3.552082404307315*^9}, 3.5520824804442253`*^9}]
+},
+WindowSize->{1268, 1082},
+WindowMargins->{{235, Automatic}, {Automatic, 12}},
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (November 11, 2008)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 70, 1, 27, "Input"],
+Cell[618, 23, 22327, 620, 1722, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
