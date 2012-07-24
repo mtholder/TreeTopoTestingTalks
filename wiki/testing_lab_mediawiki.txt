@@ -52,6 +52,8 @@ and the score of the best tree that is compatible with the null hypothesis.
 The score difference can be a difference in log-likelihoods, a difference in 
 parsimony scores, ''etc''.
 
+Parametric bootstrapping has a lot of steps. You may want to look at [http://phylo.bio.ku.edu/woodshole/pboot_flow_chart.pdf this flowchart].
+
 == Lab Activity ==
 1. Download [http://phylo.bio.ku.edu/slides/data/algae.nex algae.nex]
 
