@@ -23,7 +23,7 @@ The easiest way to run all of the steps in the lab (via a script) is to download
 <pre>wget http://phylo.bio.ku.edu/slides/param_boot_lab.zip
 unzip param_boot_lab.zip
 cd param_boot_lab
-sh do_param_bootlab.sh
+bash do_param_bootlab.sh
 </pre>
 
 However, just running the script is probably not going to help you understand the steps. I recommend that you work through the lab until at least step 16 before you resort to running the script.
@@ -64,8 +64,11 @@ parsimony scores, ''etc''.
 == Lab Activity ==
 1. Download [http://phylo.bio.ku.edu/slides/data/algae.nex algae.nex]
 
-2. Find the score of the most parsimonious tree using PAUP.  
-Because this is a small dataset, you can use the <pre>AllTrees fd=bar</pre> 
+2. Find the score of the most parsimonious tree using PAUP.  Launch the command line version of PAUP. Because this is a small dataset, you can use the commands:
+<pre>
+Execute algae.nex ; 
+AllTrees fd=bar;
+</pre> 
 command to see all the scores of all the trees.
 :* How many most parsimonious trees are there? {{title|2|answer}}
 :* What is the parsimony score of the most parsimonious tree(s)? {{title|411 steps|answer}}
@@ -76,7 +79,7 @@ command to see all the scores of all the trees.
 
 4. Does the bootstrap  tree display the chlorophyll ''a/b'' clade (a clade of all of the species except ''Anacystis'' and ''Olithodiscus'')? {{title|No|answer}}
 
-What is the bootstrap support for the split that represents our null hypothesis? If that split is not supported by the data, then it will not be on the majority-rule tree  but it should be listed in the split frequency table. {{title|Typically the bootstrap support is around 25 percent|answer}}
+What is the bootstrap support for the split that represents our null hypothesis? If that split is not supported by the data, then it will not be on the majority-rule tree  but it should be listed in the split frequency table (''Anacystis'' is taxon number 7 and ''Olithodiscus'' is taxon number 8, so look for a row in the table with a split pattern that groups taxa 7 and 8 in one group and all the other taxa in the other group: e.g., "......**"). {{title|Typically the bootstrap support is around 25 percent|answer}}
 
 You can use <pre>ShowTrees all</pre> to see all of the trees in memory (note that the <code>AllTrees</code> command scores every tree, but does not retain all of the trees in memory.  It will only retain the best trees according to the criterion).
 
