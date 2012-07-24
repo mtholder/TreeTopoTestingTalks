@@ -566,6 +566,23 @@ BP may {\bf not} be conservative when you correct for selection bias.
 \end{picture}
 
 \myNewSlide
+\section*{Parsimony-informative Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-clean.pdf}}}
+\end{picture}
+
+\myNewSlide
+\section*{Parsimony-informative Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-messy.pdf}}}
+\end{picture}
+\myNewSlide
+\section*{Parsimony-informative Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-lba.pdf}}}
+\end{picture}
+
+\myNewSlide
 \section*{Pattern Frequency Space With Observed Data}
 \begin{picture}(-0,0)(-0,0)
 	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-sample.pdf}}}
@@ -579,35 +596,32 @@ BP may {\bf not} be conservative when you correct for selection bias.
 	\put(-30,-0){$\ln L(T_1 \mid X) = -D_{KL}(f_X \mid f_{T_1})$}
 \end{picture}
 
-
 \myNewSlide
-\section*{Bootstrapping in Pattern Frequency Space}
+\section*{LR statistics in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
-	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/simple-treespace-boot.pdf}}}
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
+	\put(-50,-0){Black is the $\ln L$ between}
+	\put(-50,-30){tree $AB|CD$  and tree $AC|BD$}
+	\put(370,-0){Yellow is the $\ln L$ between}
+	\put(380,-30){tree $AB|CD$  and tree $AD|BC$}
+	
 \end{picture}
 
 
 
 \myNewSlide
-\section*{aBP in Pattern Frequency Space}
+\section*{aLRT and aBayes in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
-	\put(-50,-0){Null distribution for BP}
-	\put(-40,-30){is calculated using}
-	\put(-40,-60){Normal approximations from}
-	\put(-40,-90){polytomy}
-	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-abp.pdf}}}
-\end{picture}
-
-
-\myNewSlide
-\section*{ML scores in Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-pp1v2.pdf}}}
-	\put(-30,-0){$\ln L(T_1 \mid X) = -D_{KL}(f_X \mid f_{T_1})$}
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
+	\put(-50,-0){In aLRT, we use mixtures of $\chi^2$}
+	\put(-40,-30){and selection bias corrections}
+	\put(-40,-60){to calculate the $P$-value.}
+	\put(370,-0){In aBayes, we normalize}
+	\put(380,-30){the ML scores to sum to 1}
 \end{picture}
 
 \myNewSlide
-\section*{Bootstrapping in Pattern Frequency Space}
+\section*{Non-parametric Bootstrapping in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
 	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/simple-treespace-boot.pdf}}}
 \end{picture}
@@ -623,14 +637,14 @@ BP may {\bf not} be conservative when you correct for selection bias.
 \end{picture}
 
 \myNewSlide
-\section*{aLRT and aBayes in Pattern Frequency Space}
+\section*{Parametric bootstrapping in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
-	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
-	\put(-50,-0){In aLRT, we use mixtures of $\chi^2$}
-	\put(-40,-30){and selection bias corrections}
-	\put(-40,-60){to calculate the $P$-value.}
-	\put(370,-0){In aBayes, we normalize}
-	\put(380,-30){the ML scores to (0,1)}
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-parametricBP.pdf}}}
+	\put(-50,-0){Uses the $\delta$ test statistic}
+	\put(-40,-30){and a null distribution}
+	\put(-40,-60){{\em centered} on point that}
+	\put(-40,-90){arises from the best}
+	\put(-40,-120){tree in $H_0$}
 \end{picture}
 
 \myNewSlide
@@ -642,16 +656,18 @@ BP may {\bf not} be conservative when you correct for selection bias.
 	\put(-40,-60){{\em centered} on the boundary}
 \end{picture}
 
+
 \myNewSlide
-\section*{Parametric bootstrapping in Pattern Frequency Space}
+\section*{aBP in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
-	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-parametricBP.pdf}}}
-	\put(-50,-0){Uses the $\delta$ test statistic}
-	\put(-40,-30){and a null distribution}
-	\put(-40,-60){{\em centered} on point that}
-	\put(-40,-90){arises from the best}
-	\put(-40,-120){tree in $H_0$}
+	\put(-50,-0){Null distribution for BP}
+	\put(-40,-30){is calculated using}
+	\put(-40,-60){Normal approximations from}
+	\put(-40,-90){polytomy}
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-abp.pdf}}}
 \end{picture}
+
+
 
 
 \myNewSlide
