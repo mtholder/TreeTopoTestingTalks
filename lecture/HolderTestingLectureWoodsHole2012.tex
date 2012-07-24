@@ -13,6 +13,11 @@
 
 \myNewSlide
 \huge 
+{\begin{center}Testing phylogenetic hypotheses\end{center}}
+\vskip 3cm
+\normalsize
+Mark T. Holder\\
+University of Kansas\par 
 Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 
 \myNewSlide
@@ -21,7 +26,7 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 \begin{compactenum}
 	\item Our data might be wrong (``garbage in garbage out'')
 	\item {\em Systematic error} -- Our inference method might not be sophisticated enough
-	\item \underline{{\em Random error}} -- We might not have enough data, so we are misled by sampling error.
+	\item \underline{{\em Random error}} -- We might not have enough data --  we are misled by sampling error.
 \end{compactenum}
 
 (or it could be some combination of these).
@@ -30,7 +35,7 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 
 \myNewSlide
 \begin{compactenum}
-	\item Bootstrapping to assess repeatability;
+	\item Bootstrapping
 	\item Putting $P$-values on trees:
 	\begin{compactitem}
 		\item KH Test, SH Test
@@ -51,16 +56,25 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 \section*{Some resources related to this talk}
 A \href{http://www.mendeley.com/groups/1275263/confidence-on-phylogenetic-trees/}{Mendeley Group} of papers related to topology testing on trees.
 
-A \url{http://phylo.bio.ku.edu/woodshole/} has the beginnings of an annotated bibliography on this literature. Really this is just a few cryptic notes now. It will get better.
+A \url{http://phylo.bio.ku.edu/woodshole/} has the beginnings of an annotated bibliography and some other notes.
 
-Those notes and associated code are at:\\ {\normalsize \url{https://github.com/mtholder/TreeTopoTestingTalks} }
+The source for all the documents for my talk is at:\\ {\normalsize \url{https://github.com/mtholder/TreeTopoTestingTalks} }
 
+
+\myNewSlide
+\begin{picture}(0,0)(0,0)
+	  \put(-60,-280){\makebox(0,0)[l]{\includegraphics[scale=1.2]{../newimages/JoeFelsBootFig1.pdf}}}
+	  \put(0,-716){\makebox(0,0)[l]{\includegraphics[scale=2]{../newimages/whitepage.pdf}}}
+\end{picture}
 
 \myNewSlide
 \includepdf[pages={1}]{../newimages/JoeFelsBootFig1.pdf} 
 
 \myNewSlide
-\includepdf[pages={1}]{../newimages/JoeFelsBootFig2.pdf} 
+\begin{picture}(0,0)(0,0)
+	  \put(-70,-316){\makebox(0,0)[l]{\includegraphics[scale=2]{../newimages/greypage.pdf}}}
+	  \put(-40,-200){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsBootFig2.pdf}}}
+\end{picture}
 
 \myNewSlide
 \includepdf[pages={1}]{../newimages/JoeFelsBootFig3.pdf} 
@@ -75,21 +89,23 @@ Those notes and associated code are at:\\ {\normalsize \url{https://github.com/m
 \section*{Bootstrapping for branch support}
 \large
 \begin{itemize}
-	\item ``Rogue'' taxa can lower support for many splits -- you do not have to use the majority-rule consensus tree to summarize bootstrap confidence statements.
+	\item Typically a few hundred bootstrap, pseudoreplicate datasets are produced.
 	\item Less thorough searching is faster, but will usually artificially lower bootstrap proportions (BP). However, \citet{AnisimovaGDDG2011} report that RAxML's rapid bootstrap algorithm may inflate BP.
+	\item ``Rogue'' taxa can lower support for many splits -- you do not have to use the majority-rule consensus tree to summarize bootstrap confidence statements.
 \end{itemize}
 
 \myNewSlide
 \section*{Bootstrapping as a noisy measure of repeatability}
 \begin{picture}(0,0)(0,0)
-	  \put(0,-280){\makebox(0,0)[l]{\includegraphics[scale=1.2]{../newimages/HillisB1993Fig3.pdf}}}
+	  \put(40,-280){\makebox(0,0)[l]{\includegraphics[scale=1.2]{../newimages/HillisB1993Fig3.pdf}}}
 	  \put(150,-330){\small \% recovering tree}
-	  \put(0,-20){\small repeated}
-	  \put(0,-50){\small bootstrapping}
+	  \put(0,-20){\small bootstrap}
+	  \put(0,-50){\small values from}
+	  \put(0,-80){\small many simulations}
 	  \put(0,-220){\small repeated}
 	  \put(0,-250){\small simulation}
-	  \put(350,-170){Simulation study of }
-	  \put(350,-200){\citet{HillisB1993} }
+	  \put(390,-170){Simulation study of }
+	  \put(390,-200){\citet{HillisB1993} }
 \end{picture}
 
 
@@ -101,7 +117,7 @@ Can we reject the hypothesis of a fair coin ($p_H = 0.5$)?
 The ``recipe'' is:
 \begin{compactenum}
 	\item Formulate null ($H_0$) and alternative ($H_A$) hypotheses.
-	\item Choose an acceptable Type-I error rate.
+	\item Choose an acceptable Type-I error rate (significance level)
 	\item Choose a test statistic: $f_H$= fraction of heads in sample. $f_H=0.6$
 	\item Identify the tail region of the test statistic - the values that conflict with $H_0$ at least a strongly as your observed data.
 	\item Calculate the $P$-value: The probability of a test statistic value more extreme than $0.6$ arising {\em even if $H_0$  is true}.
