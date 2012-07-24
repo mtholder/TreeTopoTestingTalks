@@ -1,17 +1,6 @@
-= Pointers to other topology testing techniques =
-The lecture mentions several tests that we are not going to run through in detail in the lab.
-
-You will find <code>KHTest</code>, <code>SHTest</code>, and <code>AUTest</code> options in PAUP's <code>LScore</code> command.
-Using <code>LScore</code> command is the easiest way to conduct these tests.
-Let us know if you have any questions about running these tests.
-
-You can run these tests and compare the results from those tests your results from the parametric bootstrapping.
-
-Other software relevant to the testing lecture:
-* [http://www.atgc-montpellier.fr/phyml/ PhyML] aLRT and aBayes statistics, in particular.
-* [http://wwwkramer.in.tum.de/exelixis/software.html RAxML] Rapid bootstrapping
-* [http://www.is.titech.ac.jp/~shimo/prog/consel/ Consel] AU Test, SH Test, Weighted SH Test, KH Test, Bootstrap
-* [http://www.mathstat.dal.ca/tsusko/software.cgi  Ed Susko's software page] (software from Susko, E. (2010) and Susko, E. (2006) papers is of particular relevance to the tree testing lecture).
+= Overview =
+This lab is written as a tutorial as a [[#Parametric Bootstrapping Lab]].
+If you prefer you can skip to [[#Topology tests in PAUP]] if you'd prefer to see the how to run <code>KHTest</code>, <code>SHTest</code>, and <code>AUTest</code> options in PAUP's <code>LScore</code> command.
  
 
 = Parametric Bootstrapping Lab =
@@ -26,7 +15,9 @@ cd param_boot_lab
 bash do_param_bootlab.sh
 </pre>
 
-However, just running the script is probably not going to help you understand the steps. I recommend that you work through the lab until at least step 16 before you resort to running the script.
+If your machine does not have wget, you can [http://www.gnu.org/software/wget/ install it] or use <code>curl -O http://phylo.bio.ku.edu/slides/param_boot_lab.zip</code> to grab the file.
+
+Just running the <code>do_param_bootlab.sh</code> script is probably not going to help you understand the steps. I recommend that you work through the lab until at least step 16 before you resort to running the script.
 
 == Background on the Dataset  ==
 
@@ -63,6 +54,8 @@ parsimony scores, ''etc''.
 
 == Lab Activity ==
 1. Download [http://phylo.bio.ku.edu/slides/data/algae.nex algae.nex]
+
+*NOTE: remember to type in '''module load bioware''' so that paup becomes available if using the cluster version
 
 2. Find the score of the most parsimonious tree using PAUP.  Launch the command line version of PAUP. Because this is a small dataset, you can use the commands:
 <pre>
@@ -291,3 +284,87 @@ to sort the values numerically.
 And finally:
 <pre>cat step19.sim.log | grep "Length " | awk '{print $2}' | python consecutiveDiffs.py | sort -g | tail -n50</pre>
 to show the 50 most extreme length differences.
+
+= Topology tests in PAUP =
+In PAUP you can easily run the Kishino-Hasegawa test, the Shimodaira-Hasegawa test, and the Approximately Unbiased test (of Shimodaira).
+
+Remember '''the KH test is only appropriate of the trees to be tested are specified ''a priori'''
+The [http://phylo.bio.ku.edu/slides/param_boot_lab.zip param_boot_lab.zip] file (which was used in the parametric bootstrapping lab) has a file called <code>twotrees.tre</code> which has two trees which differ in their placement of ''Euglena''
+
+Run:
+<pre>
+Execute algae.nex ;
+Log start file=topotesting.log.txt ;
+
+Gettrees file = twotrees.tre ;
+pscore ; 
+LScore 1 2 / nst = 6 basefreq=est rates=gamma shape=est pinv=0 rmat=est ;
+</pre>
+to load the trees in memory, score them in parsimony and in ML (under the GTR+G model, which is reasonable for these data).
+
+Do the two criteria agree? {{title|No. ML prefers tree 1; Parsimony prefers the second|answer}}
+
+Do the data '''significantly''' prefer tree 1 according to ML? To answer this, we can use the KHTest using the normal approximation of the log likelihood ratio test statistic, we can use:
+<pre>
+LScore 1 2 / khtest=normal ;
+</pre>
+Compare the ''P''-values when you use the RELL approximation.  
+The command for RELL bootstrapping is:
+<pre>
+LScore 1 2 / khtest=bootstrap RELL ;
+</pre>
+Are the ''P''-values very close to each other? If not, why not? {{title|They usually are not close for a dataset with this few characters.|answer}}
+
+== Tests when you don't have two trees a priori ==
+The following will not work on paup 4.0beta, you have to use the version of paup from [http://people.sc.fsu.edu/~dswofford/paup_test/ the paup_test site].
+
+In truth, I took the 2 trees from Peter Lockhart et al.'s paper. 
+This is also the source of these data that we are using.
+So the trees are '''not''' specified without reference to the data, so we should '''not''' be using the KH Test.
+
+Suppose that we a came into the study confident of the topology of the land plants: in this data set Tobacco and Rice are sister. This group of Angiosperms is sister to ''Marchantia.''
+
+We would not be willing to consider an inference that conflicted with this set of relationships. If this is the full extent of our knowledge, then our candidate set can be described as all trees that show those relationships.
+
+<pre>
+LSet nst = 6 basefreq=est rates=gamma shape=est pinv=0 rmat=est NoVec NThreads=1;
+Set maxtrees = 200 ;
+Constraint sp = (((Tobacco,Rice),Marchantia),Chlamydomonas,Chlorella,Euglena,Olithodiscus,Anacystis_nidulans) ;
+Showcons sp ;
+</pre>
+will load and show the constraint tree
+
+Now run:
+<pre>
+Generate all constraints = sp ;
+Savetrees file=candidateset.tre ;
+</pre>
+To tell PAUP to generate all of the trees in the candidate set and save them.
+
+Tell PAUP to run the AUTest and then SHTest with:
+<pre>
+LScore all / NoKHTest AUTest NoSHTest ;
+LScore all / NoKHTest NoAUTest SHTest  ;
+</pre>
+Do the ''P''-values agree? Which test is more powerful? {{tite|AU test - it should show lower P-values|answer}}
+
+If you have time, you can see the effect of candidate set size on the power of the SH Test.  Suppose that we knew that ''Chlamydomonas'' was sister to the land plants. Try out these commands:
+<pre>
+Constraint spc = ((((Tobacco,Rice),Marchantia),Chlamydomonas),Chlorella,Euglena,Olithodiscus,Anacystis_nidulans) ;
+Generate all constraints = spc ;
+Savetrees file=smallcandidateset.tre ;
+LScore all / NoKHTest NoAUTest SHTest  ;
+</pre>
+
+The tree numbers will have changed (because you have a smaller set of trees), 
+but you can find the matching tree by comparing lnL values.
+You should see a lower ''P''-value in the second analysis - having fewer trees in the candidate set increases the power of the SHTest (but has less affect on the AUTest).
+
+
+= Other pointers = 
+
+Other software relevant to the testing lecture:
+* [http://www.atgc-montpellier.fr/phyml/ PhyML] aLRT and aBayes statistics, in particular.
+* [http://wwwkramer.in.tum.de/exelixis/software.html RAxML] Rapid bootstrapping
+* [http://www.is.titech.ac.jp/~shimo/prog/consel/ Consel] AU Test, SH Test, Weighted SH Test, KH Test, Bootstrap
+* [http://www.mathstat.dal.ca/tsusko/software.cgi  Ed Susko's software page] (software from Susko, E. (2010) and Susko, E. (2006) papers is of particular relevance to the tree testing lecture).
