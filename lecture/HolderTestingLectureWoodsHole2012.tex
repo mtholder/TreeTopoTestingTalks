@@ -227,16 +227,18 @@ To get the $P$-value, we need to know the probability: $$\Pr\left(\big | \delta(
 
 \myNewSlide
 \section*{KH Test - the variance of $\delta(T_1,T_2 \mid X)$}
-To get a sense of the variance of $\delta(T_1,T_2 \mid X)$ we should expect because of sampling error, we could use:
+To approximate variance of $\delta(T_1,T_2 \mid X)$ under the null, we could:
 \begin{compactenum}
-	\item Assumptions of Normality (by appealing to the Central Limit Theorem), or
-	\item Bootstrapping to generate a cloud of pseudo-replicate $\delta(T_1,T_2 \mid X^{\ast})$ values.
+	\item use assumptions of Normality (by appealing to the Central Limit Theorem), or
+	\item use bootstrapping to generate a cloud of pseudo-replicate $\delta(T_1,T_2 \mid X^{\ast})$ values, and look at their variance.
 \end{compactenum}
 
 \myNewSlide
 \section*{RELL bootstrap}
 \large
-If the MLE of the numerical parameters (including branch lengths) do not change much when we bootstrap we can simply resample the site $\ln L$ values and sum them.
+Often, the MLE of numerical parameters (including branch lengths) do not change much when we bootstrap.
+
+So, we can simply resample the site $\ln L$ values and sum them (rather than reoptimizing parameters).
 
 This is called the RELL bootstrap \citep[][and Felsenstein]{KishinoMH1990}. It is not a ``safe'' replacement for normal bootstrapping \citep[especially on large trees;][]{StamatakisHR2008} when you want to estimate clade support.
 
@@ -270,8 +272,8 @@ For each of the $j$ bootstrap replicates, we treat $$\delta(T_1,T_2 \mid X^{\ast
 
 \myNewSlide
 \begin{picture}(500,0)(0,0)
-	  \put(0,10){\large $\delta(T_1,T_2 \mid X^{(j)})-\bar\delta(T_1,T_2 \mid X^{\ast})$}
-	  \put(0,-25){for many (RELL) bootstrapped replicates of the data}
+	  \put(0,10){Approximate null distribution with}
+	  \put(0,-30){tails (absolute value $\geq 3.18$) shown}
 	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/centered1-2hist-p.pdf}}}
 	  \put(250,-490){\normalsize$\delta(T_1,T_2 \mid X^{\ast})-\bar\delta(T_1,T_2 \mid X^{\ast})$}
 \end{picture}
@@ -294,7 +296,16 @@ Imagine a competition in which a large number of equally skilled people compete,
 \myNewSlide
 \begin{picture}(500,0)(0,0)
 	  \put(-10,15){Experiment: 70 people each flip a fair coin 100 times and}
-	  \put(0,-20){count \# heads.  Test statistic:}
+	  \put(0,-20){count \# heads.}
+	  \put(100,-55){$h_1 - h_2$}
+	  %\put(400,-55){$\max(h) - h_1$}
+	  \put(-30,-250){\makebox(0,0)[l]{\includegraphics[scale=.75]{../scripts/cfc_diff_a_priori.pdf}}}
+\end{picture}
+
+\myNewSlide
+\begin{picture}(500,0)(0,0)
+	  \put(-10,15){Experiment: 70 people each flip a fair coin 100 times and}
+	  \put(0,-20){count \# heads.}
 	  \put(100,-55){$h_1 - h_2$}
 	  \put(400,-55){$\max(h) - h_1$}
 	  \put(-30,-250){\makebox(0,0)[l]{\includegraphics[scale=.75]{../scripts/cfc_diff_a_priori.pdf}}}
@@ -338,7 +349,7 @@ The test makes worst-case assumptions, so the SH test {\bf is conservative}.
 \begin{picture}(500,0)(0,0)
 	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT1.pdf}}}
 	  \put(250,-100){1. Should we calculate the LRT as:}
-	  \put(230,-140){$\delta_i = 2\left[\ln L(t=\hat{t},T_i \mid X) - \ln L(t=0,T_i \mid X)\right]$}
+	  \put(224,-140){$\delta_i = 2\left[\ln L(t=\hat{t},T_i \mid X) - \ln L(t=0,T_i \mid X)\right]$}
 	  \put(250,-250){2. And can we use the $\chi_1^2$ distribution to}
 	  \put(250,-290){get the critical value for $\delta$?}
 \end{picture}
@@ -347,7 +358,7 @@ The test makes worst-case assumptions, so the SH test {\bf is conservative}.
 \begin{picture}(500,0)(0,0)
 	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT1.pdf}}}
 	  \put(250,-100){1. Should we calculate the LRT as:}
-	  \put(230,-140){$\delta_i = 2\left[\ln L(t=\hat{t},T_i \mid X) - \ln L(t=0,T_i \mid X)\right]$}
+	  \put(224,-140){$\delta_i = 2\left[\ln L(t=\hat{t},T_i \mid X) - \ln L(t=0,T_i \mid X)\right]$}
 	  \put(250,-180){{\bf \color{red}No. $t=0$ might not yield the best}}
 	  \put(260,-220){\bf\color{red} alternative $\ln L$}
 	  \put(250,-290){2. And can we use the $\chi_1^2$ distribution to}
@@ -361,16 +372,27 @@ The test makes worst-case assumptions, so the SH test {\bf is conservative}.
 \myNewSlide
 \begin{picture}(500,0)(0,0)
 	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT2.pdf}}}
+	  \put(470,-170){{\bf \color{red}No, tree hypotheses}}
+	  \put(470,-200){{\bf \color{red}are not nested! }}
 \end{picture}
 
 \myNewSlide
-\section*{Parametric bootstrapping}
-Generate the null distribution of $\delta_i$ by:
+\section*{Another ways to assess the null distribution of the LR test statistic}
 \begin{compactitem}
-	\item finding the best tree and model pair that are consistent with the $H_0$,
-	\item Simulating a large number $B$ of data sets, $X^{(1)}, X^{(2)},\ldots,X^{(B)}$ according to the parameters of that model,
-	\item Calculating $\delta^{(j)} = 2\left[\ln L (\hat{T} \mid  X^{(j)}) - \ln L (\hat{T}_{0} \mid  X^{(j)})\right]$ where $\hat{T}_{0}$ is the tree estimated when you enforce a constraint such that all of the trees are compatible with the null.
+	\item Bootstrapping then centering LR, and 
+	\item Using normality assumptions.
 \end{compactitem}
+are both clever and cute solutions.
+
+But they do not match the null distribution under any model of sequence evolution.
+
+\myNewSlide
+\section*{Parametric bootstrapping to generate the null distribution for the LR statistic}
+\begin{enumerate}
+	\item find the best tree and model pair that are consistent with the $H_0$,
+	\item Simulate $B$ data sets (where $B$ some large \#): $X^{(1)}, X^{(2)},\ldots,X^{(B)}$ under the parameters of that model,
+	\item Calculate $\delta^{(j)} = 2\left[\ln L (\hat{T} \mid  X^{(j)}) - \ln L (\hat{T}_{0} \mid  X^{(j)})\right]$ where $\hat{T}_{0}$ is the tree estimated when you enforce a constraint such that all of the trees are compatible with the null.
+\end{enumerate}
 
 \myNewSlide
 \section*{Parametric bootstrapping}
@@ -398,7 +420,8 @@ In the SOWH test, the null tree is specified {\em a priori}.
 \myNewSlide
 \begin{picture}(500,0)(0,0)
 	  \put(-130,-450){\makebox(0,0)[l]{\includegraphics[scale=1.5]{../newimages/AnisimovaG2006Fig1.pdf}}}
-	  \put(330,-200){aLRT = $2\left[\ln L(T_1 \mid X) - \ln L(T_2 \mid X)\right]$}
+	  \put(300,-200){aLRT = $2\left[\ln \ell_1 - \ln L(T_2 \mid X)\right]$}
+	  \put(300,-240){$\ell_1 = L(T_1 \mid X)$}
 	  \put(400,-400){\small Image from \citet{AnisimovaG2006}}
 \end{picture}
 
@@ -418,92 +441,11 @@ This is similar to ``likelihood-mapping'' of \citet{StrimmerVH1997}
 
 
 \myNewSlide
-\large
+\Large
 Bootstrap proportions have been characterized as providing:
 \begin{compactitem}
 	\item a measure of repeatability,
 	\item an estimate of the probability that the tree is correct (and bootstrapping has been criticized as being too conservative in this context),
-	\item the P-value for a tree or clade
-\end{compactitem}
-
-
-
-
-
-\myNewSlide
-\section*{Bootstrap Proportion $\neq$ Posterior Probability}
-Several studies have compared the non-parametric bootstrap proportion of clade from an ML analysis of a data set to the posterior probabilities when the same data is analyzed under the same model \citep{SuzukiGN2002,WilcoxZHH2002,AlfaroZL2003,CummingsHMRRW2003,DouadyDBDD2003}.\par
-
-Note: {\em \bf Not} all of these have implied that the measures {\em\bf should} be the same, but some authors have, usually citing \citet{EfronHH1996}.
-
-\myNewSlide
-\section*{Bootstrap Proportion $\neq$ Posterior Probability in general}
-\begin{picture}(-0,0)(-0,0)
-	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/WilcoxZHH-figure.pdf}}}
-	\put(40,-330){from \citet{WilcoxZHH2002}}
-\end{picture}
-
-
-\myNewSlide
-\section*{\citet{Newton1996} showed that, when you look at the median, the BP may not be biased downward}
-\begin{picture}(-0,0)(-0,0)
-	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{../newimages/Newton1996Fig4.pdf}}}
-	\put(40,-330){Figure 4 from \citet{Newton1996}}
-\end{picture}
-
-\myNewSlide
-\section*{What did \citet{EfronHH1996} say?}
-\normalsize
-We can use a Bayesian model to show that $\tilde{\alpha}$ is a reasonable 
-assessment of the probability that $\mathscr{R}_1$ contains $ \mu$.
-Suppose we believe \textit{a priori} that $\mu$ could lie anywhere in the plane with 
-equal probability. 
-Then having observed $\hat{\mu}$, the \textit{a posteriori} 
-distribution of  $\mu$ given  $\hat{\mu}$ is $N_2( \hat{\mu},I)$ exactly the same as the 
-bootstrap distribution of $\hat{\mu}^{\ast}$. 
-In other words, $\tilde{\alpha}$ is the  \textit{a posteriori}
-probability of the event $\mu \in \mathscr{R}_1$, if we begin with an ``uninformative'' prior density for $\mu$.
-\begin{picture}(-0,0)(-0,0)
-	\put(0,-120){\makebox(30,-150)[l]{\includegraphics[scale=4]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/EfronHH-straight-fig.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{\citet{EfronHH1996} view of tree space}
-\begin{picture}(-0,0)(-0,0)
-	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=3]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/EfronHH-treespace-fig.pdf}}}
-\end{picture}
-
-
-
-\myNewSlide
-\section*{What did \citet{EfronHH1996} say (and mean)?}
-\begin{itemize}
-	\item the ``uninformative'' prior density is a uniform prior over all of pattern frequency space
-	\item this is {\em not} equivalent to a prior that would be expected to yield a phylogeny (it is actually identical to the prior you would get if you assumed that all pairwise distances between taxa were $\infty$),
-	\item  \citet{EfronHH1996}  were {\em not} predicting that the bootstrap proportions should be identical to those from a Bayesian phylogenetic analysis with real phylogenetic priors.
-	\item  \cite{SvennbladEOB2006} have a nice paper on this subject.
-\end{itemize}
-
-
-\myNewSlide
-\section*{\citet{Newton1996} provides an intuition for why the mean BP may be lower than repeatability}
-\begin{picture}(-0,0)(-0,0)
-	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{../newimages/Newton1996Fig3.pdf}}}
-	\put(40,-320){Darker ovals indicate probability contours for datasets given the truth}
-	\put(60,-350){(note that repeatability $\approx$ 100\%)}
-	\put(40,-380){Lighter ovals show probability contours for bootstrapping for one dataset.}
-	\put(60,-410){Many real datasets will have BP much $<$ 100\%}
-	\put(-40,-50){Figure 3 from \citet{Newton1996}}
-\end{picture}
-
-
-
-\myNewSlide
-\large
-Bootstrap proportions have been characterized as providing:
-\begin{compactitem}
-	\item {\color{grey} a measure of repeatability,}
-	\item  {\color{grey} an estimate of the probability that the tree is correct (and criticized as being too conservative in this context),}
 	\item the P-value for a tree or clade
 \end{compactitem}
 
@@ -522,17 +464,26 @@ We can use simulation to generate the null distribution (we could actually use t
 
 \begin{picture}(0,0)(0,0)
 	\put(-10,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/nullhist.pdf}}}
-	\put(180,-250){\color{red} P-value $\approx$ 0.029 }
+	\put(150,-250){\color{red} P-value $\approx$ 0.029 }
 \end{picture}
 
 \myNewSlide
-If we bootstrap we get a sense of the variability in our estimate, but we can also get a tail probability for $\Pr(p^{(boot)} \leq 0.5)$
+We discussed how bootstrapping gives us a sense of the variability ofour estimate
 
+It can also give a tail probability for $\Pr(f_H^{(boot)} \leq 0.5)$
+
+Amazingly (for many applications):
+$$ \Pr(\hat{f}_H \geq 0.6 \mid \mbox{null is true}) \approx \Pr(f_H^{(boot)} \leq 0.5)$$
+
+In other words, the $P$-value is approximate by the fraction of bootstrap replicates consistent with the null.
 \myNewSlide
 
 \begin{picture}(0,0)(0,0)
 	\put(-60,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/boothist.pdf}}}
-	\put(60,-250){\color{red}$ \Pr(p^{(boot)} \leq 0.5)\approx$ 0.027 }
+	\put(30,-220){\color{red}$ \Pr(p^{(boot)} \leq 0.5)\approx$ 0.027 }
+	\put(30,-265){\color{red}$ BP = \mbox{frac.~of } p^{(boot)} \geq 0.5$}
+	\put(30,-310){\color{red}$ BP \approx 0.973$}
+	\put(30,-345){\color{red}$ P\mbox{-value} \approx 1-BP$}
 \end{picture}
 
 \myNewSlide
@@ -543,6 +494,16 @@ If we bootstrap we get a sense of the variability in our estimate, but we can al
 
 
 
+
+
+
+
+\myNewSlide
+\begin{itemize}
+	\item When you decide between trees, the boundaries between tree hypotheses can be curved 
+	\item When the boundary of the hypothesis space is curved, 1 - BP can be a poor approximation of the $P$-value.
+\end{itemize}
+-- \citet{EfronHH1996}
 \myNewSlide
 \section*{\citet{EfronHH1996} view of tree space}
 \begin{picture}(-0,0)(-0,0)
@@ -550,15 +511,9 @@ If we bootstrap we get a sense of the variability in our estimate, but we can al
 \end{picture}
 
 
-
-
-\myNewSlide
-\begin{itemize}
-	\item \citet{EfronHH1996} pointed out these issues of curvature of the boundaries between tree hypotheses.
-	\item When the boundary of the hypothesis space is curved, 1 - BP can be a poor approximation of the $P$-value.
-\end{itemize}
 \myNewSlide
 \begin{picture}(-0,0)(-0,0)
+
 	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/straight_p_value.pdf}}}
 	\put(300,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/straight_boot_p_value.pdf}}}
 \end{picture}
@@ -570,11 +525,31 @@ If we bootstrap we get a sense of the variability in our estimate, but we can al
 
 \myNewSlide
 \begin{itemize}
-	\item \citet{EfronHH1996} pointed out these issues of curvature of the boundaries between tree hypotheses.
-	\item When the boundary of the hypothesis space is curved, 1 - BP can be a poor approximation of the $P$-value.
 	\item \citet{EfronHH1996}  proposed a computationally expensive multi-level bootstrap (which has not been widely used).
-	\item \citet{Shimodaira2002} used the same theoretical framework to devise a (more feasible) Approximately Unbiased (AU) test of topologies. Multiple scales of bootstrap resampling are used to detect and correct for curvature of the boundary.
+	\item \citet{Shimodaira2002} used the same theoretical framework to devise a (more feasible) Approximately Unbiased (AU) test of topologies.
+	\begin{itemize}
+		\item Multiple scales of bootstrap resampling (80\% of characters, 90\%, 100\%, 110\%$\ldots$) are used to detect and correct for curvature of the boundary.
+		\item Implemented in the new versions of PAUP$^{\ast}$
+	\end{itemize}
 \end{itemize}
+
+
+\myNewSlide
+\section*{\cite{Susko2010} adjusted BP -- aBP}
+\large
+Susko agrees with curvature arguments of \citet{EfronHH1996} and \citet{Shimodaira2002}, {\bf but} points out that they ignore the {\bf sharp point} in parameter space around the polytomy.
+
+He uses the curvature of the likelihood function to correct bootstrap proportions so that $1-aBP$ accurately estimates the $P$-value.
+
+You need to perform a different correction when you know the candidate tree {\em a priori} versus when you are putting BP on the ML tree.
+
+BP may {\bf not} be conservative when you correct for selection bias.
+
+\myNewSlide
+\begin{picture}(-0,0)(-0,0)
+	\put(-60,-150){\makebox(30,-150)[l]{\includegraphics[scale=0.75]{../scripts/Susko2010Table3aBP.pdf}}}
+	\put(300,-150){\makebox(30,-150)[l]{\includegraphics[scale=0.75]{../scripts/Susko2010Table3aBPMLCorrection.pdf}}}
+\end{picture}
 
 
 
@@ -598,28 +573,19 @@ If we bootstrap we get a sense of the variability in our estimate, but we can al
 \end{picture}
 
 \myNewSlide
+\section*{ML scores in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-pp1v2.pdf}}}
+	\put(-30,-0){$\ln L(T_1 \mid X) = -D_{KL}(f_X \mid f_{T_1})$}
+\end{picture}
+
+
+\myNewSlide
 \section*{Bootstrapping in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
 	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/simple-treespace-boot.pdf}}}
 \end{picture}
 
-
-
-\myNewSlide
-\section*{\cite{Susko2010} adjusted BP -- aBP}
-Susko reports that the curvature arguments of \citet{EfronHH1996} and \citet{Shimodaira2002}, while not incorrect, ignore the {\bf sharp point} in parameter space around the polytomy.
-
-He uses the curvature of the likelihood function to correct bootstrap proportions so that $1-aBP$ accurately estimates the $P$-value.
-
-You need to perform a different correction when you know the candidate tree {\em a priori} versus when you are putting BP on the ML tree.
-
-BP may {\bf not} be conservative when you correct for selection bias.
-
-\myNewSlide
-\begin{picture}(-0,0)(-0,0)
-	\put(-60,-150){\makebox(30,-150)[l]{\includegraphics[scale=0.75]{../scripts/Susko2010Table3aBP.pdf}}}
-	\put(300,-150){\makebox(30,-150)[l]{\includegraphics[scale=0.75]{../scripts/Susko2010Table3aBPMLCorrection.pdf}}}
-\end{picture}
 
 
 \myNewSlide
@@ -742,7 +708,78 @@ When you use a parametric test, you will usually gain power. But non-parametric 
 \normalsize
 \bibliography{phylo}
 
+\myNewSlide
+\section*{Bootstrap Proportion $\neq$ Posterior Probability}
+Several studies have compared the non-parametric bootstrap proportion of clade from an ML analysis of a data set to the posterior probabilities when the same data is analyzed under the same model \citep{SuzukiGN2002,WilcoxZHH2002,AlfaroZL2003,CummingsHMRRW2003,DouadyDBDD2003}.\par
+
+Note: {\em \bf Not} all of these have implied that the measures {\em\bf should} be the same, but some authors have \citep[usually citing][]{EfronHH1996}.
+
+\myNewSlide
+\section*{Bootstrap Proportion $\neq$ Posterior Probability in general}
+\begin{picture}(-0,0)(-0,0)
+	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/WilcoxZHH-figure.pdf}}}
+	\put(40,-330){from \citet{WilcoxZHH2002}}
+	\put(40,-380){\normalsize Note: \citet{HuelsenbeckR2004} showed that the Bayesian posterior probabilities}
+	\put(40,-400){\normalsize are right on the equality line, if you  simulate from the prior.}
+\end{picture}
+
+
+\myNewSlide
+\section*{\citet{Newton1996} showed that, when you look at the median, the BP may not be biased downward}
+\begin{picture}(-0,0)(-0,0)
+	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{../newimages/Newton1996Fig4.pdf}}}
+	\put(40,-330){Figure 4 from \citet{Newton1996}}
+\end{picture}
+
+\myNewSlide
+\section*{What did \citet{EfronHH1996} say?}
+\normalsize
+We can use a Bayesian model to show that $\tilde{\alpha}$ is a reasonable 
+assessment of the probability that $\mathscr{R}_1$ contains $ \mu$.
+Suppose we believe \textit{a priori} that $\mu$ could lie anywhere in the plane with 
+equal probability. 
+Then having observed $\hat{\mu}$, the \textit{a posteriori} 
+distribution of  $\mu$ given  $\hat{\mu}$ is $N_2( \hat{\mu},I)$ exactly the same as the 
+bootstrap distribution of $\hat{\mu}^{\ast}$. 
+In other words, $\tilde{\alpha}$ is the  \textit{a posteriori}
+probability of the event $\mu \in \mathscr{R}_1$, if we begin with an ``uninformative'' prior density for $\mu$.
+\begin{picture}(-0,0)(-0,0)
+	\put(0,-120){\makebox(30,-150)[l]{\includegraphics[scale=4]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/EfronHH-straight-fig.pdf}}}
+\end{picture}
+
+\myNewSlide
+\section*{\citet{EfronHH1996} view of tree space}
+\begin{picture}(-0,0)(-0,0)
+	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=3]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/EfronHH-treespace-fig.pdf}}}
+\end{picture}
+
+
+
+\myNewSlide
+\section*{What did \citet{EfronHH1996} say (and mean)?}
+\begin{itemize}
+	\item the ``uninformative'' prior density is a uniform prior over all of pattern frequency space
+	\item this is {\em not} equivalent to a prior that would be expected to yield a phylogeny (it is actually identical to the prior you would get if you assumed that all pairwise distances between taxa were $\infty$),
+	\item  \citet{EfronHH1996}  were {\em not} predicting that the bootstrap proportions should be identical to those from a Bayesian phylogenetic analysis with real phylogenetic priors.
+	\item  \cite{SvennbladEOB2006} have a nice paper on this subject.
+\end{itemize}
+
+
+\myNewSlide
+\section*{\citet{Newton1996} provides an intuition for why the mean BP may be lower than repeatability}
+\begin{picture}(-0,0)(-0,0)
+	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{../newimages/Newton1996Fig3.pdf}}}
+	\put(40,-320){Darker ovals indicate probability contours for datasets given the truth}
+	\put(60,-350){(note that repeatability $\approx$ 100\%)}
+	\put(40,-380){Lighter ovals show probability contours for bootstrapping for one dataset.}
+	\put(60,-410){Many real datasets will have BP much $<$ 100\%}
+	\put(-40,-50){Figure 3 from \citet{Newton1996}}
+\end{picture}
+
+
+
 \includepdf[pages={28-45}]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/lec16-Bootstrapping/lec16Bootstrapping.pdf} 
+
 
 \end{document}
 
