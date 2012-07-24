@@ -149,9 +149,14 @@ The ``recipe'' is:
 \myNewSlide
 Making similar plots for tree inference is hard.
 
-Our parameter space is trees and branch lengths. Our data is a matrix of characters. It is hard to put these objects on the same plot.
+\begin{itemize}
+	\item Our parameter space is trees and branch lengths.
+	\item Our data is a matrix of characters.
+	\item It is hard to put these objects on the same plot.
+	\item We will see later (during ``cartoon time''), that we {\em can} visualize them both in a parameter space that describes the frequency of different data patterns.
+\end{itemize}
 
-We will see later (during ``cartoon time''), that we {\em can} visualize them both in a parameter space that describes the frequency of different data patterns.
+
 
 
 \myNewSlide
@@ -194,7 +199,7 @@ Expectation under null: $$\mathbb{E}_{H_0}\left[\delta(T_1,T_2 \mid X)\right] = 
 
 \myNewSlide
 
-To get the $P$-value, we need to know the probability: $$\Pr\left(\big | \delta(T_1,T_2 \mid X)\big |  \geq 3.18  \mid  H_0\mbox{ is true}\right) $$
+To get the $P$-value, we need to know the probability: $$\Pr\left(\big | \delta(T_1,T_2 \mid X)\big |  \geq 3.18  {\bm{\Big|}}  H_0\mbox{ is true}\right) $$
 \begin{picture}(500,0)(-20,-50)
 	  \put(-10,-235){\small$\delta(T_1,T_2 \mid X)=-3.18$}
 	  \put(460,-235){\small$-\delta(T_1,T_2 \mid X)=3.18$}
@@ -229,9 +234,16 @@ To get the $P$-value, we need to know the probability: $$\Pr\left(\big | \delta(
 \section*{KH Test - the variance of $\delta(T_1,T_2 \mid X)$}
 To approximate variance of $\delta(T_1,T_2 \mid X)$ under the null, we could:
 \begin{compactenum}
-	\item use assumptions of Normality (by appealing to the Central Limit Theorem), or
+	\item use assumptions of Normality (by appealing to the Central Limit Theorem). Or
 	\item use bootstrapping to generate a cloud of pseudo-replicate $\delta(T_1,T_2 \mid X^{\ast})$ values, and look at their variance.
 \end{compactenum}
+
+\myNewSlide
+\begin{picture}(500,0)(0,0)
+	  \put(0,-10){\large $\delta$ for many (RELL) bootstrapped replicates of the data}
+	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/uncentered1-2hist.pdf}}}
+	  \put(250,-490){\normalsize$\delta(T_1,T_2 \mid X^{\ast})$}
+\end{picture}
 
 \myNewSlide
 \section*{RELL bootstrap}
@@ -248,7 +260,8 @@ And it is really fast.
 
 \myNewSlide
 \begin{picture}(500,0)(0,0)
-	  \put(0,-10){\large $\delta$ for many (RELL) bootstrapped replicates of the data}
+	  \put(0,10){\large The (RELL) bootstrapped sample of statistics.}
+	  \put(0,-20){\large Is this the null distribution for our $\delta$ test statistic?}
 	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/uncentered1-2hist.pdf}}}
 	  \put(250,-490){\normalsize$\delta(T_1,T_2 \mid X^{\ast})$}
 \end{picture}
@@ -277,6 +290,16 @@ For each of the $j$ bootstrap replicates, we treat $$\delta(T_1,T_2 \mid X^{\ast
 	  \put(20,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../scripts/mtdna/centered1-2hist-p.pdf}}}
 	  \put(250,-490){\normalsize$\delta(T_1,T_2 \mid X^{\ast})-\bar\delta(T_1,T_2 \mid X^{\ast})$}
 \end{picture}
+
+
+\myNewSlide
+\section*{Summary - Part 1}
+
+\begin{itemize}
+	\item $\delta(T_1,T_2 \mid X) = 2\left[\ln L(T_1 \mid X) - \ln L(T_2 \mid X)\right]$ is a powerful statistic for discrimination between trees.
+	\item We can assess confidence by considering the variance in signal between different characters.
+	\item Bootstrapping helps us assess the variance in $\ln L$ that we would expect to result from sampling error.
+\end{itemize}
 
 
 \myNewSlide
@@ -315,11 +338,20 @@ Imagine a competition in which a large number of equally skilled people compete,
 
 \myNewSlide 
 \section*{Shimodaira and Hasegawa proposed the SH test which deals the ``selection bias'' introduced by using the ML tree in your test}
-You have to specify of a set of candidate trees - inclusion in this set {\bf must not} depend on the dataset to be analyzed.
+You have to specify of a {\bf set of candidate trees} - inclusion in this set {\bf must not} depend on the dataset to be analyzed.
 
 The null hypothesis is that all members of the candidate set have the same expected score.
 
 The test makes worst-case assumptions, so the SH test {\bf is conservative}.
+
+\myNewSlide
+\section*{SH test candidate set selection}
+\large
+\begin{itemize}
+	\item Should be all trees that you would have seriously entertained before seeing the data (considering a subset of trees for computational convenience can invalidate the test).
+	\item Using all trees is safe.
+	\item If a tree has low $\ln L$ and low variance of site-log-likelihoods then it can probably be safely removed without affecting the $P$-values of other trees\footnote{Because such a tree would be unlikely to ever be the tree that is the determines the maximum diplacement from the centered value, $m^{(j)}$.}
+\end{itemize}
 
 \myNewSlide
 {\bf SH Test details}
@@ -334,15 +366,6 @@ The test makes worst-case assumptions, so the SH test {\bf is conservative}.
 	\item $P$-value for tree $T_i$ is approximated by the proportions of bootstrap reps for which: $$\delta_i^{(j)} \leq \delta(\hat{T}, T_i \mid X)$$
 \end{compactitem}
 
-\myNewSlide
-\section*{SH test candidate set selection}
-\large
-\begin{compactitem}
-	\item The candidate set should be all trees that you would have seriously entertained before seeing the data. 
-	\item Using all trees is safe (though weakens the test, and is computationally demanding).
-	\item Unfortunately, only considering a subset of trees for computational convenience can invalidate the test.
-	\item If a tree has low $\ln L$ and low variance of site-log-likelihoods then it can probably be safely removed without affecting the $P$-values of other trees\footnote{Because such a tree would be unlikely to ever be the tree that is the determines the maximum diplacement from the centered value, $m^{(j)}$.}
-\end{compactitem}
 
 \myNewSlide
 \large
@@ -378,10 +401,10 @@ The test makes worst-case assumptions, so the SH test {\bf is conservative}.
 
 \myNewSlide
 \section*{Another ways to assess the null distribution of the LR test statistic}
-\begin{compactitem}
+\begin{itemize}
 	\item Bootstrapping then centering LR, and 
 	\item Using normality assumptions.
-\end{compactitem}
+\end{itemize}
 are both clever and cute solutions.
 
 But they do not match the null distribution under any model of sequence evolution.
@@ -389,16 +412,22 @@ But they do not match the null distribution under any model of sequence evolutio
 \myNewSlide
 \section*{Parametric bootstrapping to generate the null distribution for the LR statistic}
 \begin{enumerate}
-	\item find the best tree and model pair that are consistent with the $H_0$,
-	\item Simulate $B$ data sets (where $B$ some large \#): $X^{(1)}, X^{(2)},\ldots,X^{(B)}$ under the parameters of that model,
-	\item Calculate $\delta^{(j)} = 2\left[\ln L (\hat{T} \mid  X^{(j)}) - \ln L (\hat{T}_{0} \mid  X^{(j)})\right]$ where $\hat{T}_{0}$ is the tree estimated when you enforce a constraint such that all of the trees are compatible with the null.
+	\item find the best tree and model pair that are consistent with the null,
+	\item Simulate many datasets under the parameters of that model,
+	\item Calculate $\delta^{(j)} = 2\left[\ln L (\hat{T}^{(j)} \mid  X^{(j)}) - \ln L (\hat{T}_{0}^{(j)} \mid  X^{(j)})\right]$ for each simulated dataset.
+		\begin{compactitem}
+			\item the $(j)$ is just an index for the simulated dataset,
+			\item $\hat{T}_{0}^{(j)}$ is the tree under the null hypothesis for simulation replicate $j$
+		\end{compactitem}
 \end{enumerate}
 
 \myNewSlide
 \section*{Parametric bootstrapping}
-Intuitive and powerful, but not robust to model violation \citep{Buckley2002}.
+This procedure is often referred to as SOWH test (in that form, the null tree is specified {\em a priori}).
 
-In the SOWH test, the null tree is specified {\em a priori}.
+\citet{HuelsenbeckHN1996} describes how to use the approach as a test for monophyly.
+
+Intuitive and powerful, but not robust to model violation \citep{Buckley2002}.
 
 \myNewSlide
 \includepdf[pages={1}]{/Users/mholder/Documents/ku_teaching/BIOL-848-2010/images/gtr_i_g_sim_hist_data.pdf} 
@@ -513,14 +542,40 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 
 \myNewSlide
 \begin{picture}(-0,0)(-0,0)
+	\put(20,0){\normalsize Imagine hypothesis tests of locations with different border shapes:}
+	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/boundarylandscape.pdf}}}
+	\put(300,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/curved_boundarylandscape.pdf}}}
+	\put(80,-290){$H_0$}
+	\put(160,-330){$H_1$}
+	\put(380,-290){$H_0$}
+	\put(490,-330){$H_1$}
+\end{picture}
 
+\myNewSlide
+\begin{picture}(-0,0)(-0,0)
+	\put(40,0){\large Similar dataset with point estimates (red dot) in $H_1$}
+	\put(20,-40){\large Green dot is the hardest set of locations in $H_0$ to reject.}
+	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/boundarylandscape_pts.pdf}}}
+	\put(300,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/curved_boundarylandscape_pts.pdf}}}
+\end{picture}
+
+\myNewSlide
+\begin{picture}(-0,0)(-0,0)
 	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/straight_p_value.pdf}}}
 	\put(300,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/straight_boot_p_value.pdf}}}
+	\put(40,0){\large In the straight border case, symmetry implies that:}
+	\put(-20,-150){\large The actual $P$-value (blue region)}
+	\put(420,-150){\large $\approx 1-BP$}
+	\put(420,-190){\large ($1-BP$ is the blue below)}
 \end{picture}
 \myNewSlide
 \begin{picture}(-0,0)(-0,0)
 	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/acurved_p_value.pdf}}}
 	\put(300,-90){\makebox(30,-150)[l]{\includegraphics[scale=1.2]{../newimages/acurved_boot_p_value.pdf}}}
+	\put(40,0){\large In the curved border case, the symmetry breaks down:}
+	\put(-20,-150){\large The actual $P$-value (blue region)}
+	\put(420,-150){\large $\neq 1-BP$}
+	\put(420,-190){\large ($1-BP$ is the blue below)}
 \end{picture}
 
 \myNewSlide
@@ -537,20 +592,23 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 \myNewSlide
 \section*{\cite{Susko2010} adjusted BP -- aBP}
 \large
-Susko agrees with curvature arguments of \citet{EfronHH1996} and \citet{Shimodaira2002}, {\bf but} points out that they ignore the {\bf sharp point} in parameter space around the polytomy.
+\begin{compactitem}
+	\item Susko agrees with curvature arguments of \citet{EfronHH1996} and \citet{Shimodaira2002}, {\bf but} points out that they ignore the {\bf sharp point} in parameter space around the polytomy.
 
-He uses the curvature of the likelihood function to correct bootstrap proportions so that $1-aBP$ accurately estimates the $P$-value.
+	\item He correct bootstrap proportions:  $1-aBP$ accurately estimates the $P$-value.
 
-You need to perform a different correction when you know the candidate tree {\em a priori} versus when you are putting BP on the ML tree.
+	\item The method uses the multivariate normal distributions the based on calculations about the curvature of the {\em likelihood} surface.
 
-BP may {\bf not} be conservative when you correct for selection bias.
+	\item You need to perform a different correction when you know the candidate tree {\em a priori} versus when you are putting BP on the ML tree.
+
+	\item BP may {\bf not} be conservative when you correct for selection bias.
+\end{compactitem}
 
 \myNewSlide
 \begin{picture}(-0,0)(-0,0)
 	\put(-60,-150){\makebox(30,-150)[l]{\includegraphics[scale=0.75]{../scripts/Susko2010Table3aBP.pdf}}}
 	\put(300,-150){\makebox(30,-150)[l]{\includegraphics[scale=0.75]{../scripts/Susko2010Table3aBPMLCorrection.pdf}}}
 \end{picture}
-
 
 
 \myNewSlide
@@ -667,9 +725,6 @@ BP may {\bf not} be conservative when you correct for selection bias.
 	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-abp.pdf}}}
 \end{picture}
 
-
-
-
 \myNewSlide
 \section*{Summary - Part 1}
 
@@ -717,6 +772,9 @@ $P$-value from BP $\delta$  &aBP(semi)  & BP, aBP(semi), AU, EHH\\
 \end{table}%
 
 When you use a parametric test, you will usually gain power. But non-parametric tests are more robust to model violation.
+
+
+
 
 
 
