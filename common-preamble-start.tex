@@ -1,22 +1,5 @@
-\newif\ifpdf
-\ifx\pdfoutput\undefined
-\pdffalse % we are not running PDFLaTeX
-\else
-\pdfoutput=1 % we are running PDFLaTeX
-\pdftrue
-\fi
-
-\ifpdf
 \usepackage[pdftex]{graphicx}
-\else
-\usepackage{graphicx}
-\fi
-
-\ifpdf
 \DeclareGraphicsExtensions{.pdf, .jpg, .tif, .png}
-\else
-\DeclareGraphicsExtensions{.eps, .jpg}
-\fi
 
 %\usepackage{pslatex}
 \usepackage{tabularx,dcolumn, graphicx, amsfonts,amsmath}  
@@ -57,6 +40,16 @@
 \definecolor{grey}{rgb}{0.5,0.5,0.5}
 \definecolor{violet}{rgb}{0.619608, 0.286275, 0.631373}
 \definecolor{mybackgroundcolor}{rgb}{1.0,1.0,1.0}
+
+
+\newcommand*{\mathcolor}{}
+\def\mathcolor#1#{\mathcoloraux{#1}}
+\newcommand*{\mathcoloraux}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
 
 %\definecolor{light}{rgb}{.5,0.5,0.0}
 \definecolor{light}{rgb}{.3,0.3,0.3}
