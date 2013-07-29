@@ -1,0 +1,7 @@
+#NEXUS
+BAndB;
+[!****This is the best tree's score****]
+PScore;
+GetTrees file = step11.model.tre;
+[!####This is the true tree's score####]
+PScore;

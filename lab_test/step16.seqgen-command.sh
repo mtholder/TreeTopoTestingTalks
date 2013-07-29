@@ -1,0 +1,1 @@
+seq-gen -mGTR -a0.615276 -i0.357336 -r 0.64253 2.17067 0.75026 0.21462 4.68720 1.00000 -f 0.275521 0.209086 0.302208 0.213185 -l920 -n1000 -on -xeachreppaup.nex step13.model.txt >simdata.nex

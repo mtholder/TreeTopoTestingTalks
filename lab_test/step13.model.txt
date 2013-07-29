@@ -1,0 +1,1 @@
+((((((Tobacco:0.007296,Rice:0.022313):0.019320,Marchantia:0.006141):0.035847,Chlorella:0.036246):0.007227,Chlamydomonas:0.103649):0.015621,Euglena:0.127728):0.028294,Anacystis_nidulans:0.111674,Olithodiscus:0.104411);

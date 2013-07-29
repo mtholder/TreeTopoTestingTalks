@@ -1,0 +1,164 @@
+
+P A U P *
+Portable version 4.0b10 for Unix
+Mon Jul 23 13:33:24 2012
+
+      -----------------------------NOTICE-----------------------------
+        This is a beta-test version.  Please report any crashes,
+        apparent calculation errors, or other anomalous results.
+        There are no restrictions on publication of results obtained
+        with this version, but you should check the WWW site
+        frequently for bug announcements and/or updated versions.  
+        See the README file on the distribution media for details.
+      ----------------------------------------------------------------
+
+Processing of file "~/Documents/storage/talks/teaching/WoodsHole2011/testing/lab_test/algae.nex" begins...
+
+ Example of RNA data
+Data read in RNA format
+
+Data matrix has 8 taxa, 920 characters
+Valid character-state symbols: ACGU
+Missing data identified by '?'
+Gaps identified by '-'
+"Equate" macros in effect:
+   R,r ==> {AG}
+   Y,y ==> {CU}
+   M,m ==> {AC}
+   K,k ==> {GU}
+   S,s ==> {CG}
+   W,w ==> {AU}
+   H,h ==> {ACU}
+   B,b ==> {CGU}
+   V,v ==> {ACG}
+   D,d ==> {AGU}
+   N,n ==> {ACGU}
+
+Outgroup status changed:
+  1 taxon transferred to outgroup
+  Total number of taxa now in outgroup = 1
+  Number of ingroup taxa = 7
+
+Processing of file "~/Documents/storage/talks/teaching/WoodsHole2011/testing/lab_test/algae.nex" completed.
+
+1 constraint-tree definition(s) loaded from file "step5.abconstraint.tre"
+
+Branch-and-bound search settings:
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 920 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        659 characters are constant
+        132 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 129
+    Gaps are treated as "missing"
+  Initial upper bound: unknown (compute heuristically)
+  Addition sequence: furthest
+  Initial 'MaxTrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  Topological constraints not enforced
+  Trees are unrooted
+
+Branch-and-bound search completed:
+   Score of best tree found = 411
+   Number of trees retained = 2
+   Time used = <1 sec (CPU time = 0.00 sec)
+
+Lengths of trees in memory:
+  Character-status summary:
+    Of 920 total characters:
+      All characters are of type 'unord'
+      All characters have equal weight
+      659 characters are constant
+      132 variable characters are parsimony-uninformative
+      Number of parsimony-informative characters = 129
+  Gaps are treated as "missing"
+
+Tree #    1   2
+Length  411 411
+
+Branch-and-bound search settings:
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 920 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        659 characters are constant
+        132 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 129
+    Gaps are treated as "missing"
+  Initial upper bound: unknown (compute heuristically)
+  Addition sequence: furthest
+  Initial 'MaxTrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  Keeping only trees compatible with constraint-tree "ab"
+  Trees are unrooted
+
+Branch-and-bound search completed:
+   Score of best tree found = 415
+   Number of trees retained = 1
+   Time used = <1 sec (CPU time = 0.00 sec)
+
+Lengths of trees in memory:
+  Character-status summary:
+    Of 920 total characters:
+      All characters are of type 'unord'
+      All characters have equal weight
+      659 characters are constant
+      132 variable characters are parsimony-uninformative
+      Number of parsimony-informative characters = 129
+  Gaps are treated as "missing"
+
+Tree #    1
+Length  415
+
+Optimality criterion set to likelihood.
+
+Likelihood scores of tree(s) in memory:
+  Likelihood settings:
+    Number of substitution types  = 6
+    Substitution rate-matrix parameters estimated via ML
+    Nucleotide frequencies estimated via ML
+    Among-site rate variation:
+      Assumed proportion of invariable sites  = estimated
+      Distribution of rates at variable sites = gamma (discrete approximation)
+        Shape parameter (alpha)   = estimated
+        Number of rate categories = 4
+        Representation of average rate for each category = mean
+    These settings correspond to the GTR+G+I model
+    Number of distinct data patterns under this model = 178
+    Molecular clock not enforced
+    Starting branch lengths obtained using Rogers-Swofford approximation method
+    Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, delta=1e-06
+    -ln L (unconstrained) = unavailable due to missing-data and/or ambiguities
+
+Writing likelihood scores (and parameter estimates) to file "~/Documents/storage/talks/teaching/WoodsHole2011/testing/lab_test/modelparams.txt"
+
+Tree             1
+------------------
+-ln L   3155.91902
+Base frequencies:
+  A       0.275521
+  C       0.209086
+  G       0.302208
+  T       0.213185
+Rate matrix R:
+  AC       0.64253
+  AG       2.17067
+  AT       0.75026
+  CG       0.21462
+  CT       4.68720
+  GT       1.00000
+P_inv     0.357336
+Shape     0.615276
+
+Time used to compute likelihoods = <1 sec (CPU time = 0.83 sec)
+
+1 tree saved to file "~/Documents/storage/talks/teaching/WoodsHole2011/testing/lab_test/step11.model.tre"
+
+Processing of file "~/Documents/storage/talks/teaching/WoodsHole2011/testing/lab_test/steps7-11.realdatacmds.nex" completed.
+
+Execution terminated.

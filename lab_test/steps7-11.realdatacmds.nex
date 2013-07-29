@@ -1,0 +1,13 @@
+#NEXUS
+Log start file = 'steps7-11.realdatalog.txt' ; 
+Execute algae.nex ; 
+LoadConstr file=step5.abconstraint.tre;
+BAndB noenforce ; 
+PScore;
+BAndB enforce constraints=ab ; 
+PScore ;
+Set crit = like;
+LSet nst=6 rmat=est basefreq=est rates = gamma shape = est pinv=est;
+LScore / ScoreFile=modelparams.txt ;
+SaveTrees file = step11.model.tre brlens format=altnexus;
+

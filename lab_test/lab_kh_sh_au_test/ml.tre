@@ -1,0 +1,57 @@
+#NEXUS 
+
+Begin trees;  [Treefile saved Tue Jul 24 14:18:02 2012]
+[!
+>Data file = /Users/mholder/Documents/storage/talks/teaching/WoodsHole2011/testing/lab_test/lab_kh_sh_au_test/algae.nex
+>Heuristic search settings:
+>  Optimality criterion = likelihood
+>    Likelihood settings:
+>      User-specified substitution rate matrix =
+>                  -   0.638061   2.142198   0.766423
+>           0.638061          -   0.238572   4.471980
+>           2.142198   0.238572          -   1.000000
+>           0.766423   4.471980   1.000000          -
+>      Assumed nucleotide frequencies (set by user):
+>        A=0.27447  C=0.20918  G=0.30293  T=0.21342
+>      Among-site rate variation:
+>        Assumed proportion of invariable sites  = none
+>        Distribution of rates at variable sites = gamma (discrete approximation)
+>          Shape parameter (alpha)   = 0.253757
+>          Number of rate categories = 4
+>          Representation of average rate for each category = mean
+>      These settings correspond to the GTR+G model
+>      Number of distinct data patterns under this model = 178
+>      Molecular clock not enforced
+>      Starting branch lengths obtained using Rogers-Swofford approximation method
+>      Trees with approximate likelihoods 5% or further from the target score are rejected without additional iteration
+>      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, delta=1e-06
+>      -ln L (unconstrained) = unavailable due to missing-data and/or ambiguities
+>  Starting tree(s) obtained via stepwise addition
+>  Addition sequence: as-is
+>  Number of trees held at each step during stepwise addition = 1
+>  Branch-swapping algorithm: tree-bisection-reconnection (TBR)
+>  Steepest descent option not in effect
+>  Initial 'MaxTrees' setting = 100
+>  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
+>  'MulTrees' option in effect
+>  Topological constraints not enforced
+>  Trees are unrooted
+>
+>Heuristic search completed
+>   Total number of rearrangements tried = 137
+>   Score of best tree(s) found = 3154.98443
+>   Number of trees retained = 1
+>   Time used = <1 sec (CPU time = 0.45 sec)
+]
+	Translate
+		1 Tobacco,
+		2 Rice,
+		3 Marchantia,
+		4 Chlamydomonas,
+		5 Chlorella,
+		6 Euglena,
+		7 Anacystis_nidulans,
+		8 Olithodiscus
+		;
+tree PAUP_1 = [&U] (1,(2,(3,(4,(5,(6,(7,8)))))));
+End;

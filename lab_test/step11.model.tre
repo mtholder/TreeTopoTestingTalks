@@ -1,0 +1,30 @@
+#NEXUS 
+
+Begin trees;  [Treefile saved Mon Jul 23 13:33:24 2012]
+[!
+>Data file = /Users/mholder/Documents/storage/talks/teaching/WoodsHole2011/testing/lab_test/algae.nex
+>Branch-and-bound search settings:
+>  Optimality criterion = parsimony
+>    Character-status summary:
+>      Of 920 total characters:
+>        All characters are of type 'unord'
+>        All characters have equal weight
+>        659 characters are constant
+>        132 variable characters are parsimony-uninformative
+>        Number of parsimony-informative characters = 129
+>    Gaps are treated as "missing"
+>  Initial upper bound: unknown (compute heuristically)
+>  Addition sequence: furthest
+>  Initial 'MaxTrees' setting = 100
+>  Branches collapsed (creating polytomies) if maximum branch length is zero
+>  'MulTrees' option in effect
+>  Keeping only trees compatible with constraint-tree "ab"
+>  Trees are unrooted
+>
+>Branch-and-bound search completed:
+>   Score of best tree found = 415
+>   Number of trees retained = 1
+>   Time used = <1 sec (CPU time = 0.00 sec)
+]
+tree PAUP_1 = [&U] ((((((Tobacco:0.007296,Rice:0.022313):0.019320,Marchantia:0.006141):0.035847,Chlorella:0.036246):0.007227,Chlamydomonas:0.103649):0.015621,Euglena:0.127728):0.028294,Anacystis_nidulans:0.111674,Olithodiscus:0.104411);
+End;

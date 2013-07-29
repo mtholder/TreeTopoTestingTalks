@@ -1,0 +1,16 @@
+#NEXUS
+execute algae.nex ;
+
+gettrees file = twotrees.tre ;
+pscore ; 
+lscore 1 2 / nst = 6 basefreq=est rates=gamma shape=est pinv=0 rmat=est ;
+lscore 1 2 / khtest=normal ;
+lscore 1 2 / khtest=RELL ;
+
+
+set maxtrees = 200 ;
+constraint vp = (((Tobacco,Rice),Marchantia),Chlamydomonas,Chlorella,Euglena,Olithodiscus,Anacystis_nidulans) ;
+showcons vp ;
+generate all constraints = vp ;
+lscore all / AUTest NoVec;
+lscore all / SHTest NoVec ;

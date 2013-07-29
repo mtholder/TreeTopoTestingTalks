@@ -1,0 +1,2 @@
+Tree	-lnL	freqA	freqC	freqG	freqT	R(a)	R(b)	R(c)	R(d)	R(e)	p-inv	gamma shape
+1	3155.91902028	0.27552129	0.20908601	0.30220801	0.21318468	0.35733581	0.615276
