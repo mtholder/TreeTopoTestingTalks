@@ -32,7 +32,7 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 
 (or it could be some combination of these).
 
-{Focus of this evening: {\bf How confident can we be in the trees/splits inferred by ML?}}
+{Focus of this lecture: {\bf How confident can we be in the trees/splits inferred by ML?}}
 
 \myNewSlide
 \begin{compactenum}
@@ -47,6 +47,7 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 		\item aBP
 	\end{compactitem}
 	\item Cartoon time! ({\small warning: ``cartoon time'' will not actually be fun})
+	\item More {\em caveats}
 \end{compactenum}
 
 \myNewSlide
@@ -709,10 +710,8 @@ When you use a parametric test, you will usually gain power. But non-parametric 
 \section*{LR statistics in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
 	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
-	\put(-50,-0){Black is the $\ln L$ between}
-	\put(-50,-30){tree $AB|CD$  and tree $AC|BD$}
-	\put(370,-0){Yellow is the $\ln L$ between}
-	\put(380,-30){tree $AB|CD$  and tree $AD|BC$}
+	\put(-50,-0){Black is $\ln L(T_{AB}) - \ln L(T_{AC})$}
+	\put(370,-0){Yellow is $\ln L(T_{AB}) - \ln L(T_{AD})$}
 	
 \end{picture}
 
@@ -819,6 +818,28 @@ When you use a parametric test, you will usually gain power. But non-parametric 
 
 
 
+\myNewSlide
+\section*{Significantly different genealogy $\neq$ different phylogeny}
+\begin{itemize}
+	\item True ``gene tree'' can differ from true ``species tree'' for several biological reasons:
+	\begin{itemize}
+		\item deep coalescence,
+		\item gene duplication/loss (you may be comparing paralogs),
+		\item lateral gene transfer.
+	\end{itemize}
+\end{itemize}
+
+\includepdf[pages={6-18}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
+
+\myNewSlide
+\section*{We often don't want to test tree topologies}
+\begin{itemize}
+	\item If we are conducting a ``comparative method'' we have to consider phylogenetic history,
+	\item ideally we would integrate out the uncertainty in the phylogeny,
+	\item this entails averaging over trees, but not averaging $P$-values (or point estimates) over trees.
+\end{itemize}
+
+\includepdf[pages={26-27}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
 
 \myNewSlide
 \normalsize
@@ -911,17 +932,6 @@ probability of the event $\mu \in \mathscr{R}_1$, if we begin with an ``uninform
 
 \includepdf[pages={28-45}]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/lec16-Bootstrapping/lec16Bootstrapping.pdf} 
 
-\includepdf[pages={6-20}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
-
-\myNewSlide
-\section*{We often don't want to test tree topologies}
-\begin{itemize}
-	\item If we are conducting a ``comparative method'' we have to consider phylogenetic history,
-	\item ideally we would integrate out the uncertainty in the phylogeny,
-	\item this entails averaging over trees, but not averaging $P$-values (or point estimates) over trees.
-\end{itemize}
-
-\includepdf[pages={26-27}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
 
 \end{document}
 
