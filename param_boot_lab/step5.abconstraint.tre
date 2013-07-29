@@ -1,0 +1,5 @@
+#NEXUS
+begin trees ;
+    Tree ab = [&U](Anacystis_nidulans,Olithodiscus,(Euglena, Chlorella, Chlamydomonas, Marchantia, Rice, Tobacco));
+end;
+

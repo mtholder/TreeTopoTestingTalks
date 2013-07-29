@@ -1,0 +1,12 @@
+#NEXUS
+
+Execute data.nex ; 
+
+GetTrees file = candidate.tre mode = 3 ;
+
+LScore / SHTest=RELL ; [ use RELL bootstrap to approximate the variance of delta]
+
+
+GetTrees file = bigcandidateset.tre mode = 3 ;
+
+LScore / SHTest=RELL ; [ use RELL bootstrap to approximate the variance of delta]

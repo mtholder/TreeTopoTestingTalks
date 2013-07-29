@@ -1,0 +1,16 @@
+#NEXUS 
+
+Begin trees; 
+	Translate
+		1 Tobacco,
+		2 Rice,
+		3 Marchantia,
+		4 Chlamydomonas,
+		5 Chlorella,
+		6 Euglena,
+		7 Anacystis_nidulans,
+		8 Olithodiscus
+		;
+    tree traditional = [&U] (1,(2,(3,(4,(5,(6,(7,8)))))));
+    tree odd = [&U] (1,(2,(3,((5,((6,8),7)),4))));
+End;
