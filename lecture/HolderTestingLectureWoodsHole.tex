@@ -46,7 +46,6 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 		\item AU and \citet{EfronHH1996} correction
 		\item aBP
 	\end{compactitem}
-	\item Cartoon time! ({\small warning: ``cartoon time'' will not actually be fun})
 	\item More {\em caveats}
 \end{compactenum}
 
@@ -277,6 +276,69 @@ For each of the $j$ bootstrap replicates, we treat $$\delta(T_1,T_2 \mid X^{\ast
 	  \put(175,-490){\normalsize$\delta(T_1,T_2 \mid X^{\ast})-\bar\delta(T_1,T_2 \mid X^{\ast})$}
 \end{picture}
 
+\myNewSlide
+\section*{Cartoon time courtesy of the \citet{Kim2000} view of tree space}
+\begin{picture}(-0,0)(-0,0)
+	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=2.5]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/Kim-treespace.pdf}}}
+\end{picture}
+
+\myNewSlide
+\section*{Parsimony-informative Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace.pdf}}}
+\end{picture}
+
+\myNewSlide
+\section*{Parsimony-informative Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-clean.pdf}}}
+\end{picture}
+
+\myNewSlide
+\section*{Parsimony-informative Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-messy.pdf}}}
+\end{picture}
+\myNewSlide
+\section*{Parsimony-informative Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-lba.pdf}}}
+\end{picture}
+
+\myNewSlide
+\section*{Pattern Frequency Space With Observed Data}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-sample.pdf}}}
+	\put(370,-183){$f_X$}
+\end{picture}
+
+
+\myNewSlide
+\section*{ML scores in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-pp1v2.pdf}}}
+	\put(-30,-0){$\ln L(T_1 \mid X) = -D_{KL}(f_X \mid f_{T_1})$}
+\end{picture}
+
+\myNewSlide
+\section*{LR statistics in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
+	\put(-50,-0){Black is $\ln L(T_{AB}) - \ln L(T_{AC})$}
+	\put(370,-0){Yellow is $\ln L(T_{AB}) - \ln L(T_{AD})$}
+	
+\end{picture}
+
+\myNewSlide
+\section*{KH Test in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-kh.pdf}}}
+	\put(-50,-0){Uses the $\delta$ test statistic}
+	\put(-40,-30){and a null distribution}
+	\put(-40,-60){{\em centered} on the boundary}
+\end{picture}
+
+
 
 \myNewSlide
 \section*{Summary - Part 1}
@@ -286,6 +348,8 @@ For each of the $j$ bootstrap replicates, we treat $$\delta(T_1,T_2 \mid X^{\ast
 	\item We can assess confidence by considering the variance in signal between different characters.
 	\item Bootstrapping helps us assess the variance in $\ln L$ that we would expect to result from sampling error.
 \end{itemize}
+
+
 
 \myNewSlide
 \section*{Scenario}
@@ -417,6 +481,32 @@ But they do not match the null distribution under any model of sequence evolutio
 \end{enumerate}
 
 \myNewSlide
+\section*{Parametric bootstrapping in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-parametricBP.pdf}}}
+	\put(-50,-0){Uses the $\delta$ test statistic}
+	\put(-40,-30){and a null distribution}
+	\put(-40,-60){{\em centered} on point that}
+	\put(-40,-90){arises from the best}
+	\put(-40,-120){tree in $H_0$}
+\end{picture}
+\myNewSlide
+
+\begin{picture}(-0,0)(-0,20)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-susko-parametricBoot2.pdf}}}
+	\put(-50,60){Susko modification to}
+	\put(-50,30){param. boot.:}
+	\put(-50,-0){Uses the $\delta$ test statistic}
+	\put(-40,-30){and a null distribution}
+	\put(-40,-60){{\em centered} on point that}
+	\put(-40,-90){arises from the best}
+	\put(-40,-120){tree in $H_0$ but with }
+	\put(-40,-150){branches in conflict}
+	\put(-40,-180){with $\hat{T}$ constrained.}
+	\put(-40,-210){to be 0.}
+\end{picture}
+
+\myNewSlide
 \section*{Parametric bootstrapping}
 This procedure is often referred to as SOWH test (in that form, the null tree is specified {\em a priori}).
 
@@ -425,6 +515,8 @@ This procedure is often referred to as SOWH test (in that form, the null tree is
 Intuitive and powerful, but not robust to model violation \citep{Buckley2002}.
 
 Detailed step-by-step instructions in \url{https://molevol.mbl.edu/wiki/index.php/ParametricBootstrappingLab}
+
+\citet{Susko2014}: collapse optimize null tree with 0-length contraints for the branch in question (to avoid rejecting too often)
 
 \myNewSlide
 \includepdf[pages={1}]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/gtr_i_g_sim_hist_data.pdf} 
@@ -464,6 +556,17 @@ It is sensitive to model violation.
 This is similar to ``likelihood-mapping'' of \citet{StrimmerVH1997}
 
 
+\myNewSlide
+\section*{aLRT and aBayes in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
+	\put(-50,-0){In aLRT, we use mixtures of $\chi^2$}
+	\put(-40,-30){and selection bias corrections}
+	\put(-40,-60){to calculate the $P$-value.}
+	\put(370,-0){In aBayes, we normalize}
+	\put(380,-30){the ML scores to sum to 1}
+\end{picture}
+
 
 
 \myNewSlide
@@ -475,6 +578,21 @@ Bootstrap proportions have been characterized as providing:
 	\item the P-value for a tree or clade
 \end{compactitem}
 
+\myNewSlide
+\section*{Non-parametric Bootstrapping in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace-boot.pdf}}}
+\end{picture}
+
+\myNewSlide
+\section*{Bootstrapping in Pattern Frequency Space (if you had more data)}
+\begin{picture}(-0,0)(-0,0)
+	\put(-50,-0){AU Test uses multiple sequence}
+	\put(-40,-30){lengths to correct BP for}
+	\put(-40,-60){any curvature in the boundary }
+	\put(-40,-90){between trees}
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-boot-more.pdf}}}
+\end{picture}
 
 
 
@@ -613,6 +731,17 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 \end{picture}
 
 \myNewSlide
+\section*{aBP in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(-50,-0){Null distribution for BP}
+	\put(-40,-30){is calculated using}
+	\put(-40,-60){Normal approximations from}
+	\put(-40,-90){polytomy}
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-abp.pdf}}}
+\end{picture}
+
+
+\myNewSlide
 \section*{Summary - Part 1}
 
 \begin{itemize}
@@ -664,161 +793,6 @@ When you use a parametric test, you will usually gain power. But non-parametric 
 
 
 \myNewSlide
-\section*{Cartoon time courtesy of the \citet{Kim2000} view of tree space}
-\begin{picture}(-0,0)(-0,0)
-	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=2.5]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/Kim-treespace.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{Parsimony-informative Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{Parsimony-informative Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-clean.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{Parsimony-informative Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-messy.pdf}}}
-\end{picture}
-\myNewSlide
-\section*{Parsimony-informative Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-lba.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{Pattern Frequency Space With Observed Data}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-sample.pdf}}}
-	\put(370,-183){$f_X$}
-\end{picture}
-
-\myNewSlide
-\section*{ML scores in Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-pp1v2.pdf}}}
-	\put(-30,-0){$\ln L(T_1 \mid X) = -D_{KL}(f_X \mid f_{T_1})$}
-\end{picture}
-
-\myNewSlide
-\section*{LR statistics in Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
-	\put(-50,-0){Black is $\ln L(T_{AB}) - \ln L(T_{AC})$}
-	\put(370,-0){Yellow is $\ln L(T_{AB}) - \ln L(T_{AD})$}
-	
-\end{picture}
-
-
-
-\myNewSlide
-\section*{aLRT and aBayes in Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-ppv2.pdf}}}
-	\put(-50,-0){In aLRT, we use mixtures of $\chi^2$}
-	\put(-40,-30){and selection bias corrections}
-	\put(-40,-60){to calculate the $P$-value.}
-	\put(370,-0){In aBayes, we normalize}
-	\put(380,-30){the ML scores to sum to 1}
-\end{picture}
-
-\myNewSlide
-\section*{Non-parametric Bootstrapping in Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace-boot.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{Bootstrapping in Pattern Frequency Space (if you had more data)}
-\begin{picture}(-0,0)(-0,0)
-	\put(-50,-0){AU Test uses multiple sequence}
-	\put(-40,-30){lengths to correct BP for}
-	\put(-40,-60){any curvature in the boundary }
-	\put(-40,-90){between trees}
-	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-boot-more.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{Parametric bootstrapping in Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-parametricBP.pdf}}}
-	\put(-50,-0){Uses the $\delta$ test statistic}
-	\put(-40,-30){and a null distribution}
-	\put(-40,-60){{\em centered} on point that}
-	\put(-40,-90){arises from the best}
-	\put(-40,-120){tree in $H_0$}
-\end{picture}
-
-\myNewSlide
-\section*{KH Test in Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-120){\makebox(30,-190)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-kh.pdf}}}
-	\put(-50,-0){Uses the $\delta$ test statistic}
-	\put(-40,-30){and a null distribution}
-	\put(-40,-60){{\em centered} on the boundary}
-\end{picture}
-
-
-\myNewSlide
-\section*{aBP in Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(-50,-0){Null distribution for BP}
-	\put(-40,-30){is calculated using}
-	\put(-40,-60){Normal approximations from}
-	\put(-40,-90){polytomy}
-	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-abp.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{Summary - Part 2}
-\normalsize
-A (very) wide variety of tests differ by:
-\begin{itemize}
-	\item Null hypotheses:
-	\begin{compactitem}
-		\item Expected scores are the same $\rightarrow$ boundary tests. {\bf Non-parametric tests}
-		\item A tree consistent with the null is correct $\rightarrow$ tests that use the full info of the model. {\bf Parametric tests}
-	\end{compactitem}
-	\item How to use variance information:
-	\begin{compactitem}
-		\item Rely on ``raw'' bootstrap variability,
-		\item Invoke assumptions of normality of scores,
-		\item Use $\chi^2$ variants.
-	\end{compactitem}
-	\item Whether or not the trees must be specified {\em a priori} -- KH Test requires the trees to be specified {\em a priori}.
-\end{itemize}
-
-\myNewSlide
-\section*{Summary - Part 3}
-\large
-\begin{table}[htdp]
-\begin{center}
-\begin{tabular}{|c|p{7cm}|p{6cm}|}
-\hline
-& Parametric & Nonparametric \\
-\hline
-$P$-value from $\delta$  & aLRT, aBayes, parametric bootstrapping & KH, SH \\
-\hline
-$P$-value from BP  &aBP(semi)  & BP, aBP(semi), AU, EHH\\
-\hline
-\end{tabular}
-\end{center}
-\label{default}
-\end{table}%
-
-When you use a parametric test, you will usually gain power. But non-parametric tests are more robust to model violation.
-
-
-
-
-
-\myNewSlide
 \section*{Significantly different genealogy $\neq$ different phylogeny}
 \begin{itemize}
 	\item True ``gene tree'' can differ from true ``species tree'' for several biological reasons:
@@ -829,7 +803,7 @@ When you use a parametric test, you will usually gain power. But non-parametric 
 	\end{itemize}
 \end{itemize}
 
-\includepdf[pages={6-18}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
+%\includepdf[pages={6-18}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
 
 \myNewSlide
 \section*{We often don't want to test tree topologies}
