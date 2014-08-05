@@ -18,5 +18,8 @@ Directories
     * 'wiki' : wiki syntax used to write lab exercises (currently in MediaWiki 
             format only)
 
-See also: https://github.com/mtholder/treeTestingDemo
+See also: 
 
+    * https://github.com/mtholder/treeTestingDemo
+    * http://phylo.bio.ku.edu/mephytis/index.html
+    * https://github.com/mtholder/mephytis

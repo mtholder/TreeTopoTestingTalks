@@ -422,7 +422,7 @@ The test makes worst-case assumptions, so the SH test {\bf is conservative}.
 		$$c_i^{(j)} = {\ln L}(T_i \mid X^{(j)})-\bar{\ln L}(T_i \mid X^{\ast})$$
 	\item For each bootstrap replicate, $j$, pick the highest value from the centered distributions (this mimics the selection bias): $$m^{(j)} = \max\left[c_i^{(j)}\right] \mbox{ over all } i$$
 	\item Then for each tree and replicate, you get a sample from the null $\delta_i^{(j)} = m^{(j)} - c_i^{(j)}$
-	\item $P$-value for tree $T_i$ is approximated by the proportions of bootstrap reps for which: $$\delta_i^{(j)} \leq \delta(\hat{T}, T_i \mid X)$$
+	\item $P$-value for tree $T_i$ is approximated by the proportions of bootstrap reps for which: $$\delta_i^{(j)} \geq \delta(\hat{T}, T_i \mid X)$$
 \end{compactitem}
 
 
@@ -465,6 +465,8 @@ The test makes worst-case assumptions, so the SH test {\bf is conservative}.
 	\item Using normality assumptions.
 \end{itemize}
 are both clever and cute solutions.
+
+They are too conservative \citep{Susko2014} - more complicated calculations from the Normal [KHns] or mixtures of $\chi^2$ distributions [chi-bar].
 
 But they do not match the null distribution under any model of sequence evolution.
 
@@ -577,23 +579,6 @@ Bootstrap proportions have been characterized as providing:
 	\item an estimate of the probability that the tree is correct (and bootstrapping has been criticized as being too conservative in this context),
 	\item the P-value for a tree or clade
 \end{compactitem}
-
-\myNewSlide
-\section*{Non-parametric Bootstrapping in Pattern Frequency Space}
-\begin{picture}(-0,0)(-0,0)
-	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace-boot.pdf}}}
-\end{picture}
-
-\myNewSlide
-\section*{Bootstrapping in Pattern Frequency Space (if you had more data)}
-\begin{picture}(-0,0)(-0,0)
-	\put(-50,-0){AU Test uses multiple sequence}
-	\put(-40,-30){lengths to correct BP for}
-	\put(-40,-60){any curvature in the boundary }
-	\put(-40,-90){between trees}
-	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-boot-more.pdf}}}
-\end{picture}
-
 
 
 \myNewSlide
@@ -708,6 +693,22 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 	\end{itemize}
 \end{itemize}
 
+\myNewSlide
+\section*{Non-parametric Bootstrapping in Pattern Frequency Space}
+\begin{picture}(-0,0)(-0,0)
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace-boot.pdf}}}
+\end{picture}
+
+\myNewSlide
+\section*{Bootstrapping in Pattern Frequency Space (if you had more data)}
+\begin{picture}(-0,0)(-0,0)
+	\put(-50,-0){AU Test uses multiple sequence}
+	\put(-40,-30){lengths to correct BP for}
+	\put(-40,-60){any curvature in the  }
+	\put(-40,-90){boundary between}
+	\put(-40,-120){trees}
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{../newimages/simple-treespace-boot-more.pdf}}}
+\end{picture}
 
 \myNewSlide
 \section*{\cite{Susko2010} adjusted BP -- aBP}
@@ -813,7 +814,7 @@ When you use a parametric test, you will usually gain power. But non-parametric 
 	\item this entails averaging over trees, but not averaging $P$-values (or point estimates) over trees.
 \end{itemize}
 
-\includepdf[pages={26-27}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
+%\includepdf[pages={26-27}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
 
 \myNewSlide
 \normalsize
