@@ -71,3 +71,9 @@ Saved "The MSA after the removal of unreliable columns" link as guidance_filtere
     to create guidance.nex.  Removed .1 from each name and removed single-quotes 
     
 7. added trees to guidance.nex 
+
+
+# Steps in demo
+Execute
+
+lscore 1 2 / siteLike scoref=sitelnL.txt
