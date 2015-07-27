@@ -20,8 +20,8 @@ Begin trees;
 		4 Gorilla_gorilla_NC_011120,
 		5 Pongo_pygmaeus_NC_001646
 		;
-tree PAUP_1 = [&U] (1,(((2,3),4),5));
-tree PAUP_2 = [&U] (1,((2,(3,4)),5));
+tree PAUP_1 = [&U] (1,((2,(3,4)),5));
+tree PAUP_2 = [&U] (1,(((2,3),4),5));
 tree PAUP_3 = [&U] (1,(((2,4),3),5));
 tree PAUP_4 = [&U] (1,(((2,3),5),4));
 tree PAUP_5 = [&U] (1,(((2,5),3),4));
