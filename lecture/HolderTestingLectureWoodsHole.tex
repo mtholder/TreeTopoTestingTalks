@@ -350,6 +350,50 @@ For each of the $j$ bootstrap replicates, we treat $$\delta(T_1,T_2 \mid X^{\ast
 \end{picture}
 
 
+\myNewSlide
+\large
+\begin{picture}(500,0)(0,0)
+	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT1.pdf}}}
+	  \put(250,-100){1. Should we calculate the LRT as:}
+	  \put(224,-140){$\delta_i = 2\left[\ln L(t=\hat{t},T_i \mid X) - \ln L(t=0,T_i \mid X)\right]$}
+	  \put(250,-250){2. And can we use the $\chi_1^2$ distribution to}
+	  \put(250,-290){get the critical value for $\delta$?}
+\end{picture}
+
+\myNewSlide
+\begin{picture}(500,0)(0,0)
+	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT1.pdf}}}
+	  \put(250,-100){1. Should we calculate the LRT as:}
+	  \put(224,-140){$\delta_i = 2\left[\ln L(t=\hat{t},T_i \mid X) - \ln L(t=0,T_i \mid X)\right]$}
+	  \put(250,-180){{\bf \color{red}No. $t=0$ might not yield the best}}
+	  \put(260,-220){\bf\color{red} alternative $\ln L$}
+	  \put(250,-290){2. And can we use the $\chi_1^2$ distribution to}
+	  \put(250,-330){get the critical value for $\delta$ ?}
+	  \put(250,-370){{\bf \color{red}No. Constraining parameters}}
+	  \put(260,-410){{\bf \color{red}at boundaries leads to a mixture}}
+	  \put(260,-450){{\bf \color{red}such as: $\frac{1}{2}\chi_0^2 + \frac{1}{2}\chi_1^2$}}
+	  \put(260,-490){\small See \citet{OtaWHSK2000}.}
+\end{picture}
+
+\myNewSlide
+\begin{picture}(500,0)(0,0)
+	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT2.pdf}}}
+	  \put(470,-170){{\bf \color{red}No, tree hypotheses}}
+	  \put(470,-200){{\bf \color{red}are not nested! }}
+\end{picture}
+
+\myNewSlide
+\section*{Other ways to assess the null distribution of the LR test statistic}
+\begin{itemize}
+	\item Bootstrapping then centering LR, and 
+	\item Using normality assumptions.
+\end{itemize}
+are both clever and cute solutions.
+
+They are too conservative \citep{Susko2014} - more complicated calculations from the Normal [KHns] or mixtures of $\chi^2$ distributions [chi-bar].
+
+But they do not match the null distribution under any model of sequence evolution.
+
 
 \myNewSlide
 \section*{Summary - Part 1}
@@ -436,50 +480,6 @@ The test makes worst-case assumptions, so the SH test {\bf is conservative}.
 	\item $P$-value for tree $T_i$ is approximated by the proportions of bootstrap reps for which: $$\delta_i^{(j)} \geq \delta(\hat{T}, T_i \mid X)$$
 \end{compactitem}
 
-
-\myNewSlide
-\large
-\begin{picture}(500,0)(0,0)
-	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT1.pdf}}}
-	  \put(250,-100){1. Should we calculate the LRT as:}
-	  \put(224,-140){$\delta_i = 2\left[\ln L(t=\hat{t},T_i \mid X) - \ln L(t=0,T_i \mid X)\right]$}
-	  \put(250,-250){2. And can we use the $\chi_1^2$ distribution to}
-	  \put(250,-290){get the critical value for $\delta$?}
-\end{picture}
-
-\myNewSlide
-\begin{picture}(500,0)(0,0)
-	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT1.pdf}}}
-	  \put(250,-100){1. Should we calculate the LRT as:}
-	  \put(224,-140){$\delta_i = 2\left[\ln L(t=\hat{t},T_i \mid X) - \ln L(t=0,T_i \mid X)\right]$}
-	  \put(250,-180){{\bf \color{red}No. $t=0$ might not yield the best}}
-	  \put(260,-220){\bf\color{red} alternative $\ln L$}
-	  \put(250,-290){2. And can we use the $\chi_1^2$ distribution to}
-	  \put(250,-330){get the critical value for $\delta$ ?}
-	  \put(250,-370){{\bf \color{red}No. Constraining parameters}}
-	  \put(260,-410){{\bf \color{red}at boundaries leads to a mixture}}
-	  \put(260,-450){{\bf \color{red}such as: $\frac{1}{2}\chi_0^2 + \frac{1}{2}\chi_1^2$}}
-	  \put(260,-490){\small See \citet{OtaWHSK2000}.}
-\end{picture}
-
-\myNewSlide
-\begin{picture}(500,0)(0,0)
-	  \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT2.pdf}}}
-	  \put(470,-170){{\bf \color{red}No, tree hypotheses}}
-	  \put(470,-200){{\bf \color{red}are not nested! }}
-\end{picture}
-
-\myNewSlide
-\section*{Another ways to assess the null distribution of the LR test statistic}
-\begin{itemize}
-	\item Bootstrapping then centering LR, and 
-	\item Using normality assumptions.
-\end{itemize}
-are both clever and cute solutions.
-
-They are too conservative \citep{Susko2014} - more complicated calculations from the Normal [KHns] or mixtures of $\chi^2$ distributions [chi-bar].
-
-But they do not match the null distribution under any model of sequence evolution.
 
 \myNewSlide
 \section*{Parametric bootstrapping to generate the null distribution for the LR statistic}
