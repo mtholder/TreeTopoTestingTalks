@@ -13,7 +13,7 @@
 \huge 
 {\begin{center}Testing phylogenetic hypotheses\end{center}}
 \vskip 3cm
-\large Woods Hole Workshop on Molecular Evolution, 2014\par 
+\large Woods Hole Workshop on Molecular Evolution, 2015\par 
 \vskip 3cm
 \normalsize
 \normalsize
@@ -49,6 +49,9 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 	\item More {\em caveats}
 \end{compactenum}
 
+\includepdf[pages={64-74}]{../../../bodega/HolderSotU.pdf} 
+
+
 \myNewSlide
 \section*{Some resources related to this talk}
 A \href{http://www.zotero.org/groups/confidence_statements_on_phylogenies}{Zotero Group} of papers related to topology testing on trees.
@@ -83,6 +86,14 @@ The source for all the documents for my talk are at:\\ {\normalsize \url{https:/
 	  \put(0,-350){\small From Hasegawa's analysis of 232 sites D-loop}
 \end{picture}
 
+\myNewSlide
+{\large
+\url{http://phylo.bio.ku.edu/mephytis/boot-sample.html}
+
+\url{http://phylo.bio.ku.edu/mephytis/parsimony.html}
+
+\url{http://phylo.bio.ku.edu/mephytis/bootstrap.html}
+}
 \myNewSlide
 \section*{Bootstrapping for branch support}
 \large
@@ -516,7 +527,9 @@ This procedure is often referred to as SOWH test (in that form, the null tree is
 
 Intuitive and powerful, but not robust to model violation \citep{Buckley2002}.
 
-Detailed step-by-step instructions in \url{https://molevol.mbl.edu/wiki/index.php/ParametricBootstrappingLab}
+Can be done manually
+\footnote{instructions in \url{https://molevol.mbl.edu/wiki/index.php/ParametricBootstrappingLab}}
+or via \\ \href{SOWHAT}{https://github.com/josephryan/sowhat}
 
 \citet{Susko2014}: collapse optimize null tree with 0-length contraints for the branch in question (to avoid rejecting too often)
 
