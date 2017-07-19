@@ -7,3 +7,5 @@ HolderTestingLectureWoodsHole.fls
 HolderTestingLecture.tex~
 HolderTestingLectureWoodsHole.tex~
 HolderTestingLectureWoodsHole2016.pdf
+*.log
+*.pdf
