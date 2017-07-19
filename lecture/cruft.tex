@@ -1,0 +1,39 @@
+\myNewSlide
+\section*{RELL bootstrap}
+\large
+Often, the MLE of numerical parameters (including branch lengths) do not change much when we bootstrap.
+
+So, we can simply resample the site $\ln L$ values and sum them (rather than reoptimizing parameters).
+
+This is called the RELL bootstrap \citep[][and Felsenstein]{KishinoMH1990}. It is not a ``safe'' replacement for normal bootstrapping \citep[especially on large trees;][]{StamatakisHR2008} when you want to estimate clade support.
+
+But it should be good enough for helping us learn about the standard error of the $\ln L$.
+
+And it is really fast.
+
+
+
+
+\myNewSlide
+\section*{SH test candidate set selection}
+\large
+\begin{itemize}
+    \item Should be all trees that you would have seriously entertained before seeing the data (considering a subset of trees for computational convenience can invalidate the test).
+    \item Using all trees is safe.
+    \item If a tree has low $\ln L$ and low variance of site-log-likelihoods then it can probably be safely removed without affecting the $P$-values of other trees\footnote{Because such a tree would be unlikely to ever be the tree that is the determines the maximum diplacement from the centered value, $m^{(j)}$.}
+\end{itemize}
+
+\myNewSlide
+{\bf SH Test details}
+\normalsize
+\begin{compactitem}
+    \item For each tree $T_i$ in the candidate set calculate $\delta(\hat{T}, T_i \mid X)$
+    \item Bootstrap to generate ${\ln L}(T_i \mid X^{(j)})$ for each bootstrap replicate $j$.
+    \item For each tree $T_i$, use the mean, $\bar{\ln L}(T_i \mid X^{\ast})$, over all bootstrap replicates to center the bootstrapped collection of log-likelihoods:
+        $$c_i^{(j)} = {\ln L}(T_i \mid X^{(j)})-\bar{\ln L}(T_i \mid X^{\ast})$$
+    \item For each bootstrap replicate, $j$, pick the highest value from the centered distributions (this mimics the selection bias): $$m^{(j)} = \max\left[c_i^{(j)}\right] \mbox{ over all } i$$
+    \item Then for each tree and replicate, you get a sample from the null $\delta_i^{(j)} = m^{(j)} - c_i^{(j)}$
+    \item $P$-value for tree $T_i$ is approximated by the proportions of bootstrap reps for which: $$\delta_i^{(j)} \geq \delta(\hat{T}, T_i \mid X)$$
+\end{compactitem}
+
+
