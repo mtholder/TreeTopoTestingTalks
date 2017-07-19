@@ -26,6 +26,37 @@
 \end{picture}
 
 \myNewSlide
+\section*{aLRT of \citet{AnisimovaG2006}}
+\begin{compactitem}
+    \item For a {\bf branch} $j$, calculate $\delta_{j}^{\dag}$ as twice the difference in $\ln L$ between the optimal tree (which has the branch) and the best NNI neighbor.
+    \item This is very fast.
+    \item They argue that the null distribution for each LRT around the polytomy follows a $\frac{1}{2}\chi_0^2 + \frac{1}{2}\chi_1^2$ distribution
+    \item The introduce Bonferroni-correction appropriate for correcting for the selection of the best of the three resolutions.
+    \item They find aLRT to be accurate and powerful in simulations, but \citet{AnisimovaGDDG2011} report that it rejects too often and is sensitive to model violation.
+\end{compactitem}
+
+\myNewSlide
+\begin{picture}(500,0)(0,0)
+      \put(-130,-450){\makebox(0,0)[l]{\includegraphics[scale=1.5]{../newimages/AnisimovaG2006Fig1.pdf}}}
+      \put(300,-200){aLRT = $2\left[\ln \ell_1 - \ln L(T_2 \mid X)\right]$}
+      \put(300,-240){$\ell_1 = L(T_1 \mid X)$}
+      \put(400,-400){\small Image from \citet{AnisimovaG2006}}
+\end{picture}
+
+\myNewSlide
+\section*{aBayes \citet{AnisimovaGDDG2011} }
+
+
+$$\mbox{aBayes}(T_1 \mid X) = \frac{\Pr(X \mid T_1)}{\Pr(X \mid T_1) + \Pr(X \mid T_2) + \Pr(X \mid T_3)}$$
+
+Simulation studies of \citet{AnisimovaGDDG2011} show it to have the best power of the methods that do not have inflated probability of falsely rejecting the null.
+
+It is sensitive to model violation.
+
+This is similar to ``likelihood-mapping'' of \citet{StrimmerVH1997}
+
+
+\myNewSlide
 \begin{picture}(500,0)(0,0)
       \put(-200,-190){\makebox(0,0)[l]{\includegraphics[scale=1.0]{../newimages/JoeFelsTreeLRT2.pdf}}}
       \put(470,-170){{\bf \color{red}No, tree hypotheses}}

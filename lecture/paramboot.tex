@@ -1,0 +1,34 @@
+
+
+\myNewSlide
+\section*{Parametric bootstrapping to generate the null distribution for the LR statistic}
+\begin{enumerate}
+    \item find the best tree and model pair that are consistent with the null,
+    \item Simulate many datasets under the parameters of that model,
+    \item Calculate $\delta^{(j)} = 2\left[\ln L (\hat{T}^{(j)} \mid  X^{(j)}) - \ln L (\hat{T}_{0}^{(j)} \mid  X^{(j)})\right]$ for each simulated dataset.
+        \begin{compactitem}
+            \item the $(j)$ is just an index for the simulated dataset,
+            \item $\hat{T}_{0}^{(j)}$ is the tree under the null hypothesis for simulation replicate $j$
+        \end{compactitem}
+\end{enumerate}
+
+
+\myNewSlide
+\section*{Parametric bootstrapping}
+This procedure is often referred to as SOWH test (in that form, the null tree is specified {\em a priori}).
+
+\citet{HuelsenbeckHN1996} describes how to use the approach as a test for monophyly.
+
+Intuitive and powerful, but not robust to model violation \citep{Buckley2002}.
+
+Can be done manually\footnote{instructions in \url{https://molevol.mbl.edu/index.php/ParametricBootstrappingLab}}
+or via \href{https://github.com/josephryan/sowhat}{SOWHAT} by \citet{SOWHAT}. Optional demo \href{https://molevol.mbl.edu/index.php/SOWHAT}{here}.
+
+\citet{Susko2014}: collapse optimize null tree with 0-length contraints for the branch in question (to avoid rejecting too often)
+
+\myNewSlide
+\includepdf[pages={1}]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/gtr_i_g_sim_hist_data.pdf} 
+
+
+\myNewSlide
+\includepdf[pages={1}]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/jc_sim_hist_data.pdf} 

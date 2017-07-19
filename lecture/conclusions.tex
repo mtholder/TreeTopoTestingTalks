@@ -1,0 +1,33 @@
+\myNewSlide
+\section*{Conclusions 1 - confidence on trees}\large
+\large
+\begin{compactenum}
+    \item Non-parametric bootstrapping proportions are useful, but a little hard to interpret  precisely.
+    \begin{compactitem}
+        \item Susko has and adjustment (``aBP``) so that $1 - aBP\approx P$-value for the hypothesis that a recovered branch is not present in the true tree. 
+    \end{compactitem}
+    \item ``How should we assign a $P$-value to tree hypothesis?'' is surprisingly complicated.
+    \begin{compactitem}
+        \item The Kishino-Hasegawa (KH-Test) can be used if you are comparing 2 trees specified {\em a priori}
+        \item Shimodaira's approximately unbiased (AU-Test) should be used if you are comparing a set of trees.
+    \end{compactitem}
+\end{compactenum}
+
+\myNewSlide
+\section*{Conclusions 2 - confidence about evo.~hypotheses}
+If $H_0$ is about the evolution of a trait:
+\begin{compactenum}
+    \item $P$-value must consider uncertainty of the tree:
+    \begin{compactitem}
+        \item can be large $P$ over confidence set of trees.
+        \item Bayesian methods (covered tomorrow) enable prior predictive or posterior predictive $P$-values.
+    \end{compactitem}
+\end{compactenum}
+
+\myNewSlide
+\section*{Conclusions 3 - simulate your own null distributions}
+(the focus of the lab)
+\begin{compactenum}
+    \item In phylogenetics we often have to simulate data to approximate $P$-values 
+    \item Designing the simulations requires care to make a convincing argument.
+\end{compactenum}
