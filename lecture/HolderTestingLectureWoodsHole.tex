@@ -13,7 +13,7 @@
 \huge 
 {\begin{center}Testing phylogenetic hypotheses\end{center}}
 \vskip 3cm
-\large Woods Hole Workshop on Molecular Evolution, 2015\par 
+\large Woods Hole Workshop on Molecular Evolution, 2016\par 
 \vskip 3cm
 \normalsize
 \normalsize
@@ -49,9 +49,6 @@ Thanks to Paul Lewis, Joe Felsenstein, and Peter Beerli for slides.
 	\item More {\em caveats}
 \end{compactenum}
 
-\includepdf[pages={64-74}]{../../../bodega/HolderSotU.pdf} 
-
-
 \myNewSlide
 \section*{Some resources related to this talk}
 A \href{http://www.zotero.org/groups/confidence_statements_on_phylogenies}{Zotero Group} of papers related to topology testing on trees.
@@ -60,6 +57,11 @@ A \url{http://phylo.bio.ku.edu/woodshole/index.html} has the beginnings of an an
 
 The source for all the documents for my talk are at:\\ {\normalsize \url{https://github.com/mtholder/TreeTopoTestingTalks} }\\
 {\normalsize \url{https://github.com/mtholder/treeTestingDemo}}
+
+
+\includepdf[pages={64-74}]{../../../bodega/HolderSotU.pdf} 
+
+
 
 
 \myNewSlide
@@ -290,13 +292,13 @@ For each of the $j$ bootstrap replicates, we treat $$\delta(T_1,T_2 \mid X^{\ast
 \myNewSlide
 \section*{Cartoon time courtesy of the \citet{Kim2000} view of tree space}
 \begin{picture}(-0,0)(-0,0)
-	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=2.5]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/Kim-treespace.pdf}}}
+	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=2.5]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/Kim-treespace.pdf}}}
 \end{picture}
 
 \myNewSlide
 \section*{Parsimony-informative Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
-	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace.pdf}}}
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace.pdf}}}
 \end{picture}
 
 \myNewSlide
@@ -527,17 +529,17 @@ This procedure is often referred to as SOWH test (in that form, the null tree is
 
 Intuitive and powerful, but not robust to model violation \citep{Buckley2002}.
 
-Can be done manually\footnote{instructions in \url{https://molevol.mbl.edu/wiki/index.php/ParametricBootstrappingLab}}
-or via \href{https://github.com/josephryan/sowhat}{SOWHAT} (demo tonight)
+Can be done manually\footnote{instructions in \url{https://molevol.mbl.edu/index.php/ParametricBootstrappingLab}}
+or via \href{https://github.com/josephryan/sowhat}{SOWHAT} by \citet{SOWHAT}. Optional demo \href{https://molevol.mbl.edu/index.php/SOWHAT}{here}.
 
 \citet{Susko2014}: collapse optimize null tree with 0-length contraints for the branch in question (to avoid rejecting too often)
 
 \myNewSlide
-\includepdf[pages={1}]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/gtr_i_g_sim_hist_data.pdf} 
+\includepdf[pages={1}]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/gtr_i_g_sim_hist_data.pdf} 
 
 
 \myNewSlide
-\includepdf[pages={1}]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/jc_sim_hist_data.pdf} 
+\includepdf[pages={1}]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/jc_sim_hist_data.pdf} 
 
 \myNewSlide
 \section*{aLRT of \citet{AnisimovaG2006}}
@@ -604,7 +606,7 @@ We can use simulation to generate the null distribution (we could actually use t
 \myNewSlide
 
 \begin{picture}(0,0)(0,0)
-	\put(-10,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/nullhist.pdf}}}
+	\put(-10,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/nullhist.pdf}}}
 	\put(150,-250){\color{red} P-value $\approx$ 0.029 }
 \end{picture}
 
@@ -620,7 +622,7 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 \myNewSlide
 
 \begin{picture}(0,0)(0,0)
-	\put(-60,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/boothist.pdf}}}
+	\put(-60,-250){\makebox(0,0)[l]{\includegraphics[scale=1.0]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/boothist.pdf}}}
 	\put(30,-220){\color{red}$ \Pr(p^{(boot)} \leq 0.5)\approx$ 0.027 }
 	\put(30,-265){\color{red}$ BP = \mbox{frac.~of } p^{(boot)} \geq 0.5$}
 	\put(30,-310){\color{red}$ BP \approx 0.973$}
@@ -629,8 +631,8 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 
 \myNewSlide
 \begin{picture}(-0,0)(-0,0)
-	\put(60,00){\makebox(30,-150)[l]{\includegraphics[scale=0.5]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/nullhist.pdf}}}
-	\put(60,-260){\makebox(30,-150)[l]{\includegraphics[scale=0.5]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/boothist.pdf}}}
+	\put(60,00){\makebox(30,-150)[l]{\includegraphics[scale=0.5]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/nullhist.pdf}}}
+	\put(60,-260){\makebox(30,-150)[l]{\includegraphics[scale=0.5]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/boothist.pdf}}}
 \end{picture}
 
 
@@ -648,13 +650,13 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 \myNewSlide
 \section*{\citet{EfronHH1996} view of tree space}
 \begin{picture}(-0,0)(-0,0)
-	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=3]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/EfronHH-treespace-fig.pdf}}}
+	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=3]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/EfronHH-treespace-fig.pdf}}}
 \end{picture}
 
 \myNewSlide
 \section*{Parsimony-informative Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
-	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace.pdf}}}
+	\put(10,-140){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace.pdf}}}
 \end{picture}
  
 \myNewSlide
@@ -708,7 +710,7 @@ In other words, the $P$-value is approximate by the fraction of bootstrap replic
 \myNewSlide
 \section*{Non-parametric Bootstrapping in Pattern Frequency Space}
 \begin{picture}(-0,0)(-0,0)
-	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace-boot.pdf}}}
+	\put(10,-150){\makebox(30,-150)[l]{\includegraphics[scale=1.]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/simple-treespace-boot.pdf}}}
 \end{picture}
 
 \myNewSlide
@@ -816,7 +818,7 @@ When you use a parametric test, you will usually gain power. But non-parametric 
 	\end{itemize}
 \end{itemize}
 
-%\includepdf[pages={6-18}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
+%\includepdf[pages={6-18}]{/home/mtholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
 
 \myNewSlide
 \section*{We often don't want to test tree topologies}
@@ -826,7 +828,7 @@ When you use a parametric test, you will usually gain power. But non-parametric 
 	\item this entails averaging over trees, but not averaging $P$-values (or point estimates) over trees.
 \end{itemize}
 
-%\includepdf[pages={26-27}]{/home/mholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
+%\includepdf[pages={26-27}]{/home/mtholder/Documents/storage/talks/bodega/HolderSotU.pdf} 
 
 \myNewSlide
 \normalsize
@@ -856,7 +858,7 @@ Note: {\em \bf Not} all of these have implied that the measures {\em\bf should} 
 \myNewSlide
 \section*{Bootstrap Proportion $\neq$ Posterior Probability in general}
 \begin{picture}(-0,0)(-0,0)
-	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/WilcoxZHH-figure.pdf}}}
+	\put(40,-50){\makebox(30,-150)[l]{\includegraphics[scale=2]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/WilcoxZHH-figure.pdf}}}
 	\put(40,-330){from \citet{WilcoxZHH2002}}
 	\put(40,-380){\normalsize Note: \citet{HuelsenbeckR2004} showed that the Bayesian posterior probabilities}
 	\put(40,-400){\normalsize are right on the equality line, if you  simulate from the prior.}
@@ -883,13 +885,13 @@ bootstrap distribution of $\hat{\mu}^{\ast}$.
 In other words, $\tilde{\alpha}$ is the  \textit{a posteriori}
 probability of the event $\mu \in \mathscr{R}_1$, if we begin with an ``uninformative'' prior density for $\mu$.
 \begin{picture}(-0,0)(-0,0)
-	\put(0,-120){\makebox(30,-150)[l]{\includegraphics[scale=4]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/EfronHH-straight-fig.pdf}}}
+	\put(0,-120){\makebox(30,-150)[l]{\includegraphics[scale=4]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/EfronHH-straight-fig.pdf}}}
 \end{picture}
 
 \myNewSlide
 \section*{\citet{EfronHH1996} view of tree space}
 \begin{picture}(-0,0)(-0,0)
-	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=3]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/images/EfronHH-treespace-fig.pdf}}}
+	\put(-10,-90){\makebox(30,-150)[l]{\includegraphics[scale=3]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/images/EfronHH-treespace-fig.pdf}}}
 \end{picture}
 
 
@@ -917,7 +919,7 @@ probability of the event $\mu \in \mathscr{R}_1$, if we begin with an ``uninform
 
 
 
-\includepdf[pages={28-45}]{/home/mholder/Documents/ku_teaching/BIOL-848-2013/lec16-Bootstrapping/lec16Bootstrapping.pdf} 
+\includepdf[pages={28-45}]{/home/mtholder/Documents/ku_teaching/BIOL-848-2013/lec16-Bootstrapping/lec16Bootstrapping.pdf} 
 
 
 \end{document}
