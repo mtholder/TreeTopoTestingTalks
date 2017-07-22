@@ -7,6 +7,8 @@
 \usetikzlibrary{trees,arrows,positioning}
 
 \tikzset{stream/.style={rectangle,rounded corners,draw= red!50,fill=red!20,thick,minimum width=6cm,minimum height=3cm}}
+\tikzset{stat/.style={rectangle,rounded corners,draw= blue!50,fill=blue!20,thick,minimum width=6cm,minimum height=3cm}}
+\tikzset{fn/.style={rectangle,rounded corners,draw= red!50!green!50,fill=red!50!green!50,thick,minimum width=6cm,minimum height=3cm}}
 \tikzset{shared/.style={rectangle,rounded corners,draw= green!50,fill=green!20,thick,minimum width=6cm,minimum height=3cm}}
 \tikzset{hidden/.style={rectangle,draw=white,fill=white,thick}}
 \tikzset{myproc/.style={rectangle,rounded corners,draw=black!50,fill=white,thick,minimum width=6cm,minimum height=10cm}}
@@ -23,8 +25,8 @@
     \node (rd) [stream] {real data} ;
     \node (statcmds) [shared, right =of rd] {test stat commands} ;
     \node (nullcmds) [shared, below =of rd] {null fitting commands} ;
-    \node (realstat) [stream, right =of statcmds] {real test stat} ;
-    \node (bestnull) [stream, below =of nullcmds] {fit null} ;
+    \node (realstat) [stat, right =of statcmds] {real test stat} ;
+    \node (bestnull) [fn, below =of nullcmds] {fit null} ;
     \draw (statcmds) to [->, arrows={-triangle 45}, out=0, in=180]  (realstat) ;
     \draw [->, arrows={-triangle 45}] (rd) to (statcmds) ;
     \draw [->, arrows={-triangle 45}] (rd) to (nullcmds) ;
@@ -38,7 +40,7 @@
     \node (rd) [stream] {real data} ;
     \node (statcmds) [shared, right =of rd] {test stat commands} ;
     \node (nullcmds) [shared, below =of rd] {null fitting commands} ;
-    \node (realstat) [stream, right =of statcmds] {real test stat} ;
+    \node (realstat) [stat, right =of statcmds] {real test stat} ;
     \node (bestnull) [stream, below =of nullcmds] {fit null} ;
     \node (simdata) [stream, below =of bestnull] {simulated data} ;
     \draw (statcmds) to [->, arrows={-triangle 45}, out=0, in=180]  (realstat) ;
@@ -57,10 +59,10 @@
     \node (rd) [stream] {real data} ;
     \node (statcmds) [shared, right =of rd] {test stat commands} ;
     \node (nullcmds) [shared, below =of rd] {null fitting commands} ;
-    \node (realstat) [stream, right =of statcmds] {real test stat} ;
+    \node (realstat) [stat, right =of statcmds] {real test stat} ;
     \node (bestnull) [stream, below =of nullcmds] {fit null} ;
     \node (simdata) [stream, below =of bestnull] {simulated data} ;
-    \node (nulldist) [stream, right =of simdata] {null distrib.} ;
+    \node (nulldist) [stat, right =of simdata] {null distrib.} ;
     \draw (statcmds) to [->, arrows={-triangle 45}, out=0, in=180]  (realstat) ;
     \draw [->, arrows={-triangle 45}] (rd) to (statcmds) ;
     \draw [->, arrows={-triangle 45}] (rd) to (nullcmds) ;
@@ -79,11 +81,11 @@
     \node (rd) [stream] {real data} ;
     \node (statcmds) [shared, right =of rd] {test stat commands} ;
     \node (nullcmds) [shared, below =of rd] {null fitting commands} ;
-    \node (realstat) [stream, right =of statcmds] {real test stat} ;
+    \node (realstat) [stat, right =of statcmds] {real test stat} ;
     \node (bestnull) [stream, below =of nullcmds] {fit null} ;
     \node (simdata) [stream, below =of bestnull] {simulated data} ;
-    \node (nulldist) [stream, right =of simdata] {null distrib.} ;
-    \node (pvalue) [stream, right =of nulldist] {$P$-value} ;
+    \node (nulldist) [stat, right =of simdata] {null distrib.} ;
+    \node (pvalue) [stat, right =of nulldist] {$P$-value} ;
     \draw (statcmds) to [->, arrows={-triangle 45}, out=0, in=180]  (realstat) ;
     \draw [->, arrows={-triangle 45}] (rd) to (statcmds) ;
     \draw [->, arrows={-triangle 45}] (rd) to (nullcmds) ;

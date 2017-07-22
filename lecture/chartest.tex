@@ -7,3 +7,30 @@
     \item If we are conducting a ``comparative method'' we have to consider phylogenetic history,
     \item ideally we would integrate out the uncertainty in the phylogeny
 \end{itemize}
+
+Tree is a  ``nuisance parameter''
+
+\myNewSlide
+\section*{$P$-values with nuisance parameters}
+Suppose we are using some positive test statistic, $s$.
+
+If we observe a value of $s=X$ on our data:
+
+Remember that $P = \Pr(s \geq X \mid H_0)$, which
+is usually described as the tail probability.
+$$P = \int_X^\infty f(s\mid H_0) ds$$
+
+But what if the probability density of $s$ depends on a nuisance
+parameter $T$ and we don't know the value of $T$?
+
+\myNewSlide
+\section*{$P$-values with nuisance parameters}
+$$P = \int_X^\infty f(s\mid H_0) ds$$
+
+We could:
+\begin{itemize}
+    \item  take the max $P$ over all $T$ -- this is way too conservative
+    \item make a confidence $(1-\beta)\%$ set of $T$ and take  $P$ to be $\beta +$ the largest $P$ in that set (Berger and Boos method)
+    \item do a Bayesian analysis and get a posterior predictive $P$ value:
+    $$ P = \int_X^\infty \left(\int f(s\mid T, H_0)p(T) dT \right)ds $$
+\end{itemize}

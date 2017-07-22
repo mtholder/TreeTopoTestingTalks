@@ -1,0 +1,96 @@
+\documentclass[landscape]{foils} 
+\input{../common-preamble-start}
+\input{../preamble.tex}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\input{../common-preamble-end}
+\usetikzlibrary{trees,arrows,positioning}
+
+\tikzset{tool/.style={rectangle,rounded corners,draw= red!50,fill=red!20,thick,minimum height=2cm}}
+\tikzset{stat/.style={rectangle,rounded corners,draw= blue!50,fill=blue!20,thick,minimum height=2cm}}
+\tikzset{known/.style={rectangle,rounded corners,draw= red!50!green!50,fill=red!50!green!50,thick,minimum height=2cm}}
+\tikzset{unc/.style={rectangle,rounded corners,draw= green!50,fill=green!20,thick,minimum height=2cm}}
+\tikzset{hidden/.style={rectangle,draw=white,fill=white,thick}}
+\tikzset{myproc/.style={rectangle,rounded corners,draw=black!50,fill=white,thick,minimum height=2cm}}
+\tikzset{fileI/.style={circle,draw=black!50,fill=black!50,thick,minimum width=.5cm,minimum height=.5cm}}
+\tikzset{toArrow/.style={stealth-,ultra thick}}
+
+
+\begin{document}
+\pagecolor{white}
+
+\myNewSlide
+\begin{tikzpicture}
+\begin{scope}[node distance=10mm]
+    \node (cr) [known] {char. evo. rate} ;
+    \node (tree) [known, below =of cr] {tree topology} ;
+    \node (edges) [known, below =of tree] {edge lengths} ;
+    \node (simirrev) [tool, right =of cr] {sim data} ;
+    \node (pvalue) [stat, right =of simirrev] {$P$-value} ;
+    \draw [->, arrows={-triangle 45}] (cr) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}] (tree) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}, out=0, in=200] (edges) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}] (simirrev) to (pvalue) ;
+\end{scope}
+\end{tikzpicture} 
+
+\myNewSlide
+\begin{tikzpicture}
+\begin{scope}[node distance=10mm]
+    \node (cir) [unc] {rate CI} ;
+    \node (cr) [unc, right= of cir] {char. evo. rate} ;
+    \node (tree) [known, below =of cr] {tree topology} ;
+    \node (edges) [known, below =of tree] {edge lengths} ;
+    \node (simirrev) [tool, right =of cr] {sim data} ;
+    \node (pvalue) [stat, right =of simirrev] {(usually bigger) $P$-value} ;
+    \draw [->, arrows={-triangle 45}] (cr) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}] (tree) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}, out=0, in=200] (edges) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}] (simirrev) to (pvalue) ;
+    \draw [->, arrows={-triangle 45}] (cir) to (cr) ;
+\end{scope}
+\end{tikzpicture} 
+
+\myNewSlide
+\begin{tikzpicture}
+\begin{scope}[node distance=10mm]
+    \node (cir) [unc] {rate CI} ;
+    \node (citree) [unc, below=of cir] {tree CI} ;
+    \node (cr) [unc, right= of cir] {char. evo. rate} ;
+    \node (tree) [unc, below =of cr] {tree topology} ;
+    \node (edges) [known, below =of tree] {edge lengths} ;
+    \node (simirrev) [tool, right =of cr] {sim data} ;
+    \node (pvalue) [stat, right =of simirrev] {(usually bigger) $P$-value} ;
+    \draw [->, arrows={-triangle 45}] (cr) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}] (tree) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}, out=0, in=200] (edges) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}] (simirrev) to (pvalue) ;
+    \draw [->, arrows={-triangle 45}] (cir) to (cr) ;
+    \draw [->, arrows={-triangle 45}] (citree) to (tree) ;
+\end{scope}
+\end{tikzpicture} 
+
+\myNewSlide
+\begin{tikzpicture}
+\begin{scope}[node distance=10mm]
+    \node (cir) [unc] {rate CI} ;
+    \node (citree) [unc, below=of cir] {tree CI} ;
+    \node (ciedges) [unc, below=of citree] {edge CI} ;
+    \node (cr) [unc, right= of cir] {char. evo. rate} ;
+    \node (tree) [unc, below =of cr] {tree topology} ;
+    \node (edges) [unc, below =of tree] {edge lengths} ;
+    \node (simirrev) [tool, right =of cr] {sim data} ;
+    \node (pvalue) [stat, right =of simirrev] {(usually biggest) $P$-value} ;
+    \draw [->, arrows={-triangle 45}] (cr) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}] (tree) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}, out=0, in=200] (edges) to (simirrev) ;
+    \draw [->, arrows={-triangle 45}] (simirrev) to (pvalue) ;
+    \draw [->, arrows={-triangle 45}] (cir) to (cr) ;
+    \draw [->, arrows={-triangle 45}] (citree) to (tree) ;
+    \draw [->, arrows={-triangle 45}] (ciedges) to (edges) ;
+\end{scope}
+\end{tikzpicture} 
+
+
+
+\end{document}
